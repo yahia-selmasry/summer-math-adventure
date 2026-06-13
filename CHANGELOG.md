@@ -1,47 +1,118 @@
-# Changelog – Summer Math Booklet
-
-All notable changes to this project are recorded here.
+# Changelog – Summer Math Adventure Booklet
 
 ---
 
-## [2.0.0] – 2026-06-13
-
-### Added – Weeks 6, 7 & 8 Extension Booklet (`summer_booklet_weeks6_8.html`)
-
-**Week 6 – Exponents**
-- Day 1: What is an exponent? (base, exponent, expanded form, exponential form)
-- Day 2: Powers of 10 (pattern table, multiply using powers of 10, word problems)
-- Day 3: Comparing & ordering exponential expressions
-- Day 4: Order of operations with exponents (PEMDAS); multi-step expressions; insert-parentheses problems
-- Day 5: Perfect squares chart (1–12), square roots, area context problems
-- Week 6 Quiz (20 pts): evaluate, PEMDAS, compare, square root word problem
-
-**Week 7 – Expressions & Equations**
-- Day 1: Variables & algebraic expressions (vocabulary, write expressions, evaluate)
-- Day 2: Simplifying expressions — combining like terms; simplify then evaluate
-- Day 3: One-step equations (inverse operations, solve & check, write from word problem)
-- Day 4: Two-step equations (label steps, solve & check, two word problems)
-- Day 5: Inequalities (write, solve, graph on number line)
-- Week 7 Quiz (20 pts): write/evaluate/simplify expressions, four equations, word problem, inequality
-
-**Week 8 – Probability**
-- Day 1: Probability intro (scale, P = favorable/total, marble bag problems)
-- Day 2: Experimental vs. theoretical probability (coin flip data, die roll table, Law of Large Numbers)
-- Day 3: Sample space & tree diagrams (list outcomes, counting principle, probability from sample space)
-- Day 4: Making predictions (expected outcomes formula, real-world scenarios, working backwards)
-- Day 5: Review & mixed practice (deck of cards, complement rule, raffle scenario, connect-all-topics challenge)
-- Week 8 Quiz (20 pts): marble jar probabilities, tree diagram, prediction, survey prediction
-
-**Project files added**
-- `CLAUDE.md` — project reference guide for AI-assisted development
-- `CHANGELOG.md` — this file
-
----
-
-## [1.1.0] – 2026-06-13 (earlier in session)
+## [3.0.0] – 2026-06-13
 
 ### Added
-- `summer_booklet_weeks6_8.html` initial structure and cover page
+
+**4 New Comic Guides** (Beast Academy 4B/4C/4D aligned)
+
+| File | Topic | BA Source |
+|------|-------|-----------|
+| `comics/concept_fractions.html` | Fractions (2-page) | 4C Ch 8 + 4D Ch 10 |
+| `comics/concept_decimals.html` | Decimals | 4D Ch 11 |
+| `comics/concept_factors.html` | Factors, Primes, Divisibility, GCF, Factor Trees | 4C Ch 7 + 4B Ch 5 |
+| `comics/concept_integers.html` | Integers, Negatives, Add/Subtract | 4C Ch 9 |
+
+**concept_fractions.html** — 2-page comic covering:
+- Numerator/denominator, bar model visual
+- Equivalent fractions (multiply/divide both parts)
+- Simplifying by GCF
+- Comparing fractions (3 strategies + cross-multiply)
+- Adding/subtracting like denominators
+- Adding/subtracting unlike denominators (LCD method)
+- Mixed numbers ↔ improper fractions
+- Multiplying fractions (top×top, bottom×bottom)
+- "Of" = multiply (½ of 12 = 6)
+
+**concept_decimals.html** — 1-page comic covering:
+- Place value chart (tenths, hundredths, thousandths)
+- Reading decimals aloud
+- 10×10 grid visual for 0.35
+- Decimal ↔ fraction connection
+- Comparing with digit-by-digit method
+- Adding/subtracting (line up the dot)
+- Common mistake: 0.9 ≠ 0.09
+
+**concept_factors.html** — 1-page comic covering:
+- What a factor is, factor pairs strategy
+- Divisibility rules (÷2, ÷3, ÷5, ÷6, ÷9, ÷10)
+- Prime vs composite (definitions + examples)
+- Sieve of Eratosthenes visual (primes to 30)
+- Factor tree → prime factorization
+- GCF by listing factors
+
+**concept_integers.html** — 1-page comic covering:
+- Number line with positives, zero, negatives
+- Real-world negatives (temperature, floors, debt)
+- Adding integers (same sign / different signs rules)
+- Number line walkthrough for additions
+- Subtracting = adding the opposite
+- Comparing integers
+
+**Navigation Hub**
+- `index.html` — full navigation page with:
+  - Top sticky navbar
+  - Hero section with quick-access buttons
+  - Weekly booklet cards (all 8 weeks) with Open + Print buttons
+  - Comic guide grid (all 12 guides) with direct links
+  - Answer key section
+  - Suggested study order table
+
+**Answer Key Updated**
+- `summer_booklet_answer_key.html` cover page updated:
+  - All 8 weeks now listed with colored badges
+  - Instructions for accessing Week 6–8 answers (in weeks6_8.html)
+  - Note about index.html navigation hub
+
+**Docs Updated**
+- `CLAUDE.md` — full rewrite: BA curriculum alignment table, comic CSS class reference, hosting instructions
+- `CHANGELOG.md` — this file
+
+### Hosting
+- All files are flat HTML/CSS — deployable via **Netlify Drop** (drag folder to netlify.com/drop)
+- No build step, no server required
+
+---
+
+## [2.0.0] – 2026-06-13 (earlier)
+
+### Added – Weeks 6–8 Extension Booklet (`summer_booklet_weeks6_8.html`)
+
+**Week 6 – Exponents**
+- Day 1: What is an exponent? (base, exponent, expand, exponential form)
+- Day 2: Powers of 10 (zeros pattern, multiply by powers of 10)
+- Day 3: Comparing & ordering exponential expressions
+- Day 4: Order of operations with exponents (PEMDAS)
+- Day 5: Perfect squares (1–12 chart), square roots, area context
+- Week 6 Quiz (20 pts)
+
+**Week 7 – Expressions & Equations**
+- Day 1: Variables & algebraic expressions (vocab, write, evaluate)
+- Day 2: Simplifying — combining like terms
+- Day 3: One-step equations (inverse operations, solve & check)
+- Day 4: Two-step equations (label steps, word problems)
+- Day 5: Inequalities (write, solve, graph on number line)
+- Week 7 Quiz (20 pts)
+
+**Week 8 – Probability**
+- Day 1: Probability intro (P formula, 0–1 scale)
+- Day 2: Experimental vs theoretical (coin flip, die roll data)
+- Day 3: Sample space & tree diagrams (counting principle)
+- Day 4: Making predictions (expected = P × trials)
+- Day 5: Review & complement rule (deck of cards, raffle)
+- Week 8 Quiz (20 pts)
+
+### Added – 8 Comic Guides (`comics/`)
+- `concept_exponents.html`
+- `concept_powers_of_10.html`
+- `concept_perfect_squares.html`
+- `concept_expressions.html`
+- `concept_equations.html`
+- `concept_inequalities.html`
+- `concept_probability.html`
+- `concept_sample_space.html`
 
 ---
 
@@ -81,8 +152,7 @@ All notable changes to this project are recorded here.
 - Week 4 Quiz
 
 **Week 5 – Geometry**
-- Points, lines, line segments, rays, angles
-- Measuring & classifying angles (acute, right, obtuse, straight)
+- Points, lines, angles (acute, right, obtuse, straight)
 - Triangles & quadrilaterals
 - Perimeter & area
 - Coordinate plane basics
@@ -90,13 +160,14 @@ All notable changes to this project are recorded here.
 
 **Other files**
 - `summer_booklet_answer_key.html` — standalone answer key for Weeks 1–5
-- Individual week files (`week1.html` – `week5.html`) — standalone per-week versions
+- `summer_booklet_week1.html` – `week5.html` — standalone per-week files
 
 ---
 
 ## Format Notes
 
-- All files: HTML, print-ready, 8.5×11 letter
-- Color scheme: one accent color per week (see CLAUDE.md)
-- Each daily page targets ~45 minutes of practice
-- Each page includes: concept intro box, 2–4 practice sections, starred challenge, score tracker
+- All files: pure HTML/CSS, print-ready, 8.5×11 letter
+- Comic files: yellow background (#f5c842), Beast Academy character art in CSS
+- Each daily booklet page targets ~45 minutes of practice
+- Each page has a `/X` score tracker in the footer
+- Answer keys are at the end of each combined booklet file, plus the standalone key

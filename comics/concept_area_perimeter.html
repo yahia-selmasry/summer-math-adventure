@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Math Comics – Area &amp; Perimeter of 2D Shapes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f5c842;
+  font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+  padding: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.comic-page { background: #f5c842; padding: 16px; page-break-after: always; }
+.row { display: flex; gap: 8px; margin-bottom: 8px; }
+.panel {
+  border: 3px solid #1a1a1a; border-radius: 6px; padding: 14px;
+  position: relative; overflow: hidden; flex: 1;
+}
+.panel.bg-sky   { background: #cce8f5; }
+.panel.bg-green { background: #c8e6c9; }
+.panel.bg-peach { background: #ffe0cc; }
+.panel.bg-tan   { background: #f5e6c8; }
+.panel.bg-white { background: #ffffff; }
+.panel.bg-red   { background: #fce4ec; }
+.panel.full { flex: none; width: 100%; }
+.panel.w2 { flex: 2; }
+.panel.w3 { flex: 3; }
+
+.title-card {
+  display: inline-block; background: #2e7d32; color: #fff;
+  font-family: 'Bangers','Impact',sans-serif; font-size: 28px;
+  letter-spacing: 2px; padding: 6px 18px 4px;
+  border: 3px solid #1a1a1a; border-radius: 8px; margin-bottom: 10px;
+  line-height: 1.1; text-shadow: 2px 2px 0 #0a3d0a;
+}
+.title-card .subtitle { font-size: 14px; letter-spacing: 1px; display: block; font-family: 'Comic Neue',cursive; text-shadow: none; }
+
+.bubble {
+  background: #fff; border: 2.5px solid #1a1a1a; border-radius: 18px;
+  padding: 8px 12px; font-size: 13.5px; line-height: 1.45;
+  position: relative; display: inline-block; max-width: 220px;
+  font-weight: 700; margin: 4px;
+}
+.bubble.left::after  { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after  { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after  { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.top-right::after  { content:''; position:absolute; top:-14px; right:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-right::before { content:''; position:absolute; top:-10px; right:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.thought { border-style:dashed; border-radius:50px; }
+.bubble.yellow { background:#fff9c4; }
+.bubble.big { font-size:15px; max-width:280px; }
+.bubble.sm  { font-size:12px; max-width:180px; }
+
+.scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:120px; padding-top:8px; }
+
+.zara { width:70px; height:110px; position:relative; flex-shrink:0; }
+.zara .body  { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head  { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye   { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair  { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm   { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail  { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+
+.max { width:56px; height:80px; position:relative; flex-shrink:0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye  { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+
+.math-box { background:#fff; border:3px solid #1a1a1a; border-radius:8px; padding:10px 16px; font-size:18px; font-weight:700; display:inline-block; margin:6px 4px; text-align:center; }
+.math-box.red    { background:#fce4ec; border-color:#c62828; color:#c62828; }
+.math-box.blue   { background:#e3f2fd; border-color:#1565c0; }
+.math-box.green  { background:#e8f5e9; border-color:#2e7d32; }
+.math-box.orange { background:#fff3e0; border-color:#e65100; }
+
+.think-sign {
+  background:#c62828; color:#fff; font-size:11px; font-weight:700; text-align:center;
+  clip-path:polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);
+  width:90px; height:90px; display:flex; align-items:center; justify-content:center; line-height:1.3;
+}
+.think-wrap { position:absolute; bottom:10px; right:10px; }
+
+.formula-box {
+  background:#fff; border:3px solid #2e7d32; border-radius:10px;
+  padding:10px 16px; font-size:15px; font-weight:700;
+  display:inline-block; margin:6px 4px; text-align:center;
+}
+.formula-box .lbl { font-size:11px; color:#555; display:block; font-weight:400; margin-bottom:2px; }
+.formula-box.red { border-color:#c62828; }
+.formula-box.blue { border-color:#1565c0; }
+.formula-box.orange { border-color:#e65100; }
+
+/* shape cards */
+.shape-card {
+  background:#fff; border:2.5px solid #1a1a1a; border-radius:8px;
+  padding:10px; text-align:center; font-size:12px;
+}
+.shape-card .shape-name { font-weight:700; font-size:13px; margin-bottom:6px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="comic-page">
+
+  <!-- ROW 1: INTRO -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:160px;">
+      <div class="title-card">
+        📐 AREA &amp; PERIMETER!
+        <span class="subtitle">Measuring Around and Inside 2D Shapes</span>
+      </div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble left big" style="margin-bottom:18px;">
+            Max, your room needs new carpet AND a fence around it! Do you know which measure helps with which?
+          </div>
+          <div class="zara">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+
+        <div style="padding:8px;text-align:center;">
+          <svg width="160" height="120" viewBox="0 0 160 120">
+            <!-- room rectangle -->
+            <rect x="20" y="20" width="120" height="80" fill="#e8f5e9" stroke="#2e7d32" stroke-width="3" stroke-dasharray="none"/>
+            <!-- carpet fill pattern -->
+            <rect x="20" y="20" width="120" height="80" fill="url(#carpet)" opacity="0.4"/>
+            <!-- dimension labels -->
+            <text x="70" y="16" font-family="Comic Neue,cursive" font-size="12" font-weight="bold" fill="#c62828">12 m</text>
+            <text x="146" y="65" font-family="Comic Neue,cursive" font-size="12" font-weight="bold" fill="#c62828">8 m</text>
+            <!-- arrows for perimeter -->
+            <text x="55" y="108" font-family="Comic Neue,cursive" font-size="11" fill="#2e7d32" font-weight="bold">Fence = perimeter</text>
+            <!-- area annotation -->
+            <text x="55" y="60" font-family="Comic Neue,cursive" font-size="11" fill="#1565c0" font-weight="bold">Carpet = area</text>
+            <defs>
+              <pattern id="carpet" patternUnits="userSpaceOnUse" width="8" height="8">
+                <rect width="8" height="8" fill="#c8e6c9"/>
+                <line x1="0" y1="0" x2="8" y2="8" stroke="#a5d6a7" stroke-width="0.5"/>
+              </pattern>
+            </defs>
+          </svg>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble right" style="margin-bottom:18px;">
+            OH! Perimeter goes<br><strong>around</strong> the edge,<br>Area fills the <strong>inside</strong>!
+          </div>
+          <div class="max">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: KEY DIFFERENCE -->
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="font-weight:700;font-size:15px;margin-bottom:8px;color:#bf360c;">📏 PERIMETER</div>
+      <div class="bubble top-left" style="max-width:200px;margin-bottom:12px;">Distance all the way AROUND the shape!</div>
+      <div style="margin-top:28px;font-size:13px;line-height:1.9;">
+        • Add up all side lengths<br>
+        • Units: cm, m, ft, in (regular)<br>
+        • Think: <strong>fence, picture frame, border</strong><br><br>
+        <div class="formula-box" style="font-size:14px;border-color:#bf360c;">
+          P = sum of all sides
+        </div>
+      </div>
+    </div>
+    <div class="panel bg-green">
+      <div style="font-weight:700;font-size:15px;margin-bottom:8px;color:#1a5900;">⬛ AREA</div>
+      <div class="bubble top-right" style="max-width:200px;margin-bottom:12px;">Amount of space INSIDE the shape!</div>
+      <div style="margin-top:28px;font-size:13px;line-height:1.9;">
+        • Count the square units inside<br>
+        • Units: cm², m², ft², in² (squared!)<br>
+        • Think: <strong>carpet, paint, floor tiles</strong><br><br>
+        <div class="formula-box" style="font-size:14px;">
+          A = length × width (rectangles)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: ALL SHAPES FORMULAS -->
+  <div class="row">
+    <div class="panel bg-tan full" style="min-height:180px;">
+      <div style="font-weight:700;font-size:14px;margin-bottom:10px;text-align:center;">📚 FORMULA REFERENCE: All the Shapes</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+
+        <!-- Rectangle -->
+        <div class="shape-card">
+          <div class="shape-name" style="color:#2e7d32;">Rectangle</div>
+          <svg width="70" height="45" viewBox="0 0 70 45">
+            <rect x="5" y="8" width="60" height="30" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
+            <text x="22" y="4" font-family="Comic Neue,cursive" font-size="10" fill="#2e7d32" font-weight="bold">l</text>
+            <text x="62" y="26" font-family="Comic Neue,cursive" font-size="10" fill="#2e7d32" font-weight="bold">w</text>
+          </svg>
+          A = l × w<br>P = 2l + 2w
+        </div>
+
+        <!-- Square -->
+        <div class="shape-card">
+          <div class="shape-name" style="color:#1565c0;">Square</div>
+          <svg width="70" height="50" viewBox="0 0 70 50">
+            <rect x="10" y="5" width="50" height="40" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+            <text x="28" y="3" font-family="Comic Neue,cursive" font-size="10" fill="#1565c0" font-weight="bold">s</text>
+            <text x="62" y="28" font-family="Comic Neue,cursive" font-size="10" fill="#1565c0" font-weight="bold">s</text>
+          </svg>
+          A = s²<br>P = 4s
+        </div>
+
+        <!-- Triangle -->
+        <div class="shape-card">
+          <div class="shape-name" style="color:#c62828;">Triangle</div>
+          <svg width="70" height="50" viewBox="0 0 70 50">
+            <polygon points="35,5 5,45 65,45" fill="#fce4ec" stroke="#c62828" stroke-width="2"/>
+            <text x="30" y="54" font-family="Comic Neue,cursive" font-size="9" fill="#c62828" font-weight="bold">base (b)</text>
+            <line x1="35" y1="5" x2="35" y2="45" stroke="#c62828" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <text x="37" y="32" font-family="Comic Neue,cursive" font-size="9" fill="#c62828">h</text>
+          </svg>
+          A = ½ × b × h<br>P = a + b + c
+        </div>
+
+        <!-- Parallelogram -->
+        <div class="shape-card">
+          <div class="shape-name" style="color:#e65100;">Parallelogram</div>
+          <svg width="70" height="50" viewBox="0 0 70 50">
+            <polygon points="15,5 65,5 55,45 5,45" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+            <line x1="35" y1="5" x2="35" y2="45" stroke="#e65100" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <text x="37" y="30" font-family="Comic Neue,cursive" font-size="9" fill="#e65100">h</text>
+            <text x="28" y="54" font-family="Comic Neue,cursive" font-size="9" fill="#e65100" font-weight="bold">base (b)</text>
+          </svg>
+          A = b × h<br>P = 2(a + b)
+        </div>
+
+        <!-- Trapezoid -->
+        <div class="shape-card" style="grid-column:span 2;">
+          <div class="shape-name" style="color:#6a1b9a;">Trapezoid</div>
+          <svg width="140" height="55" viewBox="0 0 140 55">
+            <polygon points="30,5 110,5 130,45 10,45" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="2"/>
+            <text x="60" y="3" font-family="Comic Neue,cursive" font-size="10" fill="#6a1b9a" font-weight="bold">b₁ (top)</text>
+            <text x="55" y="58" font-family="Comic Neue,cursive" font-size="10" fill="#6a1b9a" font-weight="bold">b₂ (bottom)</text>
+            <line x1="70" y1="5" x2="70" y2="45" stroke="#6a1b9a" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <text x="73" y="30" font-family="Comic Neue,cursive" font-size="9" fill="#6a1b9a">h</text>
+          </svg>
+          A = ½(b₁ + b₂) × h &nbsp;&nbsp; P = sum of all 4 sides
+        </div>
+
+        <!-- Circle -->
+        <div class="shape-card" style="grid-column:span 2;">
+          <div class="shape-name" style="color:#00695c;">Circle</div>
+          <div style="display:flex;align-items:center;gap:10px;justify-content:center;">
+            <svg width="70" height="55" viewBox="0 0 70 55">
+              <circle cx="35" cy="28" r="24" fill="#e0f2f1" stroke="#00695c" stroke-width="2"/>
+              <line x1="35" y1="28" x2="59" y2="28" stroke="#00695c" stroke-width="2"/>
+              <text x="40" y="24" font-family="Comic Neue,cursive" font-size="10" fill="#00695c" font-weight="bold">r</text>
+              <line x1="11" y1="28" x2="59" y2="28" stroke="#c62828" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <text x="28" y="44" font-family="Comic Neue,cursive" font-size="9" fill="#c62828">diameter = 2r</text>
+            </svg>
+            <div style="font-size:12px;text-align:left;line-height:1.8;">
+              A = π × r²<br>
+              C = 2 × π × r<br>
+              <span style="font-size:11px;color:#555;">(C = circumference,<br>like perimeter for circles)<br>π ≈ 3.14</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 2 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: WORKED EXAMPLES -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:180px;">
+      <div style="font-weight:700;font-size:15px;margin-bottom:10px;color:#004080;">🔢 Let's Work Some Together!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+
+        <!-- Example 1: Rectangle -->
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:10px;font-size:12px;">
+          <div style="font-weight:700;color:#2e7d32;margin-bottom:6px;">Rectangle: l=9 cm, w=4 cm</div>
+          <div style="line-height:2;">
+            <strong>Perimeter:</strong><br>
+            P = 2(9) + 2(4)<br>
+            P = 18 + 8 = <strong style="color:#c62828;">26 cm</strong><br><br>
+            <strong>Area:</strong><br>
+            A = 9 × 4 = <strong style="color:#c62828;">36 cm²</strong>
+          </div>
+        </div>
+
+        <!-- Example 2: Triangle -->
+        <div style="background:#fce4ec;border:2px solid #c62828;border-radius:8px;padding:10px;font-size:12px;">
+          <div style="font-weight:700;color:#c62828;margin-bottom:6px;">Triangle: b=10, h=6, sides 8,8,10</div>
+          <div style="line-height:2;">
+            <strong>Perimeter:</strong><br>
+            P = 8 + 8 + 10 = <strong style="color:#c62828;">26 cm</strong><br><br>
+            <strong>Area:</strong><br>
+            A = ½ × 10 × 6<br>
+            A = ½ × 60 = <strong style="color:#c62828;">30 cm²</strong>
+          </div>
+        </div>
+
+        <!-- Example 3: Compound shape -->
+        <div style="background:#e3f2fd;border:2px solid #1565c0;border-radius:8px;padding:10px;font-size:12px;">
+          <div style="font-weight:700;color:#1565c0;margin-bottom:6px;">Square: s = 7 m</div>
+          <div style="line-height:2;">
+            <strong>Perimeter:</strong><br>
+            P = 4 × 7 = <strong style="color:#c62828;">28 m</strong><br><br>
+            <strong>Area:</strong><br>
+            A = 7² = 7 × 7 = <strong style="color:#c62828;">49 m²</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: COMPOUND SHAPES -->
+  <div class="row">
+    <div class="panel bg-peach full" style="min-height:160px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div class="zara" style="transform:scale(0.85);transform-origin:bottom left;flex-shrink:0;">
+          <div class="body"></div><div class="head"></div><div class="snout"></div>
+          <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+        </div>
+        <div style="flex:1;padding-top:8px;">
+          <div class="bubble top-left" style="max-width:320px;margin-bottom:12px;">
+            Some shapes are made of TWO simpler shapes stuck together! Split them up and add!
+          </div>
+          <div style="display:flex;gap:16px;margin-top:28px;align-items:flex-start;flex-wrap:wrap;">
+            <div style="flex:1;min-width:200px;">
+              <div style="font-weight:700;margin-bottom:6px;color:#bf360c;">L-Shape Example:</div>
+              <svg width="180" height="110" viewBox="0 0 180 110">
+                <!-- L shape -->
+                <polygon points="10,10 80,10 80,50 130,50 130,100 10,100" fill="#ffe0cc" stroke="#bf360c" stroke-width="2.5"/>
+                <!-- split line -->
+                <line x1="10" y1="50" x2="80" y2="50" stroke="#2e7d32" stroke-width="2" stroke-dasharray="5,3"/>
+                <!-- labels -->
+                <text x="35" y="35" font-family="Comic Neue,cursive" font-size="10" fill="#1565c0" font-weight="bold">Part A</text>
+                <text x="52" y="80" font-family="Comic Neue,cursive" font-size="10" fill="#c62828" font-weight="bold">Part B</text>
+                <!-- dimension labels -->
+                <text x="28" y="8" font-family="Comic Neue,cursive" font-size="9" fill="#555">7</text>
+                <text x="82" y="35" font-family="Comic Neue,cursive" font-size="9" fill="#555">4</text>
+                <text x="90" y="48" font-family="Comic Neue,cursive" font-size="9" fill="#555">5</text>
+                <text x="132" y="80" font-family="Comic Neue,cursive" font-size="9" fill="#555">5</text>
+                <text x="55" y="108" font-family="Comic Neue,cursive" font-size="9" fill="#555">12</text>
+              </svg>
+            </div>
+            <div style="flex:1;min-width:200px;font-size:12px;line-height:2;">
+              <strong>Step 1:</strong> Split into rectangles<br>
+              Part A: 7 × 4 = 28<br>
+              Part B: 12 × 5 = 60<br><br>
+              <strong>Step 2:</strong> Add<br>
+              Total Area = 28 + 60 = <strong style="color:#c62828;">88 square units</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: COMMON MISTAKES -->
+  <div class="row">
+    <div class="panel bg-red">
+      <div style="font-weight:700;font-size:14px;margin-bottom:8px;">⚠️ COMMON MISTAKES!</div>
+      <div style="font-size:13px;line-height:2.1;">
+        ❌ <strong>Forgetting to square units</strong><br>
+        Area needs cm² not cm!<br><br>
+        ❌ <strong>Using height vs. side in triangles</strong><br>
+        The height must be PERPENDICULAR to base<br><br>
+        ❌ <strong>Adding instead of halving</strong><br>
+        Triangle: A = ½ × b × h (don't forget the ½!)
+      </div>
+    </div>
+    <div class="panel bg-green">
+      <div style="font-weight:700;font-size:14px;margin-bottom:8px;">🌍 Real World!</div>
+      <div style="font-size:13px;line-height:2.1;">
+        🏡 <strong>Perimeter:</strong><br>
+        → fence around yard<br>
+        → trim around a window<br>
+        → distance you walk around a park<br><br>
+        🛋️ <strong>Area:</strong><br>
+        → carpet for a room<br>
+        → paint for a wall<br>
+        → tiles for a floor
+      </div>
+      <div class="think-wrap">
+        <div class="think-sign">TRY<br>IT!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: TRY IT + SUMMARY -->
+  <div class="row">
+    <div class="panel bg-tan full" style="min-height:130px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div class="max" style="transform:scale(0.9);transform-origin:bottom left;flex-shrink:0;">
+          <div class="body"></div><div class="head"></div><div class="eye"></div>
+          <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+        </div>
+        <div style="flex:1;padding-top:8px;">
+          <div class="bubble top-left" style="max-width:360px;margin-bottom:14px;">
+            Now YOU try! Find P and A for each shape. Don't forget your units!
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:28px;">
+            <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:12px;text-align:center;">
+              <svg width="80" height="55" viewBox="0 0 80 55">
+                <rect x="5" y="8" width="70" height="40" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+                <text x="25" y="6" font-family="Comic Neue,cursive" font-size="10" fill="#2e7d32" font-weight="bold">14 ft</text>
+                <text x="62" y="32" font-family="Comic Neue,cursive" font-size="10" fill="#2e7d32" font-weight="bold">6 ft</text>
+              </svg>
+              Rectangle<br>P = ___ ft<br>A = ___ ft²
+            </div>
+            <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:12px;text-align:center;">
+              <svg width="80" height="60" viewBox="0 0 80 60">
+                <polygon points="40,5 5,55 75,55" fill="#fce4ec" stroke="#c62828" stroke-width="2"/>
+                <text x="28" y="63" font-family="Comic Neue,cursive" font-size="10" fill="#c62828" font-weight="bold">b=12</text>
+                <line x1="40" y1="5" x2="40" y2="55" stroke="#c62828" stroke-width="1.5" stroke-dasharray="3,2"/>
+                <text x="43" y="38" font-family="Comic Neue,cursive" font-size="10" fill="#c62828">h=8</text>
+              </svg>
+              Triangle<br>P = 10+10+12<br>A = ___ cm²
+            </div>
+            <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:12px;text-align:center;">
+              <svg width="80" height="60" viewBox="0 0 80 60">
+                <rect x="10" y="10" width="60" height="40" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+                <text x="28" y="8" font-family="Comic Neue,cursive" font-size="10" fill="#1565c0" font-weight="bold">s = 9m</text>
+              </svg>
+              Square<br>P = ___ m<br>A = ___ m²
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 5: FORMULA CHEAT SHEET -->
+  <div class="row">
+    <div class="panel bg-white full" style="min-height:60px;">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;padding:4px 0;">
+        <div class="formula-box" style="font-size:13px;">
+          <span class="lbl">Rectangle</span>
+          A = lw &nbsp; P = 2l+2w
+        </div>
+        <div class="formula-box red" style="font-size:13px;">
+          <span class="lbl">Triangle</span>
+          A = ½bh &nbsp; P = a+b+c
+        </div>
+        <div class="formula-box blue" style="font-size:13px;">
+          <span class="lbl">Square</span>
+          A = s² &nbsp; P = 4s
+        </div>
+        <div class="formula-box orange" style="font-size:13px;">
+          <span class="lbl">Parallelogram</span>
+          A = bh &nbsp; P = 2(a+b)
+        </div>
+        <div class="formula-box" style="font-size:13px;border-color:#00695c;">
+          <span class="lbl">Trapezoid</span>
+          A = ½(b₁+b₂)h
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 2 -->
+
+</body>
+</html>

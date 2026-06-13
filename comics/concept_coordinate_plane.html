@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Math Comics – Coordinate Plane</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f5c842;
+  font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+  padding: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.comic-page { background: #f5c842; padding: 16px; page-break-after: always; }
+.row { display: flex; gap: 8px; margin-bottom: 8px; }
+.panel {
+  border: 3px solid #1a1a1a; border-radius: 6px; padding: 14px;
+  position: relative; overflow: hidden; flex: 1;
+}
+.panel.bg-sky    { background: #cce8f5; }
+.panel.bg-green  { background: #c8e6c9; }
+.panel.bg-peach  { background: #ffe0cc; }
+.panel.bg-tan    { background: #f5e6c8; }
+.panel.bg-white  { background: #ffffff; }
+.panel.bg-indigo { background: #e8eaf6; }
+.panel.full { flex: none; width: 100%; }
+.panel.w2 { flex: 2; }
+
+.title-card {
+  display: inline-block; background: #283593; color: #fff;
+  font-family: 'Bangers','Impact',sans-serif; font-size: 28px;
+  letter-spacing: 2px; padding: 6px 18px 4px;
+  border: 3px solid #1a1a1a; border-radius: 8px; margin-bottom: 10px;
+  line-height: 1.1; text-shadow: 2px 2px 0 #0d1a6e;
+}
+.title-card .subtitle { font-size: 14px; letter-spacing: 1px; display: block; font-family: 'Comic Neue',cursive; text-shadow: none; }
+
+.bubble {
+  background: #fff; border: 2.5px solid #1a1a1a; border-radius: 18px;
+  padding: 8px 12px; font-size: 13.5px; line-height: 1.45;
+  position: relative; display: inline-block; max-width: 220px;
+  font-weight: 700; margin: 4px;
+}
+.bubble.left::after  { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after  { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after  { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.top-right::after  { content:''; position:absolute; top:-14px; right:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-right::before { content:''; position:absolute; top:-10px; right:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.thought { border-style:dashed; border-radius:50px; }
+.bubble.yellow { background:#fff9c4; }
+.bubble.big { font-size:15px; max-width:280px; }
+.bubble.sm  { font-size:12px; max-width:180px; }
+
+.scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:120px; padding-top:8px; }
+
+.zara { width:70px; height:110px; position:relative; flex-shrink:0; }
+.zara .body  { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head  { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye   { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair  { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm   { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail  { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+
+.max { width:56px; height:80px; position:relative; flex-shrink:0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye  { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+
+.math-box { background:#fff; border:3px solid #1a1a1a; border-radius:8px; padding:10px 16px; font-size:18px; font-weight:700; display:inline-block; margin:6px 4px; text-align:center; }
+.math-box.red    { background:#fce4ec; border-color:#c62828; color:#c62828; }
+.math-box.blue   { background:#e3f2fd; border-color:#283593; }
+.math-box.green  { background:#e8f5e9; border-color:#2e7d32; }
+.math-box.orange { background:#fff3e0; border-color:#e65100; }
+.math-box.indigo { background:#e8eaf6; border-color:#283593; }
+
+.think-sign {
+  background:#c62828; color:#fff; font-size:11px; font-weight:700; text-align:center;
+  clip-path:polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);
+  width:90px; height:90px; display:flex; align-items:center; justify-content:center; line-height:1.3;
+}
+.think-wrap { position:absolute; bottom:10px; right:10px; }
+.panel-divider { border:none; border-top:3px solid #1a1a1a; margin:4px 0; }
+
+.formula-box {
+  background:#fff; border:3px solid #283593; border-radius:10px;
+  padding:10px 16px; font-size:15px; font-weight:700;
+  display:inline-block; margin:6px 4px; text-align:center;
+}
+.formula-box .lbl { font-size:11px; color:#555; display:block; font-weight:400; margin-bottom:2px; }
+
+/* coordinate grid */
+.grid-svg { display:block; margin:0 auto; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="comic-page">
+
+  <!-- ROW 1: INTRO -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:150px;">
+      <div class="title-card">
+        🗺️ THE COORDINATE PLANE!
+        <span class="subtitle">X-axis · Y-axis · Ordered Pairs · Graphing Points</span>
+      </div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble left big" style="margin-bottom:18px;">
+            Max, maps use a secret<br>number code to find any<br>location! Want to learn it?
+          </div>
+          <div class="zara">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+
+        <div style="padding:10px;text-align:center;">
+          <!-- Mini coordinate plane -->
+          <svg width="160" height="140" viewBox="-80 -70 160 140">
+            <!-- grid lines -->
+            <line x1="-75" y1="0" x2="75" y2="0" stroke="#1a1a1a" stroke-width="2.5" marker-end="url(#arr)"/>
+            <line x1="0" y1="65" x2="0" y2="-65" stroke="#1a1a1a" stroke-width="2.5" marker-end="url(#arr2)"/>
+            <!-- tick marks x -->
+            <line x1="20" y1="-4" x2="20" y2="4" stroke="#1a1a1a" stroke-width="1.5"/>
+            <line x1="40" y1="-4" x2="40" y2="4" stroke="#1a1a1a" stroke-width="1.5"/>
+            <line x1="60" y1="-4" x2="60" y2="4" stroke="#1a1a1a" stroke-width="1.5"/>
+            <line x1="-20" y1="-4" x2="-20" y2="4" stroke="#1a1a1a" stroke-width="1.5"/>
+            <line x1="-40" y1="-4" x2="-40" y2="4" stroke="#1a1a1a" stroke-width="1.5"/>
+            <!-- tick marks y -->
+            <line x1="-4" y1="-20" x2="4" y2="-20" stroke="#1a1a1a" stroke-width="1.5"/>
+            <line x1="-4" y1="-40" x2="4" y2="-40" stroke="#1a1a1a" stroke-width="1.5"/>
+            <line x1="-4" y1="20" x2="4" y2="20" stroke="#1a1a1a" stroke-width="1.5"/>
+            <line x1="-4" y1="40" x2="4" y2="40" stroke="#1a1a1a" stroke-width="1.5"/>
+            <!-- axis labels -->
+            <text x="78" y="5" font-family="Comic Neue,cursive" font-size="13" font-weight="bold" fill="#283593">x</text>
+            <text x="4" y="-68" font-family="Comic Neue,cursive" font-size="13" font-weight="bold" fill="#283593">y</text>
+            <!-- number labels -->
+            <text x="17" y="14" font-family="Comic Neue,cursive" font-size="9" fill="#555">1</text>
+            <text x="37" y="14" font-family="Comic Neue,cursive" font-size="9" fill="#555">2</text>
+            <text x="57" y="14" font-family="Comic Neue,cursive" font-size="9" fill="#555">3</text>
+            <text x="-25" y="14" font-family="Comic Neue,cursive" font-size="9" fill="#555">-1</text>
+            <text x="6" y="-18" font-family="Comic Neue,cursive" font-size="9" fill="#555">1</text>
+            <text x="6" y="-38" font-family="Comic Neue,cursive" font-size="9" fill="#555">2</text>
+            <text x="6" y="22" font-family="Comic Neue,cursive" font-size="9" fill="#555">-1</text>
+            <!-- origin -->
+            <text x="-14" y="14" font-family="Comic Neue,cursive" font-size="9" fill="#c62828" font-weight="bold">O</text>
+            <!-- a point -->
+            <circle cx="40" cy="-40" r="5" fill="#c62828" stroke="#1a1a1a" stroke-width="1.5"/>
+            <text x="44" y="-44" font-family="Comic Neue,cursive" font-size="11" font-weight="bold" fill="#c62828">(2,2)</text>
+            <defs>
+              <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#1a1a1a"/>
+              </marker>
+              <marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="5" orient="auto">
+                <path d="M0,6 L3,0 L6,6 Z" fill="#1a1a1a"/>
+              </marker>
+            </defs>
+          </svg>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble right" style="margin-bottom:18px;">
+            It's like a treasure map<br>with numbers instead<br>of X marks! 🗺️
+          </div>
+          <div class="max">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: ANATOMY OF THE PLANE -->
+  <div class="row">
+    <div class="panel bg-peach full" style="min-height:120px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div class="zara" style="transform:scale(0.85);transform-origin:bottom left;flex-shrink:0;">
+          <div class="body"></div><div class="head"></div><div class="snout"></div>
+          <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+        </div>
+        <div style="flex:1;padding-top:8px;">
+          <div class="bubble top-left" style="max-width:320px;margin-bottom:14px;">
+            The coordinate plane has two number lines that cross at right angles!
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:30px;">
+            <div class="math-box indigo" style="font-size:13px;text-align:left;min-width:140px;">
+              <strong>x-axis</strong><br>
+              <span style="font-size:11px;color:#555;">horizontal line<br>→ left is negative<br>→ right is positive</span>
+            </div>
+            <div class="math-box blue" style="font-size:13px;text-align:left;min-width:140px;">
+              <strong>y-axis</strong><br>
+              <span style="font-size:11px;color:#555;">vertical line<br>↑ up is positive<br>↓ down is negative</span>
+            </div>
+            <div class="math-box green" style="font-size:13px;text-align:left;min-width:140px;">
+              <strong>Origin (0, 0)</strong><br>
+              <span style="font-size:11px;color:#555;">where axes cross<br>the starting point<br>x=0 AND y=0</span>
+            </div>
+            <div class="math-box orange" style="font-size:13px;text-align:left;min-width:140px;">
+              <strong>Quadrants</strong><br>
+              <span style="font-size:11px;color:#555;">4 sections of the plane<br>numbered I, II, III, IV<br>counterclockwise</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: ORDERED PAIRS -->
+  <div class="row">
+    <div class="panel bg-green" style="min-height:160px;">
+      <div style="font-weight:700;font-size:14px;margin-bottom:8px;color:#1a5900;">📍 ORDERED PAIRS (x, y)</div>
+      <div class="bubble top-left" style="max-width:260px;margin-bottom:14px;">
+        Every point has an address called an <strong>ordered pair</strong>!
+      </div>
+      <div style="margin-top:30px;font-size:13px;line-height:2;">
+        <div class="formula-box" style="font-size:16px;border-color:#2e7d32;margin-bottom:12px;">
+          (x, y) = (right/left, up/down)
+        </div>
+        <div style="font-size:13px;line-height:1.9;">
+          • x comes <strong>FIRST</strong> — go left or right<br>
+          • y comes <strong>SECOND</strong> — go up or down<br>
+          • Always start at the <strong>origin (0, 0)</strong>
+        </div>
+      </div>
+    </div>
+    <div class="panel bg-tan" style="min-height:160px;">
+      <div style="font-weight:700;font-size:14px;margin-bottom:8px;">🎯 How to plot (3, 5):</div>
+      <div style="font-size:13px;line-height:2.1;">
+        <span style="background:#283593;color:#fff;padding:1px 6px;border-radius:4px;">Step 1</span> Start at the <strong>origin</strong> (0,0)<br>
+        <span style="background:#2e7d32;color:#fff;padding:1px 6px;border-radius:4px;">Step 2</span> Move <strong>3 right</strong> (x = 3)<br>
+        <span style="background:#bf360c;color:#fff;padding:1px 6px;border-radius:4px;">Step 3</span> Move <strong>5 up</strong> (y = 5)<br>
+        <span style="background:#c62828;color:#fff;padding:1px 6px;border-radius:4px;">Step 4</span> Put a <strong>dot</strong> and label it!
+      </div>
+      <div style="margin-top:8px;padding:8px;background:#fff;border:2px solid #1a1a1a;border-radius:6px;font-size:12px;">
+        Memory trick: <strong>"x before y"</strong><br>
+        Go across the hallway (x), then up the stairs (y)!
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 2 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: FOUR QUADRANTS -->
+  <div class="row">
+    <div class="panel bg-indigo full" style="min-height:200px;">
+      <div style="font-weight:700;font-size:14px;margin-bottom:10px;color:#1a237e;">🧭 The Four Quadrants</div>
+      <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">
+        <div style="flex:1;min-width:240px;">
+          <!-- Full quadrant diagram -->
+          <svg width="220" height="200" viewBox="-110 -100 220 200">
+            <!-- quadrant shading -->
+            <rect x="2" y="-98" width="106" height="96" fill="#e8f5e9" opacity="0.7"/>
+            <rect x="-108" y="-98" width="106" height="96" fill="#e3f2fd" opacity="0.7"/>
+            <rect x="-108" y="2" width="106" height="96" fill="#fce4ec" opacity="0.7"/>
+            <rect x="2" y="2" width="106" height="96" fill="#fff9c4" opacity="0.7"/>
+            <!-- axes -->
+            <line x1="-108" y1="0" x2="108" y2="0" stroke="#1a1a1a" stroke-width="2.5"/>
+            <line x1="0" y1="98" x2="0" y2="-98" stroke="#1a1a1a" stroke-width="2.5"/>
+            <!-- quadrant labels -->
+            <text x="40" y="-55" font-family="Comic Neue,cursive" font-size="16" font-weight="bold" fill="#2e7d32">I</text>
+            <text x="10" y="-40" font-family="Comic Neue,cursive" font-size="10" fill="#2e7d32">(+,+)</text>
+            <text x="-75" y="-55" font-family="Comic Neue,cursive" font-size="16" font-weight="bold" fill="#1565c0">II</text>
+            <text x="-80" y="-40" font-family="Comic Neue,cursive" font-size="10" fill="#1565c0">(−,+)</text>
+            <text x="-80" y="55" font-family="Comic Neue,cursive" font-size="16" font-weight="bold" fill="#c62828">III</text>
+            <text x="-80" y="70" font-family="Comic Neue,cursive" font-size="10" fill="#c62828">(−,−)</text>
+            <text x="35" y="55" font-family="Comic Neue,cursive" font-size="16" font-weight="bold" fill="#e65100">IV</text>
+            <text x="10" y="70" font-family="Comic Neue,cursive" font-size="10" fill="#e65100">(+,−)</text>
+            <!-- axis labels -->
+            <text x="106" y="12" font-family="Comic Neue,cursive" font-size="12" font-weight="bold" fill="#1a1a1a">x</text>
+            <text x="4" y="-100" font-family="Comic Neue,cursive" font-size="12" font-weight="bold" fill="#1a1a1a">y</text>
+            <text x="-8" y="14" font-family="Comic Neue,cursive" font-size="10" font-weight="bold" fill="#c62828">O</text>
+            <!-- sample points -->
+            <circle cx="60" cy="-60" r="5" fill="#2e7d32"/>
+            <text x="64" y="-62" font-family="Comic Neue,cursive" font-size="9" fill="#2e7d32">(3,3)</text>
+            <circle cx="-60" cy="-40" r="5" fill="#1565c0"/>
+            <text x="-95" y="-42" font-family="Comic Neue,cursive" font-size="9" fill="#1565c0">(-3,2)</text>
+            <circle cx="-60" cy="60" r="5" fill="#c62828"/>
+            <text x="-95" y="58" font-family="Comic Neue,cursive" font-size="9" fill="#c62828">(-3,-3)</text>
+            <circle cx="60" cy="40" r="5" fill="#e65100"/>
+            <text x="64" y="38" font-family="Comic Neue,cursive" font-size="9" fill="#e65100">(3,-2)</text>
+            <!-- tick numbers -->
+            <text x="17" y="12" font-family="Comic Neue,cursive" font-size="8" fill="#555">1</text>
+            <text x="37" y="12" font-family="Comic Neue,cursive" font-size="8" fill="#555">2</text>
+            <text x="57" y="12" font-family="Comic Neue,cursive" font-size="8" fill="#555">3</text>
+            <text x="-22" y="12" font-family="Comic Neue,cursive" font-size="8" fill="#555">-1</text>
+            <text x="-42" y="12" font-family="Comic Neue,cursive" font-size="8" fill="#555">-2</text>
+            <text x="-62" y="12" font-family="Comic Neue,cursive" font-size="8" fill="#555">-3</text>
+            <!-- grid lines light -->
+            <line x1="20" y1="-95" x2="20" y2="95" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="40" y1="-95" x2="40" y2="95" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="60" y1="-95" x2="60" y2="95" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="80" y1="-95" x2="80" y2="95" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="-20" y1="-95" x2="-20" y2="95" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="-40" y1="-95" x2="-40" y2="95" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="-60" y1="-95" x2="-60" y2="95" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="-80" y1="-95" x2="-80" y2="95" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="-108" y1="20" x2="108" y2="20" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="-108" y1="40" x2="108" y2="40" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="-108" y1="60" x2="108" y2="60" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="-108" y1="80" x2="108" y2="80" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="-108" y1="-20" x2="108" y2="-20" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="-108" y1="-40" x2="108" y2="-40" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="-108" y1="-60" x2="108" y2="-60" stroke="#ccc" stroke-width="0.8"/>
+            <line x1="-108" y1="-80" x2="108" y2="-80" stroke="#ccc" stroke-width="0.8"/>
+          </svg>
+        </div>
+        <div style="flex:1;min-width:240px;padding-top:8px;">
+          <table style="border-collapse:collapse;font-size:13px;width:100%;">
+            <tr>
+              <th style="background:#283593;color:#fff;border:2px solid #1a1a1a;padding:6px 10px;">Quadrant</th>
+              <th style="background:#283593;color:#fff;border:2px solid #1a1a1a;padding:6px 10px;">x sign</th>
+              <th style="background:#283593;color:#fff;border:2px solid #1a1a1a;padding:6px 10px;">y sign</th>
+              <th style="background:#283593;color:#fff;border:2px solid #1a1a1a;padding:6px 10px;">Example</th>
+            </tr>
+            <tr>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#e8f5e9;font-weight:700;">I</td>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#e8f5e9;">+ (right)</td>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#e8f5e9;">+ (up)</td>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#e8f5e9;">(3, 4)</td>
+            </tr>
+            <tr>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#e3f2fd;font-weight:700;">II</td>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#e3f2fd;">− (left)</td>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#e3f2fd;">+ (up)</td>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#e3f2fd;">(−2, 5)</td>
+            </tr>
+            <tr>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#fce4ec;font-weight:700;">III</td>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#fce4ec;">− (left)</td>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#fce4ec;">− (down)</td>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#fce4ec;">(−4, −3)</td>
+            </tr>
+            <tr>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#fff9c4;font-weight:700;">IV</td>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#fff9c4;">+ (right)</td>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#fff9c4;">− (down)</td>
+              <td style="border:2px solid #1a1a1a;padding:6px;background:#fff9c4;">(5, −1)</td>
+            </tr>
+          </table>
+          <div style="margin-top:10px;padding:8px;background:#fff;border:2px dashed #283593;border-radius:6px;font-size:12px;">
+            <strong>🏛️ Memory trick:</strong><br>
+            Quadrants go <strong>counterclockwise</strong> starting top-right.<br>
+            "All Students Take Calculus" → tells you which trig functions are positive, but for us: <strong>I = all positive!</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: READING + FINDING DISTANCE -->
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="font-weight:700;font-size:14px;margin-bottom:8px;">📖 Reading Points Off a Graph</div>
+      <div class="bubble top-left" style="max-width:220px;margin-bottom:14px;">
+        Always read the x first, then the y!
+      </div>
+      <div style="margin-top:28px;font-size:13px;line-height:2;">
+        1. Find the point on the graph<br>
+        2. Draw a line straight <strong>down</strong> to the x-axis → that's your <strong>x</strong><br>
+        3. Draw a line straight <strong>left</strong> to the y-axis → that's your <strong>y</strong><br>
+        4. Write as (x, y)
+      </div>
+      <div style="margin-top:8px;padding:6px;background:#fff;border:2px solid #1a1a1a;border-radius:6px;font-size:12px;">
+        ⚠️ Don't confuse (3, 5) with (5, 3) — they are <strong>different points!</strong>
+      </div>
+    </div>
+
+    <div class="panel bg-green">
+      <div style="font-weight:700;font-size:14px;margin-bottom:8px;">📏 Distance on the Grid</div>
+      <div style="font-size:13px;line-height:1.9;">
+        Points on the <strong>same horizontal line</strong> (same y):<br>
+        → Distance = |x₁ − x₂|<br><br>
+        Points on the <strong>same vertical line</strong> (same x):<br>
+        → Distance = |y₁ − y₂|<br><br>
+        Example: A(1, 3) and B(5, 3)<br>
+        Distance = |1 − 5| = |−4| = <strong style="color:#c62828;">4 units</strong>
+      </div>
+      <div class="think-wrap">
+        <div class="think-sign">TRY<br>IT!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: GRAPHING SHAPES + PRACTICE -->
+  <div class="row">
+    <div class="panel bg-tan full" style="min-height:150px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div class="zara" style="transform:scale(0.85);transform-origin:bottom left;flex-shrink:0;">
+          <div class="body"></div><div class="head"></div><div class="snout"></div>
+          <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+        </div>
+        <div style="flex:1;padding-top:8px;">
+          <div class="bubble top-left" style="max-width:340px;margin-bottom:14px;">
+            You can even graph SHAPES on the coordinate plane! Connect the dots and you get rectangles, triangles, and more!
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px;">
+            <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;">
+              <div style="font-weight:700;margin-bottom:6px;color:#283593;">Try It! Plot and connect:</div>
+              A(1, 1) · B(4, 1) · C(4, 4) · D(1, 4)<br><br>
+              What shape did you make? ___________<br>
+              What is the area? ___________<br>
+              What is the perimeter? ___________
+            </div>
+            <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;">
+              <div style="font-weight:700;margin-bottom:6px;color:#2e7d32;">Which quadrant?</div>
+              (4, 2) → Quadrant ___<br>
+              (−3, 5) → Quadrant ___<br>
+              (−1, −4) → Quadrant ___<br>
+              (6, −2) → Quadrant ___<br>
+              (0, 3) → on the ___ axis
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: COMMON MISTAKE + SUMMARY -->
+  <div class="row">
+    <div class="panel bg-white">
+      <div style="font-weight:700;font-size:14px;margin-bottom:8px;">⚠️ WATCH OUT!</div>
+      <div style="font-size:13px;line-height:2;">
+        ❌ <strong>(x, y) not (y, x)</strong> — x always first!<br>
+        ❌ <strong>Up = positive y</strong>, Down = negative y<br>
+        ❌ <strong>Right = positive x</strong>, Left = negative x<br>
+        ❌ Points on an axis are <strong>not in any quadrant</strong><br>
+        ❌ The origin is (0, 0) — <strong>not (1, 1)</strong>!
+      </div>
+    </div>
+    <div class="panel bg-indigo">
+      <div style="font-weight:700;font-size:14px;margin-bottom:8px;">⭐ KEY VOCABULARY</div>
+      <div style="font-size:13px;line-height:2.1;">
+        <strong>x-axis</strong> — horizontal number line<br>
+        <strong>y-axis</strong> — vertical number line<br>
+        <strong>origin</strong> — (0, 0)<br>
+        <strong>ordered pair</strong> — (x, y)<br>
+        <strong>quadrant</strong> — I, II, III, or IV<br>
+        <strong>plot</strong> — place a point on the grid
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 2 -->
+
+</body>
+</html>

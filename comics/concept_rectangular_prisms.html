@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Math Comics – Rectangular Prisms</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f5c842;
+  font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+  padding: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.comic-page { background: #f5c842; padding: 16px; page-break-after: always; }
+.row { display: flex; gap: 8px; margin-bottom: 8px; }
+.panel {
+  border: 3px solid #1a1a1a; border-radius: 6px; padding: 14px;
+  position: relative; overflow: hidden; flex: 1;
+}
+.panel.bg-sky   { background: #cce8f5; }
+.panel.bg-green { background: #c8e6c9; }
+.panel.bg-peach { background: #ffe0cc; }
+.panel.bg-tan   { background: #f5e6c8; }
+.panel.bg-white { background: #ffffff; }
+.panel.bg-purple{ background: #e8d5f5; }
+.panel.full { flex: none; width: 100%; }
+.panel.w2 { flex: 2; }
+.panel.w3 { flex: 3; }
+
+.title-card {
+  display: inline-block; background: #bf360c; color: #fff;
+  font-family: 'Bangers', 'Impact', sans-serif; font-size: 28px;
+  letter-spacing: 2px; padding: 6px 18px 4px;
+  border: 3px solid #1a1a1a; border-radius: 8px; margin-bottom: 10px;
+  line-height: 1.1; text-shadow: 2px 2px 0 #5a1000;
+}
+.title-card .subtitle {
+  font-size: 14px; letter-spacing: 1px; display: block;
+  font-family: 'Comic Neue', cursive; text-shadow: none;
+}
+
+.bubble {
+  background: #fff; border: 2.5px solid #1a1a1a; border-radius: 18px;
+  padding: 8px 12px; font-size: 13.5px; line-height: 1.45;
+  position: relative; display: inline-block; max-width: 220px;
+  font-weight: 700; margin: 4px;
+}
+.bubble.left::after  { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after  { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after  { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.top-right::after  { content:''; position:absolute; top:-14px; right:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-right::before { content:''; position:absolute; top:-10px; right:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.thought { border-style: dashed; border-radius: 50px; }
+.bubble.yellow { background: #fff9c4; }
+.bubble.big { font-size: 15px; max-width: 280px; }
+.bubble.sm  { font-size: 12px; max-width: 180px; }
+
+.scene { display: flex; align-items: flex-end; justify-content: space-around; min-height: 120px; padding-top: 8px; }
+
+/* Zara */
+.zara { width: 70px; height: 110px; position: relative; flex-shrink: 0; }
+.zara .body  { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head  { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye   { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair  { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm   { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail  { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+
+/* Max */
+.max { width: 56px; height: 80px; position: relative; flex-shrink: 0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye  { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+
+.math-box { background:#fff; border:3px solid #1a1a1a; border-radius:8px; padding:10px 16px; font-size:18px; font-weight:700; display:inline-block; margin:6px 4px; text-align:center; }
+.math-box.red    { background:#fce4ec; border-color:#c62828; color:#c62828; }
+.math-box.blue   { background:#e3f2fd; border-color:#1565c0; }
+.math-box.green  { background:#e8f5e9; border-color:#2e7d32; }
+.math-box.orange { background:#fff3e0; border-color:#bf360c; }
+.math-box.purple { background:#f3e5f5; border-color:#6a1b9a; }
+
+.think-sign {
+  background:#c62828; color:#fff; font-size:11px; font-weight:700; text-align:center; padding:8px;
+  clip-path:polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);
+  width:90px; height:90px; display:flex; align-items:center; justify-content:center; line-height:1.3;
+}
+.think-wrap { position:absolute; bottom:10px; right:10px; }
+.panel-divider { border:none; border-top:3px solid #1a1a1a; margin:4px 0; }
+
+/* 3D Box SVG-style using CSS */
+.prism-3d {
+  display: inline-block;
+  position: relative;
+  margin: 8px 16px;
+}
+
+/* Label table */
+.label-table { border-collapse: collapse; font-size: 13px; margin: 8px 0; }
+.label-table td { border: 2px solid #1a1a1a; padding: 6px 12px; text-align: center; }
+.label-table th { background: #bf360c; color: #fff; border: 2px solid #1a1a1a; padding: 6px 12px; text-align: center; }
+
+.formula-box {
+  background: #fff; border: 3px solid #bf360c; border-radius: 10px;
+  padding: 12px 18px; font-size: 16px; font-weight: 700;
+  display: inline-block; margin: 8px 4px; text-align: center;
+}
+.formula-box .lbl { font-size: 11px; color: #555; display: block; font-weight: 400; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="comic-page">
+
+  <!-- ROW 1: INTRO -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:160px;">
+      <div class="title-card">
+        📦 RECTANGULAR PRISMS!
+        <span class="subtitle">Volume, Surface Area &amp; 3D Thinking</span>
+      </div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble left big" style="margin-bottom:18px;">
+            Max, look at this box!<br>It's a <strong>rectangular prism</strong>!<br>Can you describe it?
+          </div>
+          <div class="zara">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+
+        <!-- 3D Box drawing using SVG -->
+        <div style="padding:10px;">
+          <svg width="180" height="130" viewBox="0 0 180 130" style="display:block;">
+            <!-- front face -->
+            <rect x="20" y="40" width="100" height="70" fill="#fff3e0" stroke="#1a1a1a" stroke-width="2.5"/>
+            <!-- top face -->
+            <polygon points="20,40 60,10 160,10 120,40" fill="#ffe0b2" stroke="#1a1a1a" stroke-width="2.5"/>
+            <!-- right face -->
+            <polygon points="120,40 160,10 160,80 120,110" fill="#ffcc80" stroke="#1a1a1a" stroke-width="2.5"/>
+            <!-- dimension labels -->
+            <text x="60" y="88" font-family="Comic Neue,cursive" font-size="14" font-weight="bold" fill="#bf360c">length (l)</text>
+            <text x="122" y="65" font-family="Comic Neue,cursive" font-size="12" font-weight="bold" fill="#1565c0" transform="rotate(90,138,55)">width (w)</text>
+            <text x="2" y="78" font-family="Comic Neue,cursive" font-size="12" font-weight="bold" fill="#2e7d32">h</text>
+            <!-- arrows -->
+            <line x1="20" y1="115" x2="120" y2="115" stroke="#bf360c" stroke-width="2" marker-end="url(#arr)"/>
+            <line x1="120" y1="115" x2="160" y2="85" stroke="#1565c0" stroke-width="2"/>
+            <line x1="18" y1="40" x2="18" y2="110" stroke="#2e7d32" stroke-width="2"/>
+          </svg>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble right" style="margin-bottom:18px;">
+            It has 6 faces,<br>8 corners, and<br>12 edges! 📐
+          </div>
+          <div class="max">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: VOCABULARY -->
+  <div class="row">
+    <div class="panel bg-peach full" style="min-height:100px;">
+      <div style="display:flex;align-items:flex-start;gap:16px;">
+        <div class="zara" style="transform:scale(0.8);transform-origin:bottom left;flex-shrink:0;">
+          <div class="body"></div><div class="head"></div><div class="snout"></div>
+          <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+        </div>
+        <div style="flex:1;padding-top:6px;">
+          <div class="bubble top-left" style="max-width:320px;margin-bottom:12px;">
+            A rectangular prism has THREE measurements:<br>
+            <strong>Length × Width × Height</strong>. Every corner is a right angle!
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;">
+            <div class="math-box orange" style="font-size:14px;text-align:left;">
+              <strong>Face</strong><br><span style="font-size:11px;color:#555;">a flat side<br>(6 total)</span>
+            </div>
+            <div class="math-box blue" style="font-size:14px;text-align:left;">
+              <strong>Edge</strong><br><span style="font-size:11px;color:#555;">where 2 faces<br>meet (12 total)</span>
+            </div>
+            <div class="math-box green" style="font-size:14px;text-align:left;">
+              <strong>Vertex</strong><br><span style="font-size:11px;color:#555;">a corner<br>(8 total)</span>
+            </div>
+            <div class="math-box purple" style="font-size:14px;text-align:left;">
+              <strong>Cube</strong><br><span style="font-size:11px;color:#555;">special prism:<br>all sides equal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: VOLUME -->
+  <div class="row">
+    <div class="panel bg-green" style="min-height:160px;">
+      <div style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1a5900;">📦 VOLUME = Space inside</div>
+      <div class="bubble top-left" style="max-width:260px;margin-bottom:16px;">
+        Volume = how many <strong>unit cubes</strong><br>fit inside the box!
+      </div>
+      <div style="text-align:center;margin-top:20px;">
+        <div class="formula-box">
+          <span class="lbl">VOLUME formula:</span>
+          V = l × w × h
+        </div>
+        <div style="margin-top:10px;font-size:13px;">
+          Example: l = 5 cm, w = 3 cm, h = 2 cm<br>
+          V = 5 × 3 × 2 = <strong style="color:#bf360c;">30 cm³</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel bg-sky" style="min-height:160px;">
+      <div style="font-size:14px;font-weight:700;margin-bottom:8px;color:#004080;">🎁 Layer thinking!</div>
+      <div style="text-align:center;padding:8px 0;">
+        <svg width="150" height="110" viewBox="0 0 150 110">
+          <!-- layer 1 -->
+          <rect x="10" y="60" width="60" height="30" fill="#cce8f5" stroke="#1a1a1a" stroke-width="2"/>
+          <polygon points="10,60 28,45 88,45 70,60" fill="#b3d9f0" stroke="#1a1a1a" stroke-width="2"/>
+          <polygon points="70,60 88,45 88,75 70,90" fill="#99c9e8" stroke="#1a1a1a" stroke-width="2"/>
+          <!-- layer 2 -->
+          <rect x="10" y="32" width="60" height="28" fill="#ffe0cc" stroke="#1a1a1a" stroke-width="2"/>
+          <polygon points="10,32 28,17 88,17 70,32" fill="#ffd0b3" stroke="#1a1a1a" stroke-width="2"/>
+          <polygon points="70,32 88,17 88,47 70,62" fill="#ffc09a" stroke="#1a1a1a" stroke-width="2"/>
+          <!-- labels -->
+          <text x="92" y="70" font-family="Comic Neue,cursive" font-size="11" font-weight="bold" fill="#bf360c">Layer 1</text>
+          <text x="92" y="42" font-family="Comic Neue,cursive" font-size="11" font-weight="bold" fill="#bf360c">Layer 2</text>
+          <text x="25" y="80" font-family="Comic Neue,cursive" font-size="10" fill="#1a1a1a">l × w</text>
+          <text x="25" y="52" font-family="Comic Neue,cursive" font-size="10" fill="#1a1a1a">l × w</text>
+        </svg>
+        <div style="font-size:12px;margin-top:4px;">V = (l × w) × h = <strong>base area × height</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: SURFACE AREA INTRO -->
+  <div class="row">
+    <div class="panel bg-tan full" style="min-height:130px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">
+        <div style="flex:1;min-width:250px;">
+          <div style="font-size:14px;font-weight:700;margin-bottom:8px;">🎨 SURFACE AREA = The wrapping paper!</div>
+          <div class="bubble top-left" style="max-width:300px;margin-bottom:12px;">
+            Surface area = total area of <strong>ALL 6 faces</strong> added together.
+          </div>
+          <div style="margin-top:30px;">
+            <div class="formula-box" style="font-size:14px;">
+              <span class="lbl">SURFACE AREA formula:</span>
+              SA = 2(lw) + 2(lh) + 2(wh)
+            </div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:220px;padding-top:8px;">
+          <table class="label-table" style="width:100%;">
+            <tr><th>Face pair</th><th>Area each</th><th>×2</th></tr>
+            <tr><td>Top + Bottom</td><td>l × w</td><td>2lw</td></tr>
+            <tr><td>Front + Back</td><td>l × h</td><td>2lh</td></tr>
+            <tr><td>Left + Right</td><td>w × h</td><td>2wh</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 2 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: WORKED EXAMPLE -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:170px;">
+      <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#004080;">🔢 Let's work one together! A box: l=6, w=4, h=3 (all in cm)</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;">
+        <div style="flex:1;min-width:200px;">
+          <div style="font-weight:700;color:#bf360c;margin-bottom:6px;">Step 1 – VOLUME</div>
+          <div style="font-size:13px;line-height:2;">
+            V = l × w × h<br>
+            V = 6 × 4 × 3<br>
+            V = 24 × 3<br>
+            V = <strong style="color:#c62828;font-size:16px;">72 cm³</strong>
+          </div>
+        </div>
+        <div style="flex:2;min-width:280px;">
+          <div style="font-weight:700;color:#2e7d32;margin-bottom:6px;">Step 2 – SURFACE AREA</div>
+          <div style="font-size:13px;line-height:2;">
+            2(lw) = 2(6×4) = 2(24) = 48<br>
+            2(lh) = 2(6×3) = 2(18) = 36<br>
+            2(wh) = 2(4×3) = 2(12) = 24<br>
+            SA = 48 + 36 + 24 = <strong style="color:#c62828;font-size:16px;">108 cm²</strong>
+          </div>
+        </div>
+        <div style="flex:1;min-width:160px;padding-top:16px;">
+          <div class="bubble top-left" style="max-width:180px;font-size:12px;">
+            Volume uses <strong>cm³</strong> (cubed).<br>Surface Area uses <strong>cm²</strong> (squared).<br>Don't mix them up!
+          </div>
+          <div class="max" style="transform:scale(0.9);transform-origin:bottom left;margin-top:24px;">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: COMMON MISTAKES -->
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="font-weight:700;font-size:14px;margin-bottom:8px;">⚠️ COMMON MISTAKES!</div>
+      <div style="font-size:13px;line-height:1.9;">
+        ❌ <strong>Volume ≠ Surface Area</strong><br>
+        V = 72 cm³ measures <em>inside space</em><br>
+        SA = 108 cm² measures <em>outside skin</em><br><br>
+        ❌ <strong>Forget to multiply by 2</strong><br>
+        Each face has a PAIR (top&amp;bottom, etc.)<br><br>
+        ❌ <strong>Wrong units</strong><br>
+        Volume → cubic units (cm³, in³)<br>
+        Area → square units (cm², in²)
+      </div>
+    </div>
+
+    <div class="panel bg-green">
+      <div style="font-weight:700;font-size:14px;margin-bottom:8px;">🏠 Real World Uses</div>
+      <div style="font-size:13px;line-height:1.9;">
+        📦 <strong>Shipping box:</strong> need volume to know how much fits inside<br><br>
+        🎁 <strong>Wrapping gift:</strong> need surface area to know how much paper<br><br>
+        🏊 <strong>Fish tank:</strong> volume = how much water<br><br>
+        🖼️ <strong>Painting walls:</strong> surface area = how much paint
+      </div>
+      <div class="think-wrap">
+        <div class="think-sign">TRY<br>IT!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: TRY IT PROBLEMS -->
+  <div class="row">
+    <div class="panel bg-tan full" style="min-height:170px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div class="zara" style="transform:scale(0.85);transform-origin:bottom left;flex-shrink:0;">
+          <div class="body"></div><div class="head"></div><div class="snout"></div>
+          <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+        </div>
+        <div style="flex:1;padding-top:8px;">
+          <div class="bubble top-left" style="max-width:300px;margin-bottom:14px;">
+            Now YOU try! Find V and SA for each box. Show every step!
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:30px;">
+            <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;">
+              <div style="font-weight:700;margin-bottom:6px;color:#bf360c;">Box A</div>
+              l = 4 cm, w = 4 cm, h = 4 cm<br><br>
+              V = _______ cm³<br>
+              SA = _______ cm²<br><br>
+              <span style="font-size:11px;color:#555;font-style:italic;">(hint: it's a cube!)</span>
+            </div>
+            <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;">
+              <div style="font-weight:700;margin-bottom:6px;color:#2e7d32;">Box B</div>
+              l = 8 in, w = 3 in, h = 5 in<br><br>
+              V = _______ in³<br>
+              SA = _______ in²
+            </div>
+            <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;">
+              <div style="font-weight:700;margin-bottom:6px;color:#1565c0;">Box C</div>
+              l = 10 ft, w = 2 ft, h = 6 ft<br><br>
+              V = _______ ft³<br>
+              SA = _______ ft²
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: NET DIAGRAM -->
+  <div class="row">
+    <div class="panel bg-white full" style="min-height:120px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <div style="font-weight:700;font-size:14px;margin-bottom:8px;">📐 NET = Unfolded box (flat pattern)</div>
+          <div style="font-size:13px;line-height:1.8;">
+            If you cut open a box and flatten it out,<br>
+            you get a <strong>net</strong>. The net shows all 6 faces.<br>
+            Adding up all the face areas = <strong>Surface Area</strong>!<br><br>
+            <span style="color:#bf360c;font-weight:700;">SA = sum of all face areas on the net</span>
+          </div>
+        </div>
+        <div style="flex:1;min-width:220px;text-align:center;">
+          <!-- Simple net diagram -->
+          <svg width="200" height="120" viewBox="0 0 200 120">
+            <!-- cross-shaped net -->
+            <rect x="60" y="0"  width="40" height="30" fill="#ffe0b2" stroke="#1a1a1a" stroke-width="2"/>
+            <rect x="20" y="30" width="40" height="40" fill="#c8e6c9" stroke="#1a1a1a" stroke-width="2"/>
+            <rect x="60" y="30" width="40" height="40" fill="#cce8f5" stroke="#1a1a1a" stroke-width="2"/>
+            <rect x="100" y="30" width="40" height="40" fill="#c8e6c9" stroke="#1a1a1a" stroke-width="2"/>
+            <rect x="140" y="30" width="40" height="40" fill="#e8d5f5" stroke="#1a1a1a" stroke-width="2"/>
+            <rect x="60" y="70" width="40" height="30" fill="#ffe0cc" stroke="#1a1a1a" stroke-width="2"/>
+            <!-- labels -->
+            <text x="68" y="20" font-family="Comic Neue,cursive" font-size="10" fill="#1a1a1a">top</text>
+            <text x="28" y="54" font-family="Comic Neue,cursive" font-size="10" fill="#1a1a1a">left</text>
+            <text x="68" y="54" font-family="Comic Neue,cursive" font-size="10" fill="#1a1a1a">front</text>
+            <text x="108" y="54" font-family="Comic Neue,cursive" font-size="10" fill="#1a1a1a">right</text>
+            <text x="145" y="54" font-family="Comic Neue,cursive" font-size="10" fill="#1a1a1a">back</text>
+            <text x="64" y="88" font-family="Comic Neue,cursive" font-size="10" fill="#1a1a1a">bottom</text>
+          </svg>
+        </div>
+        <div style="flex:0;padding-top:10px;">
+          <div class="bubble thought sm" style="max-width:160px;font-size:12px;">
+            Fold the net back up → it makes the 3D box again! ✨
+          </div>
+          <div class="max" style="transform:scale(0.85);transform-origin:bottom right;margin-top:16px;margin-left:8px;">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 5: REMEMBER BOX -->
+  <div class="row">
+    <div class="panel bg-purple full" style="min-height:70px;">
+      <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;align-items:center;padding:8px 0;">
+        <div class="formula-box" style="border-color:#6a1b9a;">
+          <span class="lbl">Volume</span>
+          V = l × w × h &nbsp; <span style="font-size:12px;">(units³)</span>
+        </div>
+        <div class="formula-box" style="border-color:#6a1b9a;">
+          <span class="lbl">Surface Area</span>
+          SA = 2lw + 2lh + 2wh &nbsp; <span style="font-size:12px;">(units²)</span>
+        </div>
+        <div class="formula-box" style="border-color:#6a1b9a;">
+          <span class="lbl">Cube shortcut</span>
+          V = s³ &nbsp;&nbsp; SA = 6s²
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 2 -->
+
+</body>
+</html>
