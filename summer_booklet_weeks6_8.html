@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Summer Math – Weeks 6–8: Exponents, Expressions & Equations, Probability</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Georgia', serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+.page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+h1 { font-size: 22px; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
+h2 { font-size: 16px; margin: 14px 0 6px; }
+h3 { font-size: 13px; color: #1a3a6b; margin: 10px 0 4px; }
+.subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+.topic-tag { display: inline-block; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+.intro-box { border-left: 4px solid; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+.problem-block { margin-bottom: 12px; }
+.problem-block p { line-height: 1.7; margin-bottom: 4px; }
+.ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+.ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px 16px; }
+.box-blank { border: 1.5px solid #333; min-height: 28px; min-width: 36px; display: inline-block; margin: 2px; padding: 0 4px; vertical-align: middle; }
+.work-box { border: 1.5px dashed #aaa; min-height: 70px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+.work-box-sm { border: 1.5px dashed #aaa; min-height: 44px; width: 100%; margin: 4px 0; border-radius: 4px; padding: 4px; }
+.star { font-weight: bold; }
+.challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+.challenge-box h3 { color: #b06000; }
+.footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+.name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+.name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+.badge { float: right; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+.score-box { border: 2px solid #1a3a6b; border-radius: 6px; padding: 8px 16px; display: inline-block; margin-bottom: 10px; font-size: 12px; }
+.hint { font-size: 10px; color: #555; font-style: italic; }
+table { border-collapse: collapse; margin: 8px 0; font-size: 12px; }
+td, th { border: 1px solid #888; padding: 5px 8px; text-align: center; }
+.frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 13px; line-height: 1.1; }
+.frac .num { border-bottom: 1.5px solid #333; padding: 0 3px; }
+.frac .den { padding: 0 3px; }
+sup { font-size: 0.75em; vertical-align: super; }
+
+/* Week 6 – Exponents: deep orange */
+.w6 h2 { color: #e65100; }
+.w6 .topic-tag { background: #e65100; }
+.w6 .intro-box { background: #fff3e0; border-color: #e65100; }
+.w6 .badge { background: #e65100; }
+.w6 th { background: #e65100; color: #fff; }
+.w6 .star { color: #e65100; }
+
+/* Week 7 – Expressions & Equations: indigo */
+.w7 h2 { color: #283593; }
+.w7 .topic-tag { background: #283593; }
+.w7 .intro-box { background: #e8eaf6; border-color: #283593; }
+.w7 .badge { background: #283593; }
+.w7 th { background: #283593; color: #fff; }
+.w7 .star { color: #283593; }
+
+/* Week 8 – Probability: teal */
+.w8 h2 { color: #00695c; }
+.w8 .topic-tag { background: #00695c; }
+.w8 .intro-box { background: #e0f2f1; border-color: #00695c; }
+.w8 .badge { background: #00695c; }
+.w8 th { background: #00695c; color: #fff; }
+.w8 .star { color: #00695c; }
+
+/* Answer key */
+.ak h2 { font-size: 14px; color: #b03a00; border-left: 4px solid #b03a00; padding-left: 8px; margin: 12px 0 4px; }
+.answer { color: #c62828; font-weight: bold; }
+.step-box { background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; padding: 8px 12px; margin: 6px 0; font-size: 11px; line-height: 1.8; }
+.step { color: #1a3a6b; font-weight: bold; }
+
+@media print { .page { page-break-after: always; } body { margin: 0; padding: 0; } }
+@page { margin: 0; size: letter; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- COVER PAGE                                                    -->
+<!-- ============================================================ -->
+<div class="page" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:#1a3a6b;color:#fff;min-height:11in;">
+  <div style="font-size:40px;font-weight:bold;text-align:center;margin-bottom:16px;">Summer Math Adventure</div>
+  <div style="font-size:20px;text-align:center;margin-bottom:10px;">Weeks 6 – 8 Extension Booklet</div>
+  <div style="font-size:15px;text-align:center;margin-bottom:8px;">Exponents · Expressions &amp; Equations · Probability</div>
+  <div style="font-size:13px;text-align:center;margin-bottom:28px;">3 Weeks · 15 Daily Pages · 3 Quizzes · Full Answer Key · ~45 min/day</div>
+  <div style="background:#fff;color:#1a3a6b;padding:24px 40px;border-radius:12px;font-size:14px;max-width:5in;text-align:center;">
+    <strong>Name:</strong> ________________________________<br><br>
+    <strong>Summer:</strong> 2025<br><br>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;text-align:left;font-size:12px;">
+      <div>&#9744; Week 6: Exponents</div><div>&#9744; Week 6 Quiz</div>
+      <div>&#9744; Week 7: Expressions &amp; Eq.</div><div>&#9744; Week 7 Quiz</div>
+      <div>&#9744; Week 8: Probability</div><div>&#9744; Week 8 Quiz</div>
+    </div>
+  </div>
+  <div style="margin-top:28px;font-size:13px;color:#ccc;">Tools needed: pencil, calculator (Week 6 challenge only)</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 6 · DAY 1 · What Is an Exponent?                       -->
+<!-- ============================================================ -->
+<div class="page w6">
+  <div class="badge" style="background:#e65100;">W6<br>D1</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 6 · Day 1 &nbsp;|&nbsp; What Is an Exponent?</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">EXPONENTS</span>
+
+  <div class="intro-box" style="background:#fff3e0;border-left:4px solid #e65100;">
+    <strong>Key Idea:</strong> An <em>exponent</em> tells you how many times to multiply the <em>base</em> by itself.<br>
+    &nbsp;&nbsp; 3<sup>4</sup> means 3 × 3 × 3 × 3 = <strong>81</strong> &nbsp;|&nbsp; base = 3, exponent = 4<br>
+    <strong>Special names:</strong> 5<sup>2</sup> = "five squared" &nbsp;|&nbsp; 5<sup>3</sup> = "five cubed"<br>
+    <strong>Remember:</strong> Any number to the power of 0 equals 1. &nbsp;(7<sup>0</sup> = 1)
+  </div>
+
+  <h2>Part A – Label the Parts</h2>
+  <p class="hint">For each expression, write the base, the exponent, and read it aloud.</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. &nbsp; 2<sup>5</sup><br>
+      Base: <span class="ans-line"></span>
+      Exponent: <span class="ans-line"></span>
+      Read as: <span class="ans-line-long"></span>
+    </div>
+    <div class="problem-block">
+      2. &nbsp; 10<sup>3</sup><br>
+      Base: <span class="ans-line"></span>
+      Exponent: <span class="ans-line"></span>
+      Read as: <span class="ans-line-long"></span>
+    </div>
+    <div class="problem-block">
+      3. &nbsp; 6<sup>2</sup><br>
+      Base: <span class="ans-line"></span>
+      Exponent: <span class="ans-line"></span>
+      Read as: <span class="ans-line-long"></span>
+    </div>
+    <div class="problem-block">
+      4. &nbsp; 4<sup>0</sup><br>
+      Base: <span class="ans-line"></span>
+      Exponent: <span class="ans-line"></span>
+      Value: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Expand &amp; Evaluate</h2>
+  <p class="hint">Write as repeated multiplication, then find the value.</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      5. &nbsp; 3<sup>3</sup> = ___ × ___ × ___ = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      6. &nbsp; 2<sup>6</sup> = ___ × ___ × ___ × ___ × ___ × ___ = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      7. &nbsp; 5<sup>2</sup> = ___ × ___ = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      8. &nbsp; 10<sup>4</sup> = ___ × ___ × ___ × ___ = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      9. &nbsp; 1<sup>9</sup> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      10. &nbsp; 4<sup>3</sup> = ___ × ___ × ___ = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part C – Write in Exponential Form</h2>
+  <div class="grid-2">
+    <div class="problem-block">11. &nbsp; 7 × 7 × 7 = <span class="ans-line"></span></div>
+    <div class="problem-block">12. &nbsp; 9 × 9 = <span class="ans-line"></span></div>
+    <div class="problem-block">13. &nbsp; 2 × 2 × 2 × 2 × 2 = <span class="ans-line"></span></div>
+    <div class="problem-block">14. &nbsp; 10 × 10 × 10 = <span class="ans-line"></span></div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>Which is greater: 2<sup>8</sup> or 4<sup>4</sup>? Show your work and explain.</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer"><span>Week 6 · Day 1 – Exponents</span><span>Score: ______ / 14</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 6 · DAY 2 · Powers of 10 & Place Value Connection      -->
+<!-- ============================================================ -->
+<div class="page w6">
+  <div class="badge" style="background:#e65100;">W6<br>D2</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 6 · Day 2 &nbsp;|&nbsp; Powers of 10</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">EXPONENTS</span>
+
+  <div class="intro-box" style="background:#fff3e0;border-left:4px solid #e65100;">
+    <strong>Pattern:</strong> 10<sup>1</sup>=10 &nbsp;|&nbsp; 10<sup>2</sup>=100 &nbsp;|&nbsp; 10<sup>3</sup>=1,000 &nbsp;|&nbsp; 10<sup>4</sup>=10,000<br>
+    Each time the exponent goes up by 1, you multiply by 10 (add a zero).<br>
+    <strong>Shortcut:</strong> 10<sup>n</sup> = 1 followed by <em>n</em> zeros.
+  </div>
+
+  <h2>Part A – Complete the Powers of 10 Table</h2>
+  <table style="width:100%;">
+    <tr><th>Exponential</th><th>Expanded</th><th>Standard Form</th><th>Number of Zeros</th></tr>
+    <tr><td>10<sup>1</sup></td><td>10</td><td>10</td><td>1</td></tr>
+    <tr><td>10<sup>2</sup></td><td>10 × 10</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>10<sup>3</sup></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>10<sup>4</sup></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>10<sup>5</sup></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>10<sup>6</sup></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  </table>
+
+  <h2>Part B – Multiply Using Powers of 10</h2>
+  <p class="hint">Use the pattern: 4 × 10<sup>3</sup> = 4 × 1,000 = 4,000</p>
+  <div class="grid-2">
+    <div class="problem-block">1. &nbsp; 7 × 10<sup>2</sup> = <span class="ans-line"></span></div>
+    <div class="problem-block">2. &nbsp; 3 × 10<sup>4</sup> = <span class="ans-line"></span></div>
+    <div class="problem-block">3. &nbsp; 9 × 10<sup>1</sup> = <span class="ans-line"></span></div>
+    <div class="problem-block">4. &nbsp; 6 × 10<sup>5</sup> = <span class="ans-line"></span></div>
+    <div class="problem-block">5. &nbsp; 25 × 10<sup>3</sup> = <span class="ans-line"></span></div>
+    <div class="problem-block">6. &nbsp; 14 × 10<sup>2</sup> = <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Part C – Fill in the Exponent</h2>
+  <div class="grid-2">
+    <div class="problem-block">7. &nbsp; 10<sup><span class="box-blank"></span></sup> = 1,000,000</div>
+    <div class="problem-block">8. &nbsp; 10<sup><span class="box-blank"></span></sup> = 100,000</div>
+    <div class="problem-block">9. &nbsp; 5 × 10<sup><span class="box-blank"></span></sup> = 50,000</div>
+    <div class="problem-block">10. &nbsp; 8 × 10<sup><span class="box-blank"></span></sup> = 800</div>
+  </div>
+
+  <h2>Part D – Word Problems</h2>
+  <div class="problem-block">
+    11. A school has 3 × 10<sup>2</sup> students. How many students is that? <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    12. A city has 2 × 10<sup>5</sup> people. Write that number in standard form. <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    13. Light travels about 3 × 10<sup>8</sup> meters per second. Write that in standard form. <span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>The sun is about 93,000,000 miles from Earth. Write this as a whole number times a power of 10. Show your thinking.</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer"><span>Week 6 · Day 2 – Powers of 10</span><span>Score: ______ / 13</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 6 · DAY 3 · Comparing & Ordering Exponential Expressions -->
+<!-- ============================================================ -->
+<div class="page w6">
+  <div class="badge" style="background:#e65100;">W6<br>D3</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 6 · Day 3 &nbsp;|&nbsp; Comparing Exponential Expressions</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">EXPONENTS</span>
+
+  <div class="intro-box" style="background:#fff3e0;border-left:4px solid #e65100;">
+    <strong>Strategy:</strong> Always evaluate each expression first, then compare.<br>
+    Example: Is 2<sup>5</sup> or 5<sup>2</sup> greater?<br>
+    &nbsp;&nbsp; 2<sup>5</sup> = 32 &nbsp;&nbsp; 5<sup>2</sup> = 25 &nbsp;&nbsp; So 2<sup>5</sup> &gt; 5<sup>2</sup>
+  </div>
+
+  <h2>Part A – Evaluate Each Side, Then Compare (&lt;, &gt;, =)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. &nbsp; 3<sup>4</sup> <span class="box-blank" style="min-width:28px;"></span> 4<sup>3</sup><br>
+      <span class="hint">3<sup>4</sup> = ___ &nbsp; 4<sup>3</sup> = ___</span>
+    </div>
+    <div class="problem-block">
+      2. &nbsp; 2<sup>7</sup> <span class="box-blank" style="min-width:28px;"></span> 7<sup>2</sup><br>
+      <span class="hint">2<sup>7</sup> = ___ &nbsp; 7<sup>2</sup> = ___</span>
+    </div>
+    <div class="problem-block">
+      3. &nbsp; 5<sup>3</sup> <span class="box-blank" style="min-width:28px;"></span> 3<sup>5</sup><br>
+      <span class="hint">5<sup>3</sup> = ___ &nbsp; 3<sup>5</sup> = ___</span>
+    </div>
+    <div class="problem-block">
+      4. &nbsp; 6<sup>2</sup> <span class="box-blank" style="min-width:28px;"></span> 2<sup>6</sup><br>
+      <span class="hint">6<sup>2</sup> = ___ &nbsp; 2<sup>6</sup> = ___</span>
+    </div>
+    <div class="problem-block">
+      5. &nbsp; 10<sup>3</sup> <span class="box-blank" style="min-width:28px;"></span> 1,000<br>
+    </div>
+    <div class="problem-block">
+      6. &nbsp; 4<sup>2</sup> <span class="box-blank" style="min-width:28px;"></span> 2<sup>4</sup><br>
+    </div>
+  </div>
+
+  <h2>Part B – Order from Least to Greatest</h2>
+  <div class="problem-block">
+    7. &nbsp; 2<sup>3</sup> &nbsp; 3<sup>2</sup> &nbsp; 2<sup>4</sup> &nbsp; 4<sup>1</sup><br>
+    Values: ___, ___, ___, ___<br>
+    Order: <span class="ans-line-long"></span>
+  </div>
+  <div class="problem-block">
+    8. &nbsp; 5<sup>0</sup> &nbsp; 2<sup>5</sup> &nbsp; 3<sup>3</sup> &nbsp; 10<sup>2</sup><br>
+    Values: ___, ___, ___, ___<br>
+    Order: <span class="ans-line-long"></span>
+  </div>
+
+  <h2>Part C – True or False? Correct the False Ones.</h2>
+  <div class="grid-2">
+    <div class="problem-block">9. &nbsp; 2<sup>3</sup> = 6 &nbsp; T / F<br>If false, correct: <span class="ans-line"></span></div>
+    <div class="problem-block">10. &nbsp; 3<sup>0</sup> = 0 &nbsp; T / F<br>If false, correct: <span class="ans-line"></span></div>
+    <div class="problem-block">11. &nbsp; 10<sup>3</sup> = 1,000 &nbsp; T / F</div>
+    <div class="problem-block">12. &nbsp; 1<sup>100</sup> = 100 &nbsp; T / F<br>If false, correct: <span class="ans-line"></span></div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>Without calculating, explain why 2<sup>10</sup> must be greater than 10<sup>2</sup>. Hint: think about how fast each grows.</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer"><span>Week 6 · Day 3 – Comparing Exponents</span><span>Score: ______ / 12</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 6 · DAY 4 · Order of Operations with Exponents (PEMDAS) -->
+<!-- ============================================================ -->
+<div class="page w6">
+  <div class="badge" style="background:#e65100;">W6<br>D4</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 6 · Day 4 &nbsp;|&nbsp; Order of Operations with Exponents</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">EXPONENTS</span>
+
+  <div class="intro-box" style="background:#fff3e0;border-left:4px solid #e65100;">
+    <strong>PEMDAS Order:</strong><br>
+    1. <strong>P</strong>arentheses &nbsp; 2. <strong>E</strong>xponents &nbsp; 3. <strong>M</strong>ultiplication / <strong>D</strong>ivision (left→right) &nbsp; 4. <strong>A</strong>ddition / <strong>S</strong>ubtraction (left→right)<br>
+    Example: 2 + 3<sup>2</sup> × 4 = 2 + 9 × 4 = 2 + 36 = <strong>38</strong>
+  </div>
+
+  <h2>Part A – Evaluate Step by Step</h2>
+  <p class="hint">Show each step. Circle the operation you do first.</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. &nbsp; 5 + 2<sup>3</sup><br>
+      Step 1: ___<br>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      2. &nbsp; 4<sup>2</sup> − 10<br>
+      Step 1: ___<br>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      3. &nbsp; 3 × 2<sup>4</sup><br>
+      Step 1: ___<br>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      4. &nbsp; (3 + 1)<sup>2</sup><br>
+      Step 1: ___<br>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      5. &nbsp; 2<sup>3</sup> + 3<sup>2</sup><br>
+      Step 1: ___ &nbsp; Step 2: ___<br>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      6. &nbsp; 50 − 2<sup>2</sup> × 3<br>
+      Step 1: ___ &nbsp; Step 2: ___ &nbsp; Step 3: ___<br>
+      Answer: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Multi-Step Expressions</h2>
+  <div class="problem-block">
+    7. &nbsp; (2 + 3)<sup>2</sup> − 4 × 3 = <span class="ans-line"></span>
+    <div class="work-box-sm"></div>
+  </div>
+  <div class="problem-block">
+    8. &nbsp; 6<sup>2</sup> ÷ (3 + 1) + 5 = <span class="ans-line"></span>
+    <div class="work-box-sm"></div>
+  </div>
+  <div class="problem-block">
+    9. &nbsp; 3<sup>3</sup> − (4<sup>2</sup> − 7) × 2 = <span class="ans-line"></span>
+    <div class="work-box-sm"></div>
+  </div>
+
+  <h2>Part C – Insert Parentheses to Make True</h2>
+  <div class="grid-2">
+    <div class="problem-block">10. &nbsp; 3 + 5<sup>2</sup> × 2 = 128 &nbsp; (add parentheses)</div>
+    <div class="problem-block">11. &nbsp; 4 × 2 + 1<sup>2</sup> = 9 &nbsp; (add parentheses)</div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>Using the digits 2, 3, and 4 once each (with any operations), write an expression that equals exactly 100. Exponents allowed!</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer"><span>Week 6 · Day 4 – PEMDAS with Exponents</span><span>Score: ______ / 11</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 6 · DAY 5 · Perfect Squares & Square Roots             -->
+<!-- ============================================================ -->
+<div class="page w6">
+  <div class="badge" style="background:#e65100;">W6<br>D5</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 6 · Day 5 &nbsp;|&nbsp; Perfect Squares &amp; Square Roots</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">EXPONENTS</span>
+
+  <div class="intro-box" style="background:#fff3e0;border-left:4px solid #e65100;">
+    <strong>Perfect Square:</strong> A number that equals an integer times itself. &nbsp; 25 = 5 × 5 = 5<sup>2</sup><br>
+    <strong>Square Root (√):</strong> The opposite — what number times itself gives you this? &nbsp; √25 = 5<br>
+    First 12 perfect squares: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144
+  </div>
+
+  <h2>Part A – Perfect Squares Chart</h2>
+  <table style="width:100%">
+    <tr><th>n</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr>
+    <tr><td>n<sup>2</sup></td><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  </table>
+
+  <h2>Part B – Square Roots</h2>
+  <div class="grid-3">
+    <div class="problem-block">1. &nbsp; √36 = <span class="ans-line"></span></div>
+    <div class="problem-block">2. &nbsp; √81 = <span class="ans-line"></span></div>
+    <div class="problem-block">3. &nbsp; √144 = <span class="ans-line"></span></div>
+    <div class="problem-block">4. &nbsp; √49 = <span class="ans-line"></span></div>
+    <div class="problem-block">5. &nbsp; √121 = <span class="ans-line"></span></div>
+    <div class="problem-block">6. &nbsp; √1 = <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Part C – Is It a Perfect Square?</h2>
+  <p class="hint">Circle YES or NO. If yes, write its square root.</p>
+  <div class="grid-2">
+    <div class="problem-block">7. &nbsp; 50 &nbsp; YES / NO &nbsp; √ = ___</div>
+    <div class="problem-block">8. &nbsp; 64 &nbsp; YES / NO &nbsp; √ = ___</div>
+    <div class="problem-block">9. &nbsp; 100 &nbsp; YES / NO &nbsp; √ = ___</div>
+    <div class="problem-block">10. &nbsp; 72 &nbsp; YES / NO &nbsp; √ = ___</div>
+  </div>
+
+  <h2>Part D – Area &amp; Square Roots in Context</h2>
+  <div class="problem-block">
+    11. A square garden has an area of 64 m². What is the length of one side?<br>
+    Side = <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    12. A checkerboard has 64 small squares arranged in a perfect square pattern. How many rows does it have?<br>
+    Rows = <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    13. If one side of a square tile is 9 cm, what is its area?<br>
+    Area = <span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>Between which two consecutive whole numbers does √50 lie? Explain without a calculator.</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer"><span>Week 6 · Day 5 – Perfect Squares &amp; Square Roots</span><span>Score: ______ / 13 + chart</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 6 QUIZ                                                   -->
+<!-- ============================================================ -->
+<div class="page w6">
+  <div class="badge" style="background:#e65100;">W6<br>QUIZ</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 6 Quiz &nbsp;|&nbsp; Exponents</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <div class="score-box">Score: ______ / 20 &nbsp; &nbsp; Time started: _______ &nbsp; Finished: _______</div>
+
+  <h2>Section 1 – Evaluate (1 pt each)</h2>
+  <div class="grid-3">
+    <div class="problem-block">1. &nbsp; 4<sup>3</sup> = <span class="ans-line"></span></div>
+    <div class="problem-block">2. &nbsp; 2<sup>7</sup> = <span class="ans-line"></span></div>
+    <div class="problem-block">3. &nbsp; 9<sup>0</sup> = <span class="ans-line"></span></div>
+    <div class="problem-block">4. &nbsp; 10<sup>5</sup> = <span class="ans-line"></span></div>
+    <div class="problem-block">5. &nbsp; √64 = <span class="ans-line"></span></div>
+    <div class="problem-block">6. &nbsp; √121 = <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Section 2 – Order of Operations (2 pts each)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      7. &nbsp; 2<sup>4</sup> + 6 × 3 = <span class="ans-line"></span>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      8. &nbsp; (5 − 2)<sup>3</sup> ÷ 9 = <span class="ans-line"></span>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      9. &nbsp; 5<sup>2</sup> − 3<sup>2</sup> + 4 = <span class="ans-line"></span>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      10. &nbsp; 100 ÷ 10<sup>2</sup> × 3 = <span class="ans-line"></span>
+      <div class="work-box-sm"></div>
+    </div>
+  </div>
+
+  <h2>Section 3 – Compare &amp; Reason (2 pts each)</h2>
+  <div class="problem-block">
+    11. &nbsp; Circle the greater value: &nbsp; 3<sup>5</sup> &nbsp;&nbsp; or &nbsp;&nbsp; 5<sup>3</sup> &nbsp;&nbsp; Show your work below.
+    <div class="work-box-sm"></div>
+  </div>
+  <div class="problem-block">
+    12. &nbsp; A square room has an area of 196 sq ft. What is the length of each wall? Show work.
+    <div class="work-box-sm"></div>
+    Answer: <span class="ans-line"></span>
+  </div>
+
+  <div class="footer"><span>Week 6 Quiz – Exponents</span><span>Total: ______ / 20</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 7 · DAY 1 · Variables & Algebraic Expressions          -->
+<!-- ============================================================ -->
+<div class="page w7">
+  <div class="badge" style="background:#283593;">W7<br>D1</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 7 · Day 1 &nbsp;|&nbsp; Variables &amp; Algebraic Expressions</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">EXPRESSIONS</span>
+
+  <div class="intro-box" style="background:#e8eaf6;border-left:4px solid #283593;">
+    <strong>Variable:</strong> A letter that stands for an unknown number. (x, n, a, b…)<br>
+    <strong>Expression:</strong> Numbers, variables, and operations — but NO equals sign. &nbsp; (3x + 5)<br>
+    <strong>Term:</strong> Parts of an expression separated by + or −. &nbsp; In 3x + 5: terms are 3x and 5<br>
+    <strong>Coefficient:</strong> The number multiplied by a variable. &nbsp; In 3x, the coefficient is 3.
+  </div>
+
+  <h2>Part A – Vocabulary Match</h2>
+  <p class="hint">Label each part of the expression: 4n − 7 + 2n</p>
+  <div class="problem-block" style="background:#f5f5f5;padding:10px;border-radius:4px;">
+    Expression: &nbsp; <strong>4n − 7 + 2n</strong><br><br>
+    Number of terms: <span class="ans-line"></span><br>
+    List all terms: <span class="ans-line-long"></span><br>
+    Coefficient of the first term: <span class="ans-line"></span><br>
+    Constant (number with no variable): <span class="ans-line"></span>
+  </div>
+
+  <h2>Part B – Write as an Algebraic Expression</h2>
+  <p class="hint">Let n = the unknown number.</p>
+  <div class="grid-2">
+    <div class="problem-block">1. &nbsp; A number plus 8 &nbsp; → &nbsp; <span class="ans-line"></span></div>
+    <div class="problem-block">2. &nbsp; 5 times a number &nbsp; → &nbsp; <span class="ans-line"></span></div>
+    <div class="problem-block">3. &nbsp; A number divided by 4 &nbsp; → &nbsp; <span class="ans-line"></span></div>
+    <div class="problem-block">4. &nbsp; 12 minus a number &nbsp; → &nbsp; <span class="ans-line"></span></div>
+    <div class="problem-block">5. &nbsp; Twice a number, plus 3 &nbsp; → &nbsp; <span class="ans-line"></span></div>
+    <div class="problem-block">6. &nbsp; A number squared, minus 1 &nbsp; → &nbsp; <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Part C – Evaluate the Expression</h2>
+  <p class="hint">Substitute the given value and simplify.</p>
+  <div class="grid-2">
+    <div class="problem-block">7. &nbsp; 3n + 4 &nbsp; when n = 5 &nbsp; = <span class="ans-line"></span></div>
+    <div class="problem-block">8. &nbsp; 2x − 7 &nbsp; when x = 10 &nbsp; = <span class="ans-line"></span></div>
+    <div class="problem-block">9. &nbsp; m<sup>2</sup> + 1 &nbsp; when m = 6 &nbsp; = <span class="ans-line"></span></div>
+    <div class="problem-block">10. &nbsp; 4(a − 3) &nbsp; when a = 8 &nbsp; = <span class="ans-line"></span></div>
+    <div class="problem-block">11. &nbsp; <span class="frac"><span class="num">t</span><span class="den">2</span></span> + 9 &nbsp; when t = 6 &nbsp; = <span class="ans-line"></span></div>
+    <div class="problem-block">12. &nbsp; 5y − y &nbsp; when y = 4 &nbsp; = <span class="ans-line"></span></div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>A parking lot charges $3 to enter plus $2 per hour. Write an expression for the total cost for h hours. How much would 4 hours cost?</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer"><span>Week 7 · Day 1 – Variables &amp; Expressions</span><span>Score: ______ / 12</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 7 · DAY 2 · Simplifying Expressions (Like Terms)       -->
+<!-- ============================================================ -->
+<div class="page w7">
+  <div class="badge" style="background:#283593;">W7<br>D2</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 7 · Day 2 &nbsp;|&nbsp; Simplifying Expressions – Like Terms</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">EXPRESSIONS</span>
+
+  <div class="intro-box" style="background:#e8eaf6;border-left:4px solid #283593;">
+    <strong>Like Terms</strong> have the same variable (and exponent). You can combine them by adding/subtracting coefficients.<br>
+    3x + 5x = 8x &nbsp;|&nbsp; 7a − 2a = 5a &nbsp;|&nbsp; <em>BUT:</em> 3x + 5y cannot be combined — different variables!<br>
+    <strong>Tip:</strong> Constants (plain numbers) are also like terms with each other: 4 + 9 = 13
+  </div>
+
+  <h2>Part A – Identify Like Terms</h2>
+  <p class="hint">Group the like terms by circling them with matching colors (or labels A, B, C…).</p>
+  <div class="problem-block" style="background:#f5f5f5;padding:10px;border-radius:4px;">
+    1. &nbsp; 3x &nbsp; 5y &nbsp; 2x &nbsp; 8 &nbsp; 4y &nbsp; 11 &nbsp; 7x<br>
+    Like-term groups: <span class="ans-line-long"></span>
+  </div>
+  <div class="problem-block" style="background:#f5f5f5;padding:10px;border-radius:4px;margin-top:6px;">
+    2. &nbsp; 6a &nbsp; 2b &nbsp; 3a<sup>2</sup> &nbsp; 4a &nbsp; 9b &nbsp; a<sup>2</sup><br>
+    Like-term groups: <span class="ans-line-long"></span>
+  </div>
+
+  <h2>Part B – Combine Like Terms</h2>
+  <div class="grid-2">
+    <div class="problem-block">3. &nbsp; 4x + 3x = <span class="ans-line"></span></div>
+    <div class="problem-block">4. &nbsp; 9y − 2y = <span class="ans-line"></span></div>
+    <div class="problem-block">5. &nbsp; 5a + 2a + 3a = <span class="ans-line"></span></div>
+    <div class="problem-block">6. &nbsp; 8m − 5m + m = <span class="ans-line"></span></div>
+    <div class="problem-block">7. &nbsp; 3x + 4 + 2x + 7 = <span class="ans-line"></span></div>
+    <div class="problem-block">8. &nbsp; 6n − 2 + n + 5 = <span class="ans-line"></span></div>
+    <div class="problem-block">9. &nbsp; 4a + 3b − a + 2b = <span class="ans-line"></span></div>
+    <div class="problem-block">10. &nbsp; 10x + 5 − 4x − 3 = <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Part C – Simplify, Then Evaluate</h2>
+  <div class="problem-block">
+    11. &nbsp; 5n + 3 + 2n − 1 &nbsp; (simplify first, then evaluate when n = 4)<br>
+    Simplified: <span class="ans-line"></span> &nbsp; Value: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    12. &nbsp; 3x + 2y + x − y &nbsp; (simplify first, then evaluate when x = 3, y = 2)<br>
+    Simplified: <span class="ans-line"></span> &nbsp; Value: <span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>A rectangle has a length of (3x + 4) and a width of (x + 2). Write a simplified expression for the perimeter. Hint: P = 2l + 2w.</p>
+    <div class="work-box"></div>
+    Simplified perimeter: <span class="ans-line"></span>
+  </div>
+
+  <div class="footer"><span>Week 7 · Day 2 – Simplifying Expressions</span><span>Score: ______ / 12</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 7 · DAY 3 · Writing & Solving One-Step Equations       -->
+<!-- ============================================================ -->
+<div class="page w7">
+  <div class="badge" style="background:#283593;">W7<br>D3</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 7 · Day 3 &nbsp;|&nbsp; Writing &amp; Solving One-Step Equations</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">EQUATIONS</span>
+
+  <div class="intro-box" style="background:#e8eaf6;border-left:4px solid #283593;">
+    <strong>Equation</strong> = two expressions set equal. There IS an = sign. &nbsp; 3x + 5 = 20<br>
+    <strong>Solve</strong> = find the value of the variable that makes it true.<br>
+    <strong>Strategy (inverse operations):</strong> Whatever is done to the variable, do the opposite to both sides.<br>
+    &nbsp;&nbsp; x + 6 = 14 → subtract 6 from both sides → x = 8<br>
+    &nbsp;&nbsp; 3x = 21 → divide both sides by 3 → x = 7
+  </div>
+
+  <h2>Part A – Name the Inverse Operation</h2>
+  <div class="grid-2">
+    <div class="problem-block">1. &nbsp; x + 9 = 15 &nbsp; → use: <span class="ans-line"></span></div>
+    <div class="problem-block">2. &nbsp; x − 4 = 11 &nbsp; → use: <span class="ans-line"></span></div>
+    <div class="problem-block">3. &nbsp; 5x = 35 &nbsp; → use: <span class="ans-line"></span></div>
+    <div class="problem-block">4. &nbsp; x ÷ 3 = 8 &nbsp; → use: <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Part B – Solve. Show Your Check.</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      5. &nbsp; x + 12 = 30<br>
+      x = <span class="ans-line"></span><br>
+      Check: <span class="hint">___ + 12 = 30 ✓</span>
+    </div>
+    <div class="problem-block">
+      6. &nbsp; y − 7 = 19<br>
+      y = <span class="ans-line"></span><br>
+      Check: <span class="hint">___ − 7 = 19 ✓</span>
+    </div>
+    <div class="problem-block">
+      7. &nbsp; 4n = 48<br>
+      n = <span class="ans-line"></span><br>
+      Check: ___
+    </div>
+    <div class="problem-block">
+      8. &nbsp; <span class="frac"><span class="num">m</span><span class="den">6</span></span> = 9<br>
+      m = <span class="ans-line"></span><br>
+      Check: ___
+    </div>
+    <div class="problem-block">
+      9. &nbsp; t + 25 = 100<br>
+      t = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      10. &nbsp; 8p = 72<br>
+      p = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part C – Write the Equation, Then Solve</h2>
+  <div class="problem-block">
+    11. Sara has some stickers. She gives away 14 and has 23 left. How many did she start with?<br>
+    Equation: <span class="ans-line"></span> &nbsp; Answer: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    12. A bag of apples costs $6. Jake buys n bags and spends $42. How many bags did he buy?<br>
+    Equation: <span class="ans-line"></span> &nbsp; Answer: <span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>I think of a number, multiply it by 5, then subtract 8. The result is 37. Write and solve the equation. Show all steps.</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer"><span>Week 7 · Day 3 – One-Step Equations</span><span>Score: ______ / 12</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 7 · DAY 4 · Two-Step Equations                         -->
+<!-- ============================================================ -->
+<div class="page w7">
+  <div class="badge" style="background:#283593;">W7<br>D4</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 7 · Day 4 &nbsp;|&nbsp; Two-Step Equations</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">EQUATIONS</span>
+
+  <div class="intro-box" style="background:#e8eaf6;border-left:4px solid #283593;">
+    <strong>Two steps:</strong> undo addition/subtraction FIRST, then multiplication/division.<br>
+    Example: 2x + 3 = 11<br>
+    &nbsp;&nbsp; Step 1: Subtract 3 from both sides → 2x = 8<br>
+    &nbsp;&nbsp; Step 2: Divide both sides by 2 → x = 4<br>
+    <strong>Always check:</strong> 2(4) + 3 = 8 + 3 = 11 ✓
+  </div>
+
+  <h2>Part A – Label the Steps</h2>
+  <div class="problem-block">
+    Solve 3n − 5 = 16. Fill in the blanks:<br>
+    Step 1: Add ___ to both sides → 3n = ___<br>
+    Step 2: Divide both sides by ___ → n = ___<br>
+    Check: 3(___)  − 5 = ___ ✓
+  </div>
+
+  <h2>Part B – Solve. Show All Steps &amp; Check.</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. &nbsp; 2x + 7 = 21<br>
+      <div class="work-box-sm"></div>
+      x = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      2. &nbsp; 4y − 3 = 17<br>
+      <div class="work-box-sm"></div>
+      y = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      3. &nbsp; 5m + 10 = 45<br>
+      <div class="work-box-sm"></div>
+      m = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      4. &nbsp; <span class="frac"><span class="num">n</span><span class="den">3</span></span> + 4 = 10<br>
+      <div class="work-box-sm"></div>
+      n = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      5. &nbsp; 6a − 12 = 0<br>
+      <div class="work-box-sm"></div>
+      a = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      6. &nbsp; 3t + 15 = 60<br>
+      <div class="work-box-sm"></div>
+      t = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part C – Word Problems</h2>
+  <div class="problem-block">
+    7. A cab charges a $5 base fee plus $3 per mile. The total bill is $20. How many miles was the ride?<br>
+    Equation: <span class="ans-line-long"></span> &nbsp; Answer: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    8. Emma saves $8 a week. She already has $12 saved. She wants $60 total. How many more weeks?<br>
+    Equation: <span class="ans-line-long"></span> &nbsp; Answer: <span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>The sum of three consecutive even numbers is 54. If the smallest is n, write and solve an equation to find all three numbers.</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer"><span>Week 7 · Day 4 – Two-Step Equations</span><span>Score: ______ / 8 + Part A</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 7 · DAY 5 · Inequalities                               -->
+<!-- ============================================================ -->
+<div class="page w7">
+  <div class="badge" style="background:#283593;">W7<br>D5</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 7 · Day 5 &nbsp;|&nbsp; Inequalities</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">EQUATIONS</span>
+
+  <div class="intro-box" style="background:#e8eaf6;border-left:4px solid #283593;">
+    <strong>Inequality</strong> uses &lt;, &gt;, ≤, ≥ instead of =. The answer is a range of values.<br>
+    &nbsp;&nbsp; x + 3 &gt; 7 → x &gt; 4 (any number greater than 4 works)<br>
+    <strong>Graphing:</strong> Open circle ○ for &lt; / &gt; (not equal) · Closed circle ● for ≤ / ≥ (includes the value)<br>
+    Arrow points in the direction of solutions.
+  </div>
+
+  <h2>Part A – Write the Inequality</h2>
+  <div class="grid-2">
+    <div class="problem-block">1. &nbsp; "x is greater than 5" → <span class="ans-line"></span></div>
+    <div class="problem-block">2. &nbsp; "y is at most 12" → <span class="ans-line"></span></div>
+    <div class="problem-block">3. &nbsp; "n is less than or equal to 8" → <span class="ans-line"></span></div>
+    <div class="problem-block">4. &nbsp; "t is at least 20" → <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Part B – Solve the Inequality</h2>
+  <div class="grid-2">
+    <div class="problem-block">5. &nbsp; x + 4 &gt; 9 &nbsp; → <span class="ans-line"></span></div>
+    <div class="problem-block">6. &nbsp; y − 3 ≤ 7 &nbsp; → <span class="ans-line"></span></div>
+    <div class="problem-block">7. &nbsp; 2n &lt; 16 &nbsp; → <span class="ans-line"></span></div>
+    <div class="problem-block">8. &nbsp; <span class="frac"><span class="num">m</span><span class="den">4</span></span> ≥ 3 &nbsp; → <span class="ans-line"></span></div>
+    <div class="problem-block">9. &nbsp; 3x − 1 &gt; 11 &nbsp; → <span class="ans-line"></span></div>
+    <div class="problem-block">10. &nbsp; 5 + 2y ≤ 19 &nbsp; → <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Part C – Graph the Solution on the Number Line</h2>
+  <p class="hint">Draw an open or closed circle, then shade the arrow.</p>
+  <div class="problem-block">
+    11. &nbsp; x &gt; 3
+    <svg width="280" height="30" style="display:block;margin:6px 0;">
+      <line x1="10" y1="15" x2="270" y2="15" stroke="#333" stroke-width="2"/>
+      <polygon points="265,10 275,15 265,20" fill="#333"/>
+      <line x1="50" y1="10" x2="50" y2="20" stroke="#333" stroke-width="1.5"/>
+      <line x1="90" y1="10" x2="90" y2="20" stroke="#333" stroke-width="1.5"/>
+      <line x1="130" y1="10" x2="130" y2="20" stroke="#333" stroke-width="1.5"/>
+      <line x1="170" y1="10" x2="170" y2="20" stroke="#333" stroke-width="1.5"/>
+      <line x1="210" y1="10" x2="210" y2="20" stroke="#333" stroke-width="1.5"/>
+      <line x1="250" y1="10" x2="250" y2="20" stroke="#333" stroke-width="1.5"/>
+      <text x="46" y="28" font-size="10" text-anchor="middle">0</text>
+      <text x="86" y="28" font-size="10" text-anchor="middle">1</text>
+      <text x="126" y="28" font-size="10" text-anchor="middle">2</text>
+      <text x="166" y="28" font-size="10" text-anchor="middle">3</text>
+      <text x="206" y="28" font-size="10" text-anchor="middle">4</text>
+      <text x="246" y="28" font-size="10" text-anchor="middle">5</text>
+    </svg>
+  </div>
+  <div class="problem-block">
+    12. &nbsp; y ≤ 2
+    <svg width="280" height="30" style="display:block;margin:6px 0;">
+      <line x1="10" y1="15" x2="270" y2="15" stroke="#333" stroke-width="2"/>
+      <polygon points="265,10 275,15 265,20" fill="#333"/>
+      <line x1="50" y1="10" x2="50" y2="20" stroke="#333" stroke-width="1.5"/>
+      <line x1="90" y1="10" x2="90" y2="20" stroke="#333" stroke-width="1.5"/>
+      <line x1="130" y1="10" x2="130" y2="20" stroke="#333" stroke-width="1.5"/>
+      <line x1="170" y1="10" x2="170" y2="20" stroke="#333" stroke-width="1.5"/>
+      <line x1="210" y1="10" x2="210" y2="20" stroke="#333" stroke-width="1.5"/>
+      <text x="46" y="28" font-size="10" text-anchor="middle">0</text>
+      <text x="86" y="28" font-size="10" text-anchor="middle">1</text>
+      <text x="126" y="28" font-size="10" text-anchor="middle">2</text>
+      <text x="166" y="28" font-size="10" text-anchor="middle">3</text>
+      <text x="206" y="28" font-size="10" text-anchor="middle">4</text>
+    </svg>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>You have at most $25 to spend. Snacks cost $4 each. Write and solve an inequality for the maximum number of snacks you can buy. Graph the solution.</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer"><span>Week 7 · Day 5 – Inequalities</span><span>Score: ______ / 12</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 7 QUIZ                                                   -->
+<!-- ============================================================ -->
+<div class="page w7">
+  <div class="badge" style="background:#283593;">W7<br>QUIZ</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 7 Quiz &nbsp;|&nbsp; Expressions &amp; Equations</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <div class="score-box">Score: ______ / 20 &nbsp; &nbsp; Time started: _______ &nbsp; Finished: _______</div>
+
+  <h2>Section 1 – Expressions (1 pt each)</h2>
+  <div class="grid-2">
+    <div class="problem-block">1. Write an expression: "6 less than 3 times x"<br><span class="ans-line"></span></div>
+    <div class="problem-block">2. Evaluate 4n − 2 when n = 7 &nbsp; = <span class="ans-line"></span></div>
+    <div class="problem-block">3. Simplify: 5x + 3 + 2x − 1 = <span class="ans-line"></span></div>
+    <div class="problem-block">4. Simplify: 6a − 2b + a + 3b = <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Section 2 – Equations (2 pts each)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      5. &nbsp; x + 17 = 40<br>
+      <div class="work-box-sm"></div>
+      x = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      6. &nbsp; 7y = 63<br>
+      <div class="work-box-sm"></div>
+      y = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      7. &nbsp; 3m + 8 = 29<br>
+      <div class="work-box-sm"></div>
+      m = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      8. &nbsp; <span class="frac"><span class="num">n</span><span class="den">4</span></span> − 2 = 5<br>
+      <div class="work-box-sm"></div>
+      n = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Section 3 – Word Problem &amp; Inequality (2 pts each)</h2>
+  <div class="problem-block">
+    9. A box of crayons costs $5. Lena also buys a notebook for $3. She spends $23 total. How many boxes of crayons did she buy?<br>
+    Equation: <span class="ans-line-long"></span> &nbsp; Answer: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    10. Solve: 4x − 6 &gt; 10. Write your answer AND describe what values work using one example.<br>
+    x &gt; ___ &nbsp; Example: x = ___ works because ___________
+  </div>
+
+  <div class="footer"><span>Week 7 Quiz – Expressions &amp; Equations</span><span>Total: ______ / 20</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 8 · DAY 1 · Introduction to Probability                -->
+<!-- ============================================================ -->
+<div class="page w8">
+  <div class="badge" style="background:#00695c;">W8<br>D1</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 8 · Day 1 &nbsp;|&nbsp; What Is Probability?</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">PROBABILITY</span>
+
+  <div class="intro-box" style="background:#e0f2f1;border-left:4px solid #00695c;">
+    <strong>Probability</strong> = how likely an event is to happen.<br>
+    P(event) = <span class="frac"><span class="num">number of favorable outcomes</span><span class="den">total number of possible outcomes</span></span><br>
+    Scale: 0 (impossible) ←————————————→ 1 (certain)<br>
+    &nbsp;&nbsp; P = 0.5 or <span class="frac"><span class="num">1</span><span class="den">2</span></span> means equally likely as unlikely.
+  </div>
+
+  <h2>Part A – Probability Scale</h2>
+  <p class="hint">Place each event on the probability scale below. Write the letter at the right spot.</p>
+  <svg width="540" height="50" style="display:block;margin:8px 0 4px;">
+    <line x1="20" y1="25" x2="520" y2="25" stroke="#333" stroke-width="2.5"/>
+    <circle cx="20" cy="25" r="4" fill="#333"/><circle cx="520" cy="25" r="4" fill="#333"/>
+    <circle cx="270" cy="25" r="4" fill="#333"/>
+    <text x="20" y="44" font-size="11" text-anchor="middle">0</text>
+    <text x="270" y="44" font-size="11" text-anchor="middle">1/2</text>
+    <text x="520" y="44" font-size="11" text-anchor="middle">1</text>
+    <text x="20" y="14" font-size="10" text-anchor="middle">Impossible</text>
+    <text x="520" y="14" font-size="10" text-anchor="middle">Certain</text>
+  </svg>
+  <div class="grid-2">
+    <div class="problem-block">A. Rolling a 7 on a standard die</div>
+    <div class="problem-block">B. Flipping heads on a fair coin</div>
+    <div class="problem-block">C. The sun rises tomorrow</div>
+    <div class="problem-block">D. Picking a red card from a standard deck</div>
+    <div class="problem-block">E. It will snow in Arizona in July</div>
+    <div class="problem-block">F. Rolling an even number on a die</div>
+  </div>
+
+  <h2>Part B – Calculate the Probability</h2>
+  <p class="hint">A bag has 3 red, 4 blue, and 5 green marbles. Write each probability as a fraction.</p>
+  <div class="grid-2">
+    <div class="problem-block">1. &nbsp; P(red) = <span class="ans-line"></span></div>
+    <div class="problem-block">2. &nbsp; P(blue) = <span class="ans-line"></span></div>
+    <div class="problem-block">3. &nbsp; P(green) = <span class="ans-line"></span></div>
+    <div class="problem-block">4. &nbsp; P(NOT red) = <span class="ans-line"></span></div>
+    <div class="problem-block">5. &nbsp; P(red or blue) = <span class="ans-line"></span></div>
+    <div class="problem-block">6. &nbsp; P(purple) = <span class="ans-line"></span></div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>A spinner has 8 equal sections: 3 red, 2 blue, 2 yellow, 1 green. If you spin 40 times, about how many times would you expect red? Show your reasoning.</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer"><span>Week 8 · Day 1 – Introduction to Probability</span><span>Score: ______ / 6 + scale</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 8 · DAY 2 · Experimental vs. Theoretical Probability   -->
+<!-- ============================================================ -->
+<div class="page w8">
+  <div class="badge" style="background:#00695c;">W8<br>D2</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 8 · Day 2 &nbsp;|&nbsp; Experimental vs. Theoretical Probability</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">PROBABILITY</span>
+
+  <div class="intro-box" style="background:#e0f2f1;border-left:4px solid #00695c;">
+    <strong>Theoretical Probability:</strong> What SHOULD happen based on math. &nbsp; P(heads) = <span class="frac"><span class="num">1</span><span class="den">2</span></span><br>
+    <strong>Experimental Probability:</strong> What ACTUALLY happens when you do the experiment.<br>
+    &nbsp;&nbsp; If you flip a coin 20 times and get 12 heads → P(heads) = <span class="frac"><span class="num">12</span><span class="den">20</span></span> = <span class="frac"><span class="num">3</span><span class="den">5</span></span><br>
+    The more trials you run, the closer experimental gets to theoretical.
+  </div>
+
+  <h2>Part A – Coin Flip Experiment Data</h2>
+  <p class="hint">Omar flipped a coin 30 times. Results are below.</p>
+  <table style="width:60%">
+    <tr><th>Outcome</th><th>Tally</th><th>Frequency</th></tr>
+    <tr><td>Heads</td><td>|||| |||| |||| |</td><td></td></tr>
+    <tr><td>Tails</td><td>|||| |||| |||| ||||</td><td></td></tr>
+  </table>
+  <div class="grid-2" style="margin-top:10px;">
+    <div class="problem-block">1. Experimental P(Heads) = <span class="ans-line"></span></div>
+    <div class="problem-block">2. Experimental P(Tails) = <span class="ans-line"></span></div>
+    <div class="problem-block">3. Theoretical P(Heads) = <span class="ans-line"></span></div>
+    <div class="problem-block">4. Are they the same? Why/why not?<br><span class="ans-line-long"></span></div>
+  </div>
+
+  <h2>Part B – Die Roll Experiment</h2>
+  <p class="hint">A die was rolled 60 times. Fill in the theoretical, then compare.</p>
+  <table style="width:100%">
+    <tr><th>Number</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+    <tr><td>Experimental Freq.</td><td>12</td><td>8</td><td>11</td><td>9</td><td>13</td><td>7</td></tr>
+    <tr><td>Experimental Prob.</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Theoretical Prob.</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <div class="problem-block" style="margin-top:8px;">
+    5. Which number had experimental probability closest to theoretical? <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    6. If you rolled 600 times instead of 60, would you expect experimental to be closer to or farther from theoretical? Explain.<br>
+    <span class="ans-line-long"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>Design your own experiment: describe it, state the theoretical probability of your chosen outcome, run it 20 times (or simulate with a pencil), and record results. Did your results match theory?</p>
+    <div class="work-box" style="min-height:90px;"></div>
+  </div>
+
+  <div class="footer"><span>Week 8 · Day 2 – Experimental vs. Theoretical</span><span>Score: ______ / 6 + table</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 8 · DAY 3 · Sample Space & Tree Diagrams               -->
+<!-- ============================================================ -->
+<div class="page w8">
+  <div class="badge" style="background:#00695c;">W8<br>D3</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 8 · Day 3 &nbsp;|&nbsp; Sample Space &amp; Tree Diagrams</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">PROBABILITY</span>
+
+  <div class="intro-box" style="background:#e0f2f1;border-left:4px solid #00695c;">
+    <strong>Sample Space:</strong> All possible outcomes of an experiment.<br>
+    <strong>Tree Diagram:</strong> A visual tool to list all outcomes systematically.<br>
+    Example – Flip a coin AND roll a die:<br>
+    &nbsp;&nbsp; H → 1, 2, 3, 4, 5, 6 &nbsp;&nbsp; T → 1, 2, 3, 4, 5, 6 &nbsp;&nbsp; Total: 12 outcomes<br>
+    <strong>Counting Principle:</strong> # of outcomes = options × options × …
+  </div>
+
+  <h2>Part A – List the Sample Space</h2>
+  <div class="problem-block">
+    1. Flip a coin (H/T) and spin a spinner with colors Red, Blue, Green.<br>
+    Complete the sample space:<br>
+    { ___, ___, ___, ___, ___, ___ }<br>
+    Total outcomes: ___
+  </div>
+
+  <h2>Part B – Draw a Tree Diagram</h2>
+  <div class="problem-block">
+    2. A lunch special has 2 sandwich choices (Turkey, Veggie) and 3 drink choices (Water, Juice, Milk). Draw a tree diagram and list ALL combinations.
+    <div class="work-box" style="min-height:110px;"></div>
+    Total combinations: ___
+  </div>
+
+  <h2>Part C – Use the Counting Principle</h2>
+  <div class="grid-2">
+    <div class="problem-block">3. A shirt comes in 4 colors and 3 sizes. How many combinations? <span class="ans-line"></span></div>
+    <div class="problem-block">4. You roll 2 dice. How many total outcomes? <span class="ans-line"></span></div>
+    <div class="problem-block">5. A password uses 1 letter (A–E) and 1 digit (1–5). How many passwords? <span class="ans-line"></span></div>
+    <div class="problem-block">6. You flip 3 coins. How many total outcomes? <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Part D – Probability from a Sample Space</h2>
+  <p class="hint">Use the Turkey/Veggie × Water/Juice/Milk sample space from Part B.</p>
+  <div class="grid-2">
+    <div class="problem-block">7. P(Turkey AND Juice) = <span class="ans-line"></span></div>
+    <div class="problem-block">8. P(any Veggie combo) = <span class="ans-line"></span></div>
+    <div class="problem-block">9. P(any Milk combo) = <span class="ans-line"></span></div>
+    <div class="problem-block">10. P(Veggie AND Water) = <span class="ans-line"></span></div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>A game show has 3 doors. Behind one is a prize. You pick Door 1. The host opens Door 3 to show no prize. Should you switch to Door 2? Use probability to explain your reasoning.</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer"><span>Week 8 · Day 3 – Sample Space &amp; Tree Diagrams</span><span>Score: ______ / 10</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 8 · DAY 4 · Making Predictions with Probability        -->
+<!-- ============================================================ -->
+<div class="page w8">
+  <div class="badge" style="background:#00695c;">W8<br>D4</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 8 · Day 4 &nbsp;|&nbsp; Making Predictions with Probability</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">PROBABILITY</span>
+
+  <div class="intro-box" style="background:#e0f2f1;border-left:4px solid #00695c;">
+    <strong>Prediction Formula:</strong> Expected outcomes = P(event) × number of trials<br>
+    Example: P(rolling a 3) = <span class="frac"><span class="num">1</span><span class="den">6</span></span>. If you roll 60 times: expected 3s = <span class="frac"><span class="num">1</span><span class="den">6</span></span> × 60 = <strong>10</strong><br>
+    This is a <em>prediction</em>, not a guarantee — actual results may vary!
+  </div>
+
+  <h2>Part A – Calculate Expected Outcomes</h2>
+  <p class="hint">A spinner has 5 equal sections: 1 Red, 1 Blue, 2 Yellow, 1 Green.</p>
+  <div class="grid-2">
+    <div class="problem-block">1. P(Red) = <span class="ans-line"></span></div>
+    <div class="problem-block">2. P(Yellow) = <span class="ans-line"></span></div>
+    <div class="problem-block">3. If you spin 50 times, expected # of Red: <span class="ans-line"></span></div>
+    <div class="problem-block">4. If you spin 50 times, expected # of Yellow: <span class="ans-line"></span></div>
+    <div class="problem-block">5. If you spin 100 times, expected # of Green: <span class="ans-line"></span></div>
+    <div class="problem-block">6. If you spin 30 times, expected # of Blue: <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Part B – Real-World Predictions</h2>
+  <div class="problem-block">
+    7. A factory knows 3 out of every 200 light bulbs are defective. If they produce 1,000 bulbs, how many do they expect to be defective?<br>
+    <div class="work-box-sm"></div>
+    Answer: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    8. A survey of 50 students showed 20 prefer math class. If there are 350 students in the school, how many would you predict prefer math?<br>
+    <div class="work-box-sm"></div>
+    Answer: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    9. A basketball player makes 3 out of every 4 free throws. If she attempts 64 free throws in a season, how many does she expect to make?<br>
+    <div class="work-box-sm"></div>
+    Answer: <span class="ans-line"></span>
+  </div>
+
+  <h2>Part C – Working Backwards</h2>
+  <div class="problem-block">
+    10. A player expects to roll a 6 about 10 times. How many total rolls did they make?<br>
+    <div class="work-box-sm"></div>
+    Answer: <span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>A bag has some red and blue marbles. You draw 40 times (with replacement) and get red 15 times. Estimate how many red marbles are in the bag if there are 8 total. Show your reasoning.</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer"><span>Week 8 · Day 4 – Making Predictions</span><span>Score: ______ / 10</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 8 · DAY 5 · Probability Review & Mixed Practice        -->
+<!-- ============================================================ -->
+<div class="page w8">
+  <div class="badge" style="background:#00695c;">W8<br>D5</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 8 · Day 5 &nbsp;|&nbsp; Probability Review &amp; Mixed Practice</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">PROBABILITY</span>
+
+  <div class="intro-box" style="background:#e0f2f1;border-left:4px solid #00695c;">
+    <strong>Week 8 Summary:</strong><br>
+    ✓ P(event) = favorable ÷ total &nbsp;|&nbsp; ✓ 0 = impossible, 1 = certain<br>
+    ✓ Theoretical vs. Experimental &nbsp;|&nbsp; ✓ Tree diagrams = list all outcomes<br>
+    ✓ Predictions = P × trials &nbsp;|&nbsp; ✓ Complement: P(NOT event) = 1 − P(event)
+  </div>
+
+  <h2>Part A – Mixed Probability Problems</h2>
+  <p class="hint">A standard deck has 52 cards: 4 suits (♠ ♥ ♦ ♣), 13 cards each, including Ace, 2–10, Jack, Queen, King.</p>
+  <div class="grid-2">
+    <div class="problem-block">1. P(drawing a heart) = <span class="ans-line"></span></div>
+    <div class="problem-block">2. P(drawing a King) = <span class="ans-line"></span></div>
+    <div class="problem-block">3. P(drawing a red card) = <span class="ans-line"></span></div>
+    <div class="problem-block">4. P(NOT a spade) = <span class="ans-line"></span></div>
+    <div class="problem-block">5. P(a Jack or Queen) = <span class="ans-line"></span></div>
+    <div class="problem-block">6. P(a number card 2–9 of clubs) = <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Part B – Complement Rule</h2>
+  <p class="hint">P(NOT event) = 1 − P(event)</p>
+  <div class="grid-2">
+    <div class="problem-block">7. P(rain) = 0.3. &nbsp; P(no rain) = <span class="ans-line"></span></div>
+    <div class="problem-block">8. P(win) = <span class="frac"><span class="num">2</span><span class="den">5</span></span>. &nbsp; P(not win) = <span class="ans-line"></span></div>
+    <div class="problem-block">9. P(red marble) = <span class="frac"><span class="num">3</span><span class="den">8</span></span>. &nbsp; P(not red) = <span class="ans-line"></span></div>
+    <div class="problem-block">10. P(NOT rolling a 6) = <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Part C – Scenario &amp; Decision</h2>
+  <div class="problem-block">
+    11. A raffle sells 200 tickets. You buy 5. What is the probability you win?<br>
+    P(win) = <span class="ans-line"></span> &nbsp; P(lose) = <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    12. Is a probability of <span class="frac"><span class="num">7</span><span class="den">10</span></span> closer to impossible or certain? Place it on the scale and explain.
+    <div class="work-box-sm"></div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge – Connect All Three Topics</h3>
+    <p>A box has cards numbered 1–10. You draw one card. (a) What is P(drawing a perfect square)? (b) If you draw 50 times (with replacement), how many perfect squares do you expect? (c) Write an expression for expected perfect squares if you draw n times.</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer"><span>Week 8 · Day 5 – Probability Review</span><span>Score: ______ / 12</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- WEEK 8 QUIZ                                                   -->
+<!-- ============================================================ -->
+<div class="page w8">
+  <div class="badge" style="background:#00695c;">W8<br>QUIZ</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 8 Quiz &nbsp;|&nbsp; Probability</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <div class="score-box">Score: ______ / 20 &nbsp; &nbsp; Time started: _______ &nbsp; Finished: _______</div>
+
+  <h2>Section 1 – Probability Calculations (1 pt each)</h2>
+  <p class="hint">A jar has 6 red, 3 blue, and 1 yellow marble (10 total).</p>
+  <div class="grid-3">
+    <div class="problem-block">1. P(red) = <span class="ans-line"></span></div>
+    <div class="problem-block">2. P(blue) = <span class="ans-line"></span></div>
+    <div class="problem-block">3. P(yellow) = <span class="ans-line"></span></div>
+    <div class="problem-block">4. P(NOT red) = <span class="ans-line"></span></div>
+    <div class="problem-block">5. P(red or blue) = <span class="ans-line"></span></div>
+    <div class="problem-block">6. P(green) = <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Section 2 – Tree Diagram &amp; Counting (2 pts each)</h2>
+  <div class="problem-block">
+    7. You choose a flavor (Chocolate, Vanilla) and a cone (Waffle, Sugar, Cup). Draw a tree diagram and list all combinations.
+    <div class="work-box"></div>
+    Total: ___
+  </div>
+  <div class="problem-block">
+    8. From that same sample space, what is P(Chocolate AND Waffle cone)?<br>
+    P = <span class="ans-line"></span>
+  </div>
+
+  <h2>Section 3 – Prediction &amp; Reasoning (2 pts each)</h2>
+  <div class="problem-block">
+    9. P(landing on blue) = <span class="frac"><span class="num">1</span><span class="den">4</span></span>. If you spin 80 times, how many blues do you expect?<br>
+    <div class="work-box-sm"></div>
+    Answer: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    10. A survey found 35 out of 100 students walk to school. Predict how many of 400 students walk.
+    <div class="work-box-sm"></div>
+    Answer: <span class="ans-line"></span>
+  </div>
+
+  <div class="footer"><span>Week 8 Quiz – Probability</span><span>Total: ______ / 20</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- ANSWER KEY                                                    -->
+<!-- ============================================================ -->
+<div class="page ak">
+  <h1>Answer Key – Weeks 6, 7 &amp; 8</h1>
+  <div class="subtitle" style="background:#fff3e0;border-left:4px solid #e65100;padding:6px 10px;border-radius:4px;margin-bottom:10px;">
+    For parent/teacher use only. Cut or fold before giving booklet to student.
+  </div>
+
+  <h2>WEEK 6 – EXPONENTS</h2>
+
+  <h3>Day 1 – What Is an Exponent?</h3>
+  <div class="grid-3">
+    <div><span class="answer">Part A:</span><br>1. base=2, exp=5, "two to the fifth power"<br>2. base=10, exp=3, "ten cubed"<br>3. base=6, exp=2, "six squared"<br>4. base=4, exp=0, value=1</div>
+    <div><span class="answer">Part B:</span><br>5. 3×3×3=27 &nbsp; 6. 64 &nbsp; 7. 25<br>8. 10,000 &nbsp; 9. 1 &nbsp; 10. 64</div>
+    <div><span class="answer">Part C:</span><br>11. 7³ &nbsp; 12. 9² &nbsp; 13. 2⁵ &nbsp; 14. 10³<br><br><span class="answer">Challenge:</span> 2⁸=256, 4⁴=256 — equal!</div>
+  </div>
+
+  <h3>Day 2 – Powers of 10</h3>
+  <div class="grid-3">
+    <div><span class="answer">Table:</span> 100; 10×10×10=1,000; 10,000; 100,000; 1,000,000</div>
+    <div><span class="answer">Part B:</span><br>1. 700 &nbsp; 2. 30,000 &nbsp; 3. 90<br>4. 600,000 &nbsp; 5. 25,000 &nbsp; 6. 1,400</div>
+    <div><span class="answer">Part C:</span> 7. 6 &nbsp; 8. 5 &nbsp; 9. 4 &nbsp; 10. 2<br><span class="answer">Part D:</span> 11. 300 &nbsp; 12. 200,000 &nbsp; 13. 300,000,000</div>
+  </div>
+
+  <h3>Day 3 – Comparing Expressions</h3>
+  <div class="grid-3">
+    <div><span class="answer">Part A:</span><br>1. 81 &gt; 64 so &gt; &nbsp; 2. 128 &gt; 49 so &gt;<br>3. 125 &lt; 243 so &lt; &nbsp; 4. 36 &lt; 64 so &lt;<br>5. = &nbsp; 6. =</div>
+    <div><span class="answer">Part B:</span><br>7. 8, 9, 16, 4 → 4, 8, 9, 16<br>8. 1, 32, 27, 100 → 1, 27, 32, 100</div>
+    <div><span class="answer">Part C:</span><br>9. F (=8) &nbsp; 10. F (=1) &nbsp; 11. T &nbsp; 12. F (=1)</div>
+  </div>
+
+  <h3>Day 4 – PEMDAS with Exponents</h3>
+  <div class="grid-3">
+    <div><span class="answer">Part A:</span><br>1. 5+8=13 &nbsp; 2. 16−10=6 &nbsp; 3. 3×16=48<br>4. (4)²=16 &nbsp; 5. 8+9=17 &nbsp; 6. 50−12=38</div>
+    <div><span class="answer">Part B:</span><br>7. 25−12=13 &nbsp; 8. 36÷4+5=14 &nbsp; 9. 27−18=9</div>
+    <div><span class="answer">Part C:</span><br>10. (3+5)²×2=128<br>11. 4×(2+1)²=36≠9; try 4×2+1=9 ✓</div>
+  </div>
+
+  <h3>Day 5 – Perfect Squares &amp; Square Roots</h3>
+  <div class="grid-3">
+    <div><span class="answer">Chart:</span> 1,4,9,16,25,36,49,64,81,100,121,144</div>
+    <div><span class="answer">Part B:</span> 1.6 &nbsp;2.9 &nbsp;3.12 &nbsp;4.7 &nbsp;5.11 &nbsp;6.1<br><span class="answer">Part C:</span> 7.No &nbsp;8.Yes,8 &nbsp;9.Yes,10 &nbsp;10.No</div>
+    <div><span class="answer">Part D:</span> 11. 8m &nbsp; 12. 8 rows &nbsp; 13. 81 cm²<br><span class="answer">Challenge:</span> 7²=49, 8²=64, so 7&lt;√50&lt;8</div>
+  </div>
+
+  <h3>Week 6 Quiz</h3>
+  <div class="step-box">
+    <span class="step">Sec 1:</span> 1.64 &nbsp;2.128 &nbsp;3.1 &nbsp;4.100,000 &nbsp;5.8 &nbsp;6.11<br>
+    <span class="step">Sec 2:</span> 7. 16+18=34 &nbsp; 8. 27÷9=3 &nbsp; 9. 25−9+4=20 &nbsp; 10. 100÷100×3=3<br>
+    <span class="step">Sec 3:</span> 11. 3⁵=243 &gt; 5³=125; circle 3⁵ &nbsp; 12. √196=14; each wall = 14 ft
+  </div>
+
+  <h2>WEEK 7 – EXPRESSIONS &amp; EQUATIONS</h2>
+
+  <h3>Day 1 – Variables &amp; Expressions</h3>
+  <div class="grid-3">
+    <div><span class="answer">Vocab:</span> 3 terms; 4n, 2n, −7; coeff=4; const=−7</div>
+    <div><span class="answer">Part B:</span> 1.n+8 &nbsp;2.5n &nbsp;3.n÷4 &nbsp;4.12−n &nbsp;5.2n+3 &nbsp;6.n²−1</div>
+    <div><span class="answer">Part C:</span> 7.19 &nbsp;8.13 &nbsp;9.37 &nbsp;10.20 &nbsp;11.12 &nbsp;12.16<br><span class="answer">Challenge:</span> 3+2h; 4 hrs = $11</div>
+  </div>
+
+  <h3>Day 2 – Like Terms</h3>
+  <div class="grid-2">
+    <div><span class="answer">Part B:</span> 3.7x &nbsp;4.7y &nbsp;5.10a &nbsp;6.4m &nbsp;7.5x+11 &nbsp;8.7n+3 &nbsp;9.3a+5b &nbsp;10.6x+2</div>
+    <div><span class="answer">Part C:</span> 11. 7n+2; when n=4: 30 &nbsp; 12. 4x+y; when x=3,y=2: 14<br><span class="answer">Challenge:</span> P=2(3x+4)+2(x+2)=8x+12</div>
+  </div>
+
+  <h3>Day 3 – One-Step Equations</h3>
+  <div class="grid-2">
+    <div><span class="answer">Part A:</span> 1.subtract 9 &nbsp;2.add 4 &nbsp;3.divide by 5 &nbsp;4.multiply by 3</div>
+    <div><span class="answer">Part B:</span> 5.x=18 &nbsp;6.y=26 &nbsp;7.n=12 &nbsp;8.m=54 &nbsp;9.t=75 &nbsp;10.p=9<br><span class="answer">Part C:</span> 11.s−14=23, s=37 &nbsp;12.6n=42, n=7<br><span class="answer">Challenge:</span> 5n−8=37, n=9</div>
+  </div>
+
+  <h3>Day 4 – Two-Step Equations</h3>
+  <div class="grid-2">
+    <div><span class="answer">Label:</span> add 5; 3n=21; ÷3; n=7; 3(7)−5=16 ✓</div>
+    <div><span class="answer">Part B:</span> 1.x=7 &nbsp;2.y=5 &nbsp;3.m=7 &nbsp;4.n=18 &nbsp;5.a=2 &nbsp;6.t=15<br><span class="answer">Part C:</span> 7.3m+5=20, m=5 miles &nbsp;8.8w+12=60, w=6 weeks<br><span class="answer">Challenge:</span> n+(n+2)+(n+4)=54; n=16; nums: 16,18,20</div>
+  </div>
+
+  <h3>Day 5 – Inequalities</h3>
+  <div class="grid-2">
+    <div><span class="answer">Part A:</span> 1.x&gt;5 &nbsp;2.y≤12 &nbsp;3.n≤8 &nbsp;4.t≥20</div>
+    <div><span class="answer">Part B:</span> 5.x&gt;5 &nbsp;6.y≤10 &nbsp;7.n&lt;8 &nbsp;8.m≥12 &nbsp;9.x&gt;4 &nbsp;10.y≤7<br><span class="answer">Challenge:</span> 4s≤25, s≤6.25, so max 6 snacks</div>
+  </div>
+
+  <h3>Week 7 Quiz</h3>
+  <div class="step-box">
+    <span class="step">Sec 1:</span> 1.3x−6 &nbsp;2.26 &nbsp;3.7x+2 &nbsp;4.7a+b<br>
+    <span class="step">Sec 2:</span> 5.x=23 &nbsp;6.y=9 &nbsp;7.m=7 &nbsp;8.n=28<br>
+    <span class="step">Sec 3:</span> 9.5c+3=23, c=4 boxes &nbsp;10.x&gt;4; e.g. x=5 works because 4(5)−6=14&gt;10 ✓
+  </div>
+
+  <h2>WEEK 8 – PROBABILITY</h2>
+
+  <h3>Day 1 – Introduction</h3>
+  <div class="grid-2">
+    <div><span class="answer">Scale:</span> A=0, B=½, C=1, D=½, E≈0, F=½</div>
+    <div><span class="answer">Part B:</span> 1.3/12=¼ &nbsp;2.4/12=⅓ &nbsp;3.5/12 &nbsp;4.9/12=¾ &nbsp;5.7/12 &nbsp;6.0<br><span class="answer">Challenge:</span> P(red)=3/8; 40×3/8=15 times expected</div>
+  </div>
+
+  <h3>Day 2 – Experimental vs. Theoretical</h3>
+  <div class="grid-2">
+    <div><span class="answer">Coin:</span> Heads=16, Tails=14; Exp P(H)=16/30=8/15; Theo P(H)=1/2; not same due to random variation</div>
+    <div><span class="answer">Die table:</span> Each theoretical = 1/6 (or 10/60); experimental varies; closer with more trials</div>
+  </div>
+
+  <h3>Day 3 – Sample Space &amp; Tree Diagrams</h3>
+  <div class="grid-2">
+    <div><span class="answer">Part A:</span> {H-R, H-B, H-G, T-R, T-B, T-G}; 6 outcomes<br><span class="answer">Part B:</span> 6 combinations (2×3)</div>
+    <div><span class="answer">Part C:</span> 3.12 &nbsp;4.36 &nbsp;5.25 &nbsp;6.8<br><span class="answer">Part D:</span> 7.1/6 &nbsp;8.3/6=½ &nbsp;9.2/6=⅓ &nbsp;10.1/6</div>
+  </div>
+
+  <h3>Day 4 – Predictions</h3>
+  <div class="grid-2">
+    <div><span class="answer">Part A:</span> 1.1/5 &nbsp;2.2/5 &nbsp;3.10 &nbsp;4.20 &nbsp;5.20 &nbsp;6.6</div>
+    <div><span class="answer">Part B:</span> 7.15 bulbs &nbsp;8.140 students &nbsp;9.48 free throws &nbsp;10.60 rolls</div>
+  </div>
+
+  <h3>Day 5 – Review</h3>
+  <div class="grid-2">
+    <div><span class="answer">Part A (deck):</span> 1.13/52=¼ &nbsp;2.4/52=1/13 &nbsp;3.26/52=½ &nbsp;4.39/52=¾ &nbsp;5.8/52=2/13 &nbsp;6.8/52=2/13</div>
+    <div><span class="answer">Part B:</span> 7.0.7 &nbsp;8.3/5 &nbsp;9.5/8 &nbsp;10.5/6<br><span class="answer">Part C:</span> 11. P(win)=5/200=1/40; P(lose)=39/40 &nbsp; 12. closer to certain<br><span class="answer">Challenge:</span> P(perf sq)=3/10 (1,4,9); expected=15; expression=3n/10</div>
+  </div>
+
+  <h3>Week 8 Quiz</h3>
+  <div class="step-box">
+    <span class="step">Sec 1:</span> 1.6/10=3/5 &nbsp;2.3/10 &nbsp;3.1/10 &nbsp;4.4/10=2/5 &nbsp;5.9/10 &nbsp;6.0<br>
+    <span class="step">Sec 2:</span> 7. 6 combinations (Choc-Waffle, Choc-Sugar, Choc-Cup, Van-Waffle, Van-Sugar, Van-Cup)<br>
+    &nbsp;&nbsp; 8. P(Choc AND Waffle)=1/6<br>
+    <span class="step">Sec 3:</span> 9. ¼×80=20 blues &nbsp;10. 35/100×400=140 students
+  </div>
+
+  <div class="footer"><span>Answer Key – Weeks 6, 7 &amp; 8</span><span>Summer Math Adventure</span></div>
+</div>
+
+</body>
+</html>

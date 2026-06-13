@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Summer Math Booklet – Week 2</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+  h1 { font-size: 22px; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #b03a00; margin: 14px 0 6px; }
+  h3 { font-size: 13px; color: #1a3a6b; margin: 10px 0 4px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; background: #2e7d32; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+  .intro-box { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+  .problem-block { margin-bottom: 14px; }
+  .problem-block p { line-height: 1.7; margin-bottom: 4px; }
+  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px 16px; }
+  .box-blank { border: 1.5px solid #333; min-height: 28px; min-width: 28px; display: inline-block; margin: 2px; padding: 0 4px; vertical-align: middle; }
+  .work-box { border: 1.5px dashed #aaa; min-height: 70px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .star { color: #b03a00; font-weight: bold; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .challenge-box h3 { color: #b06000; }
+  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge { float: right; background: #2e7d32; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .score-box { border: 2px solid #1a3a6b; border-radius: 6px; padding: 8px 16px; display: inline-block; margin-bottom: 10px; font-size: 12px; }
+  .hint { font-size: 10px; color: #555; font-style: italic; }
+  /* Fraction display */
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 13px; line-height: 1.1; }
+  .frac .num { border-bottom: 1.5px solid #333; padding: 0 3px; }
+  .frac .den { padding: 0 3px; }
+  /* Number line */
+  .nl-container { position: relative; margin: 16px 8px 8px; height: 40px; }
+  .nl-line { position: absolute; top: 20px; left: 20px; right: 20px; height: 3px; background: #333; }
+  .nl-arrow-r { position: absolute; top: 14px; right: 14px; width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 10px solid #333; }
+  /* Fraction bar model */
+  .bar-model { border: 1.5px solid #333; height: 24px; display: flex; margin: 6px 0; }
+  .bar-seg { border-right: 1px solid #333; flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+  .bar-seg:last-child { border-right: none; }
+  .bar-filled { background: #a5d6a7; }
+  table { border-collapse: collapse; margin: 8px 0; font-size: 12px; width: 100%; }
+  td, th { border: 1px solid #888; padding: 5px 8px; text-align: center; }
+  th { background: #2e7d32; color: #fff; }
+  .circle-frac { display: inline-block; width: 48px; height: 48px; border-radius: 50%; border: 2px solid #333; margin: 4px; vertical-align: middle; position: relative; overflow: hidden; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!--  WEEK 2 · DAY 1 · Fraction Concepts & Equivalence          -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W2<br>D1</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 2 · Day 1 &nbsp;|&nbsp; Fractions: Meaning &amp; Equivalent Fractions</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">FRACTIONS</span>
+
+  <div class="intro-box">
+    <strong>Fraction = part of a whole.</strong> &nbsp;
+    <span class="frac"><span class="num">numerator</span><span class="den">denominator</span></span> &nbsp;→&nbsp;
+    numerator = how many parts you have, denominator = total equal parts.<br>
+    <strong>Equivalent fractions:</strong> multiply OR divide numerator AND denominator by the same number.<br>
+    &nbsp;&nbsp;
+    <span class="frac"><span class="num">2</span><span class="den">3</span></span> =
+    <span class="frac"><span class="num">2×4</span><span class="den">3×4</span></span> =
+    <span class="frac"><span class="num">8</span><span class="den">12</span></span>
+  </div>
+
+  <h2>Part A – Shade &amp; Label</h2>
+  <p class="hint">Shade the correct fraction of each bar. Then write an equivalent fraction by doubling.</p>
+  <div class="problem-block">
+    1. Shade <span class="frac"><span class="num">3</span><span class="den">4</span></span> — then find an equivalent fraction with denominator 8.
+    <div class="bar-model">
+      <div class="bar-seg"></div><div class="bar-seg"></div><div class="bar-seg"></div><div class="bar-seg"></div>
+    </div>
+    Equivalent: <span class="frac"><span class="num">3</span><span class="den">4</span></span> = <span class="frac"><span class="num"><span class="box-blank" style="width:24px;height:16px;"></span></span><span class="den">8</span></span>
+  </div>
+  <div class="problem-block">
+    2. Shade <span class="frac"><span class="num">2</span><span class="den">5</span></span> — then find an equivalent fraction with denominator 15.
+    <div class="bar-model">
+      <div class="bar-seg"></div><div class="bar-seg"></div><div class="bar-seg"></div><div class="bar-seg"></div><div class="bar-seg"></div>
+    </div>
+    Equivalent: <span class="frac"><span class="num">2</span><span class="den">5</span></span> = <span class="frac"><span class="num"><span class="box-blank" style="width:24px;height:16px;"></span></span><span class="den">15</span></span>
+  </div>
+
+  <h2>Part B – Find the Missing Number</h2>
+  <div class="grid-4">
+    <div class="problem-block">
+      3. <span class="frac"><span class="num">3</span><span class="den">5</span></span> = <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den">20</span></span>
+    </div>
+    <div class="problem-block">
+      4. <span class="frac"><span class="num">4</span><span class="den">6</span></span> = <span class="frac"><span class="num">2</span><span class="den"><span class="box-blank"></span></span></span>
+    </div>
+    <div class="problem-block">
+      5. <span class="frac"><span class="num">5</span><span class="den">8</span></span> = <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den">40</span></span>
+    </div>
+    <div class="problem-block">
+      6. <span class="frac"><span class="num">18</span><span class="den">24</span></span> = <span class="frac"><span class="num">3</span><span class="den"><span class="box-blank"></span></span></span>
+    </div>
+  </div>
+
+  <h2>Part C – Simplest Form</h2>
+  <p class="hint">Divide numerator and denominator by their GCF (Greatest Common Factor).</p>
+  <div class="grid-4">
+    <div class="problem-block">
+      7. <span class="frac"><span class="num">8</span><span class="den">12</span></span> = <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span>
+    </div>
+    <div class="problem-block">
+      8. <span class="frac"><span class="num">15</span><span class="den">20</span></span> = <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span>
+    </div>
+    <div class="problem-block">
+      9. <span class="frac"><span class="num">24</span><span class="den">36</span></span> = <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span>
+    </div>
+    <div class="problem-block">
+      10. <span class="frac"><span class="num">30</span><span class="den">45</span></span> = <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span>
+    </div>
+  </div>
+
+  <h2>Part D – Compare Fractions</h2>
+  <p class="hint">Write &lt;, &gt;, or = . First convert to a common denominator.</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      11. <span class="frac"><span class="num">3</span><span class="den">4</span></span> <span class="box-blank"></span> <span class="frac"><span class="num">5</span><span class="den">8</span></span><br>
+      Common denom: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      12. <span class="frac"><span class="num">2</span><span class="den">3</span></span> <span class="box-blank"></span> <span class="frac"><span class="num">3</span><span class="den">5</span></span><br>
+      Common denom: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      13. <span class="frac"><span class="num">7</span><span class="den">8</span></span> <span class="box-blank"></span> <span class="frac"><span class="num">11</span><span class="den">12</span></span><br>
+      Common denom: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      14. <span class="frac"><span class="num">4</span><span class="den">6</span></span> <span class="box-blank"></span> <span class="frac"><span class="num">6</span><span class="den">9</span></span><br>
+      Common denom: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Fraction Order</h3>
+    <p>Order these fractions from least to greatest. Show your work using a common denominator.</p>
+    <p style="font-size:15px; text-align:center;">
+      <span class="frac"><span class="num">5</span><span class="den">6</span></span> &nbsp;&nbsp;
+      <span class="frac"><span class="num">3</span><span class="den">4</span></span> &nbsp;&nbsp;
+      <span class="frac"><span class="num">7</span><span class="den">12</span></span> &nbsp;&nbsp;
+      <span class="frac"><span class="num">2</span><span class="den">3</span></span>
+    </p>
+    <div class="work-box">Work (find LCD):</div>
+    Order: ______ &lt; ______ &lt; ______ &lt; ______
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 2 Day 1</span>
+    <span>Fraction Concepts &amp; Equivalence</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 2 · DAY 2 · Adding & Subtracting Unlike Fractions    -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W2<br>D2</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 2 · Day 2 &nbsp;|&nbsp; Adding &amp; Subtracting Fractions with Unlike Denominators</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">FRACTIONS: ADD &amp; SUBTRACT</span>
+
+  <div class="intro-box">
+    <strong>To add or subtract fractions with different denominators:</strong><br>
+    Step 1: Find the <strong>LCD</strong> (Least Common Denominator)<br>
+    Step 2: Convert each fraction to an equivalent fraction using the LCD<br>
+    Step 3: Add or subtract the numerators. Keep the denominator.<br>
+    Step 4: Simplify if needed.<br>
+    Example: <span class="frac"><span class="num">1</span><span class="den">3</span></span> + <span class="frac"><span class="num">1</span><span class="den">4</span></span>
+    → LCD = 12 →
+    <span class="frac"><span class="num">4</span><span class="den">12</span></span> + <span class="frac"><span class="num">3</span><span class="den">12</span></span> =
+    <span class="frac"><span class="num">7</span><span class="den">12</span></span>
+  </div>
+
+  <h2>Part A – Find the LCD First</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. Denominators: 4 and 6 &nbsp; LCD = <span class="box-blank"></span>
+    </div>
+    <div class="problem-block">
+      2. Denominators: 3 and 8 &nbsp; LCD = <span class="box-blank"></span>
+    </div>
+    <div class="problem-block">
+      3. Denominators: 5 and 6 &nbsp; LCD = <span class="box-blank"></span>
+    </div>
+    <div class="problem-block">
+      4. Denominators: 4 and 9 &nbsp; LCD = <span class="box-blank"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Add the Fractions</h2>
+  <p class="hint">Show the LCD step. Simplify your answer.</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      5. <span class="frac"><span class="num">1</span><span class="den">2</span></span> + <span class="frac"><span class="num">1</span><span class="den">5</span></span> =<br>
+      LCD: <span class="box-blank"></span><br>
+      <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span> + <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      6. <span class="frac"><span class="num">2</span><span class="den">3</span></span> + <span class="frac"><span class="num">1</span><span class="den">4</span></span> =<br>
+      LCD: <span class="box-blank"></span><br>
+      <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span> + <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      7. <span class="frac"><span class="num">3</span><span class="den">4</span></span> + <span class="frac"><span class="num">2</span><span class="den">5</span></span> =<br>
+      LCD: <span class="box-blank"></span><br>
+      = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      8. <span class="frac"><span class="num">5</span><span class="den">6</span></span> + <span class="frac"><span class="num">3</span><span class="den">8</span></span> =<br>
+      LCD: <span class="box-blank"></span><br>
+      = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part C – Subtract the Fractions</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      9. <span class="frac"><span class="num">3</span><span class="den">4</span></span> − <span class="frac"><span class="num">1</span><span class="den">3</span></span> = <span class="ans-line"></span>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      10. <span class="frac"><span class="num">5</span><span class="den">6</span></span> − <span class="frac"><span class="num">1</span><span class="den">4</span></span> = <span class="ans-line"></span>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      11. <span class="frac"><span class="num">7</span><span class="den">8</span></span> − <span class="frac"><span class="num">2</span><span class="den">3</span></span> = <span class="ans-line"></span>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      12. 1 − <span class="frac"><span class="num">3</span><span class="den">7</span></span> = <span class="ans-line"></span>
+      <div class="work-box"></div>
+    </div>
+  </div>
+
+  <h2>Part D – Word Problems</h2>
+  <div class="problem-block">
+    13. Mia drank <span class="frac"><span class="num">2</span><span class="den">3</span></span> of a water bottle in the morning and <span class="frac"><span class="num">1</span><span class="den">4</span></span> in the afternoon. How much did she drink total? Is the bottle more or less than full? Explain.
+    <div class="work-box"></div>
+    Answer: <span class="ans-line-long"></span>
+  </div>
+  <div class="problem-block">
+    14. A recipe needs <span class="frac"><span class="num">3</span><span class="den">4</span></span> cup flour. You only have <span class="frac"><span class="num">1</span><span class="den">3</span></span> cup. How much more flour do you need?
+    <div class="work-box"></div>
+    Answer: <span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Fraction Chain</h3>
+    <p>Fill in the blank fractions to make the chain equal <strong>1</strong>:</p>
+    <p style="text-align:center; font-size:14px;">
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span> + <span class="frac"><span class="num">1</span><span class="den">4</span></span> + <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span> = 1
+    </p>
+    <div class="work-box">Show your work:</div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 2 Day 2</span>
+    <span>Adding &amp; Subtracting Unlike Fractions</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 2 · DAY 3 · Mixed Numbers                             -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W2<br>D3</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 2 · Day 3 &nbsp;|&nbsp; Mixed Numbers: Converting, Adding &amp; Subtracting</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">MIXED NUMBERS</span>
+
+  <div class="intro-box">
+    <strong>Mixed Number:</strong> whole number + fraction &nbsp; (e.g., 3<span class="frac"><span class="num">1</span><span class="den">2</span></span>)<br>
+    <strong>Convert to improper fraction:</strong> multiply whole × denominator, add numerator, keep denominator.<br>
+    &nbsp; 3<span class="frac"><span class="num">1</span><span class="den">2</span></span> → (3×2)+1 = 7 → <span class="frac"><span class="num">7</span><span class="den">2</span></span><br>
+    <strong>Convert to mixed number:</strong> divide. Quotient = whole, remainder = new numerator.<br>
+    &nbsp; <span class="frac"><span class="num">11</span><span class="den">4</span></span> → 11÷4 = 2 R 3 → 2<span class="frac"><span class="num">3</span><span class="den">4</span></span>
+  </div>
+
+  <h2>Part A – Convert Between Forms</h2>
+  <div class="grid-2">
+    <div>
+      <p><strong>Mixed → Improper:</strong></p>
+      <div class="problem-block">1. &nbsp; 2<span class="frac"><span class="num">3</span><span class="den">4</span></span> = <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span></div>
+      <div class="problem-block">2. &nbsp; 5<span class="frac"><span class="num">2</span><span class="den">3</span></span> = <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span></div>
+      <div class="problem-block">3. &nbsp; 4<span class="frac"><span class="num">5</span><span class="den">6</span></span> = <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span></div>
+    </div>
+    <div>
+      <p><strong>Improper → Mixed:</strong></p>
+      <div class="problem-block">4. &nbsp; <span class="frac"><span class="num">17</span><span class="den">5</span></span> = <span class="ans-line"></span></div>
+      <div class="problem-block">5. &nbsp; <span class="frac"><span class="num">29</span><span class="den">4</span></span> = <span class="ans-line"></span></div>
+      <div class="problem-block">6. &nbsp; <span class="frac"><span class="num">41</span><span class="den">6</span></span> = <span class="ans-line"></span></div>
+    </div>
+  </div>
+
+  <h2>Part B – Add Mixed Numbers</h2>
+  <p class="hint">Add whole numbers + add fractions. Convert to LCD first. Regroup if fraction ≥ 1.</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      7. &nbsp; 3<span class="frac"><span class="num">1</span><span class="den">2</span></span> + 2<span class="frac"><span class="num">1</span><span class="den">4</span></span> =
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      8. &nbsp; 4<span class="frac"><span class="num">2</span><span class="den">3</span></span> + 1<span class="frac"><span class="num">3</span><span class="den">4</span></span> =
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      9. &nbsp; 2<span class="frac"><span class="num">5</span><span class="den">6</span></span> + 3<span class="frac"><span class="num">3</span><span class="den">4</span></span> =
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      10. &nbsp; 6<span class="frac"><span class="num">7</span><span class="den">8</span></span> + 2<span class="frac"><span class="num">3</span><span class="den">4</span></span> =
+      <div class="work-box"></div>
+    </div>
+  </div>
+
+  <h2>Part C – Subtract Mixed Numbers</h2>
+  <p class="hint">If the fraction being subtracted is BIGGER, you must borrow 1 from the whole number.</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      11. &nbsp; 5<span class="frac"><span class="num">3</span><span class="den">4</span></span> − 2<span class="frac"><span class="num">1</span><span class="den">4</span></span> =
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      12. &nbsp; 6<span class="frac"><span class="num">1</span><span class="den">3</span></span> − 2<span class="frac"><span class="num">2</span><span class="den">3</span></span> = (need to borrow!)
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      13. &nbsp; 8<span class="frac"><span class="num">1</span><span class="den">4</span></span> − 3<span class="frac"><span class="num">3</span><span class="den">4</span></span> = (need to borrow!)
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      14. &nbsp; 10 − 4<span class="frac"><span class="num">2</span><span class="den">5</span></span> =
+      <div class="work-box"></div>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Pizza Party!</h3>
+    <p>At a party, Zach ate 2<span class="frac"><span class="num">3</span><span class="den">8</span></span> pizzas, Ana ate 1<span class="frac"><span class="num">3</span><span class="den">4</span></span> pizzas, and Dom ate 1<span class="frac"><span class="num">1</span><span class="den">2</span></span> pizzas. They started with 6 pizzas total.</p>
+    A. How much pizza did all three eat together? <span class="ans-line"></span>
+    <div class="work-box"></div>
+    B. How much pizza was left over? <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 2 Day 3</span>
+    <span>Mixed Numbers</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 2 · DAY 4 · Multiplying Fractions                    -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W2<br>D4</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 2 · Day 4 &nbsp;|&nbsp; Multiplying Fractions &amp; Fractions of Whole Numbers</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">MULTIPLYING FRACTIONS</span>
+
+  <div class="intro-box">
+    <strong>Multiply fractions: top × top, bottom × bottom.</strong><br>
+    <span class="frac"><span class="num">2</span><span class="den">3</span></span> ×
+    <span class="frac"><span class="num">4</span><span class="den">5</span></span> =
+    <span class="frac"><span class="num">2×4</span><span class="den">3×5</span></span> =
+    <span class="frac"><span class="num">8</span><span class="den">15</span></span><br>
+    <strong>Fraction of a whole number:</strong> multiply the whole number by the fraction.<br>
+    <span class="frac"><span class="num">3</span><span class="den">4</span></span> of 24 =
+    <span class="frac"><span class="num">3</span><span class="den">4</span></span> × 24 =
+    <span class="frac"><span class="num">3 × 24</span><span class="den">4</span></span> =
+    <span class="frac"><span class="num">72</span><span class="den">4</span></span> = 18<br>
+    <strong>Tip:</strong> Cross-cancel before multiplying to keep numbers small!
+  </div>
+
+  <h2>Part A – Multiply Fractions</h2>
+  <div class="grid-3">
+    <div class="problem-block">
+      1. <span class="frac"><span class="num">1</span><span class="den">2</span></span> × <span class="frac"><span class="num">3</span><span class="den">5</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      2. <span class="frac"><span class="num">3</span><span class="den">4</span></span> × <span class="frac"><span class="num">2</span><span class="den">9</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      3. <span class="frac"><span class="num">5</span><span class="den">6</span></span> × <span class="frac"><span class="num">3</span><span class="den">10</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      4. <span class="frac"><span class="num">4</span><span class="den">7</span></span> × <span class="frac"><span class="num">7</span><span class="den">8</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      5. <span class="frac"><span class="num">2</span><span class="den">3</span></span> × <span class="frac"><span class="num">6</span><span class="den">7</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      6. <span class="frac"><span class="num">5</span><span class="den">8</span></span> × <span class="frac"><span class="num">4</span><span class="den">5</span></span> = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Fraction of a Whole Number</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      7. <span class="frac"><span class="num">3</span><span class="den">4</span></span> of 32 = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      8. <span class="frac"><span class="num">2</span><span class="den">5</span></span> of 45 = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      9. <span class="frac"><span class="num">5</span><span class="den">6</span></span> of 54 = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      10. <span class="frac"><span class="num">7</span><span class="den">8</span></span> of 64 = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part C – Word Problems</h2>
+  <div class="problem-block">
+    11. A hiking trail is 4<span class="frac"><span class="num">1</span><span class="den">2</span></span> miles. Sofia walked <span class="frac"><span class="num">2</span><span class="den">3</span></span> of the trail. How far did she walk?
+    <div class="work-box"></div>
+    Answer: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    12. A class of 30 students: <span class="frac"><span class="num">3</span><span class="den">5</span></span> chose soccer, <span class="frac"><span class="num">1</span><span class="den">6</span></span> chose swimming, and the rest chose basketball. How many chose each sport?
+    <div class="work-box"></div>
+    Soccer: <span class="ans-line"></span> &nbsp; Swimming: <span class="ans-line"></span> &nbsp; Basketball: <span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Area with Fractions</h3>
+    <p>A garden plot is <span class="frac"><span class="num">3</span><span class="den">4</span></span> yd wide and <span class="frac"><span class="num">5</span><span class="den">6</span></span> yd long. What is its area? (Area = length × width)</p>
+    <div class="work-box"></div>
+    Area = <span class="ans-line"></span> square yards
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 2 Day 4</span>
+    <span>Multiplying Fractions</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 2 · DAY 5 · Fractions on Number Lines + Review       -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W2<br>D5</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 2 · Day 5 &nbsp;|&nbsp; Fractions on Number Lines &amp; Cumulative Review</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">FRACTIONS: REVIEW</span>
+
+  <div class="intro-box">
+    <strong>Number line tip:</strong> The space between 0 and 1 is divided into equal parts equal to the denominator. Count "jumps" equal to the numerator.
+  </div>
+
+  <h2>Part A – Number Line Fractions</h2>
+  <p class="hint">Label the marked points on each number line.</p>
+  <div class="problem-block">
+    1. Each section = <span class="frac"><span class="num">1</span><span class="den">6</span></span>. Label A, B, C.
+    <svg width="460" height="50" style="display:block;margin:8px 0;">
+      <line x1="20" y1="25" x2="450" y2="25" stroke="#333" stroke-width="2"/>
+      <polygon points="450,20 460,25 450,30" fill="#333"/>
+      <!-- ticks at 0, 1/6, 2/6, 3/6, 4/6, 5/6, 1 -->
+      <line x1="20" y1="18" x2="20" y2="32" stroke="#333" stroke-width="2"/>
+      <text x="17" y="44" font-size="11" fill="#333">0</text>
+      <line x1="83" y1="18" x2="83" y2="32" stroke="#333" stroke-width="2"/>
+      <line x1="146" y1="18" x2="146" y2="32" stroke="#333" stroke-width="2"/>
+      <line x1="209" y1="18" x2="209" y2="32" stroke="#333" stroke-width="2"/>
+      <line x1="272" y1="18" x2="272" y2="32" stroke="#333" stroke-width="2"/>
+      <line x1="335" y1="18" x2="335" y2="32" stroke="#333" stroke-width="2"/>
+      <line x1="398" y1="18" x2="398" y2="32" stroke="#333" stroke-width="2"/>
+      <text x="392" y="44" font-size="11" fill="#333">1</text>
+      <!-- Points A, B, C -->
+      <circle cx="83" cy="25" r="5" fill="#b03a00"/>
+      <text x="79" y="14" font-size="11" fill="#b03a00" font-weight="bold">A</text>
+      <circle cx="272" cy="25" r="5" fill="#2e7d32"/>
+      <text x="268" y="14" font-size="11" fill="#2e7d32" font-weight="bold">B</text>
+      <circle cx="335" cy="25" r="5" fill="#1a3a6b"/>
+      <text x="331" y="14" font-size="11" fill="#1a3a6b" font-weight="bold">C</text>
+    </svg>
+    A = <span class="ans-line" style="width:80px;display:inline-block"></span> &nbsp;
+    B = <span class="ans-line" style="width:80px;display:inline-block"></span> &nbsp;
+    C = <span class="ans-line" style="width:80px;display:inline-block"></span>
+  </div>
+  <div class="problem-block">
+    2. Plot these fractions on the number line: <span class="frac"><span class="num">1</span><span class="den">4</span></span>, <span class="frac"><span class="num">3</span><span class="den">4</span></span>, <span class="frac"><span class="num">1</span><span class="den">2</span></span>
+    <svg width="460" height="50" style="display:block;margin:8px 0;">
+      <line x1="20" y1="25" x2="450" y2="25" stroke="#333" stroke-width="2"/>
+      <polygon points="450,20 460,25 450,30" fill="#333"/>
+      <line x1="20" y1="18" x2="20" y2="32" stroke="#333" stroke-width="2"/>
+      <text x="17" y="44" font-size="11" fill="#333">0</text>
+      <line x1="118" y1="18" x2="118" y2="32" stroke="#333" stroke-width="1" stroke-dasharray="3,2"/>
+      <line x1="215" y1="18" x2="215" y2="32" stroke="#333" stroke-width="1" stroke-dasharray="3,2"/>
+      <line x1="313" y1="18" x2="313" y2="32" stroke="#333" stroke-width="1" stroke-dasharray="3,2"/>
+      <line x1="410" y1="18" x2="410" y2="32" stroke="#333" stroke-width="2"/>
+      <text x="405" y="44" font-size="11" fill="#333">1</text>
+    </svg>
+  </div>
+
+  <h2>Part B – Mixed Review Sprint</h2>
+  <div class="grid-3">
+    <div class="problem-block">
+      3. <span class="frac"><span class="num">3</span><span class="den">8</span></span> + <span class="frac"><span class="num">1</span><span class="den">4</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      4. <span class="frac"><span class="num">5</span><span class="den">6</span></span> − <span class="frac"><span class="num">1</span><span class="den">3</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      5. <span class="frac"><span class="num">3</span><span class="den">5</span></span> × <span class="frac"><span class="num">2</span><span class="den">3</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      6. 3<span class="frac"><span class="num">1</span><span class="den">2</span></span> + 2<span class="frac"><span class="num">3</span><span class="den">4</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      7. 5<span class="frac"><span class="num">1</span><span class="den">3</span></span> − 1<span class="frac"><span class="num">2</span><span class="den">3</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      8. <span class="frac"><span class="num">2</span><span class="den">3</span></span> of 27 = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part C – Cumulative: Number Sense + Fractions</h2>
+  <div class="problem-block">
+    9. A bucket holds 3<span class="frac"><span class="num">3</span><span class="den">4</span></span> gallons. You fill it <span class="frac"><span class="num">2</span><span class="den">3</span></span> full. How many gallons are in the bucket?
+    <div class="work-box"></div>
+    Answer: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    10. A school raised $48,360. They spent <span class="frac"><span class="num">3</span><span class="den">8</span></span> on supplies. How much was spent on supplies? (Hint: find <span class="frac"><span class="num">3</span><span class="den">8</span></span> of 48,360)
+    <div class="work-box"></div>
+    Answer: $ <span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Fraction Reasoning</h3>
+    <p>Without calculating exactly, decide which sum is larger. Explain your reasoning.</p>
+    <p>A: <span class="frac"><span class="num">7</span><span class="den">8</span></span> + <span class="frac"><span class="num">5</span><span class="den">6</span></span> &nbsp;&nbsp;&nbsp; vs &nbsp;&nbsp;&nbsp; B: <span class="frac"><span class="num">3</span><span class="den">4</span></span> + <span class="frac"><span class="num">11</span><span class="den">12</span></span></p>
+    Larger: _____ &nbsp; Why? <span class="ans-line-long"></span>
+    <div class="work-box">Check by calculating:</div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 2 Day 5</span>
+    <span>Fractions Review</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 2 QUIZ                                                  -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W2<br>QUIZ</div>
+  <h1>Week 2 Quiz – Fractions</h1>
+  <div class="subtitle">Topics: Equivalence · Comparing · Add/Subtract · Mixed Numbers · Multiply</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <div class="score-box">Score: _______ / 20</div>
+
+  <h2>Section 1 – Equivalence &amp; Comparing (5 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. Fill in the blank: <span class="frac"><span class="num">3</span><span class="den">4</span></span> = <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den">28</span></span>
+    </div>
+    <div class="problem-block">
+      2. Simplify: <span class="frac"><span class="num">20</span><span class="den">28</span></span> = <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span>
+    </div>
+    <div class="problem-block">
+      3. Compare: <span class="frac"><span class="num">5</span><span class="den">8</span></span> <span class="box-blank"></span> <span class="frac"><span class="num">3</span><span class="den">5</span></span>
+    </div>
+    <div class="problem-block">
+      4. Order least to greatest: <span class="frac"><span class="num">2</span><span class="den">3</span></span>, <span class="frac"><span class="num">3</span><span class="den">4</span></span>, <span class="frac"><span class="num">5</span><span class="den">8</span></span><br>
+      <span class="ans-line-long"></span>
+    </div>
+  </div>
+  <div class="problem-block">
+    5. <span class="star">(1 pt)</span> Convert 6<span class="frac"><span class="num">3</span><span class="den">5</span></span> to an improper fraction. <span class="ans-line"></span>
+  </div>
+
+  <h2>Section 2 – Add &amp; Subtract (7 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      6. <span class="frac"><span class="num">1</span><span class="den">3</span></span> + <span class="frac"><span class="num">1</span><span class="den">6</span></span> = <span class="ans-line"></span>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      7. <span class="frac"><span class="num">5</span><span class="den">6</span></span> − <span class="frac"><span class="num">3</span><span class="den">8</span></span> = <span class="ans-line"></span>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      8. 4<span class="frac"><span class="num">3</span><span class="den">4</span></span> + 2<span class="frac"><span class="num">2</span><span class="den">3</span></span> = <span class="ans-line"></span>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      9. 7<span class="frac"><span class="num">1</span><span class="den">4</span></span> − 3<span class="frac"><span class="num">3</span><span class="den">4</span></span> = <span class="ans-line"></span>
+      <div class="work-box"></div>
+    </div>
+  </div>
+  <div class="problem-block">
+    10. <span class="star">(3 pts)</span> Lena has 5<span class="frac"><span class="num">1</span><span class="den">2</span></span> feet of ribbon. She uses 2<span class="frac"><span class="num">3</span><span class="den">8</span></span> feet for one gift and 1<span class="frac"><span class="num">3</span><span class="den">4</span></span> feet for another. How much ribbon remains?
+    <div class="work-box"></div>
+    Answer: <span class="ans-line"></span>
+  </div>
+
+  <h2>Section 3 – Multiply (5 pts + bonus)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      11. <span class="frac"><span class="num">3</span><span class="den">5</span></span> × <span class="frac"><span class="num">5</span><span class="den">9</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      12. <span class="frac"><span class="num">3</span><span class="den">4</span></span> × 36 = <span class="ans-line"></span>
+    </div>
+  </div>
+  <div class="problem-block">
+    13. <span class="star">(3 pts)</span> A rectangular room is 9<span class="frac"><span class="num">1</span><span class="den">2</span></span> ft long and 8 ft wide. What is the area?
+    <div class="work-box"></div>
+    Answer: <span class="ans-line"></span> sq ft
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 2 Quiz</span>
+    <span>Fractions</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Math Comics – Factors &amp; Primes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap');
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:#f5c842; font-family:'Comic Neue','Comic Sans MS',cursive; padding:24px; max-width:860px; margin:0 auto; }
+.comic-page { background:#f5c842; padding:16px; }
+.row { display:flex; gap:8px; margin-bottom:8px; }
+.panel { border:3px solid #1a1a1a; border-radius:6px; padding:14px; position:relative; overflow:hidden; flex:1; }
+.panel.bg-sky { background:#cce8f5; } .panel.bg-green { background:#c8e6c9; }
+.panel.bg-peach { background:#ffe0cc; } .panel.bg-tan { background:#f5e6c8; }
+.panel.w2 { flex:2; }
+.title-card { display:inline-block; background:#e65100; color:#fff; font-family:'Bangers','Impact',sans-serif; font-size:26px; letter-spacing:2px; padding:6px 16px 4px; border:3px solid #1a1a1a; border-radius:8px; margin-bottom:10px; text-shadow:2px 2px 0 #7a2800; }
+.title-card .sub { font-size:13px; display:block; font-family:'Comic Neue',cursive; text-shadow:none; letter-spacing:1px; }
+.bubble { background:#fff; border:2.5px solid #1a1a1a; border-radius:18px; padding:8px 12px; font-size:13.5px; line-height:1.45; position:relative; display:inline-block; max-width:220px; font-weight:700; margin:4px; }
+.bubble.left::after { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.sm { font-size:12px; max-width:180px; }
+.scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:110px; padding-top:8px; }
+.zara { width:70px; height:110px; position:relative; flex-shrink:0; }
+.zara .body { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+.max { width:56px; height:80px; position:relative; flex-shrink:0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+.math-box { background:#fff; border:3px solid #1a1a1a; border-radius:8px; padding:8px 14px; font-size:16px; font-weight:700; display:inline-block; margin:4px; text-align:center; }
+.math-box.orange { background:#fff3e0; border-color:#e65100; }
+.math-box.green { background:#e8f5e9; border-color:#2e7d32; }
+.math-box.red { background:#fce4ec; border-color:#c62828; color:#c62828; }
+.math-box.blue { background:#e3f2fd; border-color:#1565c0; }
+sup { font-size:0.65em; vertical-align:super; }
+.think-sign { background:#c62828; color:#fff; font-size:11px; font-weight:700; text-align:center; padding:10px; clip-path:polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%); width:88px; height:88px; display:flex; align-items:center; justify-content:center; line-height:1.3; flex-shrink:0; }
+.sieve-grid { display:grid; grid-template-columns:repeat(6,32px); gap:2px; margin:6px 0; }
+.sieve-cell { width:32px; height:28px; border:2px solid #1a1a1a; border-radius:4px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; background:#fff; }
+.sieve-cell.prime { background:#a5d6a7; border-color:#2e7d32; }
+.sieve-cell.cross { background:#ffcdd2; border-color:#c62828; text-decoration:line-through; color:#c62828; }
+/* factor tree */
+.ftree { font-size:13px; font-family:monospace; line-height:1.8; background:#fff; border:2px solid #1a1a1a; border-radius:6px; padding:10px; display:inline-block; }
+</style>
+</head>
+<body>
+<div class="comic-page">
+
+  <div class="row">
+    <div class="panel bg-sky" style="min-height:155px;">
+      <div class="title-card">🌲 Factors &amp; Primes!<span class="sub">Breaking numbers apart to their building blocks</span></div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div class="bubble left" style="max-width:190px;margin-bottom:18px;">What numbers can we multiply together to get 12, Max?</div>
+          <div class="zara"><div class="body"></div><div class="head"></div><div class="snout"></div><div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div></div>
+        </div>
+        <div style="text-align:center;padding:10px;"><div class="math-box orange" style="font-size:22px;">12 = ?</div></div>
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div class="bubble right" style="margin-bottom:18px;">Um… 3×4? Or 2×6? Or 1×12? They're all different!</div>
+          <div class="max"><div class="body"></div><div class="head"></div><div class="eye"></div><div class="eye r"></div><div class="horn"></div><div class="fang"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="panel bg-peach w2">
+      <div class="bubble top-left" style="max-width:290px;margin-bottom:14px;">All of those are correct! Numbers that multiply to give you 12 are called <strong>FACTORS</strong> of 12. Work in pairs starting from 1!</div>
+      <div style="margin-top:36px;">
+        <div style="font-size:13px;font-weight:700;margin-bottom:6px;">All factors of 12 (in pairs):</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <div class="math-box orange" style="font-size:13px;">1 × 12</div>
+          <div class="math-box orange" style="font-size:13px;">2 × 6</div>
+          <div class="math-box orange" style="font-size:13px;">3 × 4</div>
+        </div>
+        <div style="margin-top:8px;font-size:13px;">Factors of 12: <strong>1, 2, 3, 4, 6, 12</strong></div>
+      </div>
+    </div>
+    <div class="panel bg-green">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px;color:#e65100;">Divisibility Rules (shortcuts!):</div>
+      <div style="font-size:12px;display:flex;flex-direction:column;gap:4px;">
+        <div><strong>÷2:</strong> ends in 0, 2, 4, 6, 8</div>
+        <div><strong>÷3:</strong> digit sum ÷ 3 evenly (126: 1+2+6=9 ✓)</div>
+        <div><strong>÷5:</strong> ends in 0 or 5</div>
+        <div><strong>÷10:</strong> ends in 0</div>
+        <div><strong>÷6:</strong> divisible by BOTH 2 AND 3</div>
+        <div><strong>÷9:</strong> digit sum ÷ 9 evenly</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="panel bg-tan">
+      <div class="bubble top-left" style="max-width:270px;margin-bottom:14px;">A <strong>PRIME</strong> number has exactly 2 factors: 1 and itself. A <strong>COMPOSITE</strong> has more!</div>
+      <div style="margin-top:36px;">
+        <div style="font-size:13px;margin-bottom:8px;">Special: <strong>1 is NEITHER prime nor composite!</strong></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <div class="math-box green" style="font-size:12px;padding:6px;">PRIME: 2, 3, 5, 7<br>11, 13, 17, 19…<br><span style="font-size:10px;">only 2 factors each</span></div>
+          <div class="math-box blue" style="font-size:12px;padding:6px;">COMPOSITE: 4, 6, 8, 9<br>10, 12, 14, 15…<br><span style="font-size:10px;">more than 2 factors</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel bg-sky">
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;color:#e65100;">Sieve of Eratosthenes (primes to 30):</div>
+      <div class="sieve-grid">
+        <div class="sieve-cell cross">1</div>
+        <div class="sieve-cell prime">2</div>
+        <div class="sieve-cell prime">3</div>
+        <div class="sieve-cell cross">4</div>
+        <div class="sieve-cell prime">5</div>
+        <div class="sieve-cell cross">6</div>
+        <div class="sieve-cell prime">7</div>
+        <div class="sieve-cell cross">8</div>
+        <div class="sieve-cell cross">9</div>
+        <div class="sieve-cell cross">10</div>
+        <div class="sieve-cell prime">11</div>
+        <div class="sieve-cell cross">12</div>
+        <div class="sieve-cell prime">13</div>
+        <div class="sieve-cell cross">14</div>
+        <div class="sieve-cell cross">15</div>
+        <div class="sieve-cell cross">16</div>
+        <div class="sieve-cell prime">17</div>
+        <div class="sieve-cell cross">18</div>
+        <div class="sieve-cell prime">19</div>
+        <div class="sieve-cell cross">20</div>
+        <div class="sieve-cell cross">21</div>
+        <div class="sieve-cell cross">22</div>
+        <div class="sieve-cell prime">23</div>
+        <div class="sieve-cell cross">24</div>
+        <div class="sieve-cell cross">25</div>
+        <div class="sieve-cell cross">26</div>
+        <div class="sieve-cell cross">27</div>
+        <div class="sieve-cell cross">28</div>
+        <div class="sieve-cell prime">29</div>
+        <div class="sieve-cell cross">30</div>
+      </div>
+      <div style="font-size:10px;margin-top:4px;"><span style="background:#a5d6a7;padding:1px 5px;border-radius:3px;">green</span> = prime &nbsp; <span style="background:#ffcdd2;padding:1px 5px;border-radius:3px;">pink</span> = composite</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="zara" style="transform:scale(0.82);transform-origin:bottom left;flex-shrink:0;"><div class="body"></div><div class="head"></div><div class="snout"></div><div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div></div>
+        <div style="flex:1;padding-top:4px;">
+          <div class="bubble top-left" style="max-width:260px;margin-bottom:14px;">Prime Factorization: break a number into ONLY prime factors using a factor tree!</div>
+          <div style="margin-top:36px;display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;">
+            <div>
+              <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Factor tree of 36:</div>
+              <div class="ftree">
+                &nbsp;&nbsp;&nbsp;36<br>
+                &nbsp;&nbsp;/&nbsp;&nbsp;\<br>
+                &nbsp;4&nbsp;&nbsp;&nbsp;9<br>
+                /&nbsp;\&nbsp;&nbsp;/&nbsp;\<br>
+                2&nbsp;2&nbsp;3&nbsp;3
+              </div>
+              <div style="margin-top:6px;font-size:13px;">36 = <span style="color:#c62828;font-weight:700;">2² × 3²</span></div>
+            </div>
+            <div>
+              <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Factor tree of 60:</div>
+              <div class="ftree">
+                &nbsp;&nbsp;&nbsp;60<br>
+                &nbsp;&nbsp;/&nbsp;&nbsp;\<br>
+                &nbsp;6&nbsp;&nbsp;10<br>
+                /&nbsp;\&nbsp;/&nbsp;\<br>
+                2&nbsp;3&nbsp;2&nbsp;5
+              </div>
+              <div style="margin-top:6px;font-size:13px;">60 = <span style="color:#c62828;font-weight:700;">2² × 3 × 5</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="panel bg-green" style="display:flex;align-items:center;gap:16px;">
+      <div class="think-sign">Find the GCF of 24 and 36! (List all factors of each, find the biggest one they share!)</div>
+      <div style="flex:1;font-size:13px;">
+        <div>Factors of 24: 1,2,3,<strong>4,6,8,12</strong>,24</div>
+        <div>Factors of 36: 1,2,3,4,6,9,<strong>12</strong>,18,36</div>
+        <div style="margin-top:6px;">GCF = <strong style="color:#c62828;font-size:16px;">12</strong></div>
+        <div style="font-size:11px;color:#555;margin-top:4px;">Useful for simplifying fractions!</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Math Comics – Fractions</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f5c842;
+  font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+  padding: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* ── PAGE ── */
+.comic-page {
+  background: #f5c842;
+  padding: 16px;
+  page-break-after: always;
+}
+
+/* ── PANEL GRID ── */
+.row { display: flex; gap: 8px; margin-bottom: 8px; }
+.panel {
+  border: 3px solid #1a1a1a;
+  border-radius: 6px;
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+}
+.panel.bg-sky   { background: #cce8f5; }
+.panel.bg-green { background: #c8e6c9; }
+.panel.bg-peach { background: #ffe0cc; }
+.panel.bg-tan   { background: #f5e6c8; }
+.panel.bg-white { background: #ffffff; }
+.panel.full { flex: none; width: 100%; }
+.panel.w2   { flex: 2; }
+.panel.w3   { flex: 3; }
+
+/* ── TITLE CARD ── */
+.title-card {
+  display: inline-block;
+  background: #2e7d32;
+  color: #fff;
+  font-family: 'Bangers', 'Impact', sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  padding: 6px 18px 4px;
+  border: 3px solid #1a1a1a;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  line-height: 1.1;
+  text-shadow: 2px 2px 0 #1b5e20;
+}
+.title-card .subtitle {
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: block;
+  font-family: 'Comic Neue', cursive;
+  text-shadow: none;
+}
+
+/* ── SPEECH BUBBLES ── */
+.bubble {
+  background: #fff;
+  border: 2.5px solid #1a1a1a;
+  border-radius: 18px;
+  padding: 8px 12px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  position: relative;
+  display: inline-block;
+  max-width: 220px;
+  font-weight: 700;
+  margin: 4px;
+}
+.bubble.left::after {
+  content: '';
+  position: absolute;
+  bottom: -14px; left: 20px;
+  border: 7px solid transparent;
+  border-top-color: #1a1a1a;
+}
+.bubble.left::before {
+  content: '';
+  position: absolute;
+  bottom: -10px; left: 21px;
+  border: 6px solid transparent;
+  border-top-color: #fff;
+  z-index: 1;
+}
+.bubble.right::after {
+  content: '';
+  position: absolute;
+  bottom: -14px; right: 20px;
+  border: 7px solid transparent;
+  border-top-color: #1a1a1a;
+}
+.bubble.right::before {
+  content: '';
+  position: absolute;
+  bottom: -10px; right: 21px;
+  border: 6px solid transparent;
+  border-top-color: #fff;
+  z-index: 1;
+}
+.bubble.top-right::after {
+  content: '';
+  position: absolute;
+  top: -14px; right: 20px;
+  border: 7px solid transparent;
+  border-bottom-color: #1a1a1a;
+}
+.bubble.top-right::before {
+  content: '';
+  position: absolute;
+  top: -10px; right: 21px;
+  border: 6px solid transparent;
+  border-bottom-color: #fff;
+  z-index: 1;
+}
+.bubble.top-left::after {
+  content: '';
+  position: absolute;
+  top: -14px; left: 20px;
+  border: 7px solid transparent;
+  border-bottom-color: #1a1a1a;
+}
+.bubble.top-left::before {
+  content: '';
+  position: absolute;
+  top: -10px; left: 21px;
+  border: 6px solid transparent;
+  border-bottom-color: #fff;
+  z-index: 1;
+}
+.bubble.thought {
+  border-style: dashed;
+  border-radius: 50px;
+}
+.bubble.yellow { background: #fff9c4; }
+.bubble.big { font-size: 15px; max-width: 280px; }
+.bubble.sm  { font-size: 12px; max-width: 180px; }
+
+/* ── CHARACTERS (CSS art) ── */
+.scene { display: flex; align-items: flex-end; justify-content: space-around; min-height: 120px; padding-top: 8px; }
+.scene-top { display: flex; align-items: flex-start; justify-content: space-around; }
+
+/* Zara – tall orange dino teacher */
+.zara {
+  width: 70px; height: 110px;
+  position: relative; flex-shrink: 0;
+}
+.zara .body {
+  width: 44px; height: 68px;
+  background: #e07a30;
+  border: 2.5px solid #7a3800;
+  border-radius: 14px 14px 10px 10px;
+  position: absolute; bottom: 0; left: 13px;
+}
+.zara .head {
+  width: 38px; height: 34px;
+  background: #e07a30;
+  border: 2.5px solid #7a3800;
+  border-radius: 50% 50% 40% 40%;
+  position: absolute; bottom: 60px; left: 16px;
+}
+.zara .snout {
+  width: 22px; height: 14px;
+  background: #c96020;
+  border: 2px solid #7a3800;
+  border-radius: 4px 10px 10px 4px;
+  position: absolute; bottom: 66px; left: 40px;
+}
+.zara .eye {
+  width: 7px; height: 8px;
+  background: #fff;
+  border: 2px solid #1a1a1a;
+  border-radius: 50%;
+  position: absolute; bottom: 78px; left: 28px;
+}
+.zara .eye::after {
+  content: '';
+  width: 3px; height: 3px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  position: absolute; top: 1px; left: 1px;
+}
+.zara .hair {
+  width: 0; height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 18px solid #2255aa;
+  position: absolute; bottom: 90px; left: 21px;
+  transform: rotate(-10deg);
+}
+.zara .arm {
+  width: 12px; height: 30px;
+  background: #e07a30;
+  border: 2px solid #7a3800;
+  border-radius: 6px;
+  position: absolute; bottom: 28px; left: 4px;
+  transform: rotate(15deg);
+}
+.zara .tail {
+  width: 28px; height: 12px;
+  background: #e07a30;
+  border: 2px solid #7a3800;
+  border-radius: 0 6px 6px 0;
+  position: absolute; bottom: 8px; right: -8px;
+  transform: rotate(-20deg);
+}
+
+/* Max – small blue monster student */
+.max {
+  width: 56px; height: 80px;
+  position: relative; flex-shrink: 0;
+}
+.max .body {
+  width: 40px; height: 48px;
+  background: #3d72b8;
+  border: 2.5px solid #1a2a6a;
+  border-radius: 12px;
+  position: absolute; bottom: 0; left: 8px;
+}
+.max .head {
+  width: 44px; height: 38px;
+  background: #3d72b8;
+  border: 2.5px solid #1a2a6a;
+  border-radius: 50%;
+  position: absolute; bottom: 40px; left: 6px;
+}
+.max .eye {
+  width: 9px; height: 10px;
+  background: #fff;
+  border: 2px solid #1a1a1a;
+  border-radius: 50%;
+  position: absolute; bottom: 56px; left: 14px;
+}
+.max .eye.r { left: 30px; }
+.max .eye::after {
+  content: '';
+  width: 4px; height: 4px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  position: absolute; top: 2px; left: 2px;
+}
+.max .horn {
+  width: 0; height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 14px solid #2255aa;
+  position: absolute; bottom: 74px; left: 24px;
+}
+.max .fang {
+  width: 5px; height: 7px;
+  background: #fff;
+  border: 1.5px solid #888;
+  border-radius: 0 0 3px 3px;
+  position: absolute; bottom: 41px; left: 22px;
+}
+
+/* ── MATH DISPLAY ── */
+.math-box {
+  background: #fff;
+  border: 3px solid #1a1a1a;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 20px;
+  font-weight: 700;
+  display: inline-block;
+  margin: 6px 4px;
+  font-family: 'Comic Neue', monospace;
+  text-align: center;
+}
+.math-box.orange { background: #fff3e0; border-color: #e65100; }
+.math-box.blue   { background: #e3f2fd; border-color: #1565c0; }
+.math-box.green  { background: #e8f5e9; border-color: #2e7d32; }
+.math-box.red    { background: #fce4ec; border-color: #c62828; color: #c62828; }
+
+.math-inline { font-size: 16px; font-weight: 700; }
+
+/* ── FRACTION ── */
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 700;
+  line-height: 1.1;
+  vertical-align: middle;
+  margin: 0 3px;
+}
+.frac .num { border-bottom: 2.5px solid #1a1a1a; padding: 0 4px 1px; }
+.frac .den { padding: 1px 4px 0; }
+
+/* ── BAR MODEL ── */
+.bar-model { margin: 8px 0; }
+.bar-row { display: flex; gap: 2px; margin-bottom: 4px; }
+.bar-cell {
+  height: 22px;
+  border: 2px solid #1a1a1a;
+  border-radius: 3px;
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700;
+}
+.bar-cell.filled { background: #2e7d32; color: #fff; }
+.bar-cell.empty  { background: #e8f5e9; }
+
+/* ── LABELS / ARROWS ── */
+.label-row { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 6px 0; font-weight: 700; font-size: 13px; }
+.arrow-down { font-size: 22px; color: #2e7d32; text-align: center; }
+.bracket-label { font-size: 11px; color: #555; font-style: italic; }
+
+/* ── THINK STOP SIGN ── */
+.think-sign {
+  display: inline-block;
+  background: #c62828;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  padding: 8px 10px;
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+  width: 90px; height: 90px;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1.3;
+}
+.think-wrap { position: absolute; bottom: 10px; right: 10px; }
+
+/* ── DIVIDER ── */
+.panel-divider { border: none; border-top: 3px solid #1a1a1a; margin: 4px 0; }
+
+/* ── NUMBER LINE ── */
+.nl { display: flex; align-items: center; margin: 10px 4px; }
+.nl-line { flex: 1; height: 3px; background: #1a1a1a; position: relative; }
+.nl-arrow { font-size: 18px; }
+.nl-tick { position: absolute; top: -16px; font-size: 11px; font-weight: 700; text-align: center; transform: translateX(-50%); }
+.nl-mark { position: absolute; top: -6px; width: 2px; height: 14px; background: #1a1a1a; transform: translateX(-50%); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="comic-page">
+
+  <!-- ROW 1: INTRO -->
+  <div class="row">
+    <div class="panel bg-green full" style="min-height:160px;">
+      <div class="title-card">
+        FRACTIONS!
+        <span class="subtitle">Parts of a whole — and so much more!</span>
+      </div>
+
+      <div class="scene">
+        <!-- Zara -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble left big" style="margin-bottom:18px;">
+            Max! If I cut a pizza into<br>8 slices and you eat 3,<br>what fraction did you eat?
+          </div>
+          <div class="zara">
+            <div class="body"></div>
+            <div class="head"></div>
+            <div class="snout"></div>
+            <div class="eye"></div>
+            <div class="hair"></div>
+            <div class="arm"></div>
+            <div class="tail"></div>
+          </div>
+        </div>
+
+        <!-- Center visual -->
+        <div style="text-align:center;padding:10px;">
+          <div style="font-size:36px;margin-bottom:4px;">🍕</div>
+          <div class="math-box green" style="font-size:26px;">
+            <span class="frac"><span class="num">3</span><span class="den">8</span></span>
+          </div>
+        </div>
+
+        <!-- Max -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble right" style="margin-bottom:18px;">
+            Three-eighths? But what<br>do those numbers even<br><em>mean</em>? 🍕
+          </div>
+          <div class="max">
+            <div class="body"></div>
+            <div class="head"></div>
+            <div class="eye"></div>
+            <div class="eye r"></div>
+            <div class="horn"></div>
+            <div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: WHAT A FRACTION MEANS -->
+  <div class="row">
+    <div class="panel bg-sky w2" style="min-height:150px;">
+      <div class="zara" style="transform:scale(0.8);transform-origin:bottom left;flex-shrink:0;float:left;margin-right:8px;">
+        <div class="body"></div><div class="head"></div><div class="snout"></div>
+        <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+      </div>
+      <div class="bubble top-left" style="max-width:310px;margin-bottom:12px;">
+        A fraction has two parts!<br>The <strong>NUMERATOR</strong> (top) says how many parts you have.<br>The <strong>DENOMINATOR</strong> (bottom) says total equal parts.
+      </div>
+      <div style="clear:both;margin-top:10px;text-align:center;">
+        <div class="math-box green" style="font-size:28px;position:relative;display:inline-block;padding:14px 28px;">
+          <div style="position:absolute;top:-24px;left:20px;font-size:11px;color:#2e7d32;font-weight:700;white-space:nowrap;">NUMERATOR — parts you have</div>
+          <span class="frac" style="font-size:28px;"><span class="num">3</span><span class="den">8</span></span>
+          <div style="position:absolute;bottom:-24px;left:20px;font-size:11px;color:#c62828;font-weight:700;white-space:nowrap;">DENOMINATOR — total equal parts</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAR MODEL VISUAL -->
+    <div class="panel bg-peach">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px;">Bar model for <span class="frac" style="font-size:13px;"><span class="num">3</span><span class="den">8</span></span>:</div>
+      <div class="bar-model">
+        <div class="bar-row">
+          <div class="bar-cell filled">1</div>
+          <div class="bar-cell filled">2</div>
+          <div class="bar-cell filled">3</div>
+          <div class="bar-cell empty">4</div>
+          <div class="bar-cell empty">5</div>
+          <div class="bar-cell empty">6</div>
+          <div class="bar-cell empty">7</div>
+          <div class="bar-cell empty">8</div>
+        </div>
+        <div style="display:flex;font-size:10px;font-weight:700;margin-top:2px;">
+          <div style="flex:3;color:#2e7d32;text-align:center;">3 (shaded)</div>
+          <div style="flex:5;color:#888;text-align:center;">5 (not shaded)</div>
+        </div>
+      </div>
+      <div style="font-size:12px;margin-top:8px;">8 equal parts total → 3 are shaded</div>
+      <div class="bubble right sm" style="margin-top:8px;">
+        Oh! The bottom<br>tells me how many<br>pieces to CUT it into!
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: EQUIVALENT FRACTIONS -->
+  <div class="row">
+    <div class="panel bg-tan full" style="min-height:150px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">
+        <div>
+          <div class="bubble left" style="max-width:230px;margin-bottom:10px;">
+            Now — equivalent fractions!<br>They look different but<br><strong>name the same amount!</strong>
+          </div>
+          <div class="zara" style="transform:scale(0.8);transform-origin:bottom left;">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+        <div style="flex:1;padding-top:8px;">
+          <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Multiply top AND bottom by the SAME number:</div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <div class="math-box green" style="font-size:18px;">
+              <span class="frac" style="font-size:18px;"><span class="num">1</span><span class="den">2</span></span>
+            </div>
+            <div style="font-size:14px;font-weight:700;">
+              × <span style="background:#2e7d32;color:#fff;border-radius:50%;padding:2px 6px;">3</span> / × <span style="background:#2e7d32;color:#fff;border-radius:50%;padding:2px 6px;">3</span>
+            </div>
+            <div style="font-size:22px;font-weight:700;">=</div>
+            <div class="math-box green" style="font-size:18px;">
+              <span class="frac" style="font-size:18px;"><span class="num">3</span><span class="den">6</span></span>
+            </div>
+            <div style="font-size:22px;font-weight:700;">=</div>
+            <div class="math-box green" style="font-size:18px;">
+              <span class="frac" style="font-size:18px;"><span class="num">6</span><span class="den">12</span></span>
+            </div>
+          </div>
+          <!-- Bar model comparison -->
+          <div style="margin-top:8px;">
+            <div style="font-size:11px;font-weight:700;color:#555;margin-bottom:2px;">1/2:</div>
+            <div class="bar-row">
+              <div class="bar-cell filled" style="height:16px;font-size:9px;">shaded</div>
+              <div class="bar-cell empty"  style="height:16px;"></div>
+            </div>
+            <div style="font-size:11px;font-weight:700;color:#555;margin:4px 0 2px;">3/6:</div>
+            <div class="bar-row">
+              <div class="bar-cell filled" style="height:16px;font-size:8px;">1</div>
+              <div class="bar-cell filled" style="height:16px;font-size:8px;">2</div>
+              <div class="bar-cell filled" style="height:16px;font-size:8px;">3</div>
+              <div class="bar-cell empty"  style="height:16px;font-size:8px;">4</div>
+              <div class="bar-cell empty"  style="height:16px;font-size:8px;">5</div>
+              <div class="bar-cell empty"  style="height:16px;font-size:8px;">6</div>
+            </div>
+            <div style="font-size:11px;color:#2e7d32;font-weight:700;margin-top:4px;">Both bars are the same length of shading — same fraction!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: SIMPLIFYING + COMPARING -->
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Simplifying Fractions</div>
+      <div class="bubble left sm" style="margin-bottom:8px;">Divide top AND bottom by their GCF!</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:28px;">
+        <div class="math-box orange" style="font-size:16px;">
+          <span class="frac" style="font-size:16px;"><span class="num">12</span><span class="den">18</span></span>
+        </div>
+        <div style="font-size:12px;font-weight:700;">GCF = 6<br>÷6 / ÷6</div>
+        <div style="font-size:20px;font-weight:700;">=</div>
+        <div class="math-box green" style="font-size:16px;">
+          <span class="frac" style="font-size:16px;"><span class="num">2</span><span class="den">3</span></span>
+        </div>
+        <div style="font-size:11px;color:#2e7d32;font-weight:700;">Simplest form!</div>
+      </div>
+      <div class="scene" style="min-height:70px;">
+        <div class="max" style="transform:scale(0.8);transform-origin:bottom center;">
+          <div class="body"></div><div class="head"></div><div class="eye"></div>
+          <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel bg-sky">
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Comparing Fractions</div>
+      <div style="font-size:12px;margin-bottom:4px;"><strong>Same denominator?</strong> Compare tops!</div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+        <div class="math-box blue" style="font-size:15px;padding:6px 10px;">
+          <span class="frac" style="font-size:15px;"><span class="num">3</span><span class="den">7</span></span>
+        </div>
+        <div style="font-size:18px;font-weight:700;color:#c62828;">&lt;</div>
+        <div class="math-box blue" style="font-size:15px;padding:6px 10px;">
+          <span class="frac" style="font-size:15px;"><span class="num">5</span><span class="den">7</span></span>
+        </div>
+        <div style="font-size:11px;color:#555;">(3 &lt; 5)</div>
+      </div>
+      <div style="font-size:12px;margin-bottom:4px;"><strong>Same numerator?</strong> Compare bottoms (bigger bottom = smaller fraction)!</div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+        <div class="math-box blue" style="font-size:15px;padding:6px 10px;">
+          <span class="frac" style="font-size:15px;"><span class="num">1</span><span class="den">3</span></span>
+        </div>
+        <div style="font-size:18px;font-weight:700;color:#c62828;">&gt;</div>
+        <div class="math-box blue" style="font-size:15px;padding:6px 10px;">
+          <span class="frac" style="font-size:15px;"><span class="num">1</span><span class="den">5</span></span>
+        </div>
+      </div>
+      <div style="font-size:12px;margin-bottom:2px;"><strong>Different both?</strong> Cross-multiply!</div>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <div class="math-box" style="font-size:13px;padding:5px 8px;">
+          <span class="frac" style="font-size:13px;"><span class="num">2</span><span class="den">3</span></span>
+          <span style="font-size:10px;color:#c62828;display:block;">2×5=10</span>
+        </div>
+        <div style="font-size:14px;font-weight:700;">vs</div>
+        <div class="math-box" style="font-size:13px;padding:5px 8px;">
+          <span class="frac" style="font-size:13px;"><span class="num">3</span><span class="den">5</span></span>
+          <span style="font-size:10px;color:#2e7d32;display:block;">3×3=9</span>
+        </div>
+        <div style="font-size:11px;font-weight:700;">10&gt;9, so <span class="frac" style="font-size:11px;"><span class="num">2</span><span class="den">3</span></span> wins!</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 2 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: ADDING LIKE DENOMINATORS -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:150px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div>
+          <div class="bubble left big" style="margin-bottom:14px;">
+            Page 2! Let's do<br><strong>OPERATIONS</strong> with fractions!<br>Adding like denominators is easy!
+          </div>
+          <div class="zara" style="transform:scale(0.85);transform-origin:bottom left;">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+        <div style="flex:1;padding-top:10px;">
+          <div style="font-size:13px;font-weight:700;margin-bottom:6px;">SAME denominator: just add the tops, keep the bottom!</div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <div class="math-box green" style="font-size:18px;">
+              <span class="frac" style="font-size:18px;"><span class="num">2</span><span class="den">9</span></span>
+              + <span class="frac" style="font-size:18px;"><span class="num">4</span><span class="den">9</span></span>
+            </div>
+            <div style="font-size:22px;font-weight:700;">=</div>
+            <div class="math-box green" style="font-size:18px;">
+              <span class="frac" style="font-size:18px;"><span class="num">2+4</span><span class="den">9</span></span>
+            </div>
+            <div style="font-size:22px;font-weight:700;">=</div>
+            <div class="math-box green" style="font-size:20px;background:#c8e6c9;">
+              <span class="frac" style="font-size:20px;"><span class="num">6</span><span class="den">9</span></span>
+              = <span class="frac" style="font-size:20px;"><span class="num">2</span><span class="den">3</span></span>
+            </div>
+          </div>
+          <div style="font-size:12px;margin-top:6px;color:#c62828;font-weight:700;">Always simplify your answer if you can!</div>
+          <div style="margin-top:8px;font-size:12px;font-weight:700;">Subtraction works the same — subtract the tops!</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+            <div class="math-box orange" style="font-size:16px;">
+              <span class="frac" style="font-size:16px;"><span class="num">7</span><span class="den">10</span></span>
+              − <span class="frac" style="font-size:16px;"><span class="num">3</span><span class="den">10</span></span>
+            </div>
+            <div style="font-size:20px;font-weight:700;">=</div>
+            <div class="math-box orange" style="font-size:16px;">
+              <span class="frac" style="font-size:16px;"><span class="num">4</span><span class="den">10</span></span>
+            </div>
+            <div style="font-size:20px;font-weight:700;">=</div>
+            <div class="math-box green" style="font-size:16px;">
+              <span class="frac" style="font-size:16px;"><span class="num">2</span><span class="den">5</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: UNLIKE DENOMINATORS -->
+  <div class="row">
+    <div class="panel bg-peach full" style="min-height:160px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div>
+          <div class="bubble left" style="max-width:200px;margin-bottom:12px;">
+            But what if the bottoms<br>are <em>different</em>? Can we just<br>add 1/2 + 1/3?
+          </div>
+          <div class="max" style="transform:scale(0.85);transform-origin:bottom left;">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+        <div style="flex:1;padding-top:6px;">
+          <div class="bubble top-left" style="max-width:350px;margin-bottom:10px;">
+            First find the LCD (Least Common Denominator), then convert both fractions, THEN add!
+          </div>
+          <div style="margin-top:36px;">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+              <div class="math-box orange" style="font-size:17px;">
+                <span class="frac" style="font-size:17px;"><span class="num">1</span><span class="den">2</span></span>
+                +
+                <span class="frac" style="font-size:17px;"><span class="num">1</span><span class="den">3</span></span>
+              </div>
+              <div style="font-size:12px;font-weight:700;">LCD of 2 and 3 = <strong style="color:#c62828;">6</strong></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <div class="math-box orange" style="font-size:15px;">
+                <span class="frac" style="font-size:15px;"><span class="num">1×3</span><span class="den">2×3</span></span>
+                =
+                <span class="frac" style="font-size:15px;"><span class="num">3</span><span class="den">6</span></span>
+              </div>
+              <div style="font-size:22px;font-weight:700;">+</div>
+              <div class="math-box orange" style="font-size:15px;">
+                <span class="frac" style="font-size:15px;"><span class="num">1×2</span><span class="den">3×2</span></span>
+                =
+                <span class="frac" style="font-size:15px;"><span class="num">2</span><span class="den">6</span></span>
+              </div>
+              <div style="font-size:22px;font-weight:700;">=</div>
+              <div class="math-box green" style="font-size:18px;background:#c8e6c9;">
+                <span class="frac" style="font-size:18px;"><span class="num">5</span><span class="den">6</span></span>
+              </div>
+            </div>
+            <div style="font-size:11px;color:#555;margin-top:4px;">Step 1: LCD → Step 2: Convert → Step 3: Add tops → Step 4: Simplify</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: MIXED NUMBERS + IMPROPER -->
+  <div class="row">
+    <div class="panel bg-green">
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Mixed Numbers</div>
+      <div class="bubble right sm" style="margin-bottom:6px;">
+        2 and a half pizzas<br>= 2<span class="frac" style="font-size:12px;"><span class="num">1</span><span class="den">2</span></span>
+      </div>
+      <div style="font-size:12px;font-weight:700;margin-top:28px;margin-bottom:4px;">Mixed → Improper:</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+        <div class="math-box green" style="font-size:14px;padding:6px 8px;">
+          2<span class="frac" style="font-size:14px;"><span class="num">3</span><span class="den">4</span></span>
+        </div>
+        <div style="font-size:12px;font-weight:700;">(2×4)+3=<span style="color:#c62828;">11</span></div>
+        <div style="font-size:20px;font-weight:700;">=</div>
+        <div class="math-box orange" style="font-size:14px;padding:6px 8px;">
+          <span class="frac" style="font-size:14px;"><span class="num">11</span><span class="den">4</span></span>
+        </div>
+      </div>
+      <div style="font-size:12px;font-weight:700;margin-top:6px;margin-bottom:4px;">Improper → Mixed (divide!):</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+        <div class="math-box orange" style="font-size:14px;padding:6px 8px;">
+          <span class="frac" style="font-size:14px;"><span class="num">17</span><span class="den">5</span></span>
+        </div>
+        <div style="font-size:12px;font-weight:700;">17÷5=3 R2</div>
+        <div style="font-size:20px;font-weight:700;">=</div>
+        <div class="math-box green" style="font-size:14px;padding:6px 8px;">
+          3<span class="frac" style="font-size:14px;"><span class="num">2</span><span class="den">5</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MULTIPLYING + OF -->
+    <div class="panel bg-tan">
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Multiplying Fractions</div>
+      <div class="bubble left sm" style="margin-bottom:6px;">Multiply tops × tops, bottoms × bottoms!</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:28px;margin-bottom:10px;">
+        <div class="math-box blue" style="font-size:15px;padding:6px 8px;">
+          <span class="frac" style="font-size:15px;"><span class="num">2</span><span class="den">3</span></span>
+          ×
+          <span class="frac" style="font-size:15px;"><span class="num">3</span><span class="den">5</span></span>
+        </div>
+        <div style="font-size:20px;font-weight:700;">=</div>
+        <div class="math-box blue" style="font-size:15px;padding:6px 8px;">
+          <span class="frac" style="font-size:15px;"><span class="num">2×3</span><span class="den">3×5</span></span>
+        </div>
+        <div style="font-size:20px;font-weight:700;">=</div>
+        <div class="math-box green" style="font-size:15px;padding:6px 8px;">
+          <span class="frac" style="font-size:15px;"><span class="num">6</span><span class="den">15</span></span>
+          = <span class="frac" style="font-size:15px;"><span class="num">2</span><span class="den">5</span></span>
+        </div>
+      </div>
+      <hr class="panel-divider">
+      <div style="font-size:13px;font-weight:700;margin:6px 0 4px;">"OF" means MULTIPLY!</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+        <div class="math-box orange" style="font-size:13px;padding:6px 8px;">
+          <span class="frac" style="font-size:13px;"><span class="num">1</span><span class="den">2</span></span>
+          <strong>of</strong> 12
+        </div>
+        <div style="font-size:18px;font-weight:700;">=</div>
+        <div class="math-box orange" style="font-size:13px;padding:6px 8px;">
+          <span class="frac" style="font-size:13px;"><span class="num">1</span><span class="den">2</span></span>
+          × 12
+        </div>
+        <div style="font-size:18px;font-weight:700;">=</div>
+        <div class="math-box green" style="font-size:16px;padding:6px 8px;"><strong>6</strong></div>
+      </div>
+      <div style="font-size:12px;margin-top:4px;color:#555;">
+        <span class="frac" style="font-size:12px;"><span class="num">3</span><span class="den">4</span></span>
+        of 20 =
+        <span class="frac" style="font-size:12px;"><span class="num">3</span><span class="den">4</span></span>
+        × 20 =
+        <span class="frac" style="font-size:12px;"><span class="num">60</span><span class="den">4</span></span>
+        = <strong>15</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: THINK CHALLENGE -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:110px;display:flex;align-items:center;gap:20px;">
+      <div class="think-sign" style="position:relative;flex-shrink:0;font-size:10px;">
+        THINK!<br>Which is bigger?<br>2/3 or 3/4?<br>Then find<br>2/3 + 3/4!
+      </div>
+      <div style="flex:1;">
+        <div class="scene" style="min-height:80px;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div class="bubble left" style="margin-bottom:18px;">
+              Hint: find the LCD<br>first! What is LCM<br>of 3 and 4?
+            </div>
+            <div class="zara" style="transform:scale(0.8);transform-origin:bottom center;">
+              <div class="body"></div><div class="head"></div><div class="snout"></div>
+              <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+            </div>
+          </div>
+          <div style="text-align:center;">
+            <div class="math-box blue" style="font-size:13px;margin-bottom:4px;">
+              <span class="frac" style="font-size:13px;"><span class="num">2</span><span class="den">3</span></span>
+              vs
+              <span class="frac" style="font-size:13px;"><span class="num">3</span><span class="den">4</span></span>
+            </div>
+            <div class="math-box green" style="font-size:13px;">
+              <span class="frac" style="font-size:13px;"><span class="num">2</span><span class="den">3</span></span>
+              +
+              <span class="frac" style="font-size:13px;"><span class="num">3</span><span class="den">4</span></span>
+              = ??
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div class="bubble right sm" style="margin-bottom:18px;">
+              LCD = 12!<br>Let me try… 17/12! 🤓
+            </div>
+            <div class="max" style="transform:scale(0.8);transform-origin:bottom center;">
+              <div class="body"></div><div class="head"></div><div class="eye"></div>
+              <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;font-size:11px;color:#1b5e20;margin-top:8px;font-weight:700;">
+    Answers: 3/4 &gt; 2/3 (cross-multiply: 8 vs 9) &nbsp;|&nbsp; 2/3 + 3/4 = 8/12 + 9/12 = 17/12 = 1 and 5/12
+  </div>
+</div>
+
+</body>
+</html>

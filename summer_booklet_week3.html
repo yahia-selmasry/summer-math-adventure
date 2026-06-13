@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Summer Math Booklet – Week 3</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+  h1 { font-size: 22px; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #6a0080; margin: 14px 0 6px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; background: #6a0080; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+  .intro-box { background: #f3e5f5; border-left: 4px solid #6a0080; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+  .problem-block { margin-bottom: 14px; }
+  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+  .box-blank { border: 1.5px solid #333; min-height: 28px; min-width: 28px; display: inline-block; margin: 2px; padding: 0 4px; vertical-align: middle; }
+  .work-box { border: 1.5px dashed #aaa; min-height: 80px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .work-box-sm { border: 1.5px dashed #aaa; min-height: 50px; width: 100%; margin: 4px 0; border-radius: 4px; padding: 4px; }
+  .star { color: #6a0080; font-weight: bold; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .challenge-box h3 { color: #b06000; font-size: 13px; }
+  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge { float: right; background: #6a0080; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .score-box { border: 2px solid #1a3a6b; border-radius: 6px; padding: 8px 16px; display: inline-block; margin-bottom: 10px; font-size: 12px; }
+  .hint { font-size: 10px; color: #555; font-style: italic; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 13px; line-height: 1.1; }
+  .frac .num { border-bottom: 1.5px solid #333; padding: 0 3px; }
+  .frac .den { padding: 0 3px; }
+  table { border-collapse: collapse; margin: 8px 0; font-size: 12px; }
+  td, th { border: 1px solid #888; padding: 5px 8px; text-align: center; }
+  th { background: #6a0080; color: #fff; }
+  /* Long division scaffold */
+  .div-scaffold { font-family: monospace; font-size: 15px; margin: 8px 0; border-left: 2px solid #333; border-top: 2px solid #333; padding: 4px 8px; display: inline-block; min-width: 80px; min-height: 30px; }
+  .div-outside { font-family: monospace; font-size: 15px; display: inline-block; padding-right: 4px; vertical-align: top; padding-top: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!--  WEEK 3 · DAY 1 · Multi-Digit Multiplication               -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W3<br>D1</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 3 · Day 1 &nbsp;|&nbsp; Multi-Digit Multiplication: Mastery</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">MULTIPLICATION</span>
+
+  <div class="intro-box">
+    <strong>Standard Algorithm – 2-digit × 2-digit:</strong><br>
+    &nbsp;&nbsp; 47 × 38: Multiply 47 × 8 = 376, then 47 × 30 = 1,410. Add: 376 + 1,410 = 1,786.<br>
+    <strong>Shortcut check:</strong> Estimate first! 47 × 38 ≈ 50 × 40 = 2,000. Answer 1,786 is close. ✓<br>
+    <strong>Area model alternative:</strong> Split 47 = 40 + 7, 38 = 30 + 8. Fill in the 4 boxes and add.
+  </div>
+
+  <h2>Part A – Standard Algorithm</h2>
+  <div class="grid-3">
+    <div class="problem-block">
+      1. &nbsp; 73 × 46 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      2. &nbsp; 258 × 37 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      3. &nbsp; 614 × 83 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      4. &nbsp; 307 × 59 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      5. &nbsp; 4,025 × 14 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      6. &nbsp; 528 × 406 =<br>
+      <div class="work-box"></div>
+    </div>
+  </div>
+
+  <h2>Part B – Area Model</h2>
+  <p class="hint">Fill in the area model, then add the parts.</p>
+  <div class="problem-block">
+    7. &nbsp; 63 × 47 using the area model:
+    <table style="width:280px; margin:6px 0;">
+      <tr><th></th><th>40</th><th>7</th></tr>
+      <tr><td><strong>60</strong></td><td style="height:36px;"></td><td style="height:36px;"></td></tr>
+      <tr><td><strong>3</strong></td><td style="height:36px;"></td><td style="height:36px;"></td></tr>
+    </table>
+    Total: ___ + ___ + ___ + ___ = <span class="ans-line"></span>
+  </div>
+
+  <h2>Part C – Word Problems (Multi-step)</h2>
+  <div class="problem-block">
+    8. A theater has 48 rows of seats. Each row has 36 seats. Tickets cost $12 each. If the theater is completely full, how much money is collected?
+    <div class="work-box"></div>
+    Answer: $ <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    9. A car travels 58 miles per hour. How far does it travel in 24 hours? &nbsp; (Cumulative: round to nearest hundred)
+    <div class="work-box-sm"></div>
+    Exact: <span class="ans-line"></span> &nbsp; Rounded: <span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Multiplication Magic</h3>
+    <p>Find the missing digit that makes the multiplication true:</p>
+    <p style="font-family:monospace; font-size:16px; text-align:center;">
+      &nbsp; 4 __ × 3 7 = 1, 7 __ 6
+    </p>
+    <div class="work-box">Work (try different digits):</div>
+    Missing digit: <span class="box-blank"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 3 Day 1</span>
+    <span>Multi-Digit Multiplication</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 3 · DAY 2 · Long Division                            -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W3<br>D2</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 3 · Day 2 &nbsp;|&nbsp; Long Division: 4-Digit ÷ 2-Digit</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">LONG DIVISION</span>
+
+  <div class="intro-box">
+    <strong>Long Division Steps — remember "DMSB":</strong><br>
+    <strong>D</strong>ivide → <strong>M</strong>ultiply → <strong>S</strong>ubtract → <strong>B</strong>ring down (then repeat)<br>
+    Example: 1,344 ÷ 16 → Ask: how many 16s in 13? → 0. How many 16s in 134? → 8 (8×16=128). Subtract → 6. Bring down 4 → 64. 64÷16=4. Answer: 84.<br>
+    <strong>Always check:</strong> quotient × divisor + remainder = dividend.
+  </div>
+
+  <h2>Part A – Divide (show each step)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. &nbsp; 5,376 ÷ 24 =<br>
+      <div class="work-box" style="min-height:120px;"></div>
+      Check: <span class="ans-line-long"></span>
+    </div>
+    <div class="problem-block">
+      2. &nbsp; 7,056 ÷ 48 =<br>
+      <div class="work-box" style="min-height:120px;"></div>
+      Check: <span class="ans-line-long"></span>
+    </div>
+    <div class="problem-block">
+      3. &nbsp; 4,891 ÷ 13 =<br>
+      <div class="work-box" style="min-height:120px;"></div>
+      Q: <span class="ans-line"></span> R: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      4. &nbsp; 9,072 ÷ 36 =<br>
+      <div class="work-box" style="min-height:120px;"></div>
+      Check: <span class="ans-line-long"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Estimate the Quotient First</h2>
+  <p class="hint">Round the divisor to a friendly number, estimate, then calculate exactly.</p>
+  <div class="problem-block">
+    5. &nbsp; 8,463 ÷ 27 &nbsp; Estimate: <span class="ans-line"></span> &nbsp; Exact: <span class="ans-line"></span>
+    <div class="work-box-sm"></div>
+  </div>
+  <div class="problem-block">
+    6. &nbsp; 6,480 ÷ 32 &nbsp; Estimate: <span class="ans-line"></span> &nbsp; Exact: <span class="ans-line"></span>
+    <div class="work-box-sm"></div>
+  </div>
+
+  <h2>Part C – Word Problems</h2>
+  <div class="problem-block">
+    7. A school ordered 2,496 crayons in boxes of 32. How many full boxes are there?
+    <div class="work-box-sm"></div>
+    Answer: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    8. 5,040 students are divided equally into 14 classrooms. Each classroom has __ students. Then each group of 4 students shares one table. How many tables in one classroom?
+    <div class="work-box"></div>
+    Students per room: <span class="ans-line"></span> &nbsp; Tables per room: <span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Division Riddle</h3>
+    <p>I am a 4-digit number. When divided by 25, my quotient is 148 and remainder is 0. When divided by 4, my remainder is 0. What am I?</p>
+    <div class="work-box">Work:</div>
+    Answer: <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 3 Day 2</span>
+    <span>Long Division</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 3 · DAY 3 · Factors, Multiples, Prime & Composite    -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W3<br>D3</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 3 · Day 3 &nbsp;|&nbsp; Factors, Multiples, Prime &amp; Composite Numbers</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">FACTORS &amp; MULTIPLES</span>
+
+  <div class="intro-box">
+    <strong>Factor:</strong> a number that divides evenly into another. Factors of 12: 1, 2, 3, 4, 6, 12.<br>
+    <strong>Multiple:</strong> the result of multiplying by a whole number. Multiples of 6: 6, 12, 18, 24…<br>
+    <strong>Prime:</strong> exactly 2 factors (1 and itself). Examples: 2, 3, 5, 7, 11, 13…<br>
+    <strong>Composite:</strong> more than 2 factors. Example: 12 has 6 factors → composite.<br>
+    <strong>GCF:</strong> Greatest Common Factor. &nbsp; <strong>LCM:</strong> Least Common Multiple.
+  </div>
+
+  <h2>Part A – List All Factors</h2>
+  <div class="grid-2">
+    <div class="problem-block">1. Factors of 36: <span class="ans-line-long"></span></div>
+    <div class="problem-block">2. Factors of 48: <span class="ans-line-long"></span></div>
+    <div class="problem-block">3. Factors of 60: <span class="ans-line-long"></span></div>
+    <div class="problem-block">4. Factors of 100: <span class="ans-line-long"></span></div>
+  </div>
+
+  <h2>Part B – Prime or Composite?</h2>
+  <p class="hint">Write P (prime) or C (composite). For composite numbers, list one factor pair (other than 1 × itself).</p>
+  <table style="width:100%;">
+    <tr><th>Number</th><th>P or C?</th><th>Factor pair (if composite)</th></tr>
+    <tr><td>17</td><td></td><td></td></tr>
+    <tr><td>24</td><td></td><td></td></tr>
+    <tr><td>37</td><td></td><td></td></tr>
+    <tr><td>49</td><td></td><td></td></tr>
+    <tr><td>51</td><td></td><td></td></tr>
+    <tr><td>97</td><td></td><td></td></tr>
+  </table>
+
+  <h2>Part C – GCF and LCM</h2>
+  <p class="hint">Use factor lists or prime factorization (factor trees).</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      5. GCF of 24 and 36 = <span class="box-blank"></span>
+      <div class="work-box-sm">Factor trees or lists:</div>
+    </div>
+    <div class="problem-block">
+      6. GCF of 45 and 60 = <span class="box-blank"></span>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      7. LCM of 4 and 6 = <span class="box-blank"></span>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      8. LCM of 8 and 12 = <span class="box-blank"></span>
+      <div class="work-box-sm"></div>
+    </div>
+  </div>
+
+  <h2>Part D – Word Problems: GCF &amp; LCM in Action</h2>
+  <div class="problem-block">
+    9. Ms. Rivera has 36 math books and 48 science books. She wants to make equal piles using all the books, with each pile having only one type of book. What is the greatest number of books per pile?
+    <div class="work-box-sm"></div>
+    Answer: <span class="ans-line"></span> books per pile, making <span class="ans-line"></span> piles of math and <span class="ans-line"></span> piles of science.
+  </div>
+  <div class="problem-block">
+    10. A red light blinks every 8 seconds. A blue light blinks every 12 seconds. They blink together at 0 seconds. When is the next time they blink together?
+    <div class="work-box-sm"></div>
+    Answer: after <span class="ans-line"></span> seconds.
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – The Sieve of Eratosthenes (mini)</h3>
+    <p>Cross out all multiples of 2, 3, 5, and 7 in the grid below (don't cross out 2, 3, 5, 7 themselves). The remaining numbers are prime!</p>
+    <table style="width:100%; font-size:13px;">
+      <tr><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+      <tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr>
+      <tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr>
+      <tr><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td></tr>
+      <tr><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td></tr>
+      <tr><td>47</td><td>48</td><td>49</td><td>50</td><td></td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    List all primes you found between 1–50: <span class="ans-line-long"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 3 Day 3</span>
+    <span>Factors, Multiples, Prime &amp; Composite</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 3 · DAY 4 · Order of Operations                      -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W3<br>D4</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 3 · Day 4 &nbsp;|&nbsp; Order of Operations (PEMDAS)</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">ORDER OF OPERATIONS</span>
+
+  <div class="intro-box">
+    <strong>PEMDAS:</strong> <strong>P</strong>arentheses → <strong>E</strong>xponents → <strong>M</strong>ultiply &amp; <strong>D</strong>ivide (left to right) → <strong>A</strong>dd &amp; <strong>S</strong>ubtract (left to right)<br>
+    Example: 3 + 4 × (2 + 1)² − 5<br>
+    &nbsp;= 3 + 4 × 3² − 5 &nbsp; (parentheses first)<br>
+    &nbsp;= 3 + 4 × 9 − 5 &nbsp;&nbsp; (exponents)<br>
+    &nbsp;= 3 + 36 − 5 &nbsp;&nbsp;&nbsp;&nbsp; (multiply)<br>
+    &nbsp;= 34 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (left to right add/subtract)
+  </div>
+
+  <h2>Part A – Evaluate Step by Step</h2>
+  <p class="hint">Show EACH step. Circle the operation you do first.</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. &nbsp; 5 + 3 × 4 =<br>
+      Step 1: <span class="ans-line"></span><br>
+      Step 2: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      2. &nbsp; (5 + 3) × 4 =<br>
+      Step 1: <span class="ans-line"></span><br>
+      Step 2: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      3. &nbsp; 20 − 12 ÷ 4 + 2 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      4. &nbsp; (20 − 12) ÷ 4 + 2 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      5. &nbsp; 3² + 4 × (6 − 2) =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      6. &nbsp; 48 ÷ (2 × 3) + 5² =<br>
+      <div class="work-box-sm"></div>
+    </div>
+  </div>
+
+  <h2>Part B – Add Parentheses to Make It True</h2>
+  <p class="hint">Place parentheses in each expression to make the equation correct. You may need to try a few spots.</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      7. &nbsp; 3 + 5 × 2 − 1 = 15<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      8. &nbsp; 10 − 2 × 3 + 1 = 25<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      9. &nbsp; 24 ÷ 4 + 2 × 3 = 12<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      10. &nbsp; 5 × 3 + 4 − 2 = 33<br>
+      <div class="work-box-sm"></div>
+    </div>
+  </div>
+
+  <h2>Part C – Write Your Own</h2>
+  <div class="problem-block">
+    11. Write an expression using + , × , and parentheses that equals 36. Use at least 4 numbers.
+    <span class="ans-line-long"></span>
+  </div>
+
+  <h2>Part D – Cumulative Word Problem</h2>
+  <div class="problem-block">
+    12. At a bake sale, cupcakes cost $3 each and cookies cost $1 each. Javier buys 4 cupcakes and 6 cookies, then shares the cost equally with a friend. Write an expression with parentheses and solve.
+    <div class="work-box"></div>
+    Expression: <span class="ans-line-long"></span> &nbsp; Each person pays: $<span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Make 24</h3>
+    <p>Use the numbers <strong>3, 3, 8, 8</strong> (each exactly once) with +, −, ×, ÷ and parentheses to make <strong>24</strong>.</p>
+    <div class="work-box">Try different combinations:</div>
+    Solution: <span class="ans-line-long"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 3 Day 4</span>
+    <span>Order of Operations</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 3 · DAY 5 · Mixed Multiplication/Division + Review   -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W3<br>D5</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 3 · Day 5 &nbsp;|&nbsp; Multiplication &amp; Division Word Problems + Full Review</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">OPERATIONS REVIEW</span>
+
+  <div class="intro-box">
+    <strong>Word problem strategy:</strong> Read → Identify what's asked → Choose operation → Estimate → Solve → Check if answer makes sense.
+  </div>
+
+  <h2>Part A – Mixed Computation Sprint</h2>
+  <div class="grid-3">
+    <div class="problem-block">1. &nbsp; 784 × 56 = <div class="work-box-sm"></div></div>
+    <div class="problem-block">2. &nbsp; 9,408 ÷ 28 = <div class="work-box-sm"></div></div>
+    <div class="problem-block">3. &nbsp; 5 × 3² − (4 + 2) = <div class="work-box-sm"></div></div>
+    <div class="problem-block">4. GCF(18, 30) = <span class="ans-line"></span></div>
+    <div class="problem-block">5. LCM(6, 9) = <span class="ans-line"></span></div>
+    <div class="problem-block">6. Is 91 prime? Circle: YES / NO<br>Factor pair if composite: <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Part B – Multi-Step Word Problems</h2>
+  <div class="problem-block">
+    7. A pool holds 35,280 gallons. A pump fills it at 840 gallons per hour. How many hours will it take to fill the pool completely?
+    <div class="work-box"></div>
+    Answer: <span class="ans-line"></span> hours
+  </div>
+  <div class="problem-block">
+    8. Marcus earns $14 per hour. He works 38 hours one week and 42 hours the next. He spends $350 on rent. How much does he have left after paying rent over both weeks?
+    <div class="work-box"></div>
+    Answer: $<span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    9. A store has 2,400 apples, 1,800 oranges, and 3,000 bananas. They want to pack fruit bags where every bag has an equal number of each type of fruit. What is the greatest number of bags they can make? (Hint: use GCF)
+    <div class="work-box"></div>
+    Answer: <span class="ans-line"></span> bags, each with <span class="ans-line"></span> apples, <span class="ans-line"></span> oranges, <span class="ans-line"></span> bananas.
+  </div>
+
+  <h2>Part C – Cumulative Review (Weeks 1–3)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      10. Round 4,709,283 to the nearest ten-thousand: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      11. <span class="frac"><span class="num">7</span><span class="den">8</span></span> − <span class="frac"><span class="num">1</span><span class="den">3</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      12. 3<span class="frac"><span class="num">2</span><span class="den">5</span></span> + 1<span class="frac"><span class="num">7</span><span class="den">10</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      13. <span class="frac"><span class="num">4</span><span class="den">9</span></span> × <span class="frac"><span class="num">3</span><span class="den">8</span></span> = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Puzzle Grid</h3>
+    <p>Fill in the grid so every row and column multiplies to give the product shown.</p>
+    <table style="width:200px;">
+      <tr><th></th><th>×?</th><th>×?</th><th>Product</th></tr>
+      <tr><td>×?</td><td><span class="box-blank">4</span></td><td><span class="box-blank"></span></td><td>20</td></tr>
+      <tr><td>×?</td><td><span class="box-blank"></span></td><td><span class="box-blank">6</span></td><td>18</td></tr>
+      <tr><td>Product</td><td>12</td><td>30</td><td></td></tr>
+    </table>
+    <div class="work-box">Work:</div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 3 Day 5</span>
+    <span>Operations Review</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 3 QUIZ                                                  -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W3<br>QUIZ</div>
+  <h1>Week 3 Quiz – Multiplication, Division &amp; Number Theory</h1>
+  <div class="subtitle">Topics: Multi-digit ×÷ · Factors/Multiples · GCF/LCM · Order of Operations</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <div class="score-box">Score: _______ / 20</div>
+
+  <h2>Section 1 – Multiplication &amp; Division (8 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. 437 × 68 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      2. 6,720 ÷ 32 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      3. 5,036 ÷ 14 = &nbsp; Q: ___ R: ___<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      4. 4 × (3 + 7)² ÷ 5 =<br>
+      <div class="work-box"></div>
+    </div>
+  </div>
+
+  <h2>Section 2 – Factors, Primes, GCF, LCM (6 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">5. List all factors of 42: <span class="ans-line-long"></span></div>
+    <div class="problem-block">6. Is 83 prime or composite? <span class="ans-line"></span></div>
+    <div class="problem-block">7. GCF(32, 48) = <span class="ans-line"></span></div>
+    <div class="problem-block">8. LCM(9, 12) = <span class="ans-line"></span></div>
+  </div>
+  <div class="problem-block">
+    9. <span class="star">(2 pts)</span> You have 24 red beads and 36 blue beads. You want to make identical bracelets using all beads (each bracelet has the same mix). What is the maximum number of bracelets? How many of each color per bracelet?
+    <div class="work-box-sm"></div>
+    Bracelets: <span class="ans-line"></span> &nbsp; Red each: <span class="ans-line"></span> &nbsp; Blue each: <span class="ans-line"></span>
+  </div>
+
+  <h2>Section 3 – Word Problems (6 pts)</h2>
+  <div class="problem-block">
+    10. <span class="star">(3 pts)</span> A farmer plants 45 rows of corn with 68 plants in each row. He harvests 2,856 plants and stores them in bags of 24 plants each. How many full bags does he fill?
+    <div class="work-box"></div>
+    Plants total: <span class="ans-line"></span> &nbsp; Full bags: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    11. <span class="star">(3 pts)</span> Write and evaluate an expression: A store sells books for $8 and pens for $2. Julia buys 5 books and 7 pens, then gets $4 off. Write the expression and find the total.
+    <div class="work-box"></div>
+    Expression: <span class="ans-line-long"></span> &nbsp; Total: $<span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 3 Quiz</span>
+    <span>Multiplication, Division &amp; Number Theory</span>
+  </div>
+</div>
+
+</body>
+</html>

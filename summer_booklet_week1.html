@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Summer Math Booklet – Week 1</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page {
+    width: 8.5in; min-height: 11in; padding: 0.6in 0.7in;
+    page-break-after: always; position: relative;
+  }
+  h1 { font-size: 22px; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #b03a00; margin: 14px 0 6px; }
+  h3 { font-size: 13px; color: #1a3a6b; margin: 10px 0 4px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag {
+    display: inline-block; background: #1a3a6b; color: #fff;
+    font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px;
+  }
+  .intro-box {
+    background: #eef4ff; border-left: 4px solid #1a3a6b;
+    padding: 10px 14px; margin-bottom: 14px; border-radius: 4px;
+    font-size: 12px; line-height: 1.6;
+  }
+  .problem-block { margin-bottom: 14px; }
+  .problem-block p { line-height: 1.7; margin-bottom: 4px; }
+  .ans-line {
+    display: block; border-bottom: 1px solid #333;
+    width: 160px; height: 18px; margin: 6px 0 2px;
+  }
+  .ans-line-long {
+    display: block; border-bottom: 1px solid #333;
+    width: 300px; height: 18px; margin: 6px 0 2px;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+  .box-blank {
+    border: 1.5px solid #333; min-height: 36px; min-width: 36px;
+    display: inline-block; margin: 2px; padding: 2px 6px;
+  }
+  .work-box {
+    border: 1.5px dashed #aaa; min-height: 70px;
+    width: 100%; margin: 6px 0; border-radius: 4px;
+    padding: 4px; font-size: 11px; color: #aaa;
+  }
+  .star { color: #b03a00; font-weight: bold; }
+  .number-line {
+    display: flex; align-items: center; margin: 10px 0;
+    position: relative; height: 30px;
+  }
+  .nl-bar {
+    height: 3px; background: #333; flex: 1; position: relative;
+  }
+  .nl-tick {
+    position: absolute; top: -8px; font-size: 10px; text-align: center;
+    width: 30px; transform: translateX(-50%);
+  }
+  .nl-tick-mark {
+    position: absolute; top: -6px; height: 14px; width: 2px;
+    background: #333;
+  }
+  table { border-collapse: collapse; margin: 8px 0; font-size: 12px; }
+  td, th { border: 1px solid #888; padding: 5px 10px; text-align: center; }
+  th { background: #1a3a6b; color: #fff; }
+  .challenge-box {
+    background: #fff8e1; border: 2px solid #f0a500;
+    border-radius: 6px; padding: 10px 14px; margin-top: 14px;
+  }
+  .challenge-box h3 { color: #b06000; }
+  .footer {
+    position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in;
+    font-size: 10px; color: #888; border-top: 1px solid #ddd;
+    padding-top: 4px; display: flex; justify-content: space-between;
+  }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge {
+    float: right; background: #b03a00; color: #fff;
+    border-radius: 50%; width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2;
+    margin-top: -10px;
+  }
+  .score-box {
+    border: 2px solid #1a3a6b; border-radius: 6px;
+    padding: 8px 16px; display: inline-block; margin-bottom: 10px;
+    font-size: 12px;
+  }
+  svg text { font-family: Georgia, serif; }
+  .fraction { display: inline-block; text-align: center; vertical-align: middle; margin: 0 4px; }
+  .fraction .num { display: block; border-bottom: 1px solid #333; }
+  .fraction .den { display: block; }
+  .hint { font-size: 10px; color: #555; font-style: italic; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!--  WEEK 1 · DAY 1 · Place Value: Reading & Writing Numbers    -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W1<br>D1</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 1 · Day 1 &nbsp;|&nbsp; Place Value: Reading &amp; Writing Big Numbers</div>
+  <div class="name-date">
+    Name: <span></span> &nbsp; Date: <span></span>
+  </div>
+  <span class="topic-tag">PLACE VALUE</span>
+
+  <div class="intro-box">
+    <strong>Remember:</strong> Every digit has a <em>place</em> AND a <em>value</em>.<br>
+    In 4,<u>7</u>28,013 — the digit <strong>7</strong> is in the <strong>hundred-thousands</strong> place. Its value is <strong>700,000</strong>.<br>
+    Periods help us read numbers: | Billions | Millions | Thousands | Ones |
+  </div>
+
+  <h2>Part A – Name That Place</h2>
+  <p class="problem-block">Write the <strong>place</strong> and <strong>value</strong> of the underlined digit.</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. &nbsp; 3,<u>4</u>62,805<br>
+      Place: <span class="ans-line"></span>
+      Value: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      2. &nbsp; 27,<u>9</u>14,600<br>
+      Place: <span class="ans-line"></span>
+      Value: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      3. &nbsp; <u>5</u>13,002,744<br>
+      Place: <span class="ans-line"></span>
+      Value: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      4. &nbsp; 8,004,<u>3</u>71<br>
+      Place: <span class="ans-line"></span>
+      Value: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Expanded Form</h2>
+  <p class="hint">Write each number in expanded form. Example: 4,302 = 4,000 + 300 + 2</p>
+  <div class="problem-block">
+    5. &nbsp; 605,814 = <span class="ans-line-long"></span>
+  </div>
+  <div class="problem-block">
+    6. &nbsp; 3,070,009 = <span class="ans-line-long"></span>
+  </div>
+  <div class="problem-block">
+    7. &nbsp; Write the number for: 400,000 + 60,000 + 500 + 7 = <span class="ans-line"></span>
+  </div>
+
+  <h2>Part C – Comparing Numbers</h2>
+  <p class="hint">Write &lt;, &gt;, or = in each circle.</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      8. &nbsp; 3,841,002 <span class="box-blank"></span> 3,841,020
+    </div>
+    <div class="problem-block">
+      9. &nbsp; 70,500,000 <span class="box-blank"></span> 7,500,000
+    </div>
+    <div class="problem-block">
+      10. &nbsp; 999,999 <span class="box-blank"></span> 1,000,000
+    </div>
+    <div class="problem-block">
+      11. &nbsp; 24,060,000 <span class="box-blank"></span> 24,006,000
+    </div>
+  </div>
+
+  <h2>Part D – Rounding</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      12. Round 4,738,201 to the nearest <strong>million</strong>.<br>
+      <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      13. Round 583,647 to the nearest <strong>ten-thousand</strong>.<br>
+      <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      14. Round 29,450 to the nearest <strong>thousand</strong>.<br>
+      <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      15. Round 7,499,999 to the nearest <strong>million</strong>.<br>
+      <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Number Detective</h3>
+    <p>I am a 7-digit number. My millions digit is 3. My thousands digit is twice my millions digit. My ones digit is the sum of my millions and thousands digits. All other digits are zero. What number am I?</p>
+    <span class="ans-line-long"></span>
+    <div class="work-box">Show your thinking here:</div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 1 Day 1</span>
+    <span>Place Value</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 1 · DAY 2 · Rounding & Estimation                     -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W1<br>D2</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 1 · Day 2 &nbsp;|&nbsp; Rounding, Estimation &amp; Number Patterns</div>
+  <div class="name-date">
+    Name: <span></span> &nbsp; Date: <span></span>
+  </div>
+  <span class="topic-tag">ROUNDING &amp; ESTIMATION</span>
+
+  <div class="intro-box">
+    <strong>Rounding Rule:</strong> Look at the digit ONE place to the RIGHT of where you're rounding.<br>
+    • If it's 0–4 → round <em>down</em> (keep the digit the same, replace the rest with zeros)<br>
+    • If it's 5–9 → round <em>up</em> (add 1 to the digit, replace the rest with zeros)
+  </div>
+
+  <h2>Part A – Round It!</h2>
+  <table>
+    <tr><th>Number</th><th>Nearest 10</th><th>Nearest 100</th><th>Nearest 1,000</th></tr>
+    <tr><td>4,763</td><td></td><td></td><td></td></tr>
+    <tr><td>28,549</td><td></td><td></td><td></td></tr>
+    <tr><td>305,281</td><td></td><td></td><td></td></tr>
+    <tr><td>1,999,500</td><td></td><td></td><td></td></tr>
+  </table>
+
+  <h2>Part B – Estimation in Action</h2>
+  <p class="hint">Estimate by rounding each number to its <strong>leading digit</strong>, then compute. Show both the estimate AND the exact answer.</p>
+  <div class="problem-block">
+    1. A school has 4,812 students and 3,276 moved in over summer. About how many students total?<br>
+    Estimate: <span class="ans-line"></span> &nbsp; Exact: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    2. A factory makes 78,340 bolts per day. About how many bolts in 5 days?<br>
+    Estimate: <span class="ans-line"></span> &nbsp; Exact: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    3. Phoenix gets about 8 inches of rain per year. Estimate rain over 12 years.<br>
+    Estimate: <span class="ans-line"></span> &nbsp; Exact: <span class="ans-line"></span>
+  </div>
+
+  <h2>Part C – Is the Estimate Reasonable?</h2>
+  <p class="hint">Circle <strong>YES</strong> or <strong>NO</strong> and explain why.</p>
+  <div class="problem-block">
+    4. Mia says 6,489 + 3,211 ≈ 10,000. &nbsp; YES &nbsp;/&nbsp; NO<br>
+    Why? <span class="ans-line-long"></span>
+  </div>
+  <div class="problem-block">
+    5. Jake says 52,710 − 18,300 ≈ 20,000. &nbsp; YES &nbsp;/&nbsp; NO<br>
+    Why? <span class="ans-line-long"></span>
+  </div>
+
+  <h2>Part D – Number Patterns (Cumulative Review)</h2>
+  <p class="hint">Find the rule and fill in the blanks.</p>
+  <div class="problem-block">
+    6. &nbsp; 3,000 &nbsp;→&nbsp; 6,000 &nbsp;→&nbsp; 12,000 &nbsp;→&nbsp; <span class="box-blank"></span> &nbsp;→&nbsp; <span class="box-blank"></span> &nbsp;&nbsp; Rule: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    7. &nbsp; 1,000,000 &nbsp;→&nbsp; 900,000 &nbsp;→&nbsp; 800,000 &nbsp;→&nbsp; <span class="box-blank"></span> &nbsp;→&nbsp; <span class="box-blank"></span> &nbsp;&nbsp; Rule: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    8. &nbsp; 5 &nbsp;→&nbsp; 50 &nbsp;→&nbsp; 500 &nbsp;→&nbsp; 5,000 &nbsp;→&nbsp; <span class="box-blank"></span> &nbsp;&nbsp; Rule: <span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Peoria Population Puzzle</h3>
+    <p>Peoria, AZ had a population of 190,985 in 2020. Mesa had 504,258. Chandler had 261,165.</p>
+    <p>A. Round each city's population to the nearest ten-thousand.</p>
+    Peoria: <span class="ans-line"></span> &nbsp; Mesa: <span class="ans-line"></span> &nbsp; Chandler: <span class="ans-line"></span>
+    <p>B. About how many more people does Mesa have than Peoria and Chandler <em>combined</em>?</p>
+    <span class="ans-line-long"></span>
+    <div class="work-box">Work:</div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 1 Day 2</span>
+    <span>Rounding &amp; Estimation</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 1 · DAY 3 · Addition & Subtraction with Large Numbers -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W1<br>D3</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 1 · Day 3 &nbsp;|&nbsp; Addition &amp; Subtraction: Large Numbers</div>
+  <div class="name-date">
+    Name: <span></span> &nbsp; Date: <span></span>
+  </div>
+  <span class="topic-tag">ADDITION &amp; SUBTRACTION</span>
+
+  <div class="intro-box">
+    <strong>Key Reminder:</strong> Always line up digits by <em>place value</em> before adding or subtracting.<br>
+    When subtracting, if the top digit is smaller, you must <strong>regroup (borrow)</strong> from the next column.<br>
+    Check: Addition answer − one addend = other addend. &nbsp; Subtraction answer + subtracted number = starting number.
+  </div>
+
+  <h2>Part A – Solve It (Show all work in the space)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. &nbsp; 485,372 + 246,918 = <br>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      2. &nbsp; 3,004,000 − 1,867,425 =<br>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      3. &nbsp; 72,308 + 9,847 + 140,003 =<br>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      4. &nbsp; 10,000,000 − 4,382,619 =<br>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Error Hunt</h2>
+  <p class="hint">Each problem below has a mistake. Find it, explain it, and write the correct answer.</p>
+  <div class="problem-block">
+    5. &nbsp; A student solved: 500,000 − 238,471 = <strong>272,439</strong><br>
+    Correct answer: <span class="ans-line"></span> &nbsp; What went wrong? <span class="ans-line-long"></span>
+  </div>
+  <div class="problem-block">
+    6. &nbsp; A student solved: 304,072 + 58,900 = <strong>362,072</strong><br>
+    Correct answer: <span class="ans-line"></span> &nbsp; What went wrong? <span class="ans-line-long"></span>
+  </div>
+
+  <h2>Part C – Word Problems (Cumulative: rounding + place value + operations)</h2>
+  <div class="problem-block">
+    7. The Grand Canyon had 4,532,677 visitors in one year and 5,969,811 the next. How many visitors total over both years? Round your answer to the nearest hundred-thousand.<br>
+    Exact: <span class="ans-line"></span> &nbsp; Rounded: <span class="ans-line"></span>
+    <div class="work-box"></div>
+  </div>
+  <div class="problem-block">
+    8. Arizona has 113,990 square miles of land. If 48,320 square miles are desert, how many are NOT desert?<br>
+    <span class="ans-line-long"></span>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Missing Digits</h3>
+    <p>Fill in the missing digits to make each equation true.</p>
+    <p>A. &nbsp; 4 __ 7, __ 3 2 + 1 8 __, 4 0 __ = 6 3 5, 8 3 7</p>
+    <p>B. &nbsp; 9 0 0, 0 0 0 − __ __ 4, 3 __ 1 = 3 6 5, 6 __ 9</p>
+    <div class="work-box">Work:</div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 1 Day 3</span>
+    <span>Addition &amp; Subtraction</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 1 · DAY 4 · Multiplication Concepts                   -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W1<br>D4</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 1 · Day 4 &nbsp;|&nbsp; Multiplication: Patterns &amp; Properties</div>
+  <div class="name-date">
+    Name: <span></span> &nbsp; Date: <span></span>
+  </div>
+  <span class="topic-tag">MULTIPLICATION FOUNDATIONS</span>
+
+  <div class="intro-box">
+    <strong>Properties to remember:</strong><br>
+    • <strong>Commutative:</strong> 6 × 9 = 9 × 6<br>
+    • <strong>Associative:</strong> (2 × 3) × 5 = 2 × (3 × 5)<br>
+    • <strong>Distributive:</strong> 7 × 13 = 7 × 10 + 7 × 3 = 70 + 21 = 91<br>
+    • <strong>Multiplying by 10, 100, 1,000:</strong> Just add zeros! &nbsp; 47 × 100 = 4,700
+  </div>
+
+  <h2>Part A – Powers of 10 Patterns</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. &nbsp; 83 × 10 = <span class="box-blank"></span><br>
+      &nbsp;&nbsp;&nbsp; 83 × 100 = <span class="box-blank"></span><br>
+      &nbsp;&nbsp;&nbsp; 83 × 1,000 = <span class="box-blank"></span>
+    </div>
+    <div class="problem-block">
+      2. &nbsp; 7 × 40 = <span class="box-blank"></span><br>
+      &nbsp;&nbsp;&nbsp; 7 × 400 = <span class="box-blank"></span><br>
+      &nbsp;&nbsp;&nbsp; 70 × 400 = <span class="box-blank"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Distributive Property</h2>
+  <p class="hint">Break apart each problem and solve. Show all steps.</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      3. &nbsp; 6 × 47<br>
+      = 6 × (__ + __)<br>
+      = __ + __<br>
+      = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      4. &nbsp; 8 × 93<br>
+      = 8 × (__ + __)<br>
+      = __ + __<br>
+      = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      5. &nbsp; 5 × 108<br>
+      = 5 × (__ + __)<br>
+      = __ + __<br>
+      = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      6. &nbsp; 12 × 25<br>
+      = 12 × (__ + __)<br>
+      = __ + __<br>
+      = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part C – Multi-Digit Multiplication</h2>
+  <div class="grid-3">
+    <div class="problem-block">
+      7. &nbsp; 346 × 7 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      8. &nbsp; 524 × 38 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      9. &nbsp; 2,004 × 6 =<br>
+      <div class="work-box"></div>
+    </div>
+  </div>
+
+  <h2>Part D – Word Problem (Cumulative)</h2>
+  <div class="problem-block">
+    10. Destiny's school uses 48 boxes of pencils each month. Each box has 144 pencils. The school year has 9 months. How many pencils does the school use in a full year? First estimate, then find the exact answer.
+    <br>Estimate: <span class="ans-line"></span> &nbsp; Exact: <span class="ans-line"></span>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – True or False? Prove It.</h3>
+    <p>A. Is it true that 25 × 16 = 50 × 8? Use the associative property to explain.</p>
+    <span class="ans-line-long"></span>
+    <p>B. Find two different ways to use the distributive property to solve 15 × 24.</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 1 Day 4</span>
+    <span>Multiplication Foundations</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 1 · DAY 5 · Division Concepts                         -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W1<br>D5</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 1 · Day 5 &nbsp;|&nbsp; Division: Meaning, Remainders &amp; Word Problems</div>
+  <div class="name-date">
+    Name: <span></span> &nbsp; Date: <span></span>
+  </div>
+  <span class="topic-tag">DIVISION</span>
+
+  <div class="intro-box">
+    <strong>Division = splitting into equal groups.</strong><br>
+    372 ÷ 6: &nbsp; "How many groups of 6 fit in 372?"<br>
+    Remainder: the leftover amount that can't form a full group.<br>
+    <strong>Check:</strong> (quotient × divisor) + remainder = dividend &nbsp;→&nbsp; (62 × 6) + 0 = 372 ✓
+  </div>
+
+  <h2>Part A – Division with Remainders</h2>
+  <div class="grid-3">
+    <div class="problem-block">
+      1. &nbsp; 97 ÷ 4 =<br>
+      <div class="work-box"></div>
+      Q: <span class="ans-line"></span> R: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      2. &nbsp; 253 ÷ 7 =<br>
+      <div class="work-box"></div>
+      Q: <span class="ans-line"></span> R: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      3. &nbsp; 8,145 ÷ 9 =<br>
+      <div class="work-box"></div>
+      Q: <span class="ans-line"></span> R: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part B – What Does the Remainder Mean?</h2>
+  <p class="hint">For each problem, decide: Do you round UP, round DOWN, or USE THE REMAINDER?</p>
+  <div class="problem-block">
+    4. 75 kids need to take the school van. Each van holds 8 kids. How many vans are needed?<br>
+    Work: &nbsp; 75 ÷ 8 = __ R __ &nbsp; → &nbsp; Answer: <span class="ans-line"></span> vans &nbsp; (Why? <span class="ans-line-long"></span>)
+  </div>
+  <div class="problem-block">
+    5. 130 cookies are packed equally into boxes of 12. How many <em>full</em> boxes can be packed?<br>
+    Work: &nbsp; 130 ÷ 12 = __ R __ &nbsp; → &nbsp; Answer: <span class="ans-line"></span> full boxes (leftover cookies: __)
+  </div>
+  <div class="problem-block">
+    6. 4 friends share $47 equally. How much does each get, and how much is left over?<br>
+    Each gets: $<span class="ans-line"></span> &nbsp; Leftover: $<span class="ans-line"></span>
+  </div>
+
+  <h2>Part C – Long Division Practice</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      7. &nbsp; 4,368 ÷ 12 =<br>
+      <div class="work-box" style="min-height:90px"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      8. &nbsp; 3,525 ÷ 15 =<br>
+      <div class="work-box" style="min-height:90px"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part D – Cumulative Review Sprint (2 min)</h2>
+  <div class="grid-3">
+    <div>9. &nbsp; 403,002 + 298,998 = <span class="ans-line"></span></div>
+    <div>10. Round 7,654,321 to nearest million: <span class="ans-line"></span></div>
+    <div>11. &nbsp; 9 × 800 = <span class="ans-line"></span></div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Division Puzzle</h3>
+    <p>A number divided by 8 gives quotient 47 and remainder 3. What is the number?</p>
+    <span class="ans-line-long"></span>
+    <p>A number divided by 6 gives a remainder of 4. The quotient is between 30 and 40. List all possible original numbers.</p>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 1 Day 5</span>
+    <span>Division</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 1 · WEEKLY QUIZ                                        -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W1<br>QUIZ</div>
+  <h1>Week 1 Quiz – Number Sense &amp; Operations</h1>
+  <div class="subtitle">Topics: Place Value · Rounding · Addition · Subtraction · Multiplication · Division</div>
+  <div class="name-date">
+    Name: <span></span> &nbsp; Date: <span></span>
+  </div>
+  <div class="score-box">Score: _______ / 20</div>
+  <p class="hint">Show all work. Each question is worth 1 point unless marked otherwise.</p>
+
+  <h2>Section 1 – Place Value &amp; Rounding (5 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. What is the value of the digit 6 in 46,803,210?<br>
+      <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      2. Write 5,000,000 + 30,000 + 400 + 9 as a standard number.<br>
+      <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      3. Round 8,372,649 to the nearest hundred-thousand.<br>
+      <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      4. Which is greatest? Circle one:<br>
+      &nbsp;&nbsp; 2,047,000 &nbsp; 2,470,000 &nbsp; 2,407,000
+    </div>
+  </div>
+  <div class="problem-block">
+    5. <span class="star">(2 pts)</span> Write the number that is 100,000 MORE than 6,900,050.<br>
+    <span class="ans-line"></span>
+  </div>
+
+  <h2>Section 2 – Addition &amp; Subtraction (5 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      6. &nbsp; 748,293 + 351,708 = <br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      7. &nbsp; 5,000,000 − 3,284,736 =<br>
+      <div class="work-box"></div>
+    </div>
+  </div>
+  <div class="problem-block">
+    8. <span class="star">(3 pts)</span> A library has 2,403,811 books. They donate 385,200 and receive 740,000 new ones. How many books does the library have now?<br>
+    <span class="ans-line-long"></span>
+    <div class="work-box"></div>
+  </div>
+
+  <h2>Section 3 – Multiplication &amp; Division (10 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      9. &nbsp; 463 × 27 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      10. &nbsp; 50 × 700 =<br>
+      <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      11. &nbsp; 3,276 ÷ 9 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      12. &nbsp; 5,824 ÷ 16 =<br>
+      <div class="work-box"></div>
+    </div>
+  </div>
+  <div class="problem-block">
+    13. <span class="star">(2 pts)</span> Use the distributive property to solve 14 × 35. Show two steps.<br>
+    <div class="work-box"></div>
+  </div>
+  <div class="problem-block">
+    14. <span class="star">(3 pts)</span> 243 students are going on a field trip. Each bus holds 36 students. How many buses are needed? Will any bus be less than full — if so, how many seats are empty?<br>
+    Buses needed: <span class="ans-line"></span> &nbsp; Empty seats: <span class="ans-line"></span>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 1 Quiz</span>
+    <span>Number Sense &amp; Operations</span>
+  </div>
+</div>
+
+</body>
+</html>

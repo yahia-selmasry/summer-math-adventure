@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Math Comics – Equations</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap');
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:#f5c842; font-family:'Comic Neue','Comic Sans MS',cursive; padding:24px; max-width:860px; margin:0 auto; }
+.comic-page { background:#f5c842; padding:16px; page-break-after:always; }
+.row { display:flex; gap:8px; margin-bottom:8px; }
+.panel { border:3px solid #1a1a1a; border-radius:6px; padding:14px; position:relative; overflow:hidden; flex:1; }
+.panel.bg-sky { background:#cce8f5; } .panel.bg-green { background:#c8e6c9; }
+.panel.bg-peach { background:#ffe0cc; } .panel.bg-tan { background:#f5e6c8; }
+.panel.w2 { flex:2; } .panel.w3 { flex:3; }
+.title-card { display:inline-block; background:#1b5e20; color:#fff; font-family:'Bangers','Impact',sans-serif; font-size:26px; letter-spacing:2px; padding:6px 16px 4px; border:3px solid #1a1a1a; border-radius:8px; margin-bottom:10px; text-shadow:2px 2px 0 #0a2e0a; }
+.title-card .sub { font-size:13px; display:block; font-family:'Comic Neue',cursive; text-shadow:none; letter-spacing:1px; }
+.bubble { background:#fff; border:2.5px solid #1a1a1a; border-radius:18px; padding:8px 12px; font-size:13.5px; line-height:1.45; position:relative; display:inline-block; max-width:220px; font-weight:700; margin:4px; }
+.bubble.left::after { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.sm { font-size:12px; max-width:180px; }
+.scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:110px; padding-top:8px; }
+.zara { width:70px; height:110px; position:relative; flex-shrink:0; }
+.zara .body { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+.max { width:56px; height:80px; position:relative; flex-shrink:0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+.math-box { background:#fff; border:3px solid #1a1a1a; border-radius:8px; padding:8px 14px; font-size:18px; font-weight:700; display:inline-block; margin:5px 4px; text-align:center; }
+.math-box.green { background:#e8f5e9; border-color:#1b5e20; }
+.math-box.red { background:#fce4ec; border-color:#c62828; color:#c62828; }
+.math-box.blue { background:#e3f2fd; border-color:#1565c0; }
+.math-box.orange { background:#fff3e0; border-color:#e65100; }
+sup { font-size:0.65em; vertical-align:super; }
+/* Scale / balance visual */
+.balance { display:flex; flex-direction:column; align-items:center; margin:8px auto; }
+.beam { width:200px; height:6px; background:#5d4037; border-radius:3px; position:relative; }
+.pivot { width:0; height:0; border-left:10px solid transparent; border-right:10px solid transparent; border-top:20px solid #5d4037; margin:0 auto; }
+.pan { border:3px solid #5d4037; border-radius:4px; background:#ffe082; min-width:70px; min-height:38px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; padding:4px 8px; }
+.pan-row { display:flex; justify-content:space-between; width:210px; gap:8px; }
+.think-sign { background:#c62828; color:#fff; font-size:11px; font-weight:700; text-align:center; padding:10px; clip-path:polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%); width:88px; height:88px; display:flex; align-items:center; justify-content:center; line-height:1.3; flex-shrink:0; }
+.step-arrow { font-size:20px; color:#1b5e20; font-weight:700; text-align:center; }
+</style>
+</head>
+<body>
+<div class="comic-page">
+
+  <!-- ROW 1: INTRO — EXPRESSION vs EQUATION -->
+  <div class="row">
+    <div class="panel bg-sky" style="min-height:160px;">
+      <div class="title-card">
+        ⚖️ Equations!
+        <span class="sub">Find the mystery number that makes both sides equal!</span>
+      </div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div class="bubble left" style="max-width:190px;margin-bottom:18px;">An expression is like a recipe. An equation says two recipes make the same thing!</div>
+          <div class="zara"><div class="body"></div><div class="head"></div><div class="snout"></div><div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div></div>
+        </div>
+        <div style="text-align:center;padding:10px;">
+          <div class="math-box" style="font-size:13px;margin-bottom:6px;">Expression: 3x + 5<br><span style="font-size:10px;color:#555;">No = sign</span></div>
+          <div style="font-size:24px;color:#1b5e20;font-weight:700;">↓</div>
+          <div class="math-box green" style="font-size:13px;">Equation: 3x + 5 = 20<br><span style="font-size:10px;color:#555;">Has an = sign! ✓</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div class="bubble right" style="max-width:190px;margin-bottom:18px;">So I need to find the x that makes it TRUE!</div>
+          <div class="max"><div class="body"></div><div class="head"></div><div class="eye"></div><div class="eye r"></div><div class="horn"></div><div class="fang"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: BALANCE SCALE MODEL -->
+  <div class="row">
+    <div class="panel bg-peach w2" style="min-height:160px;">
+      <div class="bubble top-left" style="max-width:280px;margin-bottom:14px;">
+        Think of an equation like a <strong>BALANCE SCALE</strong>. Both sides must weigh the same!
+      </div>
+      <div style="margin-top:36px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:6px;text-align:center;">x + 6 = 14</div>
+          <div class="balance">
+            <div class="pan-row">
+              <div class="pan">x + 6</div>
+              <div style="font-size:24px;align-self:center;">=</div>
+              <div class="pan">14</div>
+            </div>
+            <div class="beam"></div>
+            <div class="pivot"></div>
+          </div>
+          <div style="font-size:12px;text-align:center;margin-top:4px;color:#555;">Both sides must stay equal!</div>
+        </div>
+        <div style="flex:1;font-size:13px;">
+          <div style="font-weight:700;margin-bottom:6px;">🔑 Key: Inverse Operations</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <div class="math-box" style="font-size:12px;padding:6px;">+ ↔ −<br><span style="font-size:10px;">opposites!</span></div>
+            <div class="math-box" style="font-size:12px;padding:6px;">× ↔ ÷<br><span style="font-size:10px;">opposites!</span></div>
+          </div>
+          <div style="margin-top:8px;font-size:12px;">Whatever you do to one side,<br><strong>do the same to the other!</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel bg-green">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px;">✅ One-Step — Solve x + 6 = 14</div>
+      <div style="font-size:13px;margin-bottom:6px;">Goal: get x alone!</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+          <div class="math-box" style="font-size:13px;padding:5px 10px;">x + 6 = 14</div>
+        </div>
+        <div class="step-arrow">↓ subtract 6 from both sides</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+          <div class="math-box green" style="font-size:15px;padding:5px 10px;"><span style="color:#c62828;">x</span> = 8</div>
+        </div>
+        <div style="font-size:12px;color:#555;">✓ Check: 8 + 6 = 14 ✓</div>
+      </div>
+      <hr style="border:1px dashed #888;margin:8px 0;">
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">✅ Solve 4n = 28</div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div class="math-box" style="font-size:13px;padding:4px 8px;display:block;">4n = 28</div>
+        <div class="step-arrow">↓ divide both sides by 4</div>
+        <div class="math-box green" style="font-size:15px;display:block;"><span style="color:#c62828;">n</span> = 7</div>
+        <div style="font-size:12px;color:#555;">✓ Check: 4 × 7 = 28 ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: TWO-STEP EQUATIONS -->
+  <div class="row">
+    <div class="panel bg-tan" style="min-height:190px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="zara" style="transform:scale(0.82);transform-origin:bottom left;flex-shrink:0;"><div class="body"></div><div class="head"></div><div class="snout"></div><div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div></div>
+        <div style="flex:1;padding-top:6px;">
+          <div class="bubble top-left" style="max-width:290px;margin-bottom:14px;">
+            Two-step equations need <strong>two moves</strong>. Always undo + or − first, then × or ÷!
+          </div>
+          <div style="margin-top:36px;">
+            <div style="font-size:14px;font-weight:700;margin-bottom:8px;">Solve 2x + 3 = 11</div>
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+                <div class="math-box blue" style="font-size:13px;padding:4px 10px;">2x + 3 = 11</div>
+              </div>
+              <div class="step-arrow" style="color:#283593;">Step 1: − 3 from both sides</div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+                <div class="math-box" style="font-size:13px;padding:4px 10px;">2x = 8</div>
+              </div>
+              <div class="step-arrow" style="color:#283593;">Step 2: ÷ 2 on both sides</div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+                <div class="math-box green" style="font-size:16px;padding:4px 10px;"><span style="color:#c62828;">x</span> = 4</div>
+              </div>
+              <div style="font-size:12px;color:#555;">✓ Check: 2(4) + 3 = 8 + 3 = 11 ✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: WORD PROBLEM + THINK -->
+  <div class="row">
+    <div class="panel bg-sky" style="min-height:130px;">
+      <div class="bubble top-left" style="max-width:260px;margin-bottom:12px;">
+        Word problems can turn into equations!<br>A cab charges $5 base + $3/mile. Total = $20. How many miles?
+      </div>
+      <div style="margin-top:36px;display:flex;flex-direction:column;gap:4px;font-size:13px;">
+        <div>Write it: <span class="math-box blue" style="font-size:13px;padding:3px 8px;display:inline;">3m + 5 = 20</span></div>
+        <div>Step 1: 3m = 15</div>
+        <div>Step 2: m = <strong style="color:#c62828;font-size:16px;">5 miles</strong></div>
+        <div style="font-size:11px;color:#555;">✓ Check: 3(5)+5=20 ✓</div>
+      </div>
+    </div>
+
+    <div class="panel bg-peach" style="min-height:130px;display:flex;align-items:center;gap:12px;">
+      <div class="think-sign">I think of a number, multiply by 5, subtract 8 — I get 37. What's the number?</div>
+      <div style="flex:1;font-size:13px;">
+        <div class="math-box green" style="font-size:13px;display:block;">5n − 8 = 37</div>
+        <div style="margin-top:6px;">5n = 45</div>
+        <div>n = <strong style="color:#c62828;font-size:16px;">9</strong></div>
+        <div style="font-size:11px;color:#555;margin-top:4px;">✓ 5(9)−8 = 45−8 = 37 ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 5: ALWAYS CHECK! -->
+  <div class="row">
+    <div class="panel bg-green" style="min-height:80px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="max" style="transform:scale(0.8);transform-origin:bottom left;flex-shrink:0;"><div class="body"></div><div class="head"></div><div class="eye"></div><div class="eye r"></div><div class="horn"></div><div class="fang"></div></div>
+        <div class="bubble left" style="max-width:260px;">Always PLUG your answer back in to check! If both sides match, you nailed it! 🎯</div>
+        <div style="flex:1;font-size:12px;font-weight:700;color:#1b5e20;text-align:center;">
+          SOLVE → CHECK → CELEBRATE! 🎉
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Math Comics – Probability</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap');
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:#f5c842; font-family:'Comic Neue','Comic Sans MS',cursive; padding:24px; max-width:860px; margin:0 auto; }
+.comic-page { background:#f5c842; padding:16px; page-break-after:always; }
+.row { display:flex; gap:8px; margin-bottom:8px; }
+.panel { border:3px solid #1a1a1a; border-radius:6px; padding:14px; position:relative; overflow:hidden; flex:1; }
+.panel.bg-sky { background:#cce8f5; } .panel.bg-green { background:#c8e6c9; }
+.panel.bg-peach { background:#ffe0cc; } .panel.bg-tan { background:#f5e6c8; }
+.panel.w2 { flex:2; }
+.title-card { display:inline-block; background:#00695c; color:#fff; font-family:'Bangers','Impact',sans-serif; font-size:26px; letter-spacing:2px; padding:6px 16px 4px; border:3px solid #1a1a1a; border-radius:8px; margin-bottom:10px; text-shadow:2px 2px 0 #002e27; }
+.title-card .sub { font-size:13px; display:block; font-family:'Comic Neue',cursive; text-shadow:none; letter-spacing:1px; }
+.bubble { background:#fff; border:2.5px solid #1a1a1a; border-radius:18px; padding:8px 12px; font-size:13.5px; line-height:1.45; position:relative; display:inline-block; max-width:220px; font-weight:700; margin:4px; }
+.bubble.left::after { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.sm { font-size:12px; max-width:180px; }
+.scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:100px; padding-top:8px; }
+.zara { width:70px; height:110px; position:relative; flex-shrink:0; }
+.zara .body { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+.max { width:56px; height:80px; position:relative; flex-shrink:0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+.math-box { background:#fff; border:3px solid #1a1a1a; border-radius:8px; padding:8px 14px; font-size:18px; font-weight:700; display:inline-block; margin:4px; text-align:center; }
+.math-box.teal { background:#e0f2f1; border-color:#00695c; }
+.math-box.green { background:#e8f5e9; border-color:#2e7d32; }
+.math-box.red { background:#fce4ec; border-color:#c62828; }
+.math-box.orange { background:#fff3e0; border-color:#e65100; }
+sup { font-size:0.65em; vertical-align:super; }
+.marble { display:inline-block; width:22px; height:22px; border-radius:50%; border:2px solid #555; margin:2px; vertical-align:middle; }
+.think-sign { background:#c62828; color:#fff; font-size:11px; font-weight:700; text-align:center; padding:10px; clip-path:polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%); width:88px; height:88px; display:flex; align-items:center; justify-content:center; line-height:1.3; flex-shrink:0; }
+/* probability scale */
+.prob-scale { position:relative; height:36px; margin:12px 8px 8px; }
+.ps-line { position:absolute; top:16px; left:0; right:0; height:4px; background:linear-gradient(to right,#c62828,#f0a500,#2e7d32); border-radius:2px; }
+.ps-label { position:absolute; top:22px; font-size:10px; font-weight:700; transform:translateX(-50%); }
+.ps-mark { position:absolute; top:10px; width:3px; height:14px; background:#1a1a1a; transform:translateX(-50%); }
+</style>
+</head>
+<body>
+<div class="comic-page">
+
+  <!-- ROW 1: INTRO -->
+  <div class="row">
+    <div class="panel bg-sky" style="min-height:155px;">
+      <div class="title-card">
+        🎲 Probability!
+        <span class="sub">How likely is something to happen?</span>
+      </div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div class="bubble left" style="max-width:200px;margin-bottom:18px;">Max, I have a bag with 3 red and 1 blue marble. What are the chances you pull out red?</div>
+          <div class="zara"><div class="body"></div><div class="head"></div><div class="snout"></div><div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div></div>
+        </div>
+        <div style="text-align:center;padding:10px;">
+          <div style="font-size:32px;margin-bottom:4px;">🎒</div>
+          <div>
+            <span class="marble" style="background:#e53935;"></span>
+            <span class="marble" style="background:#e53935;"></span>
+            <span class="marble" style="background:#e53935;"></span>
+            <span class="marble" style="background:#1565c0;"></span>
+          </div>
+          <div style="font-size:11px;margin-top:4px;color:#555;">4 marbles total</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div class="bubble right" style="max-width:180px;margin-bottom:18px;">3 out of 4 are red… so I'd write 3/4? That's probability!</div>
+          <div class="max"><div class="body"></div><div class="head"></div><div class="eye"></div><div class="eye r"></div><div class="horn"></div><div class="fang"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: THE FORMULA -->
+  <div class="row">
+    <div class="panel bg-peach" style="min-height:130px;">
+      <div class="bubble top-left" style="max-width:280px;margin-bottom:14px;">
+        Exactly! The formula is always:
+      </div>
+      <div style="margin-top:36px;text-align:center;">
+        <div style="background:#fff;border:3px solid #00695c;border-radius:10px;padding:12px;display:inline-block;font-size:15px;">
+          <span style="color:#00695c;font-weight:700;">P(event)</span> =
+          <span style="display:inline-block;text-align:center;vertical-align:middle;margin:0 4px;">
+            <span style="display:block;border-bottom:2.5px solid #333;padding:0 6px;font-weight:700;">favorable outcomes</span>
+            <span style="display:block;padding:0 6px;font-weight:700;">total outcomes</span>
+          </span>
+        </div>
+        <div style="margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          <div class="math-box teal" style="font-size:13px;">P(red) = 3/4</div>
+          <div class="math-box" style="font-size:13px;">P(blue) = 1/4</div>
+          <div class="math-box red" style="font-size:13px;">P(green) = 0/4 = 0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel bg-green">
+      <!-- Probability scale -->
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px;color:#2e7d32;">The Probability Scale: 0 to 1</div>
+      <div class="prob-scale">
+        <div class="ps-line"></div>
+        <div class="ps-mark" style="left:0;"></div>
+        <div class="ps-mark" style="left:50%;"></div>
+        <div class="ps-mark" style="left:100%;"></div>
+        <div class="ps-label" style="left:0;top:26px;color:#c62828;">0<br>Impossible</div>
+        <div class="ps-label" style="left:50%;color:#555;">½<br>Even</div>
+        <div class="ps-label" style="left:100%;color:#2e7d32;">1<br>Certain</div>
+      </div>
+      <div style="margin-top:28px;font-size:12px;display:flex;flex-direction:column;gap:4px;">
+        <div>🚫 P = 0 → <strong>impossible</strong> (rolling a 7 on a 6-sided die)</div>
+        <div>🟡 P = ½ → <strong>equally likely</strong> (flipping heads)</div>
+        <div>✅ P = 1 → <strong>certain</strong> (sun rises tomorrow)</div>
+        <div>🎲 P = ¾ → <strong>likely</strong> (pulling red from our bag!)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: COMPLEMENT RULE -->
+  <div class="row">
+    <div class="panel bg-tan" style="min-height:150px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="zara" style="transform:scale(0.82);transform-origin:bottom left;flex-shrink:0;"><div class="body"></div><div class="head"></div><div class="snout"></div><div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div></div>
+        <div style="flex:1;padding-top:6px;">
+          <div class="bubble top-left" style="max-width:280px;margin-bottom:14px;">
+            Here's a cool shortcut: P(NOT happening) = 1 − P(happening)!
+          </div>
+          <div style="margin-top:36px;">
+            <div style="font-size:13px;font-weight:700;margin-bottom:8px;">Example: P(rain) = 0.3</div>
+            <div style="font-size:13px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <div class="math-box teal" style="font-size:13px;padding:4px 10px;">P(no rain) = 1 − 0.3 = <span style="color:#c62828;font-size:16px;">0.7</span></div>
+            </div>
+            <div style="margin-top:8px;font-size:13px;">
+              <div>Bag example: P(NOT red) = 1 − 3/4 = <strong style="color:#c62828;">1/4</strong></div>
+              <div style="font-size:11px;color:#555;">= P(blue) ✓ Makes sense!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: PREDICTIONS + THINK -->
+  <div class="row">
+    <div class="panel bg-sky">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px;color:#00695c;">Making Predictions:</div>
+      <div style="font-size:13px;margin-bottom:8px;">Expected outcomes = P(event) × number of trials</div>
+      <div style="font-size:13px;margin-bottom:6px;">
+        <strong>Example:</strong> P(heads) = ½. Flip 40 times:
+      </div>
+      <div class="math-box teal" style="font-size:14px;display:block;">½ × 40 = <span style="color:#c62828;font-size:18px;">20 heads</span></div>
+      <div style="font-size:11px;color:#555;margin-top:4px;">This is a prediction — not guaranteed!</div>
+      <div class="scene" style="min-height:70px;margin-top:6px;">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div class="bubble right sm" style="margin-bottom:12px;">The more you try, the closer you get to the prediction! 📊</div>
+          <div class="max" style="transform:scale(0.8);transform-origin:bottom center;"><div class="body"></div><div class="head"></div><div class="eye"></div><div class="eye r"></div><div class="horn"></div><div class="fang"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel bg-peach" style="display:flex;align-items:center;gap:12px;">
+      <div class="think-sign">A spinner has 8 sections: 3 red, 2 blue, 2 yellow, 1 green. If you spin 40 times, expect how many reds?</div>
+      <div style="flex:1;font-size:13px;">
+        <div>P(red) = 3/8</div>
+        <div style="margin-top:6px;">3/8 × 40 = <strong style="color:#c62828;font-size:16px;">15 reds</strong></div>
+        <div style="font-size:11px;color:#555;margin-top:4px;">You might get 13 or 17 — that's okay! It's an estimate.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

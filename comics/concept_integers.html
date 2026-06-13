@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Math Comics – Integers</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f5c842;
+  font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+  padding: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* ── PAGE ── */
+.comic-page {
+  background: #f5c842;
+  padding: 16px;
+  page-break-after: always;
+}
+
+/* ── PANEL GRID ── */
+.row { display: flex; gap: 8px; margin-bottom: 8px; }
+.panel {
+  border: 3px solid #1a1a1a;
+  border-radius: 6px;
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+}
+.panel.bg-sky   { background: #cce8f5; }
+.panel.bg-green { background: #c8e6c9; }
+.panel.bg-peach { background: #ffe0cc; }
+.panel.bg-tan   { background: #f5e6c8; }
+.panel.bg-white { background: #ffffff; }
+.panel.full { flex: none; width: 100%; }
+.panel.w2   { flex: 2; }
+.panel.w3   { flex: 3; }
+
+/* ── TITLE CARD ── */
+.title-card {
+  display: inline-block;
+  background: #880e4f;
+  color: #fff;
+  font-family: 'Bangers', 'Impact', sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  padding: 6px 18px 4px;
+  border: 3px solid #1a1a1a;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  line-height: 1.1;
+  text-shadow: 2px 2px 0 #4a0028;
+}
+.title-card .subtitle {
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: block;
+  font-family: 'Comic Neue', cursive;
+  text-shadow: none;
+}
+
+/* ── SPEECH BUBBLES ── */
+.bubble {
+  background: #fff;
+  border: 2.5px solid #1a1a1a;
+  border-radius: 18px;
+  padding: 8px 12px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  position: relative;
+  display: inline-block;
+  max-width: 220px;
+  font-weight: 700;
+  margin: 4px;
+}
+.bubble.left::after {
+  content: '';
+  position: absolute;
+  bottom: -14px; left: 20px;
+  border: 7px solid transparent;
+  border-top-color: #1a1a1a;
+}
+.bubble.left::before {
+  content: '';
+  position: absolute;
+  bottom: -10px; left: 21px;
+  border: 6px solid transparent;
+  border-top-color: #fff;
+  z-index: 1;
+}
+.bubble.right::after {
+  content: '';
+  position: absolute;
+  bottom: -14px; right: 20px;
+  border: 7px solid transparent;
+  border-top-color: #1a1a1a;
+}
+.bubble.right::before {
+  content: '';
+  position: absolute;
+  bottom: -10px; right: 21px;
+  border: 6px solid transparent;
+  border-top-color: #fff;
+  z-index: 1;
+}
+.bubble.top-right::after {
+  content: '';
+  position: absolute;
+  top: -14px; right: 20px;
+  border: 7px solid transparent;
+  border-bottom-color: #1a1a1a;
+}
+.bubble.top-right::before {
+  content: '';
+  position: absolute;
+  top: -10px; right: 21px;
+  border: 6px solid transparent;
+  border-bottom-color: #fff;
+  z-index: 1;
+}
+.bubble.top-left::after {
+  content: '';
+  position: absolute;
+  top: -14px; left: 20px;
+  border: 7px solid transparent;
+  border-bottom-color: #1a1a1a;
+}
+.bubble.top-left::before {
+  content: '';
+  position: absolute;
+  top: -10px; left: 21px;
+  border: 6px solid transparent;
+  border-bottom-color: #fff;
+  z-index: 1;
+}
+.bubble.thought {
+  border-style: dashed;
+  border-radius: 50px;
+}
+.bubble.yellow { background: #fff9c4; }
+.bubble.big { font-size: 15px; max-width: 280px; }
+.bubble.sm  { font-size: 12px; max-width: 180px; }
+
+/* ── CHARACTERS (CSS art) ── */
+.scene { display: flex; align-items: flex-end; justify-content: space-around; min-height: 120px; padding-top: 8px; }
+.scene-top { display: flex; align-items: flex-start; justify-content: space-around; }
+
+/* Zara – tall orange dino teacher */
+.zara {
+  width: 70px; height: 110px;
+  position: relative; flex-shrink: 0;
+}
+.zara .body {
+  width: 44px; height: 68px;
+  background: #e07a30;
+  border: 2.5px solid #7a3800;
+  border-radius: 14px 14px 10px 10px;
+  position: absolute; bottom: 0; left: 13px;
+}
+.zara .head {
+  width: 38px; height: 34px;
+  background: #e07a30;
+  border: 2.5px solid #7a3800;
+  border-radius: 50% 50% 40% 40%;
+  position: absolute; bottom: 60px; left: 16px;
+}
+.zara .snout {
+  width: 22px; height: 14px;
+  background: #c96020;
+  border: 2px solid #7a3800;
+  border-radius: 4px 10px 10px 4px;
+  position: absolute; bottom: 66px; left: 40px;
+}
+.zara .eye {
+  width: 7px; height: 8px;
+  background: #fff;
+  border: 2px solid #1a1a1a;
+  border-radius: 50%;
+  position: absolute; bottom: 78px; left: 28px;
+}
+.zara .eye::after {
+  content: '';
+  width: 3px; height: 3px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  position: absolute; top: 1px; left: 1px;
+}
+.zara .hair {
+  width: 0; height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 18px solid #2255aa;
+  position: absolute; bottom: 90px; left: 21px;
+  transform: rotate(-10deg);
+}
+.zara .arm {
+  width: 12px; height: 30px;
+  background: #e07a30;
+  border: 2px solid #7a3800;
+  border-radius: 6px;
+  position: absolute; bottom: 28px; left: 4px;
+  transform: rotate(15deg);
+}
+.zara .tail {
+  width: 28px; height: 12px;
+  background: #e07a30;
+  border: 2px solid #7a3800;
+  border-radius: 0 6px 6px 0;
+  position: absolute; bottom: 8px; right: -8px;
+  transform: rotate(-20deg);
+}
+
+/* Max – small blue monster student */
+.max {
+  width: 56px; height: 80px;
+  position: relative; flex-shrink: 0;
+}
+.max .body {
+  width: 40px; height: 48px;
+  background: #3d72b8;
+  border: 2.5px solid #1a2a6a;
+  border-radius: 12px;
+  position: absolute; bottom: 0; left: 8px;
+}
+.max .head {
+  width: 44px; height: 38px;
+  background: #3d72b8;
+  border: 2.5px solid #1a2a6a;
+  border-radius: 50%;
+  position: absolute; bottom: 40px; left: 6px;
+}
+.max .eye {
+  width: 9px; height: 10px;
+  background: #fff;
+  border: 2px solid #1a1a1a;
+  border-radius: 50%;
+  position: absolute; bottom: 56px; left: 14px;
+}
+.max .eye.r { left: 30px; }
+.max .eye::after {
+  content: '';
+  width: 4px; height: 4px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  position: absolute; top: 2px; left: 2px;
+}
+.max .horn {
+  width: 0; height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 14px solid #2255aa;
+  position: absolute; bottom: 74px; left: 24px;
+}
+.max .fang {
+  width: 5px; height: 7px;
+  background: #fff;
+  border: 1.5px solid #888;
+  border-radius: 0 0 3px 3px;
+  position: absolute; bottom: 41px; left: 22px;
+}
+
+/* ── MATH DISPLAY ── */
+.math-box {
+  background: #fff;
+  border: 3px solid #1a1a1a;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 20px;
+  font-weight: 700;
+  display: inline-block;
+  margin: 6px 4px;
+  font-family: 'Comic Neue', monospace;
+  text-align: center;
+}
+.math-box.orange { background: #fff3e0; border-color: #e65100; }
+.math-box.blue   { background: #e3f2fd; border-color: #1565c0; }
+.math-box.green  { background: #e8f5e9; border-color: #2e7d32; }
+.math-box.red    { background: #fce4ec; border-color: #c62828; color: #c62828; }
+.math-box.pink   { background: #fce4ec; border-color: #880e4f; }
+
+.math-inline { font-size: 16px; font-weight: 700; }
+
+/* ── LABELS / ARROWS ── */
+.label-row { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 6px 0; font-weight: 700; font-size: 13px; }
+.arrow-down { font-size: 22px; color: #880e4f; text-align: center; }
+.bracket-label { font-size: 11px; color: #555; font-style: italic; }
+
+/* ── THINK STOP SIGN ── */
+.think-sign {
+  display: inline-block;
+  background: #c62828;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  padding: 8px 10px;
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+  width: 90px; height: 90px;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1.3;
+}
+.think-wrap { position: absolute; bottom: 10px; right: 10px; }
+
+/* ── DIVIDER ── */
+.panel-divider { border: none; border-top: 3px solid #1a1a1a; margin: 4px 0; }
+
+/* ── NUMBER LINE ── */
+.nl { display: flex; align-items: center; margin: 10px 4px; }
+.nl-line { flex: 1; height: 3px; background: #1a1a1a; position: relative; }
+.nl-arrow { font-size: 18px; }
+.nl-tick { position: absolute; top: -16px; font-size: 11px; font-weight: 700; text-align: center; transform: translateX(-50%); }
+.nl-mark { position: absolute; top: -6px; width: 2px; height: 14px; background: #1a1a1a; transform: translateX(-50%); }
+.nl-pos { color: #c62828; }
+.nl-neg { color: #1565c0; }
+
+/* ── BUILDING visual ── */
+.building {
+  display: inline-flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  border: 2px solid #1a1a1a;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 70px;
+  margin: 4px;
+}
+.floor {
+  width: 100%;
+  height: 20px;
+  border-top: 1.5px solid #aaa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+}
+.floor.above { background: #fff9c4; }
+.floor.ground { background: #c8e6c9; border-top: 2.5px solid #1a1a1a; }
+.floor.below { background: #cce8f5; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="comic-page">
+
+  <!-- ROW 1: INTRO -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:160px;">
+      <div class="title-card" style="background:#880e4f;text-shadow:2px 2px 0 #4a0028;">
+        INTEGERS!
+        <span class="subtitle">Positive, negative, and zero — the full number line!</span>
+      </div>
+
+      <div class="scene">
+        <!-- Zara -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble left big" style="margin-bottom:18px;">
+            Max, what number is<br><em>less than zero</em>?<br>Can a number be negative?
+          </div>
+          <div class="zara">
+            <div class="body"></div>
+            <div class="head"></div>
+            <div class="snout"></div>
+            <div class="eye"></div>
+            <div class="hair"></div>
+            <div class="arm"></div>
+            <div class="tail"></div>
+          </div>
+        </div>
+
+        <!-- Number line in center -->
+        <div style="flex:1;padding:10px 16px;">
+          <div style="font-size:12px;font-weight:700;text-align:center;margin-bottom:4px;">THE INTEGER NUMBER LINE</div>
+          <div class="nl">
+            <div class="nl-arrow" style="color:#1565c0;">&#8592;</div>
+            <div class="nl-line" style="position:relative;height:3px;">
+              <!-- ticks -->
+              <div class="nl-mark" style="left:0%;"></div>
+              <div class="nl-mark" style="left:16.6%;"></div>
+              <div class="nl-mark" style="left:33.3%;"></div>
+              <div class="nl-mark" style="left:50%;background:#c62828;width:3px;height:18px;top:-8px;"></div>
+              <div class="nl-mark" style="left:66.6%;"></div>
+              <div class="nl-mark" style="left:83.3%;"></div>
+              <div class="nl-mark" style="left:100%;"></div>
+              <!-- labels -->
+              <div class="nl-tick nl-neg" style="left:0%;">−3</div>
+              <div class="nl-tick nl-neg" style="left:16.6%;">−2</div>
+              <div class="nl-tick nl-neg" style="left:33.3%;">−1</div>
+              <div class="nl-tick" style="left:50%;color:#c62828;font-size:13px;">0</div>
+              <div class="nl-tick nl-pos" style="left:66.6%;">+1</div>
+              <div class="nl-tick nl-pos" style="left:83.3%;">+2</div>
+              <div class="nl-tick nl-pos" style="left:100%;">+3</div>
+            </div>
+            <div class="nl-arrow" style="color:#c62828;">&#8594;</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;font-weight:700;margin-top:4px;">
+            <span style="color:#1565c0;">NEGATIVE (less than 0)</span>
+            <span style="color:#c62828;">POSITIVE (greater than 0)</span>
+          </div>
+          <div style="text-align:center;margin-top:6px;">
+            <span style="background:#c62828;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:700;">INTEGERS = whole numbers + their negatives + zero</span>
+          </div>
+        </div>
+
+        <!-- Max -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble right" style="margin-bottom:18px;">
+            Wait — numbers can go<br>below zero?! My brain<br>just broke. 🤯
+          </div>
+          <div class="max">
+            <div class="body"></div>
+            <div class="head"></div>
+            <div class="eye"></div>
+            <div class="eye r"></div>
+            <div class="horn"></div>
+            <div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: REAL LIFE NEGATIVES -->
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px;">Negatives in Real Life!</div>
+      <div class="bubble left sm" style="margin-bottom:8px;">You see negatives everywhere!</div>
+      <div style="margin-top:32px;display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">🌡</span>
+          <div class="math-box blue" style="font-size:13px;padding:4px 8px;margin:0;">−10°C</div>
+          <span style="font-size:11px;font-weight:700;">10 degrees below freezing</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">🏢</span>
+          <div class="math-box blue" style="font-size:13px;padding:4px 8px;margin:0;">Floor −2</div>
+          <span style="font-size:11px;font-weight:700;">2 floors underground</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">💸</span>
+          <div class="math-box red" style="font-size:13px;padding:4px 8px;margin:0;">−$5</div>
+          <span style="font-size:11px;font-weight:700;">You owe $5 (debt!)</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">🌊</span>
+          <div class="math-box blue" style="font-size:13px;padding:4px 8px;margin:0;">−30 m</div>
+          <span style="font-size:11px;font-weight:700;">30 meters below sea level</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Building visual -->
+    <div class="panel bg-tan" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+      <div style="font-size:12px;font-weight:700;margin-bottom:6px;text-align:center;">Building floors = integers!</div>
+      <div style="display:flex;gap:12px;align-items:flex-end;">
+        <div class="building">
+          <div class="floor above">Floor 3</div>
+          <div class="floor above">Floor 2</div>
+          <div class="floor above">Floor 1</div>
+          <div class="floor ground">Lobby (0)</div>
+          <div class="floor below">B1 (−1)</div>
+          <div class="floor below">B2 (−2)</div>
+        </div>
+        <div style="font-size:10px;font-weight:700;text-align:left;">
+          <div style="color:#e65100;margin-bottom:20px;">↑ positive</div>
+          <div style="font-size:11px;margin-bottom:6px;">← zero</div>
+          <div style="color:#1565c0;margin-top:14px;">↓ negative</div>
+        </div>
+      </div>
+      <div class="bubble right sm" style="margin-top:8px;">
+        Now I get it!<br>Zero is ground floor! 🏢
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: ADDING INTEGERS -->
+  <div class="row">
+    <div class="panel bg-green full" style="min-height:170px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div>
+          <div class="bubble left" style="max-width:200px;margin-bottom:12px;">
+            Adding integers has<br><strong>two rules</strong> — one for<br>same signs, one for different!
+          </div>
+          <div class="zara" style="transform:scale(0.82);transform-origin:bottom left;">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+        <div style="flex:1;padding-top:6px;">
+          <!-- Rule 1 -->
+          <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:8px 12px;margin-bottom:8px;">
+            <div style="font-size:12px;font-weight:700;color:#2e7d32;margin-bottom:4px;">RULE 1: Same signs → ADD and KEEP the sign</div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <div class="math-box green" style="font-size:14px;padding:5px 8px;margin:2px;">+5 + +3 = <strong>+8</strong></div>
+              <div style="font-size:11px;color:#555;">both positive → add → positive</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px;">
+              <div class="math-box blue" style="font-size:14px;padding:5px 8px;margin:2px;">−4 + (−2) = <strong>−6</strong></div>
+              <div style="font-size:11px;color:#555;">both negative → add → negative</div>
+            </div>
+          </div>
+          <!-- Rule 2 -->
+          <div style="background:#fce4ec;border:2px solid #880e4f;border-radius:8px;padding:8px 12px;">
+            <div style="font-size:12px;font-weight:700;color:#880e4f;margin-bottom:4px;">RULE 2: Different signs → SUBTRACT and KEEP sign of bigger absolute value</div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <div class="math-box pink" style="font-size:14px;padding:5px 8px;margin:2px;">+7 + (−3) = <strong>+4</strong></div>
+              <div style="font-size:11px;color:#555;">7−3=4, 7 is bigger, so positive</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px;">
+              <div class="math-box pink" style="font-size:14px;padding:5px 8px;margin:2px;">+2 + (−9) = <strong>−7</strong></div>
+              <div style="font-size:11px;color:#555;">9−2=7, 9 is bigger, so negative</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: NUMBER LINE VISUAL FOR ADDING -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:140px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div>
+          <div class="bubble left sm" style="margin-bottom:8px;">
+            Use the number line!<br>Add = move RIGHT<br>Subtract = move LEFT
+          </div>
+          <div class="max" style="transform:scale(0.82);transform-origin:bottom left;margin-top:20px;">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+        <div style="flex:1;padding-top:6px;">
+          <!-- Example: 3 + (−5) -->
+          <div style="font-size:12px;font-weight:700;margin-bottom:4px;">Example: 3 + (−5) = ?</div>
+          <div style="font-size:11px;margin-bottom:6px;">Start at <strong style="color:#c62828;">+3</strong>, then move <strong style="color:#1565c0;">5 steps LEFT</strong> (because −5)</div>
+          <div class="nl" style="margin:6px 0;">
+            <div class="nl-arrow" style="color:#1565c0;">&#8592;</div>
+            <div class="nl-line" style="position:relative;height:3px;">
+              <div class="nl-mark" style="left:0%;"></div>
+              <div class="nl-mark" style="left:12.5%;"></div>
+              <div class="nl-mark" style="left:25%;"></div>
+              <div class="nl-mark" style="left:37.5%;background:#c62828;width:3px;height:18px;top:-8px;"></div>
+              <div class="nl-mark" style="left:50%;background:#1a1a1a;width:3px;height:18px;top:-8px;"></div>
+              <div class="nl-mark" style="left:62.5%;"></div>
+              <div class="nl-mark" style="left:75%;background:#2e7d32;width:3px;height:18px;top:-8px;"></div>
+              <div class="nl-mark" style="left:87.5%;"></div>
+              <div class="nl-mark" style="left:100%;"></div>
+              <div class="nl-tick" style="left:0%;">−4</div>
+              <div class="nl-tick" style="left:12.5%;">−3</div>
+              <div class="nl-tick" style="left:25%;">−2</div>
+              <div class="nl-tick nl-neg" style="left:37.5%;">−1</div>
+              <div class="nl-tick" style="left:50%;font-size:13px;">0</div>
+              <div class="nl-tick nl-pos" style="left:62.5%;">1</div>
+              <div class="nl-tick nl-pos" style="left:75%;">2</div>
+              <div class="nl-tick nl-pos" style="left:87.5%;color:#c62828;font-size:13px;">3</div>
+              <div class="nl-tick nl-pos" style="left:100%;">4</div>
+              <!-- arrow showing move left -->
+              <div style="position:absolute;top:-28px;left:37.5%;width:37.5%;height:0;border-top:2.5px dashed #1565c0;">
+                <div style="position:absolute;right:0;top:-6px;font-size:12px;color:#1565c0;">&#8592;&#8592;&#8592;</div>
+              </div>
+            </div>
+            <div class="nl-arrow" style="color:#c62828;">&#8594;</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap;">
+            <div style="font-size:11px;color:#555;">Start at +3, move 5 left → land on</div>
+            <div class="math-box red" style="font-size:16px;padding:4px 10px;margin:0;"><strong>−2</strong></div>
+            <div style="font-size:11px;font-weight:700;color:#2e7d32;">3 + (−5) = −2 ✓</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 5: SUBTRACTING INTEGERS -->
+  <div class="row">
+    <div class="panel bg-peach w2" style="min-height:140px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <div>
+          <div class="bubble left" style="max-width:200px;margin-bottom:10px;">
+            Subtracting is secretly<br>just <strong>ADDING THE OPPOSITE!</strong><br>Subtract = add the opposite!
+          </div>
+          <div class="zara" style="transform:scale(0.78);transform-origin:bottom left;">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+        <div style="flex:1;padding-top:6px;">
+          <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:8px;margin-bottom:8px;">
+            <div style="font-size:12px;font-weight:700;color:#e65100;text-align:center;margin-bottom:6px;">THE GOLDEN RULE: a − b = a + (−b)</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px;">
+              <div class="math-box orange" style="font-size:13px;padding:5px 8px;margin:2px;">5 − (−3)</div>
+              <div style="font-size:16px;font-weight:700;">=</div>
+              <div class="math-box orange" style="font-size:13px;padding:5px 8px;margin:2px;">5 + (+3)</div>
+              <div style="font-size:16px;font-weight:700;">=</div>
+              <div class="math-box green" style="font-size:15px;padding:5px 8px;margin:2px;"><strong>8</strong></div>
+            </div>
+            <div style="font-size:11px;color:#555;margin-bottom:6px;">Subtracting a negative = adding a positive!</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+              <div class="math-box orange" style="font-size:13px;padding:5px 8px;margin:2px;">−4 − 6</div>
+              <div style="font-size:16px;font-weight:700;">=</div>
+              <div class="math-box orange" style="font-size:13px;padding:5px 8px;margin:2px;">−4 + (−6)</div>
+              <div style="font-size:16px;font-weight:700;">=</div>
+              <div class="math-box red" style="font-size:15px;padding:5px 8px;margin:2px;"><strong>−10</strong></div>
+            </div>
+          </div>
+          <div class="bubble top-left sm">
+            Two negatives next<br>to each other = positive!<br>−(−3) = +3 !!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARING INTEGERS -->
+    <div class="panel bg-tan">
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Comparing Integers</div>
+      <div style="font-size:12px;margin-bottom:8px;font-weight:700;">On a number line:<br><span style="color:#c62828;">further RIGHT = BIGGER</span></div>
+      <div class="nl" style="margin:8px 0;">
+        <div class="nl-arrow" style="color:#1565c0;">&#8592;</div>
+        <div class="nl-line" style="position:relative;height:3px;">
+          <div class="nl-mark" style="left:0%;"></div>
+          <div class="nl-mark" style="left:25%;"></div>
+          <div class="nl-mark" style="left:50%;"></div>
+          <div class="nl-mark" style="left:75%;"></div>
+          <div class="nl-mark" style="left:100%;"></div>
+          <div class="nl-tick nl-neg" style="left:0%;">−2</div>
+          <div class="nl-tick nl-neg" style="left:25%;">−1</div>
+          <div class="nl-tick" style="left:50%;">0</div>
+          <div class="nl-tick nl-pos" style="left:75%;">1</div>
+          <div class="nl-tick nl-pos" style="left:100%;">2</div>
+        </div>
+        <div class="nl-arrow" style="color:#c62828;">&#8594;</div>
+      </div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:5px;">
+        <div style="display:flex;align-items:center;gap:6px;">
+          <div class="math-box blue" style="font-size:13px;padding:4px 8px;margin:0;">−3</div>
+          <div style="font-size:16px;font-weight:700;color:#c62828;">&lt;</div>
+          <div class="math-box blue" style="font-size:13px;padding:4px 8px;margin:0;">−1</div>
+          <div style="font-size:11px;color:#555;">−1 is further right</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <div class="math-box blue" style="font-size:13px;padding:4px 8px;margin:0;">−5</div>
+          <div style="font-size:16px;font-weight:700;color:#c62828;">&lt;</div>
+          <div class="math-box green" style="font-size:13px;padding:4px 8px;margin:0;">0</div>
+          <div style="font-size:11px;color:#555;">0 &gt; any negative!</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <div class="math-box blue" style="font-size:13px;padding:4px 8px;margin:0;">−100</div>
+          <div style="font-size:16px;font-weight:700;color:#c62828;">&lt;</div>
+          <div class="math-box blue" style="font-size:13px;padding:4px 8px;margin:0;">−1</div>
+          <div style="font-size:11px;color:#555;">bigger negative number = smaller!</div>
+        </div>
+      </div>
+      <div class="scene" style="min-height:50px;">
+        <div class="max" style="transform:scale(0.7);transform-origin:bottom center;">
+          <div class="body"></div><div class="head"></div><div class="eye"></div>
+          <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+        </div>
+        <div class="bubble right sm">
+          So −100 is SMALLER<br>than −1?! That's wild!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 6: THINK CHALLENGE -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:110px;display:flex;align-items:center;gap:20px;">
+      <div class="think-sign" style="position:relative;flex-shrink:0;font-size:10px;">
+        THINK!<br>−8 + 3 = ?<br>5 − (−2) = ?<br>Which is bigger:<br>−7 or −2?
+      </div>
+      <div style="flex:1;">
+        <div class="scene" style="min-height:80px;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div class="bubble left" style="margin-bottom:18px;">
+              Use the rules!<br>For subtraction:<br>flip the sign and add!
+            </div>
+            <div class="zara" style="transform:scale(0.8);transform-origin:bottom center;">
+              <div class="body"></div><div class="head"></div><div class="snout"></div>
+              <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+            </div>
+          </div>
+          <div style="text-align:center;">
+            <div class="math-box pink" style="font-size:13px;margin-bottom:4px;">−8 + 3 = ___</div>
+            <div class="math-box pink" style="font-size:13px;margin-bottom:4px;">5 − (−2) = ___</div>
+            <div class="math-box pink" style="font-size:13px;">−7 ___ −2</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div class="bubble right sm" style="margin-bottom:18px;">
+              I think I've got this!<br>Integers are actually<br>pretty cool! 😎
+            </div>
+            <div class="max" style="transform:scale(0.8);transform-origin:bottom center;">
+              <div class="body"></div><div class="head"></div><div class="eye"></div>
+              <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;font-size:11px;color:#4a0028;margin-top:8px;font-weight:700;">
+    Answers: −8 + 3 = −5 &nbsp;|&nbsp; 5 − (−2) = 5 + 2 = 7 &nbsp;|&nbsp; −7 &lt; −2 (−2 is further right on number line)
+  </div>
+
+</div><!-- end page -->
+
+</body>
+</html>

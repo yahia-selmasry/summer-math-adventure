@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Summer Math Booklet – Week 4</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+  h1 { font-size: 22px; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #00695c; margin: 14px 0 6px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; background: #00695c; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+  .intro-box { background: #e0f2f1; border-left: 4px solid #00695c; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+  .problem-block { margin-bottom: 14px; }
+  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; }
+  .box-blank { border: 1.5px solid #333; min-height: 28px; min-width: 28px; display: inline-block; margin: 2px; padding: 0 4px; vertical-align: middle; }
+  .work-box { border: 1.5px dashed #aaa; min-height: 80px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .work-box-sm { border: 1.5px dashed #aaa; min-height: 50px; width: 100%; margin: 4px 0; border-radius: 4px; padding: 4px; }
+  .star { color: #00695c; font-weight: bold; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .challenge-box h3 { color: #b06000; font-size: 13px; }
+  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge { float: right; background: #00695c; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .score-box { border: 2px solid #1a3a6b; border-radius: 6px; padding: 8px 16px; display: inline-block; margin-bottom: 10px; font-size: 12px; }
+  .hint { font-size: 10px; color: #555; font-style: italic; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 13px; line-height: 1.1; }
+  .frac .num { border-bottom: 1.5px solid #333; padding: 0 3px; }
+  .frac .den { padding: 0 3px; }
+  table { border-collapse: collapse; margin: 8px 0; font-size: 12px; }
+  td, th { border: 1px solid #888; padding: 5px 8px; text-align: center; }
+  th { background: #00695c; color: #fff; }
+  /* Place value chart */
+  .pv-chart { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .pv-chart td { border: 1px solid #888; height: 28px; min-width: 48px; text-align: center; }
+  .pv-chart th { background: #00695c; color: #fff; padding: 4px; }
+  .decimal-point-cell { font-size: 18px; font-weight: bold; border: none !important; width: 16px; }
+  /* Grid model for tenths/hundredths */
+  .decimal-grid { display: inline-block; border: 2px solid #333; }
+  .decimal-grid table { border: none; margin: 0; }
+  .decimal-grid td { width: 12px; height: 12px; border: 0.5px solid #bbb; padding: 0; }
+  .decimal-filled { background: #80cbc4; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!--  WEEK 4 · DAY 1 · Decimal Place Value                      -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W4<br>D1</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 4 · Day 1 &nbsp;|&nbsp; Decimals: Place Value &amp; Reading/Writing</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">DECIMALS</span>
+
+  <div class="intro-box">
+    <strong>Decimal Place Value Chart:</strong><br>
+    Hundreds | Tens | Ones &nbsp;<strong>.</strong>&nbsp; Tenths | Hundredths | Thousandths<br>
+    &nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3&nbsp;&nbsp;&nbsp; 7 &nbsp;<strong>.</strong>&nbsp; 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5<br>
+    Read as: "one hundred thirty-seven AND four hundred five thousandths" (137.405)<br>
+    <strong>Key:</strong> tenths = <span class="frac"><span class="num">1</span><span class="den">10</span></span>, hundredths = <span class="frac"><span class="num">1</span><span class="den">100</span></span>, thousandths = <span class="frac"><span class="num">1</span><span class="den">1000</span></span>
+  </div>
+
+  <h2>Part A – Name the Place &amp; Value</h2>
+  <table style="width:100%">
+    <tr><th>Number</th><th>Underlined digit</th><th>Place Name</th><th>Value</th></tr>
+    <tr><td>4<u>7</u>.305</td><td>7</td><td></td><td></td></tr>
+    <tr><td>12.4<u>8</u>6</td><td>8</td><td></td><td></td></tr>
+    <tr><td>0.<u>0</u>53</td><td>0</td><td></td><td></td></tr>
+    <tr><td>304.0<u>9</u>1</td><td>9</td><td></td><td></td></tr>
+    <tr><td>5.7<u>3</u>8</td><td>3</td><td></td><td></td></tr>
+  </table>
+
+  <h2>Part B – Write in Words and Standard Form</h2>
+  <div class="problem-block">
+    1. Write 8.047 in words:<br>
+    <span class="ans-line-long"></span>
+  </div>
+  <div class="problem-block">
+    2. Write 0.305 in words:<br>
+    <span class="ans-line-long"></span>
+  </div>
+  <div class="problem-block">
+    3. "Fourteen and sixty-two thousandths" = <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    4. "Three hundred and eight tenths" = <span class="ans-line"></span>
+  </div>
+
+  <h2>Part C – Decimals as Fractions</h2>
+  <div class="grid-4">
+    <div class="problem-block">5. 0.7 = <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span></div>
+    <div class="problem-block">6. 0.43 = <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span></div>
+    <div class="problem-block">7. 0.125 = <span class="frac"><span class="num"><span class="box-blank"></span></span><span class="den"><span class="box-blank"></span></span></span></div>
+    <div class="problem-block">8. <span class="frac"><span class="num">9</span><span class="den">100</span></span> = <span class="box-blank"></span></div>
+  </div>
+
+  <h2>Part D – Compare &amp; Order Decimals</h2>
+  <p class="hint">Line up the decimal points! Compare digit by digit from left to right.</p>
+  <div class="grid-2">
+    <div class="problem-block">9. 0.6 <span class="box-blank"></span> 0.60 <span class="box-blank"></span> 0.600</div>
+    <div class="problem-block">10. 3.45 <span class="box-blank"></span> 3.450 <span class="box-blank"></span> 3.405</div>
+    <div class="problem-block">
+      11. Order from least to greatest:<br>
+      0.8, &nbsp; 0.08, &nbsp; 0.80, &nbsp; 0.081<br>
+      <span class="ans-line-long"></span>
+    </div>
+    <div class="problem-block">
+      12. Order from greatest to least:<br>
+      4.07, &nbsp; 4.7, &nbsp; 4.071, &nbsp; 4.70<br>
+      <span class="ans-line-long"></span>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Decimal Detectives</h3>
+    <p>A. I am a decimal between 0.5 and 0.6. My hundredths digit is 3 more than my tenths digit. What could I be? (find two possibilities)</p>
+    <span class="ans-line-long"></span>
+    <p>B. Write three decimals between 2.3 and 2.4. None of them can be 2.35.</p>
+    <span class="ans-line-long"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 4 Day 1</span>
+    <span>Decimal Place Value</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 4 · DAY 2 · Rounding &amp; Comparing Decimals        -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W4<br>D2</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 4 · Day 2 &nbsp;|&nbsp; Rounding Decimals &amp; Decimal Number Lines</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">ROUNDING DECIMALS</span>
+
+  <div class="intro-box">
+    <strong>Rounding decimals — same rule as whole numbers:</strong><br>
+    Look at the digit ONE place to the RIGHT of where you're rounding.<br>
+    0–4 → round down, &nbsp; 5–9 → round up.<br>
+    Round 4.376 to the nearest tenth: look at hundredths digit (7 ≥ 5) → round up → <strong>4.4</strong><br>
+    Round 4.376 to the nearest hundredth: look at thousandths digit (6 ≥ 5) → round up → <strong>4.38</strong>
+  </div>
+
+  <h2>Part A – Round the Decimals</h2>
+  <table style="width:100%">
+    <tr><th>Number</th><th>Nearest whole</th><th>Nearest tenth</th><th>Nearest hundredth</th></tr>
+    <tr><td>6.382</td><td></td><td></td><td></td></tr>
+    <tr><td>0.547</td><td></td><td></td><td></td></tr>
+    <tr><td>14.905</td><td></td><td></td><td></td></tr>
+    <tr><td>2.999</td><td></td><td></td><td></td></tr>
+    <tr><td>0.0047</td><td></td><td></td><td></td></tr>
+  </table>
+
+  <h2>Part B – Number Line: Locate the Decimal</h2>
+  <div class="problem-block">
+    1. Mark and label 0.3, 0.7, and 0.15 on the number line below.
+    <svg width="480" height="55" style="display:block;margin:8px 0;">
+      <line x1="20" y1="30" x2="460" y2="30" stroke="#333" stroke-width="2"/>
+      <polygon points="460,25 470,30 460,35" fill="#333"/>
+      <!-- 0 to 1, marks at each 0.1 -->
+      <line x1="20" y1="23" x2="20" y2="37" stroke="#333" stroke-width="2"/>
+      <text x="15" y="50" font-size="11">0</text>
+      <line x1="64" y1="26" x2="64" y2="34" stroke="#555" stroke-width="1"/>
+      <text x="59" y="50" font-size="10">0.1</text>
+      <line x1="108" y1="26" x2="108" y2="34" stroke="#555" stroke-width="1"/>
+      <text x="103" y="50" font-size="10">0.2</text>
+      <line x1="152" y1="26" x2="152" y2="34" stroke="#555" stroke-width="1"/>
+      <text x="147" y="50" font-size="10">0.3</text>
+      <line x1="196" y1="26" x2="196" y2="34" stroke="#555" stroke-width="1"/>
+      <text x="191" y="50" font-size="10">0.4</text>
+      <line x1="240" y1="23" x2="240" y2="37" stroke="#333" stroke-width="2"/>
+      <text x="235" y="50" font-size="10">0.5</text>
+      <line x1="284" y1="26" x2="284" y2="34" stroke="#555" stroke-width="1"/>
+      <text x="279" y="50" font-size="10">0.6</text>
+      <line x1="328" y1="26" x2="328" y2="34" stroke="#555" stroke-width="1"/>
+      <text x="323" y="50" font-size="10">0.7</text>
+      <line x1="372" y1="26" x2="372" y2="34" stroke="#555" stroke-width="1"/>
+      <text x="367" y="50" font-size="10">0.8</text>
+      <line x1="416" y1="26" x2="416" y2="34" stroke="#555" stroke-width="1"/>
+      <text x="411" y="50" font-size="10">0.9</text>
+      <line x1="458" y1="23" x2="458" y2="37" stroke="#333" stroke-width="2"/>
+      <text x="454" y="50" font-size="10">1</text>
+    </svg>
+  </div>
+  <div class="problem-block">
+    2. What decimal is exactly halfway between 0.4 and 0.5? <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    3. What decimal is exactly halfway between 3.6 and 3.7? <span class="ans-line"></span>
+  </div>
+
+  <h2>Part C – Real-World Rounding</h2>
+  <div class="problem-block">
+    4. A bag of chips weighs 8.637 oz. Round to the nearest tenth: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    5. Gas in Peoria costs $3.879 per gallon. A news report rounds to the nearest cent (hundredth). What does the report say? <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    6. A runner's time is 9.843 seconds. Rounded to the nearest tenth, was it faster or slower than 9.9 seconds? <span class="ans-line-long"></span>
+  </div>
+
+  <h2>Part D – Cumulative Sprint</h2>
+  <div class="grid-3">
+    <div class="problem-block">7. 2,047,300 rounded to nearest million: <span class="ans-line"></span></div>
+    <div class="problem-block">8. GCF(40, 56) = <span class="ans-line"></span></div>
+    <div class="problem-block">9. <span class="frac"><span class="num">5</span><span class="den">6</span></span> + <span class="frac"><span class="num">1</span><span class="den">4</span></span> = <span class="ans-line"></span></div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Decimal Round-Trip</h3>
+    <p>A number rounds to 4.6 when rounded to the nearest tenth. What is the largest possible value of the number (to the thousandths place)? What is the smallest?</p>
+    Largest: <span class="ans-line"></span> &nbsp; Smallest: <span class="ans-line"></span>
+    <div class="work-box-sm">Explain your thinking:</div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 4 Day 2</span>
+    <span>Rounding Decimals</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 4 · DAY 3 · Adding &amp; Subtracting Decimals        -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W4<br>D3</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 4 · Day 3 &nbsp;|&nbsp; Adding &amp; Subtracting Decimals</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">DECIMAL OPERATIONS</span>
+
+  <div class="intro-box">
+    <strong>The golden rule: LINE UP THE DECIMAL POINTS!</strong><br>
+    Then add zeros to make the same number of decimal places. Carry and borrow just like whole numbers.<br>
+    Example: 12.4 + 3.067<br>
+    &nbsp;&nbsp; 12.400<br>
+    &nbsp;+  3.067<br>
+    &nbsp;&nbsp; 15.467 &nbsp; ← decimal point stays in same column!
+  </div>
+
+  <h2>Part A – Set It Up &amp; Solve</h2>
+  <p class="hint">Rewrite vertically with decimal points aligned, add zeros where needed.</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. 4.3 + 2.85 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      2. 13.7 + 0.048 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      3. 8.4 − 3.27 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      4. 10 − 4.375 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      5. 6.003 + 14.97 + 0.8 =<br>
+      <div class="work-box"></div>
+    </div>
+    <div class="problem-block">
+      6. 25.06 − 18.4 =<br>
+      <div class="work-box"></div>
+    </div>
+  </div>
+
+  <h2>Part B – Error Hunt</h2>
+  <div class="problem-block">
+    7. A student says: 3.4 + 0.06 = 3.46? &nbsp; Is this right? Circle: YES / NO<br>
+    If wrong, what did they do wrong? <span class="ans-line-long"></span><br>
+    Correct answer: <span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    8. A student says: 5 − 1.2 = 4.2? &nbsp; Is this right? Circle: YES / NO<br>
+    Correct answer: <span class="ans-line"></span>
+  </div>
+
+  <h2>Part C – Word Problems</h2>
+  <div class="problem-block">
+    9. At the Peoria farmer's market: tomatoes cost $2.49/lb, apples cost $1.75/lb, and peppers cost $3.08/lb. If you buy 1 lb of each, what is the total cost?
+    <div class="work-box-sm"></div>
+    Total: $<span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    10. A trail is 8.5 km long. Mei hiked 3.75 km before lunch and 2.8 km after lunch. How much trail is left?
+    <div class="work-box-sm"></div>
+    Remaining: <span class="ans-line"></span> km
+  </div>
+  <div class="problem-block">
+    11. Three siblings' heights: Alex is 4.83 feet, Bella is 4.6 feet, Carlos is 5.17 feet. How much taller is Carlos than Alex? What is the combined height of all three?
+    <div class="work-box"></div>
+    Difference: <span class="ans-line"></span> &nbsp; Combined: <span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Magic Decimal Square</h3>
+    <p>Fill in the blank so that every row, column, and diagonal adds to <strong>1.5</strong>:</p>
+    <table style="width:180px;">
+      <tr><td>0.7</td><td></td><td>0.3</td></tr>
+      <tr><td></td><td>0.5</td><td></td></tr>
+      <tr><td>0.2</td><td></td><td>0.8</td></tr>
+    </table>
+    <div class="work-box-sm">Work:</div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 4 Day 3</span>
+    <span>Adding &amp; Subtracting Decimals</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 4 · DAY 4 · Multiplying Decimals                     -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W4<br>D4</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 4 · Day 4 &nbsp;|&nbsp; Multiplying Decimals</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">MULTIPLYING DECIMALS</span>
+
+  <div class="intro-box">
+    <strong>How to multiply decimals:</strong><br>
+    Step 1: Ignore the decimal points and multiply as whole numbers.<br>
+    Step 2: Count total decimal places in BOTH numbers.<br>
+    Step 3: Place the decimal point that many places from the RIGHT in your answer.<br>
+    Example: 3.4 × 0.7 → 34 × 7 = 238 → 2 decimal places total → <strong>2.38</strong><br>
+    <strong>Sense check:</strong> 3.4 × 0.7 ≈ 3 × 0.7 = 2.1. Answer 2.38 is close. ✓
+  </div>
+
+  <h2>Part A – Multiply (Count the decimal places!)</h2>
+  <div class="grid-3">
+    <div class="problem-block">
+      1. 0.4 × 0.3 =<br>
+      Whole: 4 × 3 = ___<br>
+      Decimal places: ___<br>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      2. 1.2 × 0.5 =<br>
+      Whole: 12 × 5 = ___<br>
+      Decimal places: ___<br>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      3. 2.4 × 1.3 =<br>
+      Whole: 24 × 13 = ___<br>
+      Decimal places: ___<br>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      4. 0.08 × 0.7 =<br>
+      <div class="work-box-sm"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      5. 3.14 × 2.5 =<br>
+      <div class="work-box-sm"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      6. 0.25 × 0.04 =<br>
+      <div class="work-box-sm"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Decimal × Whole Number</h2>
+  <div class="grid-3">
+    <div class="problem-block">7. 3.6 × 7 = <span class="ans-line"></span></div>
+    <div class="problem-block">8. 12.4 × 5 = <span class="ans-line"></span></div>
+    <div class="problem-block">9. 0.045 × 8 = <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Part C – Powers of 10 Shortcut</h2>
+  <p class="hint">Multiplying by 10, 100, 1000? Move the decimal RIGHT. By 0.1, 0.01? Move it LEFT.</p>
+  <div class="grid-3">
+    <div class="problem-block">10. 4.7 × 10 = <span class="ans-line"></span></div>
+    <div class="problem-block">11. 4.7 × 100 = <span class="ans-line"></span></div>
+    <div class="problem-block">12. 4.7 × 0.1 = <span class="ans-line"></span></div>
+    <div class="problem-block">13. 4.7 × 1,000 = <span class="ans-line"></span></div>
+    <div class="problem-block">14. 4.7 × 0.01 = <span class="ans-line"></span></div>
+    <div class="problem-block">15. 0.006 × 10 = <span class="ans-line"></span></div>
+  </div>
+
+  <h2>Part D – Word Problems</h2>
+  <div class="problem-block">
+    16. A car gets 32.4 miles per gallon. The gas tank holds 12.5 gallons. How far can the car travel on a full tank?
+    <div class="work-box"></div>
+    Answer: <span class="ans-line"></span> miles
+  </div>
+  <div class="problem-block">
+    17. Fabric costs $4.75 per yard. You buy 3.5 yards. How much do you pay?
+    <div class="work-box-sm"></div>
+    Answer: $<span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Decimal Patterns</h3>
+    <p>Complete the pattern and explain the rule:</p>
+    <p>1,000 × 0.003 = 3 &nbsp;&nbsp; 100 × 0.003 = ___ &nbsp;&nbsp; 10 × 0.003 = ___ &nbsp;&nbsp; 1 × 0.003 = ___ &nbsp;&nbsp; 0.1 × 0.003 = ___</p>
+    Rule: <span class="ans-line-long"></span>
+    <p>Use the pattern to find: 0.01 × 0.003 = <span class="ans-line"></span></p>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 4 Day 4</span>
+    <span>Multiplying Decimals</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 4 · DAY 5 · Dividing Decimals + Full Review          -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W4<br>D5</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 4 · Day 5 &nbsp;|&nbsp; Dividing Decimals &amp; Cumulative Review</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">DIVIDING DECIMALS</span>
+
+  <div class="intro-box">
+    <strong>Dividing a decimal by a whole number:</strong> Place decimal in quotient directly above the decimal in the dividend. Divide as usual.<br>
+    &nbsp;&nbsp; 6.48 ÷ 4 = 1.62 &nbsp; (think: 648 ÷ 4 = 162, then place decimal: 1.62)<br>
+    <strong>Dividing by a decimal:</strong> Multiply BOTH numbers by 10/100 to make divisor a whole number.<br>
+    &nbsp;&nbsp; 3.6 ÷ 0.4 = 36 ÷ 4 = 9 &nbsp; (multiply both by 10)
+  </div>
+
+  <h2>Part A – Decimal ÷ Whole Number</h2>
+  <div class="grid-3">
+    <div class="problem-block">
+      1. 8.4 ÷ 7 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      2. 14.4 ÷ 6 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      3. 0.96 ÷ 8 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      4. 32.5 ÷ 5 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      5. 7.35 ÷ 3 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      6. 4.56 ÷ 12 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+  </div>
+
+  <h2>Part B – Decimal ÷ Decimal</h2>
+  <p class="hint">Multiply both numbers to eliminate the decimal in the divisor first.</p>
+  <div class="grid-3">
+    <div class="problem-block">
+      7. 2.4 ÷ 0.6 =<br>
+      → __ ÷ __ = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      8. 3.5 ÷ 0.7 =<br>
+      → __ ÷ __ = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      9. 0.36 ÷ 0.04 =<br>
+      → __ ÷ __ = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part C – Word Problems</h2>
+  <div class="problem-block">
+    10. You and 4 friends split a restaurant bill of $48.75 equally. How much does each person pay?
+    <div class="work-box-sm"></div>
+    Each pays: $<span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    11. A rope is 13.5 meters long. It is cut into pieces of 0.9 meters each. How many pieces are there?
+    <div class="work-box-sm"></div>
+    Answer: <span class="ans-line"></span> pieces
+  </div>
+
+  <h2>Part D – Cumulative Review: Weeks 1–4</h2>
+  <div class="grid-2">
+    <div class="problem-block">12. 5,000,000 − 2,738,416 = <div class="work-box-sm"></div></div>
+    <div class="problem-block">13. 347 × 82 = <div class="work-box-sm"></div></div>
+    <div class="problem-block">14. 4<span class="frac"><span class="num">1</span><span class="den">3</span></span> − 1<span class="frac"><span class="num">5</span><span class="den">6</span></span> = <div class="work-box-sm"></div></div>
+    <div class="problem-block">15. 4.83 + 12.6 + 0.097 = <div class="work-box-sm"></div></div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Shopping Smarts</h3>
+    <p>At a store:</p>
+    <p>• 3 packs of gum: $0.89 each &nbsp; • 2 water bottles: $1.45 each &nbsp; • 1 notebook: $3.99</p>
+    <p>You pay with $10.00. How much change do you get? If you split the cost 3 ways, how much per person?</p>
+    <div class="work-box"></div>
+    Change: $<span class="ans-line"></span> &nbsp; Per person: $<span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 4 Day 5</span>
+    <span>Dividing Decimals</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 4 QUIZ                                                  -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W4<br>QUIZ</div>
+  <h1>Week 4 Quiz – Decimals</h1>
+  <div class="subtitle">Topics: Place Value · Rounding · Add/Subtract · Multiply · Divide</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <div class="score-box">Score: _______ / 20</div>
+
+  <h2>Section 1 – Place Value &amp; Rounding (5 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">1. What is the value of 4 in 12.3<u>4</u>6? <span class="ans-line"></span></div>
+    <div class="problem-block">2. Write 0.305 as a fraction. <span class="ans-line"></span></div>
+    <div class="problem-block">3. Order: 0.5, 0.05, 0.51, 0.505 (least to greatest)<br><span class="ans-line-long"></span></div>
+    <div class="problem-block">4. Round 7.4852 to nearest hundredth: <span class="ans-line"></span></div>
+  </div>
+  <div class="problem-block">
+    5. <span class="star">(1 pt)</span> Write in standard form: "fifty-two and seven hundredths" = <span class="ans-line"></span>
+  </div>
+
+  <h2>Section 2 – Add &amp; Subtract (5 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      6. 8.4 + 3.076 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      7. 20 − 7.38 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+  </div>
+  <div class="problem-block">
+    8. <span class="star">(3 pts)</span> Mei ran 3.75 km on Monday, 4.2 km on Wednesday, and 2.875 km on Friday. How many total km did she run? Round your answer to the nearest tenth.
+    <div class="work-box"></div>
+    Total: <span class="ans-line"></span> km &nbsp; Rounded: <span class="ans-line"></span> km
+  </div>
+
+  <h2>Section 3 – Multiply &amp; Divide (10 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      9. 2.4 × 3.5 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      10. 0.07 × 0.9 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      11. 6.48 ÷ 4 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      12. 4.5 ÷ 0.9 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+  </div>
+  <div class="problem-block">
+    13. <span class="star">(2 pts)</span> A bag of trail mix weighs 1.35 kg. There are 6 bags. What is the total weight?
+    <div class="work-box-sm"></div>
+    Answer: <span class="ans-line"></span> kg
+  </div>
+  <div class="problem-block">
+    14. <span class="star">(4 pts)</span> You earn $12.50 per hour. You work 8 hours on Saturday and 6.5 hours on Sunday. After spending $24.75 on lunch both days, how much money do you have left?
+    <div class="work-box"></div>
+    Answer: $<span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 4 Quiz</span>
+    <span>Decimals</span>
+  </div>
+</div>
+
+</body>
+</html>

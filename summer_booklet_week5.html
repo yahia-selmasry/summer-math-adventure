@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Summer Math Booklet – Week 5</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+  h1 { font-size: 22px; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #bf360c; margin: 14px 0 6px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; background: #bf360c; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+  .intro-box { background: #fbe9e7; border-left: 4px solid #bf360c; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+  .problem-block { margin-bottom: 14px; }
+  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+  .box-blank { border: 1.5px solid #333; min-height: 28px; min-width: 28px; display: inline-block; margin: 2px; padding: 0 4px; vertical-align: middle; }
+  .work-box { border: 1.5px dashed #aaa; min-height: 80px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .work-box-sm { border: 1.5px dashed #aaa; min-height: 50px; width: 100%; margin: 4px 0; border-radius: 4px; padding: 4px; }
+  .star { color: #bf360c; font-weight: bold; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .challenge-box h3 { color: #b06000; font-size: 13px; }
+  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge { float: right; background: #bf360c; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .score-box { border: 2px solid #1a3a6b; border-radius: 6px; padding: 8px 16px; display: inline-block; margin-bottom: 10px; font-size: 12px; }
+  .hint { font-size: 10px; color: #555; font-style: italic; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 13px; line-height: 1.1; }
+  .frac .num { border-bottom: 1.5px solid #333; padding: 0 3px; }
+  .frac .den { padding: 0 3px; }
+  table { border-collapse: collapse; margin: 8px 0; font-size: 12px; }
+  td, th { border: 1px solid #888; padding: 5px 8px; text-align: center; }
+  th { background: #bf360c; color: #fff; }
+  svg { display: block; }
+  .angle-label { font-family: Georgia, serif; font-size: 12px; }
+  /* Graph paper grid */
+  .graph-area { display: inline-block; position: relative; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!--  WEEK 5 · DAY 1 · Angles – Measuring & Drawing             -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W5<br>D1</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 5 · Day 1 &nbsp;|&nbsp; Angles: Types, Measuring &amp; Drawing</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">GEOMETRY: ANGLES</span>
+
+  <div class="intro-box">
+    <strong>Angle Types:</strong> Acute &lt; 90° &nbsp;|&nbsp; Right = 90° &nbsp;|&nbsp; Obtuse: 90°–180° &nbsp;|&nbsp; Straight = 180° &nbsp;|&nbsp; Reflex: 180°–360°<br>
+    <strong>Using a protractor:</strong> Place center hole on vertex. Line up one ray on 0°. Read the scale where the other ray crosses.<br>
+    <strong>Remember:</strong> Acute → use the SMALLER number; Obtuse → use the LARGER number on the protractor.
+  </div>
+
+  <h2>Part A – Name That Angle</h2>
+  <p class="hint">Identify each angle type and estimate the measure. Then use your protractor to measure exactly.</p>
+
+  <!-- Angle 1: ~40° acute -->
+  <div class="grid-2">
+    <div class="problem-block">
+      <strong>Angle 1</strong><br>
+      <svg width="180" height="120">
+        <line x1="20" y1="100" x2="170" y2="100" stroke="#333" stroke-width="2"/>
+        <line x1="20" y1="100" x2="90" y2="20" stroke="#333" stroke-width="2"/>
+        <path d="M 50 100 A 30 30 0 0 1 33 76" fill="none" stroke="#bf360c" stroke-width="1.5"/>
+        <text x="60" y="90" font-size="11" fill="#bf360c">?°</text>
+        <text x="10" y="115" font-size="10" fill="#555">vertex</text>
+        <circle cx="20" cy="100" r="3" fill="#333"/>
+      </svg>
+      Type: <span class="ans-line"></span>
+      Measured: <span class="ans-line"></span> °
+    </div>
+    <!-- Angle 2: ~115° obtuse -->
+    <div class="problem-block">
+      <strong>Angle 2</strong><br>
+      <svg width="180" height="120">
+        <line x1="160" y1="100" x2="10" y2="100" stroke="#333" stroke-width="2"/>
+        <line x1="160" y1="100" x2="60" y2="20" stroke="#333" stroke-width="2"/>
+        <path d="M 130 100 A 30 30 0 0 0 145 72" fill="none" stroke="#bf360c" stroke-width="1.5"/>
+        <text x="110" y="90" font-size="11" fill="#bf360c">?°</text>
+        <circle cx="160" cy="100" r="3" fill="#333"/>
+      </svg>
+      Type: <span class="ans-line"></span>
+      Measured: <span class="ans-line"></span> °
+    </div>
+    <!-- Angle 3: ~65° acute -->
+    <div class="problem-block">
+      <strong>Angle 3</strong><br>
+      <svg width="180" height="120">
+        <line x1="20" y1="100" x2="170" y2="100" stroke="#333" stroke-width="2"/>
+        <line x1="20" y1="100" x2="70" y2="15" stroke="#333" stroke-width="2"/>
+        <path d="M 55 100 A 35 35 0 0 1 32 67" fill="none" stroke="#bf360c" stroke-width="1.5"/>
+        <text x="60" y="88" font-size="11" fill="#bf360c">?°</text>
+        <circle cx="20" cy="100" r="3" fill="#333"/>
+      </svg>
+      Type: <span class="ans-line"></span>
+      Measured: <span class="ans-line"></span> °
+    </div>
+    <!-- Angle 4: ~145° obtuse -->
+    <div class="problem-block">
+      <strong>Angle 4</strong><br>
+      <svg width="180" height="120">
+        <line x1="20" y1="80" x2="170" y2="80" stroke="#333" stroke-width="2"/>
+        <line x1="20" y1="80" x2="150" y2="20" stroke="#333" stroke-width="2"/>
+        <path d="M 55 80 A 35 35 0 0 1 42 46" fill="none" stroke="#bf360c" stroke-width="1.5"/>
+        <text x="62" y="74" font-size="11" fill="#bf360c">?°</text>
+        <circle cx="20" cy="80" r="3" fill="#333"/>
+      </svg>
+      Type: <span class="ans-line"></span>
+      Measured: <span class="ans-line"></span> °
+    </div>
+  </div>
+
+  <h2>Part B – Draw the Angle</h2>
+  <p class="hint">Use your protractor and the starting ray given. Draw the second ray to form the angle.</p>
+  <div class="grid-3">
+    <div class="problem-block">
+      Draw a <strong>35°</strong> angle.<br>
+      <svg width="150" height="100">
+        <line x1="10" y1="80" x2="140" y2="80" stroke="#333" stroke-width="2"/>
+        <circle cx="10" cy="80" r="3" fill="#333"/>
+        <text x="6" y="96" font-size="10">vertex</text>
+      </svg>
+    </div>
+    <div class="problem-block">
+      Draw a <strong>110°</strong> angle.<br>
+      <svg width="150" height="100">
+        <line x1="10" y1="80" x2="140" y2="80" stroke="#333" stroke-width="2"/>
+        <circle cx="10" cy="80" r="3" fill="#333"/>
+        <text x="6" y="96" font-size="10">vertex</text>
+      </svg>
+    </div>
+    <div class="problem-block">
+      Draw a <strong>75°</strong> angle.<br>
+      <svg width="150" height="100">
+        <line x1="10" y1="80" x2="140" y2="80" stroke="#333" stroke-width="2"/>
+        <circle cx="10" cy="80" r="3" fill="#333"/>
+        <text x="6" y="96" font-size="10">vertex</text>
+      </svg>
+    </div>
+  </div>
+
+  <h2>Part C – Angle Arithmetic</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. Two angles together make a right angle (90°). One angle is 37°. What is the other?<br>
+      <span class="ans-line"></span> °
+    </div>
+    <div class="problem-block">
+      2. Two angles together make a straight line (180°). One is 124°. What is the other?<br>
+      <span class="ans-line"></span> °
+    </div>
+    <div class="problem-block">
+      3. Angles around a point sum to 360°. Three angles are 90°, 115°, and 82°. What is the fourth?<br>
+      <span class="ans-line"></span> °
+    </div>
+    <div class="problem-block">
+      4. An angle is 3 times another. Together they make 180°. Find both angles.<br>
+      Angles: <span class="ans-line"></span> ° and <span class="ans-line"></span> °
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Clock Angles</h3>
+    <p>A clock shows 3:00. The minute hand points at 12 and the hour hand at 3. What angle is formed?<br>
+    At 6:00, what angle? &nbsp; At 2:00, what angle? (Hint: 360° ÷ 12 hours = 30° per hour mark)</p>
+    3:00 → <span class="ans-line"></span>° &nbsp; 6:00 → <span class="ans-line"></span>° &nbsp; 2:00 → <span class="ans-line"></span>°
+    <div class="work-box-sm"></div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 5 Day 1</span>
+    <span>Angles</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 5 · DAY 2 · Lines, Triangles & Quadrilaterals        -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W5<br>D2</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 5 · Day 2 &nbsp;|&nbsp; Lines, Triangles &amp; Quadrilaterals</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">GEOMETRY: SHAPES</span>
+
+  <div class="intro-box">
+    <strong>Line types:</strong> Line (infinite both ways), Ray (one endpoint), Line Segment (two endpoints)<br>
+    Parallel lines never meet. Perpendicular lines meet at 90°.<br>
+    <strong>Triangle angles always add to 180°. </strong>Quadrilateral angles always add to <strong>360°.</strong><br>
+    Triangle types: Equilateral (3 equal), Isosceles (2 equal), Scalene (none equal), Right (one 90° angle)
+  </div>
+
+  <h2>Part A – Classify the Triangle</h2>
+  <p class="hint">Use your protractor to measure the angles. Then classify by angles AND by sides.</p>
+  <div class="grid-3">
+    <!-- Equilateral-ish -->
+    <div class="problem-block">
+      <strong>Triangle 1</strong>
+      <svg width="150" height="110">
+        <polygon points="75,10 10,100 140,100" fill="none" stroke="#333" stroke-width="2"/>
+        <text x="65" y="8" font-size="10">A</text>
+        <text x="2" y="112" font-size="10">B</text>
+        <text x="136" y="112" font-size="10">C</text>
+        <!-- tick marks suggesting equal sides -->
+        <line x1="39" y1="53" x2="43" y2="57" stroke="#333" stroke-width="1.5"/>
+        <line x1="108" y1="53" x2="112" y2="57" stroke="#333" stroke-width="1.5"/>
+        <line x1="72" y1="101" x2="76" y2="101" stroke="#333" stroke-width="1.5"/>
+        <text x="28" y="80" font-size="10" fill="#bf360c">?°</text>
+        <text x="80" y="95" font-size="10" fill="#bf360c">?°</text>
+        <text x="108" y="80" font-size="10" fill="#bf360c">?°</text>
+      </svg>
+      Angle A: <span class="ans-line"></span>°<br>
+      Angle B: <span class="ans-line"></span>°<br>
+      Angle C: <span class="ans-line"></span>°<br>
+      Type (sides): <span class="ans-line"></span><br>
+      Type (angles): <span class="ans-line"></span>
+    </div>
+    <!-- Right isosceles -->
+    <div class="problem-block">
+      <strong>Triangle 2</strong>
+      <svg width="150" height="110">
+        <polygon points="10,100 10,10 140,100" fill="none" stroke="#333" stroke-width="2"/>
+        <rect x="10" y="90" width="10" height="10" fill="none" stroke="#333" stroke-width="1.5"/>
+        <text x="2" y="8" font-size="10">A</text>
+        <text x="2" y="112" font-size="10">B</text>
+        <text x="136" y="112" font-size="10">C</text>
+        <text x="18" y="55" font-size="10" fill="#bf360c">?°</text>
+        <text x="18" y="95" font-size="10" fill="#bf360c">90°</text>
+        <text x="90" y="92" font-size="10" fill="#bf360c">?°</text>
+      </svg>
+      Angle A: <span class="ans-line"></span>°<br>
+      Angle B: 90°<br>
+      Angle C: <span class="ans-line"></span>°<br>
+      Type (sides): <span class="ans-line"></span><br>
+      Type (angles): <span class="ans-line"></span>
+    </div>
+    <!-- Scalene obtuse -->
+    <div class="problem-block">
+      <strong>Triangle 3</strong>
+      <svg width="150" height="110">
+        <polygon points="10,100 130,100 30,30" fill="none" stroke="#333" stroke-width="2"/>
+        <text x="2" y="112" font-size="10">A</text>
+        <text x="126" y="112" font-size="10">B</text>
+        <text x="24" y="24" font-size="10">C</text>
+        <text x="20" y="92" font-size="10" fill="#bf360c">?°</text>
+        <text x="95" y="95" font-size="10" fill="#bf360c">?°</text>
+        <text x="38" y="44" font-size="10" fill="#bf360c">?°</text>
+      </svg>
+      Angle A: <span class="ans-line"></span>°<br>
+      Angle B: <span class="ans-line"></span>°<br>
+      Angle C: <span class="ans-line"></span>°<br>
+      Type (sides): <span class="ans-line"></span><br>
+      Type (angles): <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Find the Missing Angle</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. Triangle: angles are 48°, 75°, and ?°<br>
+      ? = <span class="ans-line"></span> °
+    </div>
+    <div class="problem-block">
+      2. Triangle: angles are 90°, 36°, and ?°<br>
+      ? = <span class="ans-line"></span> °
+    </div>
+    <div class="problem-block">
+      3. Quadrilateral: angles are 85°, 110°, 95°, and ?°<br>
+      ? = <span class="ans-line"></span> °
+    </div>
+    <div class="problem-block">
+      4. Parallelogram: one angle is 68°. Find all 4 angles.<br>
+      (Hint: opposite angles are equal; adjacent angles add to 180°)<br>
+      Angles: <span class="ans-line-long"></span>
+    </div>
+  </div>
+
+  <h2>Part C – Quadrilateral Sort</h2>
+  <p class="hint">Write the name of the quadrilateral that matches each description.</p>
+  <table style="width:100%">
+    <tr><th>Description</th><th>Name</th></tr>
+    <tr><td>4 equal sides, 4 right angles</td><td></td></tr>
+    <tr><td>Opposite sides equal and parallel, 4 right angles</td><td></td></tr>
+    <tr><td>4 equal sides, opposite angles equal (no right angles)</td><td></td></tr>
+    <tr><td>One pair of parallel sides</td><td></td></tr>
+    <tr><td>All rectangles are also this type of shape</td><td></td></tr>
+  </table>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Angle Chase</h3>
+    <p>In the figure below, line AB is straight. Find angles x, y, and z. Show your reasoning.</p>
+    <svg width="300" height="120">
+      <line x1="10" y1="60" x2="290" y2="60" stroke="#333" stroke-width="2"/>
+      <line x1="100" y1="60" x2="180" y2="10" stroke="#333" stroke-width="2"/>
+      <line x1="100" y1="60" x2="160" y2="110" stroke="#333" stroke-width="2"/>
+      <text x="10" y="55" font-size="11">A</text>
+      <text x="280" y="55" font-size="11">B</text>
+      <text x="175" y="8" font-size="11">C</text>
+      <text x="155" y="118" font-size="11">D</text>
+      <text x="60" y="52" font-size="11" fill="#bf360c">42°</text>
+      <text x="112" y="52" font-size="11" fill="#1a3a6b">x</text>
+      <text x="140" y="72" font-size="11" fill="#2e7d32">y</text>
+      <text x="106" y="80" font-size="11" fill="#6a0080">z</text>
+    </svg>
+    x = <span class="ans-line"></span>° &nbsp; y = <span class="ans-line"></span>° &nbsp; z = <span class="ans-line"></span>°
+    <div class="work-box-sm">Reasoning:</div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 5 Day 2</span>
+    <span>Lines, Triangles &amp; Quadrilaterals</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 5 · DAY 3 · Area & Perimeter                         -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W5<br>D3</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 5 · Day 3 &nbsp;|&nbsp; Area &amp; Perimeter of 2D Shapes</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">AREA &amp; PERIMETER</span>
+
+  <div class="intro-box">
+    <strong>Perimeter</strong> = total distance around the outside (add all sides). Units: cm, m, ft, in.<br>
+    <strong>Area</strong> = space inside a shape. Units: cm², m², ft², in².<br>
+    • Rectangle: A = length × width &nbsp; P = 2(l + w)<br>
+    • Triangle: A = <span class="frac" style="font-size:12px"><span class="num">1</span><span class="den">2</span></span> × base × height<br>
+    • Parallelogram: A = base × height &nbsp; (height is perpendicular distance, NOT the slanted side!)
+  </div>
+
+  <h2>Part A – Find Area &amp; Perimeter</h2>
+  <div class="grid-2">
+    <!-- Rectangle -->
+    <div class="problem-block">
+      <strong>Shape 1 – Rectangle</strong>
+      <svg width="200" height="100">
+        <rect x="20" y="20" width="160" height="70" fill="#e3f2fd" stroke="#333" stroke-width="2"/>
+        <text x="90" y="62" font-size="12" text-anchor="middle">14.5 cm</text>
+        <text x="10" y="58" font-size="12" text-anchor="middle" transform="rotate(-90,10,58)">8 cm</text>
+      </svg>
+      Perimeter = <span class="ans-line"></span> cm<br>
+      Area = <span class="ans-line"></span> cm²
+    </div>
+    <!-- Triangle -->
+    <div class="problem-block">
+      <strong>Shape 2 – Triangle</strong>
+      <svg width="200" height="110">
+        <polygon points="20,100 180,100 100,20" fill="#e8f5e9" stroke="#333" stroke-width="2"/>
+        <line x1="100" y1="20" x2="100" y2="100" stroke="#333" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="90" y="110" font-size="11">base = 16 cm</text>
+        <text x="103" y="65" font-size="11">h = 9 cm</text>
+      </svg>
+      Area = <span class="ans-line"></span> cm²
+    </div>
+    <!-- Square -->
+    <div class="problem-block">
+      <strong>Shape 3 – Square</strong>
+      <svg width="140" height="110">
+        <rect x="20" y="15" width="100" height="100" fill="#fff3e0" stroke="#333" stroke-width="2"/>
+        <text x="60" y="72" font-size="11" text-anchor="middle">7.5 m</text>
+      </svg>
+      Perimeter = <span class="ans-line"></span> m<br>
+      Area = <span class="ans-line"></span> m²
+    </div>
+    <!-- Parallelogram -->
+    <div class="problem-block">
+      <strong>Shape 4 – Parallelogram</strong>
+      <svg width="200" height="110">
+        <polygon points="40,100 180,100 160,20 20,20" fill="#fce4ec" stroke="#333" stroke-width="2"/>
+        <line x1="40" y1="20" x2="40" y2="100" stroke="#333" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <rect x="40" y="90" width="10" height="10" fill="none" stroke="#333" stroke-width="1"/>
+        <text x="95" y="115" font-size="11" text-anchor="middle">base = 14 cm</text>
+        <text x="2" y="63" font-size="11">h = 7 cm</text>
+      </svg>
+      Area = <span class="ans-line"></span> cm²
+    </div>
+  </div>
+
+  <h2>Part B – Composite Shapes</h2>
+  <p class="hint">Break the shape into rectangles or triangles, find each area, then add.</p>
+  <div class="problem-block">
+    <strong>Find the area of the L-shaped figure:</strong>
+    <svg width="240" height="160">
+      <!-- L-shape: big rectangle minus small cut -->
+      <polygon points="20,20 160,20 160,80 90,80 90,140 20,140" fill="#e8eaf6" stroke="#333" stroke-width="2"/>
+      <!-- Dimension labels -->
+      <text x="85" y="14" font-size="11">10 ft</text>
+      <text x="162" y="55" font-size="11">4 ft</text>
+      <text x="85" y="115" font-size="11">4 ft</text>
+      <text x="0" y="85" font-size="11">8 ft</text>
+      <text x="42" y="150" font-size="11">5 ft</text>
+      <text x="163" y="90" font-size="11" fill="#555">(missing</text>
+      <text x="163" y="103" font-size="11" fill="#555">corner)</text>
+    </svg>
+    <div class="work-box">Break into rectangles. Label and solve:</div>
+    Area = <span class="ans-line"></span> ft²
+  </div>
+
+  <h2>Part C – Word Problems</h2>
+  <div class="problem-block">
+    5. A rectangular yard is 24.5 feet long and 18 feet wide. It costs $3.50 per square foot to install sod. How much does it cost to sod the entire yard?
+    <div class="work-box-sm"></div>
+    Area: <span class="ans-line"></span> ft² &nbsp; Cost: $<span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    6. A triangular garden has base 12 m and height 7.5 m. A fence costs $18 per meter. The three sides measure 12 m, 9 m, and 10.5 m. How much does the fence cost?
+    <div class="work-box-sm"></div>
+    Perimeter: <span class="ans-line"></span> m &nbsp; Fence cost: $<span class="ans-line"></span>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Same Area, Different Perimeter</h3>
+    <p>Draw TWO different rectangles that each have an area of 24 cm². Find the perimeter of each. Which has the smaller perimeter?</p>
+    <div class="grid-2">
+      <div>Rectangle 1: ___ × ___ = 24 &nbsp; P = ___</div>
+      <div>Rectangle 2: ___ × ___ = 24 &nbsp; P = ___</div>
+    </div>
+    Smaller perimeter: Rectangle <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 5 Day 3</span>
+    <span>Area &amp; Perimeter</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 5 · DAY 4 · Volume & Coordinate Plane                -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W5<br>D4</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 5 · Day 4 &nbsp;|&nbsp; Volume of Rectangular Prisms &amp; Coordinate Plane</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">VOLUME &amp; COORDINATES</span>
+
+  <div class="intro-box">
+    <strong>Volume</strong> = length × width × height. Units: cm³, m³, ft³, in³.<br>
+    Think of it as: (base area) × height, or count cubic unit cubes.<br>
+    <strong>Coordinate plane:</strong> (x, y) → x = right/left, y = up/down. Origin = (0,0).<br>
+    Quadrant I: (+, +) &nbsp; II: (−, +) &nbsp; III: (−, −) &nbsp; IV: (+, −)
+  </div>
+
+  <h2>Part A – Volume of Rectangular Prisms</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      <strong>Prism 1</strong>
+      <svg width="180" height="130">
+        <!-- Isometric box -->
+        <polygon points="30,90 110,90 150,60 70,60" fill="#b3e5fc" stroke="#333" stroke-width="1.5"/>
+        <polygon points="30,90 70,60 70,20 30,50" fill="#81d4fa" stroke="#333" stroke-width="1.5"/>
+        <polygon points="110,90 150,60 150,20 110,50" fill="#4fc3f7" stroke="#333" stroke-width="1.5"/>
+        <line x1="70" y1="60" x2="70" y2="20" stroke="#333" stroke-width="1.5"/>
+        <line x1="70" y1="20" x2="150" y2="20" stroke="#333" stroke-width="1.5"/>
+        <line x1="150" y1="20" x2="110" y2="50" stroke="#333" stroke-width="1.5"/>
+        <text x="80" y="85" font-size="11">6 cm</text>
+        <text x="115" y="78" font-size="11">4 cm</text>
+        <text x="155" y="45" font-size="11">5 cm</text>
+      </svg>
+      V = l × w × h = __ × __ × __ = <span class="ans-line"></span> cm³
+    </div>
+    <div class="problem-block">
+      <strong>Prism 2</strong>
+      <svg width="180" height="130">
+        <polygon points="20,95 120,95 155,65 55,65" fill="#c8e6c9" stroke="#333" stroke-width="1.5"/>
+        <polygon points="20,95 55,65 55,25 20,55" fill="#a5d6a7" stroke="#333" stroke-width="1.5"/>
+        <polygon points="120,95 155,65 155,25 120,55" fill="#81c784" stroke="#333" stroke-width="1.5"/>
+        <line x1="55" y1="65" x2="55" y2="25" stroke="#333" stroke-width="1.5"/>
+        <line x1="55" y1="25" x2="155" y2="25" stroke="#333" stroke-width="1.5"/>
+        <line x1="155" y1="25" x2="120" y2="55" stroke="#333" stroke-width="1.5"/>
+        <text x="68" y="87" font-size="11">8 ft</text>
+        <text x="124" y="84" font-size="11">3 ft</text>
+        <text x="158" y="48" font-size="11">7 ft</text>
+      </svg>
+      V = <span class="ans-line"></span> ft³
+    </div>
+  </div>
+
+  <div class="problem-block">
+    <strong>Word Problem:</strong> A fish tank is 24 inches long, 12 inches wide, and 18 inches tall. What is its volume?
+    <div class="work-box-sm"></div>
+    V = <span class="ans-line"></span> in³
+  </div>
+  <div class="problem-block">
+    <strong>Find the missing dimension:</strong> A box has volume 360 cm³. Its base is 12 cm × 6 cm. What is the height?
+    <div class="work-box-sm"></div>
+    Height = <span class="ans-line"></span> cm
+  </div>
+
+  <h2>Part B – Coordinate Plane</h2>
+  <p class="hint">Use the grid below. Label the x-axis and y-axis. Plot each point and label it.</p>
+  <div class="grid-2">
+    <div>
+      <!-- Coordinate grid -->
+      <svg width="220" height="220">
+        <!-- Grid lines -->
+        <defs>
+          <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#ddd" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="220" height="220" fill="url(#grid)"/>
+        <!-- Axes -->
+        <line x1="110" y1="10" x2="110" y2="210" stroke="#333" stroke-width="2"/>
+        <line x1="10" y1="110" x2="210" y2="110" stroke="#333" stroke-width="2"/>
+        <!-- Arrowheads -->
+        <polygon points="110,8 106,16 114,16" fill="#333"/>
+        <polygon points="212,110 204,106 204,114" fill="#333"/>
+        <!-- Tick marks & labels -->
+        <text x="112" y="108" font-size="9">0</text>
+        <!-- x axis labels -->
+        <text x="126" y="122" font-size="9">1</text>
+        <text x="146" y="122" font-size="9">2</text>
+        <text x="166" y="122" font-size="9">3</text>
+        <text x="186" y="122" font-size="9">4</text>
+        <text x="86" y="122" font-size="9">-1</text>
+        <text x="64" y="122" font-size="9">-2</text>
+        <text x="44" y="122" font-size="9">-3</text>
+        <text x="24" y="122" font-size="9">-4</text>
+        <!-- y axis labels -->
+        <text x="114" y="93" font-size="9">1</text>
+        <text x="114" y="73" font-size="9">2</text>
+        <text x="114" y="53" font-size="9">3</text>
+        <text x="114" y="33" font-size="9">4</text>
+        <text x="114" y="130" font-size="9">-1</text>
+        <text x="114" y="150" font-size="9">-2</text>
+        <text x="114" y="170" font-size="9">-3</text>
+        <text x="114" y="190" font-size="9">-4</text>
+        <!-- Axis labels -->
+        <text x="205" y="107" font-size="10">x</text>
+        <text x="113" y="6" font-size="10">y</text>
+      </svg>
+    </div>
+    <div>
+      <p>Plot and label these points:</p>
+      <p>A (3, 2) &nbsp; B (−1, 4) &nbsp; C (−3, −2)<br>D (2, −3) &nbsp; E (0, 3) &nbsp; F (−4, 0)</p>
+      <br>
+      <p><strong>Questions:</strong></p>
+      <div class="problem-block">
+        1. Which quadrant is A in? <span class="ans-line"></span>
+      </div>
+      <div class="problem-block">
+        2. Which quadrant is C in? <span class="ans-line"></span>
+      </div>
+      <div class="problem-block">
+        3. What is the distance from A to E along the y-axis? <span class="ans-line"></span>
+      </div>
+      <div class="problem-block">
+        4. Plot point G so that ABGD forms a rectangle. What are G's coordinates? <span class="ans-line"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge – Coordinate Geometry</h3>
+    <p>Points P(1,1), Q(5,1), R(5,4) form a triangle. Find the area of this triangle using coordinates. (Hint: it's a right triangle — use the legs as base and height.)</p>
+    <div class="work-box-sm"></div>
+    Area = <span class="ans-line"></span> square units
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 5 Day 4</span>
+    <span>Volume &amp; Coordinate Plane</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 5 · DAY 5 · Full Cumulative Review                   -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W5<br>D5</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 5 · Day 5 &nbsp;|&nbsp; FULL CUMULATIVE REVIEW – All 5 Weeks</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">CUMULATIVE REVIEW</span>
+
+  <div class="intro-box">
+    <strong>You've covered:</strong> Place value · Rounding · Add/Subtract big numbers · Multiplication · Division · Factors/Multiples · Order of Operations · Fractions · Mixed Numbers · Decimals · Angles · Area/Perimeter · Volume · Coordinates<br>
+    This is your chance to show how much you remember!
+  </div>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      1. Write 40,000,000 + 300,000 + 5,000 + 70 + 2 in standard form:<br>
+      <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      2. Round 13.847 to nearest tenth: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      3. 8,040,000 − 3,857,621 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      4. 648 × 75 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      5. 7,344 ÷ 48 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      6. GCF(36, 54) = <span class="ans-line"></span> &nbsp; LCM(9, 15) = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      7. 4 + 3 × (8 − 2)² ÷ 9 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      8. <span class="frac"><span class="num">5</span><span class="den">6</span></span> + <span class="frac"><span class="num">3</span><span class="den">8</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      9. 5<span class="frac"><span class="num">1</span><span class="den">4</span></span> − 2<span class="frac"><span class="num">5</span><span class="den">6</span></span> =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      10. <span class="frac"><span class="num">3</span><span class="den">4</span></span> × <span class="frac"><span class="num">8</span><span class="den">9</span></span> = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      11. 7.4 − 2.863 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      12. 3.6 × 0.25 =<br>
+      <div class="work-box-sm"></div>
+    </div>
+  </div>
+
+  <h2>Word Problems</h2>
+  <div class="problem-block">
+    13. A swimming pool is 50 m long, 25 m wide, and 2.4 m deep. What is its volume? If water costs $0.04 per cubic meter, how much does it cost to fill the pool?
+    <div class="work-box"></div>
+    Volume: <span class="ans-line"></span> m³ &nbsp; Cost: $<span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    14. A triangle has angles in the ratio 1:2:3. What are the three angles?
+    <div class="work-box-sm"></div>
+    Angles: <span class="ans-line"></span>° , <span class="ans-line"></span>° , <span class="ans-line"></span>°
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Final Challenge – The Math Maze</h3>
+    <p>Start with the number <strong>1,000</strong>. Follow each instruction and write the result after each step.</p>
+    <ol style="line-height:2.2; padding-left:20px;">
+      <li>Add 3,847: ___________</li>
+      <li>Multiply by <span class="frac"><span class="num">1</span><span class="den">2</span></span>: ___________</li>
+      <li>Subtract 248.5: ___________</li>
+      <li>Divide by 0.5: ___________</li>
+      <li>Find 30% of your result (30% = 0.3): ___________</li>
+      <li>Add the LCM of 8 and 12: ___________</li>
+      <li>Round to the nearest hundred: ___________</li>
+    </ol>
+    <div class="work-box-sm">Check each step:</div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 5 Day 5</span>
+    <span>Full Cumulative Review</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  WEEK 5 QUIZ                                                  -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="badge">W5<br>QUIZ</div>
+  <h1>Week 5 Quiz – Geometry &amp; Measurement</h1>
+  <div class="subtitle">Topics: Angles · Shapes · Area/Perimeter · Volume · Coordinates + Cumulative</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <div class="score-box">Score: _______ / 20</div>
+
+  <h2>Section 1 – Angles (5 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. Measure this angle with your protractor:
+      <svg width="160" height="100">
+        <line x1="10" y1="80" x2="150" y2="80" stroke="#333" stroke-width="2"/>
+        <line x1="10" y1="80" x2="80" y2="10" stroke="#333" stroke-width="2"/>
+        <circle cx="10" cy="80" r="3" fill="#333"/>
+        <text x="45" y="75" font-size="11" fill="#bf360c">?°</text>
+      </svg>
+      Measure: <span class="ans-line"></span>° &nbsp; Type: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      2. Two angles form a straight line. One is 67°. Find the other.<br>
+      <span class="ans-line"></span>°
+    </div>
+    <div class="problem-block">
+      3. Triangle angles: 52°, 78°, ?<br>
+      ? = <span class="ans-line"></span>°
+    </div>
+    <div class="problem-block">
+      4. Draw a 55° angle using the ray below:
+      <svg width="160" height="80">
+        <line x1="10" y1="65" x2="150" y2="65" stroke="#333" stroke-width="2"/>
+        <circle cx="10" cy="65" r="3" fill="#333"/>
+      </svg>
+    </div>
+  </div>
+  <div class="problem-block">
+    5. <span class="star">(1 pt)</span> A quadrilateral has angles 88°, 112°, 95°. Find the fourth angle.<br>
+    <span class="ans-line"></span>°
+  </div>
+
+  <h2>Section 2 – Area, Perimeter &amp; Volume (9 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      6. Rectangle: l = 13.5 cm, w = 7 cm<br>
+      Area: <span class="ans-line"></span> &nbsp; Perimeter: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      7. Triangle: base = 10 m, height = 6.4 m<br>
+      Area: <span class="ans-line"></span> m²
+    </div>
+  </div>
+  <div class="problem-block">
+    8. <span class="star">(3 pts)</span> A room is 15 ft long, 12 ft wide, and 9 ft tall. Find: (a) the area of the floor, (b) the volume of the room, (c) how much it costs to carpet the floor at $4.50/ft².
+    <div class="work-box"></div>
+    Floor area: <span class="ans-line"></span> ft² &nbsp; Volume: <span class="ans-line"></span> ft³ &nbsp; Carpet cost: $<span class="ans-line"></span>
+  </div>
+  <div class="problem-block">
+    9. <span class="star">(3 pts)</span> A rectangular prism has volume 504 in³. The base is 12 in × 7 in. Find the height.
+    <div class="work-box-sm"></div>
+    Height = <span class="ans-line"></span> in
+  </div>
+
+  <h2>Section 3 – Cumulative Final (6 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">10. 487 × 63 = <div class="work-box-sm"></div></div>
+    <div class="problem-block">11. 5<span class="frac"><span class="num">1</span><span class="den">3</span></span> + 2<span class="frac"><span class="num">3</span><span class="den">4</span></span> = <div class="work-box-sm"></div></div>
+  </div>
+  <div class="problem-block">
+    12. <span class="star">(4 pts)</span> A hiker walks 4.75 km on Day 1 and <span class="frac"><span class="num">3</span><span class="den">4</span></span> of that on Day 2. On Day 3, she walks twice as far as Day 2. What is the total distance for all 3 days? Give your answer as a decimal.
+    <div class="work-box"></div>
+    Total: <span class="ans-line"></span> km
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 5 Quiz</span>
+    <span>Geometry &amp; Measurement</span>
+  </div>
+</div>
+
+</body>
+</html>
