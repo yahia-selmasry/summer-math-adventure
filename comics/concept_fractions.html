@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <title>Math Comics – Fractions</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   background: #f5c842;
-  font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+  font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 16px;
   padding: 24px;
   max-width: 860px;
   margin: 0 auto;
@@ -60,7 +60,7 @@ body {
   font-size: 14px;
   letter-spacing: 1px;
   display: block;
-  font-family: 'Comic Neue', cursive;
+  font-family: 'Nunito', sans-serif;
   text-shadow: none;
 }
 
@@ -70,7 +70,7 @@ body {
   border: 2.5px solid #1a1a1a;
   border-radius: 18px;
   padding: 8px 12px;
-  font-size: 13.5px;
+  font-size: 15px;
   line-height: 1.45;
   position: relative;
   display: inline-block;
@@ -143,8 +143,8 @@ body {
   border-radius: 50px;
 }
 .bubble.yellow { background: #fff9c4; }
-.bubble.big { font-size: 15px; max-width: 280px; }
-.bubble.sm  { font-size: 12px; max-width: 180px; }
+.bubble.big { font-size: 17px; max-width: 280px; }
+.bubble.sm  { font-size: 14px; max-width: 180px; }
 
 /* ── CHARACTERS (CSS art) ── */
 .scene { display: flex; align-items: flex-end; justify-content: space-around; min-height: 120px; padding-top: 8px; }
@@ -274,7 +274,7 @@ body {
   font-weight: 700;
   display: inline-block;
   margin: 6px 4px;
-  font-family: 'Comic Neue', monospace;
+  font-family: 'Nunito', sans-serif;
   text-align: center;
 }
 .math-box.orange { background: #fff3e0; border-color: #e65100; }
@@ -741,6 +741,76 @@ body {
         × 20 =
         <span class="frac" style="font-size:12px;"><span class="num">60</span><span class="den">4</span></span>
         = <strong>15</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3b: DIVIDING FRACTIONS -->
+  <div class="row">
+    <div class="panel bg-green full" style="min-height:170px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div>
+          <div class="bubble left" style="max-width:200px;margin-bottom:12px;">
+            Dividing fractions?<br>Just <strong>FLIP</strong> the second<br>one and <strong>MULTIPLY!</strong>
+          </div>
+          <div class="zara" style="transform:scale(0.82);transform-origin:bottom left;">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+        <div style="flex:1;padding-top:6px;">
+          <div style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1b5e20;">Keep → Change → Flip (KCF rule):</div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+            <div class="math-box green" style="font-size:17px;">
+              <span class="frac" style="font-size:17px;"><span class="num">3</span><span class="den">4</span></span>
+              ÷
+              <span class="frac" style="font-size:17px;"><span class="num">1</span><span class="den">2</span></span>
+            </div>
+            <div style="font-size:12px;font-weight:700;text-align:center;line-height:1.6;">
+              <span style="background:#2e7d32;color:#fff;border-radius:4px;padding:2px 5px;">KEEP</span> ÷ <span style="background:#c62828;color:#fff;border-radius:4px;padding:2px 5px;">CHANGE to ×</span> <span style="background:#1565c0;color:#fff;border-radius:4px;padding:2px 5px;">FLIP</span>
+            </div>
+            <div style="font-size:22px;font-weight:700;">=</div>
+            <div class="math-box blue" style="font-size:17px;">
+              <span class="frac" style="font-size:17px;"><span class="num">3</span><span class="den">4</span></span>
+              ×
+              <span class="frac" style="font-size:17px;"><span class="num">2</span><span class="den">1</span></span>
+            </div>
+            <div style="font-size:22px;font-weight:700;">=</div>
+            <div class="math-box green" style="font-size:17px;background:#c8e6c9;">
+              <span class="frac" style="font-size:17px;"><span class="num">6</span><span class="den">4</span></span>
+              = 1<span class="frac" style="font-size:15px;"><span class="num">1</span><span class="den">2</span></span>
+            </div>
+          </div>
+          <hr class="panel-divider">
+          <div style="font-size:13px;font-weight:700;margin:8px 0 4px;">Another example with mixed numbers:</div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
+            <div class="math-box orange" style="font-size:15px;padding:6px 10px;">
+              2<span class="frac" style="font-size:15px;"><span class="num">1</span><span class="den">2</span></span>
+              ÷
+              <span class="frac" style="font-size:15px;"><span class="num">1</span><span class="den">4</span></span>
+            </div>
+            <div style="font-size:12px;font-weight:700;">Step 1: convert 2½ →<br>improper: <span style="color:#c62828;">5/2</span></div>
+            <div style="font-size:20px;font-weight:700;">=</div>
+            <div class="math-box orange" style="font-size:15px;padding:6px 10px;">
+              <span class="frac" style="font-size:15px;"><span class="num">5</span><span class="den">2</span></span>
+              ×
+              <span class="frac" style="font-size:15px;"><span class="num">4</span><span class="den">1</span></span>
+            </div>
+            <div style="font-size:20px;font-weight:700;">=</div>
+            <div class="math-box green" style="font-size:15px;padding:6px 10px;background:#c8e6c9;">
+              <span class="frac" style="font-size:15px;"><span class="num">20</span><span class="den">2</span></span>
+              = <strong>10</strong>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;">
+            <div style="font-size:12px;background:#e8f5e9;border:2px solid #2e7d32;border-radius:6px;padding:6px 10px;">
+              <strong>WHY does flipping work?</strong><br>Dividing by ½ = asking "how many halves fit?"<br>There are <strong>2</strong> halves in every whole, so ×2 makes sense!
+            </div>
+            <div class="bubble right sm" style="margin-top:0;">
+              So ÷ by a fraction<br>always makes the<br>answer BIGGER! 🤯
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

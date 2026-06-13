@@ -32,10 +32,13 @@ summer_booklet/
     ├── concept_inequalities.html
     ├── concept_probability.html
     ├── concept_sample_space.html
-    ├── concept_fractions.html
+    ├── concept_fractions.html       ← covers +, −, ×, ÷ (all 4 operations)
     ├── concept_decimals.html
     ├── concept_factors.html
-    └── concept_integers.html
+    ├── concept_integers.html
+    ├── concept_area_perimeter.html
+    ├── concept_rectangular_prisms.html
+    └── concept_coordinate_plane.html
 ```
 
 ---
@@ -109,6 +112,12 @@ summer_booklet/
 - `.think-sign` — red octagon challenge box
 - `.scene` — flex container for characters + bubbles
 
+### Font Standards
+- **Comics**: `'Nunito'` (Google Fonts), body `font-size: 16px`, bubbles `15px`, `.bubble.big` `17px`
+- **Booklets**: `'Nunito'` (Google Fonts), body `font-size: 15px`, h1 `26px/900`, h2 `19px/800`, h3 `16px/700`
+- **Title cards** in comics: `'Bangers'` (Google Fonts, comic book style)
+- Both fonts loaded via: `https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap`
+
 ### Fractions
 ```html
 <span class="frac"><span class="num">3</span><span class="den">4</span></span>
@@ -139,7 +148,8 @@ summer_booklet/
 - **index.html** is the hub — open this first
 - All files are pure HTML/CSS, no build step needed
 - **Printing**: Chrome/Safari → File → Print → Letter → No margins → Background graphics ✓
-- **Public hosting**: Drag the entire `summer_booklet/` folder to **netlify.com/drop** for a free public URL
+- **Live URL**: https://yahia-selmasry.github.io/summer-math-adventure/ (GitHub Pages, permanent, no password)
+- **To push updates**: `git add . && git commit -m "..." && git push` from the project directory
 - The site is a flat file structure — no server needed, everything is relative paths
 
 ---

@@ -2,6 +2,59 @@
 
 ---
 
+## [4.0.0] – 2026-06-13
+
+### Changed – Font & Readability Overhaul
+
+**All booklet files** (`summer_math_complete_booklet.html`, `summer_booklet_weeks6_8.html`):
+- Font changed from `Georgia` (serif) to **Nunito** (Google Fonts) — matches Beast Academy's actual typeface
+- Base body font size: 13px → **15px**
+- h1: 22px → **26px** (weight 900)
+- h2: 16px → **19px** (weight 800)
+- h3: 13px → **16px** (weight 700)
+- `.ans-line` height: 18px → **30px** (kids can write answers comfortably)
+- `.ans-line-long` height: 18px → **30px**
+- `.work-box` min-height: 70px → **110px** (more scratch work space)
+- `.work-box-sm` min-height: 44–50px → **80px**
+- Answer line border upgraded from 1px to **2px** solid
+- Tables, hints, footer, score-box, intro-box all scaled up proportionally
+- Duplicate CSS blocks (one per week addition) consolidated into a single clean stylesheet
+
+**All 15 comic files** (`comics/*.html`):
+- Font changed from `Comic Neue` to **Nunito** — consistent with booklets
+- Body font size added: **16px**
+- Speech bubbles: 13.5px → **15px**
+- `.bubble.big`: 15px → **17px**
+- `.bubble.sm`: 12px → **14px**
+
+### Added – Fraction Division Comic Panel
+
+**`comics/concept_fractions.html`** — new panel added on page 2 before the Think challenge:
+- Full "Keep → Change → Flip" (KCF) rule with color-coded labels
+- Worked example: 3/4 ÷ 1/2 → 3/4 × 2/1 = 6/4 = 1½
+- Mixed number example: 2½ ÷ 1/4 (convert to improper first → 5/2 × 4/1 = 10)
+- Conceptual "WHY" explanation: dividing by ½ = asking how many halves fit
+- Note: "÷ by a fraction always makes the answer bigger" insight
+
+**concept_fractions.html now covers all 4 operations**: +, −, ×, **÷**
+
+### Added – GitHub Pages Hosting
+
+- Public URL: **https://yahia-selmasry.github.io/summer-math-adventure/**
+- Permanent, no password, no expiration (free GitHub Pages)
+- Repository: https://github.com/yahia-selmasry/summer-math-adventure
+- Branch: `main`, path: `/`
+- To push future updates: `git add . && git commit -m "..." && git push`
+
+### Added – Comics File List Updated
+
+`index.html` and `CLAUDE.md` updated to show all 15 comics (was missing the 3 new ones from v3.0.0):
+- `concept_area_perimeter.html`
+- `concept_rectangular_prisms.html`
+- `concept_coordinate_plane.html`
+
+---
+
 ## [3.0.0] – 2026-06-13
 
 ### Added
