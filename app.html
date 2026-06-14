@@ -11,6 +11,7 @@
   :root {
     --w1: #1a3a6b; --w2: #2e7d32; --w3: #6a0080; --w4: #00695c;
     --w5: #bf360c; --w6: #e65100; --w7: #283593; --w8: #00695c;
+    --w9: #4a148c;
     --accent: #1a3a6b;
   }
 
@@ -281,7 +282,7 @@
   <div class="star-badge">★</div>
   <div>
     <h1>Summer Math Adventure</h1>
-    <div class="sub">Grade 4 → 5 · Interactive Practice · All 8 Weeks</div>
+    <div class="sub">Grade 4 → 5 · Interactive Practice · All 9 Weeks</div>
   </div>
 </header>
 
@@ -321,6 +322,33 @@
       <span class="wlabel">WEEK 8</span>
       <span class="wtopic">Probability</span>
     </button>
+    <button class="week-btn" style="background:var(--w9)" data-week="9" onclick="selectWeek(9)">
+      <span class="wlabel">WEEK 9</span>
+      <span class="wtopic">BASIS Prep</span>
+    </button>
+  </div>
+
+  <!-- Week 9 day picker -->
+  <div id="w9-day-picker" style="display:none; margin-bottom:20px;">
+    <div style="font-size:15px;font-weight:900;color:#4a148c;margin-bottom:10px;">Choose a Day — Week 9 BASIS Prep</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;">
+      <button class="week-btn" style="background:#4a148c" onclick="selectW9Day(1)">
+        <span class="wlabel">DAY 1</span>
+        <span class="wtopic">Statistics</span>
+      </button>
+      <button class="week-btn" style="background:#6a1b9a" onclick="selectW9Day(2)">
+        <span class="wlabel">DAY 2</span>
+        <span class="wtopic">Coordinate Plane</span>
+      </button>
+      <button class="week-btn" style="background:#7b1fa2" onclick="selectW9Day(3)">
+        <span class="wlabel">DAY 3</span>
+        <span class="wtopic">Algebra Word Problems</span>
+      </button>
+      <button class="week-btn" style="background:#8e24aa" onclick="selectW9Day(4)">
+        <span class="wlabel">DAY 4</span>
+        <span class="wtopic">Mixed Practice</span>
+      </button>
+    </div>
   </div>
 
   <!-- Session panel -->
@@ -369,8 +397,16 @@
 // ─────────────────────────────────────────────────────────────
 //  UTILITIES
 // ─────────────────────────────────────────────────────────────
-const WEEK_COLORS = ['','#1a3a6b','#2e7d32','#6a0080','#00695c','#bf360c','#e65100','#283593','#00695c'];
-const WEEK_NAMES  = ['','Number Sense','Fractions','Multiplication & Division','Decimals','Geometry','Exponents','Expressions & Equations','Probability'];
+const WEEK_COLORS = ['','#1a3a6b','#2e7d32','#6a0080','#00695c','#bf360c','#e65100','#283593','#00695c','#4a148c'];
+const WEEK_NAMES  = ['','Number Sense','Fractions','Multiplication & Division','Decimals','Geometry','Exponents','Expressions & Equations','Probability','BASIS Prep'];
+
+// Week 9 sub-day generators map
+const WEEK9_DAYS = {
+  1: { label: 'D1 — Statistics', gens: null },       // filled after declaration
+  2: { label: 'D2 — Coordinate Plane', gens: null },
+  3: { label: 'D3 — Algebra Word Problems', gens: null },
+  4: { label: 'D4 — Mixed Practice', gens: null },
+};
 
 let currentWeek = 0;
 let problems = [];
@@ -1053,6 +1089,289 @@ const week8Generators = [
   },
 ];
 
+// ── WEEK 9: BASIS Prep ───────────────────────────────────────
+// D1: Statistics, D2: Coordinate Plane, D3: Algebra Word Problems, D4: Mixed
+
+// D1 — Statistics
+const week9_d1Generators = [
+  // Find the mean
+  () => {
+    const count = rand(4, 6);
+    const vals = Array.from({length: count}, () => rand(5, 25));
+    const sum = vals.reduce((a,b)=>a+b,0);
+    const mean = sum / count;
+    const isMeanWhole = Number.isInteger(mean);
+    return {
+      q: `Find the <strong>mean</strong> of: <strong>${vals.join(', ')}</strong>`,
+      a: isMeanWhole ? [String(mean)] : [mean.toFixed(1), mean.toString()],
+      hint: `Add all values: ${vals.join('+')} = ${sum}. Divide by ${count}: ${sum}÷${count} = ${isMeanWhole ? mean : mean.toFixed(1)}`
+    };
+  },
+  // Find the median
+  () => {
+    const count = pick([5, 7]);
+    const vals = Array.from({length: count}, () => rand(4, 30));
+    const sorted = [...vals].sort((a,b)=>a-b);
+    const median = sorted[Math.floor(count/2)];
+    return {
+      q: `Find the <strong>median</strong> of: <strong>${vals.join(', ')}</strong>`,
+      a: [String(median)],
+      hint: `Sort: ${sorted.join(', ')}. Middle value (position ${Math.floor(count/2)+1} of ${count}) = ${median}`
+    };
+  },
+  // Median with even count
+  () => {
+    const count = pick([4, 6]);
+    const vals = Array.from({length: count}, () => rand(4, 30));
+    const sorted = [...vals].sort((a,b)=>a-b);
+    const mid = count/2;
+    const median = (sorted[mid-1] + sorted[mid]) / 2;
+    const ans = Number.isInteger(median) ? String(median) : median.toFixed(1);
+    return {
+      q: `Find the <strong>median</strong> of: <strong>${vals.join(', ')}</strong> (${count} numbers)`,
+      a: [ans, String(median)],
+      hint: `Sort: ${sorted.join(', ')}. Average the two middle values: (${sorted[mid-1]}+${sorted[mid]})÷2 = ${ans}`
+    };
+  },
+  // Find the mode
+  () => {
+    const mode = rand(5, 15);
+    const extras = Array.from({length: rand(2,4)}, () => { let v; do { v=rand(5,20); } while(v===mode); return v; });
+    const vals = shuffle([mode, mode, ...extras]);
+    return {
+      q: `Find the <strong>mode</strong> of: <strong>${vals.join(', ')}</strong>`,
+      a: [String(mode)],
+      hint: `The mode is the most frequent value. ${mode} appears twice; all others appear once. Mode = ${mode}`
+    };
+  },
+  // Find the range
+  () => {
+    const count = rand(4, 6);
+    const vals = Array.from({length: count}, () => rand(5, 40));
+    const range = Math.max(...vals) - Math.min(...vals);
+    return {
+      q: `Find the <strong>range</strong> of: <strong>${vals.join(', ')}</strong>`,
+      a: [String(range)],
+      hint: `Range = max − min = ${Math.max(...vals)} − ${Math.min(...vals)} = ${range}`
+    };
+  },
+  // Find all 4 measures
+  () => {
+    const vals = [rand(5,15), rand(5,15), rand(5,15), rand(5,15), rand(5,15)];
+    const mode = vals[0];
+    vals.push(mode); // ensure a mode
+    const shuffled = shuffle(vals);
+    const sorted = [...shuffled].sort((a,b)=>a-b);
+    const sum = sorted.reduce((a,b)=>a+b,0);
+    const mean = sum/sorted.length;
+    const median = sorted[Math.floor(sorted.length/2)];
+    const range = sorted[sorted.length-1] - sorted[0];
+    const ans = Number.isInteger(mean) ? String(mean) : mean.toFixed(1);
+    return {
+      q: `For the data set <strong>${shuffled.join(', ')}</strong> — what is the <strong>mean</strong>? (Round to 1 decimal if needed)`,
+      a: [ans, String(mean)],
+      hint: `Sum = ${sum}, count = ${sorted.length}. Mean = ${sum}÷${sorted.length} = ${ans}. (Median=${median}, Mode=${mode}, Range=${range})`
+    };
+  },
+  // Find missing value given mean
+  () => {
+    const known = Array.from({length: 4}, () => rand(5, 20));
+    const targetMean = rand(8, 18);
+    const missing = targetMean * 5 - known.reduce((a,b)=>a+b,0);
+    if (missing < 1 || missing > 30) {
+      // fallback
+      const k2 = [10, 12, 14, 16];
+      const tm2 = 14;
+      const m2 = tm2*5 - k2.reduce((a,b)=>a+b,0);
+      return {
+        q: `The mean of 5 numbers is <strong>${tm2}</strong>. Four of the numbers are <strong>${k2.join(', ')}</strong>. What is the fifth number?`,
+        a: [String(m2)],
+        hint: `Total sum = mean × count = ${tm2} × 5 = ${tm2*5}. Fifth number = ${tm2*5} − (${k2.join('+')} = ${k2.reduce((a,b)=>a+b,0)}) = ${m2}`
+      };
+    }
+    return {
+      q: `The mean of 5 numbers is <strong>${targetMean}</strong>. Four of the numbers are <strong>${known.join(', ')}</strong>. What is the fifth number?`,
+      a: [String(missing)],
+      hint: `Total sum = ${targetMean} × 5 = ${targetMean*5}. Known sum = ${known.reduce((a,b)=>a+b,0)}. Fifth = ${targetMean*5} − ${known.reduce((a,b)=>a+b,0)} = ${missing}`
+    };
+  },
+];
+
+// D2 — Coordinate Plane
+const week9_d2Generators = [
+  // Identify quadrant
+  () => {
+    const quadrants = [
+      {x: rand(1,8), y: rand(1,8), q:'I'},
+      {x: -rand(1,8), y: rand(1,8), q:'II'},
+      {x: -rand(1,8), y: -rand(1,8), q:'III'},
+      {x: rand(1,8), y: -rand(1,8), q:'IV'},
+    ];
+    const {x, y, q} = pick(quadrants);
+    return {
+      q: `The point <strong>(${x}, ${y})</strong> is in which quadrant? (Type I, II, III, or IV)`,
+      a: [q],
+      hint: `x=${x} (${x>0?'positive':'negative'}), y=${y} (${y>0?'positive':'negative'}). Quadrant ${q}: (+,+)=I, (−,+)=II, (−,−)=III, (+,−)=IV`
+    };
+  },
+  // Name the coordinates
+  () => {
+    const options = [
+      {x:3,y:5},{x:-2,y:4},{x:-4,y:-3},{x:5,y:-2},{x:0,y:3},{x:-3,y:0}
+    ];
+    const pt = pick(options);
+    return {
+      q: `A point is plotted 3 units right and 5 units up from the origin, then moved to (${pt.x}, ${pt.y}). What is the x-coordinate of (${pt.x}, ${pt.y})?`,
+      a: [String(pt.x)],
+      hint: `In an ordered pair (x, y), the x-coordinate comes first. Answer: ${pt.x}`
+    };
+  },
+  // Distance between points (same axis)
+  () => {
+    const axis = pick(['x','y']);
+    const fixed = rand(-4, 4);
+    const a = rand(-6, 6);
+    const b = rand(-6, 6);
+    if (a === b) return week9_d2Generators[2](); // retry
+    const dist = Math.abs(a - b);
+    const p1 = axis === 'x' ? `(${a}, ${fixed})` : `(${fixed}, ${a})`;
+    const p2 = axis === 'x' ? `(${b}, ${fixed})` : `(${fixed}, ${b})`;
+    return {
+      q: `What is the distance between points <strong>${p1}</strong> and <strong>${p2}</strong>?`,
+      a: [String(dist)],
+      hint: `Both points share the same ${axis==='x'?'y':'x'}-coordinate, so find |${a} − ${b}| = ${dist}`
+    };
+  },
+  // Reflection across x-axis
+  () => {
+    const x = rand(-5, 5);
+    const y = pick([-4,-3,-2,-1,1,2,3,4]);
+    return {
+      q: `Point <strong>(${x}, ${y})</strong> is reflected across the <strong>x-axis</strong>. What are the new coordinates? (enter as x,y)`,
+      a: [`${x},${-y}`, `(${x},${-y})`, `${x}, ${-y}`],
+      hint: `Reflection across x-axis: flip the sign of y. (${x}, ${y}) → (${x}, ${-y})`
+    };
+  },
+  // Reflection across y-axis
+  () => {
+    const x = pick([-4,-3,-2,-1,1,2,3,4]);
+    const y = rand(-5, 5);
+    return {
+      q: `Point <strong>(${x}, ${y})</strong> is reflected across the <strong>y-axis</strong>. What are the new coordinates? (enter as x,y)`,
+      a: [`${-x},${y}`, `(${-x},${y})`, `${-x}, ${y}`],
+      hint: `Reflection across y-axis: flip the sign of x. (${x}, ${y}) → (${-x}, ${y})`
+    };
+  },
+  // Which quadrant after move
+  () => {
+    const start = pick([{x:3,y:2},{x:-2,y:3},{x:-3,y:-2},{x:2,y:-3}]);
+    const dx = pick([-1,1]) * rand(4,8);
+    const dy = pick([-1,1]) * rand(4,8);
+    const nx = start.x + dx, ny = start.y + dy;
+    const qMap = (x,y) => x>0&&y>0?'I':x<0&&y>0?'II':x<0&&y<0?'III':x>0&&y<0?'IV':'on an axis';
+    return {
+      q: `A point starts at <strong>(${start.x}, ${start.y})</strong> and moves <strong>${Math.abs(dx)} units ${dx>0?'right':'left'}</strong> and <strong>${Math.abs(dy)} units ${dy>0?'up':'down'}</strong>. What quadrant is it in now?`,
+      a: [qMap(nx,ny)],
+      hint: `New point: (${start.x}${dx>0?'+':''}${dx}, ${start.y}${dy>0?'+':''}${dy}) = (${nx}, ${ny}) → Quadrant ${qMap(nx,ny)}`
+    };
+  },
+];
+
+// D3 — Algebra Word Problems
+const week9_d3Generators = [
+  // One-step: addition
+  () => {
+    const start = rand(15, 80);
+    const gained = rand(10, 50);
+    const total = start + gained;
+    const varName = pick(['n','x','s']);
+    return {
+      q: `Maya had <strong>${start} stickers</strong>. After receiving some more, she has <strong>${total}</strong>. Write and solve: ${varName} + ${start} = ${total}. What is ${varName}?`,
+      a: [String(gained)],
+      hint: `${varName} = ${total} − ${start} = ${gained}`
+    };
+  },
+  // One-step: multiplication
+  () => {
+    const groups = rand(4, 12);
+    const each = rand(6, 20);
+    const total = groups * each;
+    const varName = pick(['n','p','c']);
+    return {
+      q: `There are <strong>${groups} boxes</strong>, each with the same number of crayons. There are <strong>${total} crayons</strong> total. Solve: ${groups}${varName} = ${total}. What is ${varName}?`,
+      a: [String(each)],
+      hint: `Divide both sides by ${groups}: ${varName} = ${total} ÷ ${groups} = ${each}`
+    };
+  },
+  // One-step: subtraction
+  () => {
+    const start = rand(40, 120);
+    const spent = rand(10, 40);
+    const left = start - spent;
+    const varName = pick(['m','x','n']);
+    return {
+      q: `Zara had <strong>$${start}</strong>. She spent some money and has <strong>$${left}</strong> left. Solve: ${start} − ${varName} = ${left}. What is ${varName}?`,
+      a: [String(spent)],
+      hint: `${varName} = ${start} − ${left} = ${spent}`
+    };
+  },
+  // Two-step
+  () => {
+    const perMile = pick([2, 3, 4, 5]);
+    const base = pick([3, 4, 5, 6, 8]);
+    const miles = rand(3, 10);
+    const total = base + perMile * miles;
+    return {
+      q: `A taxi charges a <strong>$${base} base fee</strong> plus <strong>$${perMile} per mile</strong>. The total bill is <strong>$${total}</strong>. How many miles was the ride? (solve: ${base} + ${perMile}m = ${total})`,
+      a: [String(miles)],
+      hint: `Subtract base fee: ${total} − ${base} = ${total-base}. Divide by ${perMile}: ${total-base} ÷ ${perMile} = ${miles} miles`
+    };
+  },
+  // Two-step: savings
+  () => {
+    const start = rand(10, 30);
+    const weekly = pick([5, 8, 10, 12]);
+    const weeks = rand(3, 8);
+    const total = start + weekly * weeks;
+    return {
+      q: `Max already saved <strong>$${start}</strong>. He saves <strong>$${weekly}/week</strong>. After how many weeks will he have <strong>$${total}</strong>? (solve: ${start} + ${weekly}w = ${total})`,
+      a: [String(weeks)],
+      hint: `${total} − ${start} = ${total-start}. Then ${total-start} ÷ ${weekly} = ${weeks} weeks`
+    };
+  },
+  // Two unknowns
+  () => {
+    const maxVal = rand(4, 10);
+    const zaraVal = rand(2, 4) * maxVal + rand(1, 5);
+    const total = maxVal + zaraVal;
+    const diff = zaraVal - maxVal;
+    return {
+      q: `Together, Max and Zara have <strong>${total} coins</strong>. Zara has <strong>${diff} more</strong> than Max. How many coins does Max have?`,
+      a: [String(maxVal)],
+      hint: `Let Max = m. Zara = m + ${diff}. So m + (m+${diff}) = ${total} → 2m = ${total-diff} → m = ${maxVal}`
+    };
+  },
+  // Two unknowns: ratio
+  () => {
+    const smaller = rand(3, 8);
+    const times = rand(2, 4);
+    const larger = times * smaller;
+    const total = smaller + larger;
+    return {
+      q: `Zara has <strong>${times} times</strong> as many books as Max. Together they have <strong>${total} books</strong>. How many does Max have?`,
+      a: [String(smaller)],
+      hint: `Let Max = m, Zara = ${times}m. Then m + ${times}m = ${total} → ${times+1}m = ${total} → m = ${total}÷${times+1} = ${smaller}`
+    };
+  },
+];
+
+// D4 — Mixed (all 3 topics)
+const week9_d4Generators = [
+  ...week9_d1Generators.slice(0, 3),
+  ...week9_d2Generators.slice(0, 3),
+  ...week9_d3Generators.slice(0, 4),
+];
+
 const GENERATORS = {
   1: week1Generators,
   2: week2Generators,
@@ -1062,6 +1381,7 @@ const GENERATORS = {
   6: week6Generators,
   7: week7Generators,
   8: week8Generators,
+  9: week9_d4Generators,
 };
 
 // ─────────────────────────────────────────────────────────────
@@ -1073,14 +1393,20 @@ function selectWeek(week) {
   currentWeek = week;
   const color = WEEK_COLORS[week];
 
-  // Update accent color
   document.documentElement.style.setProperty('--accent', color);
   document.getElementById('main-header').style.background = color;
   document.querySelector('.star-badge').style.color = color;
 
-  // Mark active button
-  document.querySelectorAll('.week-btn').forEach(b => b.classList.toggle('active', +b.dataset.week === week));
+  document.querySelectorAll('.week-btn[data-week]').forEach(b => b.classList.toggle('active', +b.dataset.week === week));
 
+  if (week === 9) {
+    document.getElementById('w9-day-picker').style.display = 'block';
+    document.getElementById('session-panel').style.display = 'none';
+    document.getElementById('w9-day-picker').scrollIntoView({behavior:'smooth'});
+    return;
+  }
+
+  document.getElementById('w9-day-picker').style.display = 'none';
   document.getElementById('session-title').textContent = `Week ${week} — ${WEEK_NAMES[week]}`;
   document.getElementById('session-panel').style.display = 'block';
 
@@ -1088,8 +1414,29 @@ function selectWeek(week) {
   document.getElementById('session-panel').scrollIntoView({behavior:'smooth'});
 }
 
+function selectW9Day(day) {
+  const dayGens = {
+    1: week9_d1Generators,
+    2: week9_d2Generators,
+    3: week9_d3Generators,
+    4: week9_d4Generators,
+  };
+  const dayLabels = {
+    1: 'Week 9 D1 — Statistics',
+    2: 'Week 9 D2 — Coordinate Plane',
+    3: 'Week 9 D3 — Algebra Word Problems',
+    4: 'Week 9 D4 — Mixed Practice',
+  };
+  GENERATORS[9] = dayGens[day];
+  document.getElementById('session-title').textContent = dayLabels[day];
+  document.getElementById('session-panel').style.display = 'block';
+  newSession();
+  document.getElementById('session-panel').scrollIntoView({behavior:'smooth'});
+}
+
 function backToMenu() {
   document.getElementById('session-panel').style.display = 'none';
+  document.getElementById('w9-day-picker').style.display = 'none';
   document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
   currentWeek = 0;
   window.scrollTo({top:0, behavior:'smooth'});
