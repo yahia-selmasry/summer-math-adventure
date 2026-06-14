@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Math Comics – Algebra Word Problems</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f5c842;
+  font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 16px;
+  padding: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.comic-page { background: #f5c842; padding: 16px; page-break-after: always; }
+.row { display: flex; gap: 8px; margin-bottom: 8px; }
+.panel {
+  border: 3px solid #1a1a1a; border-radius: 6px; padding: 14px;
+  position: relative; overflow: hidden; flex: 1;
+}
+.panel.bg-sky    { background: #cce8f5; }
+.panel.bg-green  { background: #c8e6c9; }
+.panel.bg-peach  { background: #ffe0cc; }
+.panel.bg-tan    { background: #f5e6c8; }
+.panel.bg-white  { background: #ffffff; }
+.panel.bg-indigo { background: #e8eaf6; }
+.panel.bg-purple { background: #f3e5f5; }
+.panel.bg-teal   { background: #e0f2f1; }
+.panel.full { flex: none; width: 100%; }
+.panel.w2 { flex: 2; }
+
+.title-card {
+  display: inline-block; background: #4a148c; color: #fff;
+  font-family: 'Bangers','Impact',sans-serif; font-size: 26px;
+  letter-spacing: 2px; padding: 6px 18px 4px;
+  border: 3px solid #1a1a1a; border-radius: 8px; margin-bottom: 10px;
+  line-height: 1.1; text-shadow: 2px 2px 0 #1a0040;
+}
+.title-card .subtitle { font-size: 13px; letter-spacing: 1px; display: block; font-family: 'Nunito', sans-serif; font-weight: 700; text-shadow: none; }
+
+.bubble {
+  background: #fff; border: 2.5px solid #1a1a1a; border-radius: 18px;
+  padding: 8px 12px; font-size: 15px; line-height: 1.45;
+  position: relative; display: inline-block; max-width: 220px;
+  font-weight: 700; margin: 4px;
+}
+.bubble.left::after  { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after  { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after  { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.big { font-size: 15px; max-width: 300px; }
+.bubble.sm  { font-size: 12px; max-width: 180px; }
+
+.scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:120px; padding-top:8px; }
+
+.zara { width:70px; height:110px; position:relative; flex-shrink:0; }
+.zara .body  { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head  { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye   { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair  { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm   { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail  { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+
+.max { width:56px; height:80px; position:relative; flex-shrink:0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye  { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+
+.math-box { background:#fff; border:3px solid #1a1a1a; border-radius:8px; padding:10px 16px; font-size:16px; font-weight:700; display:inline-block; margin:6px 4px; text-align:center; }
+.math-box.purple { background:#f3e5f5; border-color:#6a1b9a; }
+.math-box.green  { background:#e8f5e9; border-color:#2e7d32; }
+.math-box.orange { background:#fff3e0; border-color:#e65100; }
+
+.step-tag { display:inline-block; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; margin-right:4px; }
+
+.think-sign {
+  background: #4a148c; color: #fff; font-size: 11px; font-weight: 700; text-align: center;
+  border-radius: 12px; width: 80px; height: 80px;
+  display: flex; align-items: center; justify-content: center; line-height: 1.3;
+}
+.think-wrap { position:absolute; bottom:10px; right:10px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="comic-page">
+
+  <!-- ROW 1: TITLE -->
+  <div class="row">
+    <div class="panel bg-purple full" style="min-height:150px;">
+      <div class="title-card">
+        🧩 ALGEBRA WORD PROBLEMS!
+        <span class="subtitle">Define a variable · Write an equation · Solve · Check</span>
+      </div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble left big" style="margin-bottom:18px;">
+            Word problems are just<br>equations in disguise!<br>We need to <strong>translate</strong><br>English → Math.
+          </div>
+          <div class="zara">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:10px;">
+          <div style="background:#fff;border:3px solid #4a148c;border-radius:10px;padding:12px;font-size:13px;max-width:220px;">
+            <strong style="color:#4a148c;">The 4-Step Method:</strong><br>
+            <span class="step-tag" style="background:#4a148c;">1</span> Define the variable<br>
+            <span class="step-tag" style="background:#283593;">2</span> Write the equation<br>
+            <span class="step-tag" style="background:#1b5e20;">3</span> Solve it<br>
+            <span class="step-tag" style="background:#b03a00;">4</span> Check your answer
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble right" style="margin-bottom:18px;">
+            The variable is like<br>the mystery box<br>we're trying to open! 📦
+          </div>
+          <div class="max">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: KEY PHRASES -->
+  <div class="row">
+    <div class="panel bg-indigo full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a237e;">📖 Translating Words → Math Symbols</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;font-size:13px;">
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:8px;">
+          <strong style="color:#2e7d32;">➕ Addition</strong><br>
+          sum, plus, more than,<br>increased by,<br>total, added to
+        </div>
+        <div style="background:#fce4ec;border:2px solid #c62828;border-radius:8px;padding:8px;">
+          <strong style="color:#c62828;">➖ Subtraction</strong><br>
+          difference, minus,<br>less than, fewer,<br>decreased by, left
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:8px;">
+          <strong style="color:#e65100;">✖️ Multiplication</strong><br>
+          product, times,<br>twice (×2), triple (×3),<br>of, groups of
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:8px;">
+          <strong style="color:#283593;">➗ Division</strong><br>
+          quotient, divided,<br>split equally,<br>shared, per, ratio
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: WORKED EXAMPLE 1 (1-STEP) -->
+  <div class="row">
+    <div class="panel bg-green" style="flex:1.3;">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#1b5e20;">✅ Example 1: One-Step</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;margin-bottom:8px;">
+        <em>"Maya has some stickers. She gives away 14 and has 23 left. How many did she start with?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.2;">
+        <span class="step-tag" style="background:#4a148c;">1</span> Let <strong>n</strong> = stickers Maya started with<br>
+        <span class="step-tag" style="background:#283593;">2</span> Equation: <strong>n − 14 = 23</strong><br>
+        <span class="step-tag" style="background:#1b5e20;">3</span> Solve: n = 23 + 14 = <strong style="color:#1b5e20;">37</strong><br>
+        <span class="step-tag" style="background:#b03a00;">4</span> Check: 37 − 14 = 23 ✓
+      </div>
+    </div>
+    <div class="panel bg-peach">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#bf360c;">✅ Example 2: One-Step ×</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;margin-bottom:8px;">
+        <em>"Each box holds 8 crayons. There are 6 boxes. How many crayons total?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.2;">
+        <span class="step-tag" style="background:#4a148c;">1</span> Let <strong>c</strong> = total crayons<br>
+        <span class="step-tag" style="background:#283593;">2</span> Equation: <strong>c = 8 × 6</strong><br>
+        <span class="step-tag" style="background:#1b5e20;">3</span> Solve: c = <strong style="color:#bf360c;">48</strong><br>
+        <span class="step-tag" style="background:#b03a00;">4</span> Check: 48 ÷ 6 = 8 ✓
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 2 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: TWO-STEP EXAMPLE -->
+  <div class="row">
+    <div class="panel bg-indigo full" style="min-height:180px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div class="zara" style="transform:scale(0.85);transform-origin:bottom left;flex-shrink:0;">
+          <div class="body"></div><div class="head"></div><div class="snout"></div>
+          <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+        </div>
+        <div style="flex:1;padding-top:8px;">
+          <div class="bubble top-left big" style="margin-bottom:14px;">
+            Two-step problems need TWO operations — undo them in REVERSE ORDER!
+          </div>
+          <div style="margin-top:28px;">
+            <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;margin-bottom:10px;">
+              <strong>Example 3 (Two-Step):</strong> <em>"A book costs $5 more than twice the cost of a pen. The book costs $17. What does the pen cost?"</em>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+              <div>
+                <span class="step-tag" style="background:#4a148c;">1</span> Let <strong>p</strong> = cost of pen<br>
+                <span class="step-tag" style="background:#283593;">2</span> Equation: <strong>2p + 5 = 17</strong><br>
+                <span class="step-tag" style="background:#1b5e20;">3</span> Subtract 5: 2p = 12<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divide by 2: p = <strong style="color:#1a237e;">6</strong>
+              </div>
+              <div>
+                <span class="step-tag" style="background:#b03a00;">4</span> <strong>Check:</strong><br>
+                2 × 6 + 5 = 12 + 5 = 17 ✓<br><br>
+                <span style="color:#1b5e20;font-weight:800;">Pen costs $6</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: MULTI-STEP WITH MULTIPLE UNKNOWNS -->
+  <div class="row">
+    <div class="panel bg-teal full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#006064;">🏆 Example 4 (Multi-Step): Two Related Unknowns</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;margin-bottom:10px;">
+        <em>"Zara is 3 times as old as Max. Together their ages add up to 28. How old is each?"</em>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+        <div style="line-height:2.2;">
+          <span class="step-tag" style="background:#4a148c;">1</span> Let <strong>m</strong> = Max's age<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Then Zara = <strong>3m</strong><br>
+          <span class="step-tag" style="background:#283593;">2</span> Equation: <strong>m + 3m = 28</strong><br>
+          <span class="step-tag" style="background:#1b5e20;">3</span> Combine: 4m = 28<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divide: m = <strong style="color:#006064;">7</strong><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So Zara = 3 × 7 = <strong style="color:#006064;">21</strong>
+        </div>
+        <div style="line-height:2.2;">
+          <span class="step-tag" style="background:#b03a00;">4</span> <strong>Check:</strong><br>
+          7 + 21 = 28 ✓<br>
+          21 = 3 × 7 ✓<br><br>
+          <span style="color:#1b5e20;font-weight:800;">Max = 7, Zara = 21</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: COMMON MISTAKES + TIPS -->
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;">⚠️ COMMON MISTAKES</div>
+      <div style="font-size:13px;line-height:2.1;">
+        ❌ <strong>"Less than"</strong> flips the order!<br>
+        &nbsp;&nbsp;"5 less than x" = x − 5 (not 5 − x)<br>
+        ❌ Not writing what the variable stands for<br>
+        ❌ Forgetting to check the answer<br>
+        ❌ Solving in wrong order for two-step<br>
+        ❌ Using the same variable for two different things
+      </div>
+    </div>
+    <div class="panel bg-green">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#1b5e20;">💡 PRO TIPS</div>
+      <div style="font-size:13px;line-height:2.1;">
+        ✓ <strong>Underline</strong> key numbers in the problem<br>
+        ✓ <strong>Circle</strong> the operation words (more, less, times…)<br>
+        ✓ <strong>Write what x means</strong> before the equation<br>
+        ✓ For two unknowns, express <strong>both in terms of one variable</strong><br>
+        ✓ <strong>Always check</strong> by substituting back in!
+      </div>
+      <div class="think-wrap">
+        <div class="think-sign">TRY<br>IT!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="display:flex;gap:16px;align-items:flex-end;">
+        <div class="max" style="flex-shrink:0;">
+          <div class="body"></div><div class="head"></div><div class="eye"></div>
+          <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+        </div>
+        <div class="bubble top-left" style="margin-bottom:50px;">
+          Your turn! Write the equation, solve it, and check!
+        </div>
+        <div style="flex:1;font-size:13px;line-height:2.1;">
+          <strong>Try it:</strong> <em>"A store sold 3 times as many apples as oranges. They sold 12 more apples than oranges. How many of each?"</em><br>
+          Let o = oranges → apples = ___<br>
+          Equation: _______<br>
+          Answer: oranges = ___, apples = ___
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 2 -->
+
+</body>
+</html>

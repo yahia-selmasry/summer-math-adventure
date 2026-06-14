@@ -4,41 +4,40 @@
 <meta charset="UTF-8">
 <title>Summer Math – Weeks 6–8: Exponents, Expressions & Equations, Probability</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Bangers&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 15px; color: #1a1a1a; background: #fff; }
-.page { width: 8.5in; min-height: 11in; padding: 0.55in 0.65in 0.9in; page-break-after: always; break-after: page; position: relative; }
-h1 { font-size: 26px; font-weight: 900; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
-h2 { font-size: 19px; font-weight: 800; margin: 16px 0 8px; }
-h3 { font-size: 16px; font-weight: 700; color: #1a3a6b; margin: 12px 0 6px; }
-.subtitle { font-size: 13px; color: #555; margin-bottom: 12px; }
-.topic-tag { display: inline-block; color: #fff; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 10px; margin-bottom: 12px; }
-.intro-box { border-left: 4px solid; padding: 12px 16px; margin-bottom: 16px; border-radius: 4px; font-size: 14px; line-height: 1.7; }
-.problem-block { margin-bottom: 18px; }
-.problem-block p { line-height: 1.8; margin-bottom: 6px; font-size: 15px; }
-.ans-line { display: block; border-bottom: 2px solid #333; width: 180px; height: 30px; margin: 8px 0 4px; }
-.ans-line-long { display: block; border-bottom: 2px solid #333; width: 340px; height: 30px; margin: 8px 0 4px; }
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 30px; }
-.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px 20px; }
-.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px 16px; }
-.box-blank { border: 2px solid #333; min-height: 36px; min-width: 40px; display: inline-block; margin: 2px; padding: 2px 6px; vertical-align: middle; }
-.work-box { border: 2px dashed #aaa; min-height: 110px; width: 100%; margin: 8px 0; border-radius: 6px; padding: 6px; }
-.work-box-sm { border: 2px dashed #aaa; min-height: 80px; width: 100%; margin: 6px 0; border-radius: 6px; padding: 4px; }
-.star { font-weight: 800; }
-.challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 8px; padding: 12px 16px; margin-top: 16px; }
+body { font-family: 'Nunito', sans-serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+.page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+h1 { font-size: 22px; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
+h2 { font-size: 16px; margin: 14px 0 6px; }
+h3 { font-size: 13px; color: #1a3a6b; margin: 10px 0 4px; }
+.subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+.topic-tag { display: inline-block; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+.intro-box { border-left: 4px solid; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+.problem-block { margin-bottom: 12px; }
+.problem-block p { line-height: 1.7; margin-bottom: 4px; }
+.ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+.ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px 16px; }
+.box-blank { border: 1.5px solid #333; min-height: 28px; min-width: 36px; display: inline-block; margin: 2px; padding: 0 4px; vertical-align: middle; }
+.work-box { border: 1.5px dashed #aaa; min-height: 70px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+.work-box-sm { border: 1.5px dashed #aaa; min-height: 44px; width: 100%; margin: 4px 0; border-radius: 4px; padding: 4px; }
+.star { font-weight: bold; }
+.challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
 .challenge-box h3 { color: #b06000; }
-.footer { position: absolute; bottom: 0.35in; left: 0.65in; right: 0.65in; font-size: 11px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
-.name-date { display: flex; gap: 40px; margin-bottom: 16px; font-size: 14px; }
-.name-date span { border-bottom: 2px solid #333; min-width: 180px; display: inline-block; }
-.badge { float: right; color: #fff; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; text-align: center; line-height: 1.2; margin-top: -10px; }
-.score-box { border: 2px solid #1a3a6b; border-radius: 6px; padding: 8px 18px; display: inline-block; margin-bottom: 12px; font-size: 14px; font-weight: 700; }
-.hint { font-size: 12px; color: #555; font-style: italic; }
-table { border-collapse: collapse; margin: 10px 0; font-size: 14px; }
-td, th { border: 1px solid #888; padding: 7px 12px; text-align: center; }
-th { font-weight: 800; }
-.frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 15px; line-height: 1.1; font-weight: 700; }
-.frac .num { border-bottom: 2px solid #333; padding: 0 3px; }
+.footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+.name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+.name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+.badge { float: right; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+.score-box { border: 2px solid #1a3a6b; border-radius: 6px; padding: 8px 16px; display: inline-block; margin-bottom: 10px; font-size: 12px; }
+.hint { font-size: 10px; color: #555; font-style: italic; }
+table { border-collapse: collapse; margin: 8px 0; font-size: 12px; }
+td, th { border: 1px solid #888; padding: 5px 8px; text-align: center; }
+.frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 13px; line-height: 1.1; }
+.frac .num { border-bottom: 1.5px solid #333; padding: 0 3px; }
 .frac .den { padding: 0 3px; }
 sup { font-size: 0.75em; vertical-align: super; }
 
@@ -67,16 +66,13 @@ sup { font-size: 0.75em; vertical-align: super; }
 .w8 .star { color: #00695c; }
 
 /* Answer key */
-.ak h2 { font-size: 16px; color: #b03a00; border-left: 4px solid #b03a00; padding-left: 8px; margin: 14px 0 6px; font-weight: 800; }
-.answer { color: #c62828; font-weight: 800; }
-.step-box { background: #f9f9f9; border: 1px solid #ddd; border-radius: 6px; padding: 10px 14px; margin: 8px 0; font-size: 14px; line-height: 1.9; }
-.step { color: #1a3a6b; font-weight: 800; }
+.ak h2 { font-size: 14px; color: #b03a00; border-left: 4px solid #b03a00; padding-left: 8px; margin: 12px 0 4px; }
+.answer { color: #c62828; font-weight: bold; }
+.step-box { background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; padding: 8px 12px; margin: 6px 0; font-size: 11px; line-height: 1.8; }
+.step { color: #1a3a6b; font-weight: bold; }
 
-@page { size: letter; margin: 0; }
-@media print {
-  body { background: #fff; }
-  .page { height: 11in; min-height: unset; overflow: visible; page-break-after: always; break-after: page; }
-}
+@media print { .page { page-break-after: always; } body { margin: 0; padding: 0; } }
+@page { margin: 0; size: letter; }
 </style>
 </head>
 <body>
@@ -84,7 +80,7 @@ sup { font-size: 0.75em; vertical-align: super; }
 <!-- ============================================================ -->
 <!-- COVER PAGE                                                    -->
 <!-- ============================================================ -->
-<div class="page" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:#1a3a6b;color:#fff;">
+<div class="page" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:#1a3a6b;color:#fff;min-height:11in;">
   <div style="font-size:40px;font-weight:bold;text-align:center;margin-bottom:16px;">Summer Math Adventure</div>
   <div style="font-size:20px;text-align:center;margin-bottom:10px;">Weeks 6 – 8 Extension Booklet</div>
   <div style="font-size:15px;text-align:center;margin-bottom:8px;">Exponents · Expressions &amp; Equations · Probability</div>
@@ -315,50 +311,13 @@ sup { font-size: 0.75em; vertical-align: super; }
     <div class="problem-block">12. &nbsp; 1<sup>100</sup> = 100 &nbsp; T / F<br>If false, correct: <span class="ans-line"></span></div>
   </div>
 
-  <h2>Part D – Pattern Recognition &amp; Apply</h2>
-  <div class="grid-2">
-    <div class="problem-block">
-      13. Fill in the missing exponent:<br>
-      32 = 2<sup><span class="box-blank"></span></sup> &nbsp;&nbsp; 81 = 3<sup><span class="box-blank"></span></sup> &nbsp;&nbsp; 125 = 5<sup><span class="box-blank"></span></sup>
-    </div>
-    <div class="problem-block">
-      14. Which is greater: 2<sup>8</sup> or 8<sup>2</sup>?<br>
-      2<sup>8</sup> = <span class="ans-line"></span> &nbsp;&nbsp; 8<sup>2</sup> = <span class="ans-line"></span><br>
-      Greater: <span class="ans-line"></span>
-    </div>
-    <div class="problem-block">
-      15. A rumor starts with 1 person. Each day every person tells 3 new people. Write the number of NEW people told on Day 4 as a power.<br>
-      Day 1: 3<sup>1</sup> = 3 &nbsp; Day 2: 3<sup>2</sup> = 9 &nbsp; Day 3: ___<br>
-      Day 4: <span class="ans-line"></span> new people
-    </div>
-    <div class="problem-block">
-      16. Rank these from least to greatest:<br>
-      10<sup>4</sup> &nbsp; 2<sup>10</sup> &nbsp; 3<sup>6</sup> &nbsp; 4<sup>4</sup><br>
-      Values: ___, ___, ___, ___<br>
-      Order: <span class="ans-line-long"></span>
-    </div>
-  </div>
-
-  <h2>Part E – Cumulative Review (Weeks 1–5)</h2>
-  <div class="grid-3">
-    <div class="problem-block">17. &nbsp; 847 × 36 = <div class="work-box-sm"></div></div>
-    <div class="problem-block">18. &nbsp; 5,940 ÷ 45 = <div class="work-box-sm"></div></div>
-    <div class="problem-block">19. GCF(48, 72) = <span class="ans-line"></span></div>
-    <div class="problem-block">
-      20. <span class="frac"><span class="num">5</span><span class="den">6</span></span> + <span class="frac"><span class="num">3</span><span class="den">4</span></span> = <span class="ans-line"></span>
-    </div>
-    <div class="problem-block">21. 3.6 × 4.5 = <span class="ans-line"></span></div>
-    <div class="problem-block">22. Area of rectangle: l = 9.5 cm, w = 6 cm<br>A = <span class="ans-line"></span> cm²</div>
-  </div>
-
   <div class="challenge-box">
     <h3>&#9733; Challenge</h3>
     <p>Without calculating, explain why 2<sup>10</sup> must be greater than 10<sup>2</sup>. Hint: think about how fast each grows.</p>
-    <p style="margin-top:8px;">Bonus: Find the value of n if 4<sup>n</sup> = 64.</p>
     <div class="work-box"></div>
   </div>
 
-  <div class="footer"><span>Week 6 · Day 3 – Comparing Exponents</span><span>Score: ______ / 22</span></div>
+  <div class="footer"><span>Week 6 · Day 3 – Comparing Exponents</span><span>Score: ______ / 12</span></div>
 </div>
 
 <!-- ============================================================ -->
@@ -1019,66 +978,13 @@ sup { font-size: 0.75em; vertical-align: super; }
     <div class="problem-block">6. &nbsp; P(purple) = <span class="ans-line"></span></div>
   </div>
 
-  <h2>Part C – Probability as Decimal and Percent</h2>
-  <p class="hint">Use the same bag (3 red, 4 blue, 5 green marbles). Express each probability as a fraction, decimal, and percent.</p>
-  <div class="grid-2">
-    <div class="problem-block">
-      7. P(green):<br>
-      Fraction: <span class="ans-line"></span> &nbsp; Decimal: <span class="ans-line"></span> &nbsp; Percent: <span class="ans-line"></span>%
-    </div>
-    <div class="problem-block">
-      8. P(blue):<br>
-      Fraction: <span class="ans-line"></span> &nbsp; Decimal: <span class="ans-line"></span> &nbsp; Percent: <span class="ans-line"></span>%
-    </div>
-  </div>
-
-  <h2>Part D – Write Your Own Probability Scenario</h2>
-  <div class="problem-block">
-    9. You have a jar of colored tiles. Complete the table so that P(yellow) = <span class="frac"><span class="num">1</span><span class="den">4</span></span>.
-    <table style="width:70%;margin:8px 0;">
-      <tr><th>Color</th><th>Number of tiles</th><th>Probability</th></tr>
-      <tr><td>Yellow</td><td><span class="box-blank"></span></td><td><span class="frac"><span class="num">1</span><span class="den">4</span></span></td></tr>
-      <tr><td>Red</td><td><span class="box-blank"></span></td><td><span class="ans-line"></span></td></tr>
-      <tr><td>Blue</td><td><span class="box-blank"></span></td><td><span class="ans-line"></span></td></tr>
-      <tr><td><strong>Total</strong></td><td><span class="box-blank"></span></td><td>1</td></tr>
-    </table>
-  </div>
-  <div class="problem-block">
-    10. A standard deck of 52 cards has 4 suits (hearts ♥, diamonds ♦, clubs ♣, spades ♠), each with 13 cards.<br>
-    a) P(heart) = <span class="ans-line"></span> &nbsp;&nbsp; b) P(ace) = <span class="ans-line"></span><br>
-    c) P(red card) = <span class="ans-line"></span> &nbsp;&nbsp; d) P(face card: J, Q, K) = <span class="ans-line"></span>
-    <div class="work-box-sm"></div>
-  </div>
-
-  <h2>Part E – Complement Rule</h2>
-  <p class="hint">P(event does NOT happen) = 1 − P(event). This is called the complement.</p>
-  <div class="grid-2">
-    <div class="problem-block">
-      11. P(rolling a 4 on a die) = <span class="frac"><span class="num">1</span><span class="den">6</span></span><br>
-      P(NOT rolling a 4) = <span class="ans-line"></span>
-    </div>
-    <div class="problem-block">
-      12. P(picking a vowel from MATHEMATICS) = <span class="ans-line"></span><br>
-      P(NOT a vowel) = <span class="ans-line"></span>
-    </div>
-    <div class="problem-block">
-      13. If P(rain today) = 0.35, then<br>
-      P(no rain today) = <span class="ans-line"></span>
-    </div>
-    <div class="problem-block">
-      14. A bag has only red and blue marbles. P(red) = <span class="frac"><span class="num">3</span><span class="den">7</span></span>.<br>
-      P(blue) = <span class="ans-line"></span>
-    </div>
-  </div>
-
   <div class="challenge-box">
     <h3>&#9733; Challenge</h3>
     <p>A spinner has 8 equal sections: 3 red, 2 blue, 2 yellow, 1 green. If you spin 40 times, about how many times would you expect red? Show your reasoning.</p>
-    <p style="margin-top:8px;">Harder: What is P(NOT green)? Express as fraction, decimal, and percent.</p>
     <div class="work-box"></div>
   </div>
 
-  <div class="footer"><span>Week 8 · Day 1 – Introduction to Probability</span><span>Score: ______ / 14 + scale + table</span></div>
+  <div class="footer"><span>Week 8 · Day 1 – Introduction to Probability</span><span>Score: ______ / 6 + scale</span></div>
 </div>
 
 <!-- ============================================================ -->
@@ -1128,55 +1034,13 @@ sup { font-size: 0.75em; vertical-align: super; }
     <span class="ans-line-long"></span>
   </div>
 
-  <h2>Part C – Compare and Analyze</h2>
-  <div class="problem-block">
-    7. A bag has 5 red and 5 blue marbles. You draw 20 times (replacing each time). Results: 13 red, 7 blue.<br>
-    a) Theoretical P(red) = <span class="ans-line"></span> &nbsp; Experimental P(red) = <span class="ans-line"></span><br>
-    b) Were results closer to theoretical or farther? <span class="ans-line-long"></span><br>
-    c) If you drew 2,000 times, what would you expect to happen to the gap? <span class="ans-line-long"></span>
-    <div class="work-box-sm"></div>
-  </div>
-  <div class="problem-block">
-    8. Marcus spins a spinner 50 times. The spinner has 4 equal sections: A, B, C, D.<br>
-    He gets: A = 15, B = 11, C = 14, D = 10.<br>
-    a) P(A) theoretical = <span class="ans-line"></span> &nbsp; P(A) experimental = <span class="ans-line"></span><br>
-    b) Which result is closest to theoretical? <span class="ans-line"></span><br>
-    c) Which result is farthest from theoretical? <span class="ans-line"></span>
-  </div>
-
-  <h2>Part D – Cumulative Review Sprint</h2>
-  <p class="hint">Keep your skills sharp! Solve these from earlier weeks.</p>
-  <div class="grid-3">
-    <div class="problem-block">
-      9. Evaluate: 3<sup>4</sup> − 2<sup>5</sup> =<br>
-      <span class="ans-line"></span>
-    </div>
-    <div class="problem-block">
-      10. Solve: 4x + 7 = 31<br>
-      x = <span class="ans-line"></span>
-    </div>
-    <div class="problem-block">
-      11. <span class="frac"><span class="num">7</span><span class="den">8</span></span> × <span class="frac"><span class="num">4</span><span class="den">5</span></span> = <span class="ans-line"></span>
-    </div>
-    <div class="problem-block">
-      12. Volume of box: 8×3×5 = <span class="ans-line"></span> cm³
-    </div>
-    <div class="problem-block">
-      13. What quadrant is (−3, 4) in?<br>
-      <span class="ans-line"></span>
-    </div>
-    <div class="problem-block">
-      14. 0.6 × 0.07 = <span class="ans-line"></span>
-    </div>
-  </div>
-
   <div class="challenge-box">
     <h3>&#9733; Challenge</h3>
     <p>Design your own experiment: describe it, state the theoretical probability of your chosen outcome, run it 20 times (or simulate with a pencil), and record results. Did your results match theory?</p>
     <div class="work-box" style="min-height:90px;"></div>
   </div>
 
-  <div class="footer"><span>Week 8 · Day 2 – Experimental vs. Theoretical</span><span>Score: ______ / 14 + table</span></div>
+  <div class="footer"><span>Week 8 · Day 2 – Experimental vs. Theoretical</span><span>Score: ______ / 6 + table</span></div>
 </div>
 
 <!-- ============================================================ -->

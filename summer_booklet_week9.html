@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Summer Math Booklet – Week 9: BASIS Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+  h1 { font-size: 22px; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #4a148c; margin: 14px 0 6px; }
+  h3 { font-size: 13px; color: #1a3a6b; margin: 10px 0 4px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+  .intro-box { border-left: 4px solid; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+  .problem-block { margin-bottom: 14px; }
+  .problem-block p { line-height: 1.7; margin-bottom: 4px; }
+  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+  .box-blank { border: 1.5px solid #333; min-height: 28px; min-width: 36px; display: inline-block; margin: 2px; padding: 0 4px; vertical-align: middle; }
+  .work-box { border: 1.5px dashed #aaa; min-height: 70px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .work-box-sm { border: 1.5px dashed #aaa; min-height: 44px; width: 100%; margin: 4px 0; border-radius: 4px; padding: 4px; }
+  .star { font-weight: bold; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .challenge-box h3 { color: #b06000; }
+  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge { float: right; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .score-box { border: 2px solid #4a148c; border-radius: 6px; padding: 8px 16px; display: inline-block; margin-bottom: 10px; font-size: 12px; }
+  .hint { font-size: 10px; color: #555; font-style: italic; }
+  table { border-collapse: collapse; margin: 8px 0; font-size: 12px; }
+  td, th { border: 1px solid #888; padding: 5px 10px; text-align: center; }
+  th { background: #4a148c; color: #fff; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 13px; line-height: 1.1; }
+  .frac .num { border-bottom: 1.5px solid #333; padding: 0 3px; }
+  .frac .den { padding: 0 3px; }
+
+  /* week 9 colors */
+  .w9 h2 { color: #4a148c; }
+  .w9 .badge { background: #4a148c; }
+  .w9 .topic-tag { background: #4a148c; }
+  .w9 .intro-box { background: #f3e5f5; border-color: #4a148c; }
+  .w9 h1 { color: #1a3a6b; border-color: #1a3a6b; }
+  .w9 .star { color: #4a148c; }
+
+  @media print { .page { page-break-after: always; } body { margin: 0; padding: 0; } }
+  @page { margin: 0; size: letter; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- WEEK 9 · DAY 1 – STATISTICS: Mean, Median, Mode & Range      -->
+<!-- ============================================================ -->
+<div class="page w9" id="w9d1">
+  <div class="badge">W9<br>D1</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 9 · Day 1 | Statistics: Mean, Median, Mode &amp; Range</div>
+  <div class="name-date">Name: <span></span> Date: <span></span></div>
+  <span class="topic-tag">BASIS PREP: STATISTICS</span>
+  <div class="intro-box">
+    <strong>Mean</strong> = sum ÷ count &nbsp;|&nbsp; <strong>Median</strong> = middle value (sort first!) &nbsp;|&nbsp; <strong>Mode</strong> = most frequent &nbsp;|&nbsp; <strong>Range</strong> = max − min<br>
+    For <em>even</em> number of values, median = average of the two middle numbers.
+  </div>
+
+  <h2>Part A – Find All Four Measures</h2>
+  <p class="hint">Sort the data first, then find each measure.</p>
+
+  <div class="problem-block">
+    1. Data set: <strong>8, 3, 6, 3, 10, 4</strong><br>
+    Sorted: _____, _____, _____, _____, _____, _____<br>
+    Mean: <span class="ans-line"></span>
+    Median: <span class="ans-line"></span>
+    Mode: <span class="ans-line"></span>
+    Range: <span class="ans-line"></span>
+  </div>
+
+  <div class="problem-block">
+    2. Data set: <strong>15, 22, 15, 30, 18, 22, 15, 11</strong><br>
+    Sorted: _____, _____, _____, _____, _____, _____, _____, _____<br>
+    Mean: <span class="ans-line"></span>
+    Median: <span class="ans-line"></span>
+    Mode: <span class="ans-line"></span>
+    Range: <span class="ans-line"></span>
+    <div class="work-box"></div>
+  </div>
+
+  <h2>Part B – Word Problems with Statistics</h2>
+
+  <div class="problem-block">
+    3. A student's test scores are: 72, 88, 95, 72, 83, 90. Find the mean, median, mode, and range. Show your work.<br>
+    Mean: <span class="ans-line"></span> &nbsp; Median: <span class="ans-line"></span> &nbsp; Mode: <span class="ans-line"></span> &nbsp; Range: <span class="ans-line"></span>
+    <div class="work-box"></div>
+  </div>
+
+  <div class="problem-block">
+    4. Five friends measure their heights in inches: 54, 60, 57, 54, 60. Which measure of center best represents a "typical" height — mean or median? Explain.<br>
+    Mean: <span class="ans-line"></span> &nbsp; Median: <span class="ans-line"></span> &nbsp; Better measure: <span class="ans-line"></span><br>
+    Why? <span class="ans-line-long"></span>
+  </div>
+
+  <div class="problem-block">
+    5. <span class="star">(2 pts)</span> A data set has 5 values. The mean is 12, and four of the values are 8, 15, 10, and 14. What is the missing value?<br>
+    Missing value: <span class="ans-line"></span>
+    <div class="work-box"></div>
+  </div>
+
+  <h2>Part C – Reasoning About Data</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      6. Can a data set have no mode? Give an example.<br>
+      <span class="ans-line-long"></span>
+    </div>
+    <div class="problem-block">
+      7. Can the mean equal the median? Give an example.<br>
+      <span class="ans-line-long"></span>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>A class of 4 students has a mean quiz score of 80. A 5th student joins with a score of 100. What is the new mean? Show all steps.</p>
+    <div class="work-box"></div>
+    New mean: <span class="ans-line"></span>
+  </div>
+
+  <div class="footer"><span>Week 9 · Day 1 – Statistics</span><span>Score: ______ / 14</span></div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- WEEK 9 · DAY 2 – COORDINATE PLANE: All 4 Quadrants          -->
+<!-- ============================================================ -->
+<div class="page w9" id="w9d2">
+  <div class="badge">W9<br>D2</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 9 · Day 2 | Coordinate Plane: All 4 Quadrants &amp; Graphing</div>
+  <div class="name-date">Name: <span></span> Date: <span></span></div>
+  <span class="topic-tag">BASIS PREP: COORDINATE PLANE</span>
+  <div class="intro-box">
+    <strong>Ordered pair (x, y):</strong> x = left/right, y = up/down · Always start at origin (0, 0)<br>
+    <strong>Quadrant I</strong> (+,+) &nbsp; <strong>Quadrant II</strong> (−,+) &nbsp; <strong>Quadrant III</strong> (−,−) &nbsp; <strong>Quadrant IV</strong> (+,−)<br>
+    Memory trick: "x before y" — go across the hall (x), then up the stairs (y)!
+  </div>
+
+  <h2>Part A – Plot &amp; Label Points</h2>
+  <p class="hint">Use the coordinate grid below. Plot each point and label it with its letter.</p>
+
+  <div style="display:flex;gap:20px;align-items:flex-start;">
+    <div style="flex:1;">
+      <div class="grid-2">
+        <div class="problem-block">A (3, 4)</div>
+        <div class="problem-block">B (−2, 5)</div>
+        <div class="problem-block">C (−4, −3)</div>
+        <div class="problem-block">D (5, −2)</div>
+        <div class="problem-block">E (0, 3)</div>
+        <div class="problem-block">F (−3, 0)</div>
+        <div class="problem-block">G (2, −5)</div>
+        <div class="problem-block">H (−1, −4)</div>
+      </div>
+    </div>
+    <!-- Coordinate Grid -->
+    <div style="flex-shrink:0;">
+      <svg width="260" height="260" viewBox="-130 -130 260 260" style="border:2px solid #ccc;border-radius:6px;background:#fff;">
+        <!-- grid lines -->
+        <line x1="-120" y1="-100" x2="-120" y2="100" stroke="#eee" stroke-width="1"/>
+        <line x1="-100" y1="-100" x2="-100" y2="100" stroke="#eee" stroke-width="1"/>
+        <line x1="-80" y1="-100" x2="-80" y2="100" stroke="#eee" stroke-width="1"/>
+        <line x1="-60" y1="-100" x2="-60" y2="100" stroke="#eee" stroke-width="1"/>
+        <line x1="-40" y1="-100" x2="-40" y2="100" stroke="#eee" stroke-width="1"/>
+        <line x1="-20" y1="-100" x2="-20" y2="100" stroke="#eee" stroke-width="1"/>
+        <line x1="20" y1="-100" x2="20" y2="100" stroke="#eee" stroke-width="1"/>
+        <line x1="40" y1="-100" x2="40" y2="100" stroke="#eee" stroke-width="1"/>
+        <line x1="60" y1="-100" x2="60" y2="100" stroke="#eee" stroke-width="1"/>
+        <line x1="80" y1="-100" x2="80" y2="100" stroke="#eee" stroke-width="1"/>
+        <line x1="100" y1="-100" x2="100" y2="100" stroke="#eee" stroke-width="1"/>
+        <line x1="120" y1="-100" x2="120" y2="100" stroke="#eee" stroke-width="1"/>
+        <line x1="-120" y1="-100" x2="120" y2="-100" stroke="#eee" stroke-width="1"/>
+        <line x1="-120" y1="-80" x2="120" y2="-80" stroke="#eee" stroke-width="1"/>
+        <line x1="-120" y1="-60" x2="120" y2="-60" stroke="#eee" stroke-width="1"/>
+        <line x1="-120" y1="-40" x2="120" y2="-40" stroke="#eee" stroke-width="1"/>
+        <line x1="-120" y1="-20" x2="120" y2="-20" stroke="#eee" stroke-width="1"/>
+        <line x1="-120" y1="20" x2="120" y2="20" stroke="#eee" stroke-width="1"/>
+        <line x1="-120" y1="40" x2="120" y2="40" stroke="#eee" stroke-width="1"/>
+        <line x1="-120" y1="60" x2="120" y2="60" stroke="#eee" stroke-width="1"/>
+        <line x1="-120" y1="80" x2="120" y2="80" stroke="#eee" stroke-width="1"/>
+        <line x1="-120" y1="100" x2="120" y2="100" stroke="#eee" stroke-width="1"/>
+        <!-- axes -->
+        <line x1="-125" y1="0" x2="125" y2="0" stroke="#1a1a1a" stroke-width="2"/>
+        <line x1="0" y1="125" x2="0" y2="-125" stroke="#1a1a1a" stroke-width="2"/>
+        <!-- axis labels -->
+        <text x="118" y="12" font-family="Nunito,sans-serif" font-size="11" font-weight="bold" fill="#283593">x</text>
+        <text x="4" y="-118" font-family="Nunito,sans-serif" font-size="11" font-weight="bold" fill="#283593">y</text>
+        <!-- tick numbers x -->
+        <text x="17" y="14" font-family="Nunito,sans-serif" font-size="8" fill="#555">1</text>
+        <text x="37" y="14" font-family="Nunito,sans-serif" font-size="8" fill="#555">2</text>
+        <text x="57" y="14" font-family="Nunito,sans-serif" font-size="8" fill="#555">3</text>
+        <text x="77" y="14" font-family="Nunito,sans-serif" font-size="8" fill="#555">4</text>
+        <text x="97" y="14" font-family="Nunito,sans-serif" font-size="8" fill="#555">5</text>
+        <text x="-24" y="14" font-family="Nunito,sans-serif" font-size="8" fill="#555">-1</text>
+        <text x="-44" y="14" font-family="Nunito,sans-serif" font-size="8" fill="#555">-2</text>
+        <text x="-64" y="14" font-family="Nunito,sans-serif" font-size="8" fill="#555">-3</text>
+        <text x="-84" y="14" font-family="Nunito,sans-serif" font-size="8" fill="#555">-4</text>
+        <text x="-104" y="14" font-family="Nunito,sans-serif" font-size="8" fill="#555">-5</text>
+        <!-- tick numbers y -->
+        <text x="4" y="-17" font-family="Nunito,sans-serif" font-size="8" fill="#555">1</text>
+        <text x="4" y="-37" font-family="Nunito,sans-serif" font-size="8" fill="#555">2</text>
+        <text x="4" y="-57" font-family="Nunito,sans-serif" font-size="8" fill="#555">3</text>
+        <text x="4" y="-77" font-family="Nunito,sans-serif" font-size="8" fill="#555">4</text>
+        <text x="4" y="-97" font-family="Nunito,sans-serif" font-size="8" fill="#555">5</text>
+        <text x="4" y="23" font-family="Nunito,sans-serif" font-size="8" fill="#555">-1</text>
+        <text x="4" y="43" font-family="Nunito,sans-serif" font-size="8" fill="#555">-2</text>
+        <text x="4" y="63" font-family="Nunito,sans-serif" font-size="8" fill="#555">-3</text>
+        <text x="4" y="83" font-family="Nunito,sans-serif" font-size="8" fill="#555">-4</text>
+        <text x="4" y="103" font-family="Nunito,sans-serif" font-size="8" fill="#555">-5</text>
+        <!-- origin -->
+        <text x="-14" y="14" font-family="Nunito,sans-serif" font-size="9" fill="#c62828" font-weight="bold">O</text>
+      </svg>
+    </div>
+  </div>
+
+  <h2>Part B – Read Points &amp; Identify Quadrants</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. Write the ordered pair for each point you plotted above. Which quadrant (or axis) is each in?<br>
+      C: ( ___ , ___ ) → Quadrant ___<br>
+      D: ( ___ , ___ ) → Quadrant ___<br>
+      E: ( ___ , ___ ) → on the ___ axis<br>
+      H: ( ___ , ___ ) → Quadrant ___
+    </div>
+    <div class="problem-block">
+      2. Plot and connect these points in order. What shape is formed?<br>
+      P(−3, 2) &nbsp; Q(3, 2) &nbsp; R(3, −2) &nbsp; S(−3, −2)<br>
+      Shape: <span class="ans-line"></span><br>
+      Width: <span class="ans-line"></span> units &nbsp; Height: <span class="ans-line"></span> units<br>
+      Area: <span class="ans-line"></span> sq units
+    </div>
+  </div>
+
+  <h2>Part C – Distance Between Points</h2>
+  <p class="hint">For points on the same horizontal or vertical line: distance = |difference of the changing coordinate|</p>
+  <div class="grid-2">
+    <div class="problem-block">3. Distance from (1, 4) to (7, 4) = <span class="ans-line"></span> units</div>
+    <div class="problem-block">4. Distance from (−3, 5) to (−3, −2) = <span class="ans-line"></span> units</div>
+    <div class="problem-block">5. Distance from (−4, 1) to (2, 1) = <span class="ans-line"></span> units</div>
+    <div class="problem-block">6. <span class="star">(2 pts)</span> A rectangle has corners at A(−2, 3) and C(4, −1). Find the perimeter.<br>
+    Length: ___ &nbsp; Width: ___ &nbsp; Perimeter: <span class="ans-line"></span></div>
+  </div>
+
+  <div class="footer"><span>Week 9 · Day 2 – Coordinate Plane</span><span>Score: ______ / 14</span></div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- WEEK 9 · DAY 3 – ALGEBRA WORD PROBLEMS                      -->
+<!-- ============================================================ -->
+<div class="page w9" id="w9d3">
+  <div class="badge">W9<br>D3</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 9 · Day 3 | Algebra Word Problems: Define · Equation · Solve · Check</div>
+  <div class="name-date">Name: <span></span> Date: <span></span></div>
+  <span class="topic-tag">BASIS PREP: ALGEBRA WORD PROBLEMS</span>
+  <div class="intro-box">
+    <strong>Step 1:</strong> Define the variable (let n = …) &nbsp;|&nbsp; <strong>Step 2:</strong> Write the equation &nbsp;|&nbsp; <strong>Step 3:</strong> Solve &nbsp;|&nbsp; <strong>Step 4:</strong> Check!<br>
+    Key words: <em>more than</em> (+), <em>less than</em> (−), <em>times / twice</em> (×), <em>split equally</em> (÷)
+  </div>
+
+  <h2>Part A – One-Step Equations</h2>
+  <p class="hint">Write the equation and solve. Show all work.</p>
+  <div class="grid-2">
+    <div class="problem-block">
+      1. A bag of apples weighs 24 lb. After removing some apples it weighs 17 lb. How many pounds were removed?<br>
+      Let n = ___<br>Equation: ___<br>n = <span class="ans-line"></span>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      2. Tickets for a show cost $6 each. A group spent $54. How many tickets did they buy?<br>
+      Let t = ___<br>Equation: ___<br>t = <span class="ans-line"></span>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      3. A number increased by 13 equals 40. Find the number.<br>
+      Let n = ___<br>Equation: ___<br>n = <span class="ans-line"></span>
+      <div class="work-box-sm"></div>
+    </div>
+    <div class="problem-block">
+      4. Zara has 3 times as many books as Max. Zara has 36 books. How many does Max have?<br>
+      Let m = ___<br>Equation: ___<br>m = <span class="ans-line"></span>
+      <div class="work-box-sm"></div>
+    </div>
+  </div>
+
+  <h2>Part B – Two-Step Equations</h2>
+  <div class="problem-block">
+    5. A taxi charges $3.50 plus $2 per mile. A ride costs $13.50. How many miles was the ride?<br>
+    Let m = ___<br>Equation: ___<br>m = <span class="ans-line"></span>
+    <div class="work-box"></div>
+  </div>
+  <div class="problem-block">
+    6. Zara saves $5 each week and already has $20 saved. How many weeks until she has $65?<br>
+    Let w = ___<br>Equation: ___<br>w = <span class="ans-line"></span>
+    <div class="work-box"></div>
+  </div>
+
+  <h2>Part C – Multi-Step with Two Unknowns</h2>
+  <div class="problem-block">
+    7. <span class="star">(3 pts)</span> Max scored 8 more points than twice Zara's score. Together they scored 44 points. Find each score.<br>
+    Let z = Zara's score &nbsp;→ Max's score = ___<br>
+    Equation: ___<br>
+    Zara = <span class="ans-line"></span> &nbsp; Max = <span class="ans-line"></span> &nbsp; Check: ___
+    <div class="work-box"></div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#9733; Challenge</h3>
+    <p>A store sells small and large candles. A large candle costs $3 more than twice a small candle. Together one small and one large cost $18. Find the cost of each. Show all steps and check your answer.</p>
+    <div class="work-box"></div>
+    Small = $<span class="ans-line"></span> &nbsp; Large = $<span class="ans-line"></span>
+  </div>
+
+  <div class="footer"><span>Week 9 · Day 3 – Algebra Word Problems</span><span>Score: ______ / 15</span></div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- WEEK 9 · DAY 4 – MIXED PRACTICE (All 3 Topics)              -->
+<!-- ============================================================ -->
+<div class="page w9" id="w9d4">
+  <div class="badge">W9<br>D4</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 9 · Day 4 | Mixed Practice: Statistics · Coordinate Plane · Algebra</div>
+  <div class="name-date">Name: <span></span> Date: <span></span></div>
+  <span class="topic-tag">BASIS PREP: MIXED REVIEW</span>
+  <div class="intro-box">
+    Review day! Use everything from this week: mean/median/mode/range, coordinate plane all 4 quadrants, and algebra word problems with variables.
+  </div>
+
+  <h2>Section 1 – Statistics (10 pts)</h2>
+  <div class="problem-block">
+    1. The daily high temperatures (°F) for a week were: 98, 104, 97, 104, 101, 95, 104<br>
+    Mean: <span class="ans-line"></span> &nbsp; Median: <span class="ans-line"></span> &nbsp; Mode: <span class="ans-line"></span> &nbsp; Range: <span class="ans-line"></span>
+    <div class="work-box"></div>
+  </div>
+  <div class="grid-2">
+    <div class="problem-block">
+      2. A data set has a mean of 20 and 6 values. What is the sum of all 6 values?<br>
+      Sum = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      3. <span class="star">(2 pts)</span> Outlier: Data: 5, 6, 7, 6, 50. Which measure is most affected by the outlier — mean or median? Explain.<br>
+      <span class="ans-line-long"></span>
+    </div>
+  </div>
+
+  <h2>Section 2 – Coordinate Plane (10 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      4. Name the quadrant for each point:<br>
+      (−5, 7) → _____ &nbsp; (3, −4) → _____<br>
+      (−2, −8) → _____ &nbsp; (9, 6) → _____
+    </div>
+    <div class="problem-block">
+      5. Triangle vertices: A(0, 5), B(−4, −3), C(4, −3)<br>
+      Base BC length: <span class="ans-line"></span> units<br>
+      Height (from A to base): <span class="ans-line"></span> units<br>
+      Area: <span class="ans-line"></span> sq units
+    </div>
+    <div class="problem-block">
+      6. Point P is reflected across the y-axis. If P = (3, −2), what are the new coordinates?<br>
+      P' = ( ___ , ___ )
+    </div>
+    <div class="problem-block">
+      7. <span class="star">(2 pts)</span> A rectangle has one corner at (−3, 4) and the opposite corner at (5, −1). Find the area.<br>
+      Area = <span class="ans-line"></span> sq units
+      <div class="work-box-sm"></div>
+    </div>
+  </div>
+
+  <h2>Section 3 – Algebra Word Problems (10 pts)</h2>
+  <div class="problem-block">
+    8. <span class="star">(2 pts)</span> A school raised $450 selling tickets. Adult tickets cost $8 and student tickets cost $5. They sold 70 tickets total. How many of each type were sold?<br>
+    Let a = adult tickets → student tickets = ___<br>
+    Equation: ___<br>
+    Adult tickets: <span class="ans-line"></span> &nbsp; Student tickets: <span class="ans-line"></span>
+    <div class="work-box"></div>
+  </div>
+  <div class="problem-block">
+    9. <span class="star">(2 pts)</span> Max thinks of a number. He triples it, subtracts 7, and gets 20. What is the number?<br>
+    Equation: ___ &nbsp; Answer: <span class="ans-line"></span>
+    <div class="work-box-sm"></div>
+  </div>
+
+  <div class="footer"><span>Week 9 · Day 4 – Mixed Practice</span><span>Score: ______ / 30</span></div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- WEEK 9 · DAY 5 – QUIZ                                       -->
+<!-- ============================================================ -->
+<div class="page w9" id="w9d5">
+  <div class="badge">W9<br>Q</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 9 Quiz | Statistics · Coordinate Plane · Algebra Word Problems</div>
+  <div class="name-date">Name: <span></span> Date: <span></span></div>
+  <div class="score-box">Score: _______ / 30 &nbsp;|&nbsp; Time: _______ min</div>
+
+  <h2>Part A – Statistics (10 pts)</h2>
+  <div class="problem-block">
+    1. Data: <strong>4, 9, 4, 7, 11, 4, 8</strong><br>
+    Mean: <span class="ans-line"></span> &nbsp; Median: <span class="ans-line"></span> &nbsp; Mode: <span class="ans-line"></span> &nbsp; Range: <span class="ans-line"></span>
+    <div class="work-box"></div>
+  </div>
+  <div class="grid-2">
+    <div class="problem-block">
+      2. A class of 5 students has test scores with a mean of 84. Four scores are 80, 90, 75, and 95. What is the fifth score?<br>
+      <div class="work-box-sm"></div>
+      Fifth score: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      3. Data: 10, 10, 10, 10. What are the mean, median, mode, and range?<br>
+      Mean: ___ &nbsp; Median: ___<br>
+      Mode: ___ &nbsp; Range: ___<br>
+      What do you notice?<br>
+      <span class="ans-line-long"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Coordinate Plane (10 pts)</h2>
+  <div class="grid-2">
+    <div class="problem-block">
+      4. Plot and label these points on the grid to the right:<br>
+      A(−4, 3) &nbsp; B(2, 3) &nbsp; C(2, −2) &nbsp; D(−4, −2)<br>
+      Connect A→B→C→D→A.<br>
+      Shape: <span class="ans-line"></span><br>
+      Perimeter: <span class="ans-line"></span> units<br>
+      Area: <span class="ans-line"></span> sq units
+    </div>
+    <div style="flex-shrink:0;">
+      <svg width="200" height="200" viewBox="-100 -100 200 200" style="border:2px solid #ccc;border-radius:6px;background:#fff;">
+        <line x1="-80" y1="-80" x2="-80" y2="80" stroke="#eee" stroke-width="1"/><line x1="-60" y1="-80" x2="-60" y2="80" stroke="#eee" stroke-width="1"/>
+        <line x1="-40" y1="-80" x2="-40" y2="80" stroke="#eee" stroke-width="1"/><line x1="-20" y1="-80" x2="-20" y2="80" stroke="#eee" stroke-width="1"/>
+        <line x1="20" y1="-80" x2="20" y2="80" stroke="#eee" stroke-width="1"/><line x1="40" y1="-80" x2="40" y2="80" stroke="#eee" stroke-width="1"/>
+        <line x1="60" y1="-80" x2="60" y2="80" stroke="#eee" stroke-width="1"/><line x1="80" y1="-80" x2="80" y2="80" stroke="#eee" stroke-width="1"/>
+        <line x1="-80" y1="-80" x2="80" y2="-80" stroke="#eee" stroke-width="1"/><line x1="-80" y1="-60" x2="80" y2="-60" stroke="#eee" stroke-width="1"/>
+        <line x1="-80" y1="-40" x2="80" y2="-40" stroke="#eee" stroke-width="1"/><line x1="-80" y1="-20" x2="80" y2="-20" stroke="#eee" stroke-width="1"/>
+        <line x1="-80" y1="20" x2="80" y2="20" stroke="#eee" stroke-width="1"/><line x1="-80" y1="40" x2="80" y2="40" stroke="#eee" stroke-width="1"/>
+        <line x1="-80" y1="60" x2="80" y2="60" stroke="#eee" stroke-width="1"/><line x1="-80" y1="80" x2="80" y2="80" stroke="#eee" stroke-width="1"/>
+        <line x1="-95" y1="0" x2="95" y2="0" stroke="#1a1a1a" stroke-width="2"/>
+        <line x1="0" y1="95" x2="0" y2="-95" stroke="#1a1a1a" stroke-width="2"/>
+        <text x="88" y="12" font-family="Nunito,sans-serif" font-size="10" font-weight="bold" fill="#283593">x</text>
+        <text x="4" y="-88" font-family="Nunito,sans-serif" font-size="10" font-weight="bold" fill="#283593">y</text>
+        <text x="17" y="12" font-family="Nunito,sans-serif" font-size="7" fill="#555">1</text><text x="37" y="12" font-family="Nunito,sans-serif" font-size="7" fill="#555">2</text>
+        <text x="57" y="12" font-family="Nunito,sans-serif" font-size="7" fill="#555">3</text><text x="77" y="12" font-family="Nunito,sans-serif" font-size="7" fill="#555">4</text>
+        <text x="-24" y="12" font-family="Nunito,sans-serif" font-size="7" fill="#555">-1</text><text x="-44" y="12" font-family="Nunito,sans-serif" font-size="7" fill="#555">-2</text>
+        <text x="-64" y="12" font-family="Nunito,sans-serif" font-size="7" fill="#555">-3</text><text x="-84" y="12" font-family="Nunito,sans-serif" font-size="7" fill="#555">-4</text>
+        <text x="4" y="-17" font-family="Nunito,sans-serif" font-size="7" fill="#555">1</text><text x="4" y="-37" font-family="Nunito,sans-serif" font-size="7" fill="#555">2</text>
+        <text x="4" y="-57" font-family="Nunito,sans-serif" font-size="7" fill="#555">3</text><text x="4" y="-77" font-family="Nunito,sans-serif" font-size="7" fill="#555">4</text>
+        <text x="4" y="23" font-family="Nunito,sans-serif" font-size="7" fill="#555">-1</text><text x="4" y="43" font-family="Nunito,sans-serif" font-size="7" fill="#555">-2</text>
+        <text x="4" y="63" font-family="Nunito,sans-serif" font-size="7" fill="#555">-3</text><text x="4" y="83" font-family="Nunito,sans-serif" font-size="7" fill="#555">-4</text>
+      </svg>
+    </div>
+  </div>
+  <div class="problem-block">
+    5. <span class="star">(2 pts)</span> Point M(−3, 5) is reflected across the x-axis. Point N(4, −2) is reflected across the y-axis. Write the new coordinates.<br>
+    M' = ( ___ , ___ ) &nbsp;&nbsp; N' = ( ___ , ___ )
+  </div>
+
+  <h2>Part C – Algebra Word Problems (10 pts)</h2>
+  <div class="problem-block">
+    6. A number is 5 less than three times another number. Their sum is 27. Find both numbers.<br>
+    Let n = smaller number → larger = ___<br>
+    Equation: ___<br>
+    Smaller: <span class="ans-line"></span> &nbsp; Larger: <span class="ans-line"></span>
+    <div class="work-box"></div>
+  </div>
+  <div class="problem-block">
+    7. <span class="star">(2 pts)</span> A plumber charges $45 for the first hour and $30 for each additional hour. A job cost $165. How many total hours did the plumber work?<br>
+    Equation: ___ &nbsp; Hours: <span class="ans-line"></span>
+    <div class="work-box-sm"></div>
+  </div>
+
+  <div class="footer"><span>Week 9 Quiz – BASIS Prep</span><span>Score: ______ / 30</span></div>
+</div>
+
+</body>
+</html>

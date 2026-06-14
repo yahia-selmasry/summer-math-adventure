@@ -13,6 +13,7 @@ Each HTML file is self-contained and formatted for 8.5×11 letter printing.
 ```
 summer_booklet/
 ├── index.html                        ← Navigation hub (start here!)
+├── app.html                          ← Interactive practice app (all 8 weeks, problem generator)
 ├── summer_math_complete_booklet.html ← Weeks 1–5 combined (25 days + quizzes + key)
 ├── summer_booklet_weeks6_8.html      ← Weeks 6–8 combined (15 days + quizzes + key)
 ├── summer_booklet_answer_key.html    ← Standalone answer key (all 8 weeks)
@@ -21,6 +22,7 @@ summer_booklet/
 ├── summer_booklet_week3.html         ← Week 3 standalone
 ├── summer_booklet_week4.html         ← Week 4 standalone
 ├── summer_booklet_week5.html         ← Week 5 standalone
+├── summer_booklet_week9.html         ← Week 9 standalone (BASIS prep: statistics, coordinate plane, algebra word problems)
 ├── CLAUDE.md                         ← This file
 ├── CHANGELOG.md                      ← Version history
 └── comics/
@@ -38,7 +40,9 @@ summer_booklet/
     ├── concept_integers.html
     ├── concept_area_perimeter.html
     ├── concept_rectangular_prisms.html
-    └── concept_coordinate_plane.html
+    ├── concept_coordinate_plane.html
+    ├── concept_statistics.html      ← mean, median, mode, range (Week 9)
+    └── concept_algebra_wordproblems.html ← multi-step algebra word problems (Week 9)
 ```
 
 ---
@@ -55,6 +59,7 @@ summer_booklet/
 | 6 | Exponents | 5A Ch 1 | Exponents, Powers of 10 |
 | 7 | Expressions & Equations | 5A/5B | Expressions, Equations, Inequalities |
 | 8 | Probability | 4D Ch 12 | Chance, Computing Probability, Coins & Dice |
+| 9 | BASIS Prep | 5A/5B/4D | Statistics, Coordinate Plane (4 quadrants), Algebra Word Problems |
 
 ### Comic Guides ↔ BA Topics
 | Comic | BA Source |

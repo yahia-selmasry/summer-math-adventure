@@ -7,44 +7,39 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 15px; color: #1a1a1a; background: #fff; }
-  .page { width: 8.5in; min-height: 11in; padding: 0.55in 0.65in 0.9in; page-break-after: always; break-after: page; position: relative; }
-  h1 { font-size: 26px; font-weight: 900; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
-  h2 { font-size: 19px; font-weight: 800; color: #6a0080; margin: 14px 0 6px; }
-  h3 { font-size: 16px; font-weight: 700; color: #1a3a6b; margin: 10px 0 4px; }
-  .subtitle { font-size: 13px; color: #555; margin-bottom: 12px; }
-  .topic-tag { display: inline-block; background: #6a0080; color: #fff; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 10px; margin-bottom: 12px; }
-  .intro-box { background: #f3e5f5; border-left: 4px solid #6a0080; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 13px; line-height: 1.6; }
-  .problem-block { margin-bottom: 12px; }
-  .ans-line { display: block; border-bottom: 2px solid #333; width: 180px; height: 28px; margin: 6px 0 2px; }
-  .ans-line-long { display: block; border-bottom: 2px solid #333; width: 340px; height: 28px; margin: 6px 0 2px; }
+  body { font-family: 'Nunito', sans-serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+  h1 { font-size: 22px; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #6a0080; margin: 14px 0 6px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; background: #6a0080; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+  .intro-box { background: #f3e5f5; border-left: 4px solid #6a0080; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+  .problem-block { margin-bottom: 14px; }
+  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
-  .box-blank { border: 2px solid #333; min-height: 30px; min-width: 30px; display: inline-block; margin: 2px; padding: 0 4px; vertical-align: middle; }
-  .work-box { border: 2px dashed #aaa; min-height: 80px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
-  .work-box-sm { border: 2px dashed #aaa; min-height: 55px; width: 100%; margin: 4px 0; border-radius: 4px; padding: 4px; }
-  .star { color: #6a0080; font-weight: 800; }
-  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 12px; }
-  .challenge-box h3 { color: #b06000; font-size: 14px; }
-  .footer { position: absolute; bottom: 0.35in; left: 0.65in; right: 0.65in; font-size: 11px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
-  .name-date { display: flex; gap: 40px; margin-bottom: 12px; font-size: 13px; }
-  .name-date span { border-bottom: 2px solid #333; min-width: 180px; display: inline-block; }
-  .badge { float: right; background: #6a0080; color: #fff; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; text-align: center; line-height: 1.2; margin-top: -10px; }
-  .score-box { border: 2px solid #1a3a6b; border-radius: 6px; padding: 8px 16px; display: inline-block; margin-bottom: 10px; font-size: 13px; font-weight: 700; }
-  .hint { font-size: 12px; color: #555; font-style: italic; }
-  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 14px; line-height: 1.1; font-weight: 700; }
-  .frac .num { border-bottom: 2px solid #333; padding: 0 3px; }
+  .box-blank { border: 1.5px solid #333; min-height: 28px; min-width: 28px; display: inline-block; margin: 2px; padding: 0 4px; vertical-align: middle; }
+  .work-box { border: 1.5px dashed #aaa; min-height: 80px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .work-box-sm { border: 1.5px dashed #aaa; min-height: 50px; width: 100%; margin: 4px 0; border-radius: 4px; padding: 4px; }
+  .star { color: #6a0080; font-weight: bold; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .challenge-box h3 { color: #b06000; font-size: 13px; }
+  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge { float: right; background: #6a0080; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .score-box { border: 2px solid #1a3a6b; border-radius: 6px; padding: 8px 16px; display: inline-block; margin-bottom: 10px; font-size: 12px; }
+  .hint { font-size: 10px; color: #555; font-style: italic; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 13px; line-height: 1.1; }
+  .frac .num { border-bottom: 1.5px solid #333; padding: 0 3px; }
   .frac .den { padding: 0 3px; }
-  table { border-collapse: collapse; margin: 8px 0; font-size: 13px; }
+  table { border-collapse: collapse; margin: 8px 0; font-size: 12px; }
   td, th { border: 1px solid #888; padding: 5px 8px; text-align: center; }
-  th { background: #6a0080; color: #fff; font-weight: 800; }
+  th { background: #6a0080; color: #fff; }
+  /* Long division scaffold */
   .div-scaffold { font-family: monospace; font-size: 15px; margin: 8px 0; border-left: 2px solid #333; border-top: 2px solid #333; padding: 4px 8px; display: inline-block; min-width: 80px; min-height: 30px; }
   .div-outside { font-family: monospace; font-size: 15px; display: inline-block; padding-right: 4px; vertical-align: top; padding-top: 4px; }
-  @page { size: letter; margin: 0; }
-  @media print {
-    body { background: #fff; }
-    .page { height: 11in; min-height: unset; overflow: visible; page-break-after: always; break-after: page; }
-  }
 </style>
 </head>
 <body>
@@ -465,7 +460,7 @@
       <tr><td>×?</td><td><span class="box-blank"></span></td><td><span class="box-blank">6</span></td><td>18</td></tr>
       <tr><td>Product</td><td>12</td><td>30</td><td></td></tr>
     </table>
-    <div class="work-box" style="min-height:44px;">Work:</div>
+    <div class="work-box">Work:</div>
   </div>
 
   <div class="footer">
@@ -488,19 +483,19 @@
   <div class="grid-2">
     <div class="problem-block">
       1. 437 × 68 =<br>
-      <div class="work-box" style="min-height:44px;"></div>
+      <div class="work-box"></div>
     </div>
     <div class="problem-block">
       2. 6,720 ÷ 32 =<br>
-      <div class="work-box" style="min-height:44px;"></div>
+      <div class="work-box"></div>
     </div>
     <div class="problem-block">
       3. 5,036 ÷ 14 = &nbsp; Q: ___ R: ___<br>
-      <div class="work-box" style="min-height:44px;"></div>
+      <div class="work-box"></div>
     </div>
     <div class="problem-block">
       4. 4 × (3 + 7)² ÷ 5 =<br>
-      <div class="work-box" style="min-height:44px;"></div>
+      <div class="work-box"></div>
     </div>
   </div>
 
@@ -513,19 +508,19 @@
   </div>
   <div class="problem-block">
     9. <span class="star">(2 pts)</span> You have 24 red beads and 36 blue beads. You want to make identical bracelets using all beads (each bracelet has the same mix). What is the maximum number of bracelets? How many of each color per bracelet?
-    <div class="work-box" style="min-height:36px;"></div>
+    <div class="work-box-sm"></div>
     Bracelets: <span class="ans-line"></span> &nbsp; Red each: <span class="ans-line"></span> &nbsp; Blue each: <span class="ans-line"></span>
   </div>
 
   <h2>Section 3 – Word Problems (6 pts)</h2>
   <div class="problem-block">
     10. <span class="star">(3 pts)</span> A farmer plants 45 rows of corn with 68 plants in each row. He harvests 2,856 plants and stores them in bags of 24 plants each. How many full bags does he fill?
-    <div class="work-box" style="min-height:44px;"></div>
+    <div class="work-box"></div>
     Plants total: <span class="ans-line"></span> &nbsp; Full bags: <span class="ans-line"></span>
   </div>
   <div class="problem-block">
     11. <span class="star">(3 pts)</span> Write and evaluate an expression: A store sells books for $8 and pens for $2. Julia buys 5 books and 7 pens, then gets $4 off. Write the expression and find the total.
-    <div class="work-box" style="min-height:44px;"></div>
+    <div class="work-box"></div>
     Expression: <span class="ans-line-long"></span> &nbsp; Total: $<span class="ans-line"></span>
   </div>
 

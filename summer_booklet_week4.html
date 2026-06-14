@@ -7,51 +7,47 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 15px; color: #1a1a1a; background: #fff; }
-  .page { width: 8.5in; min-height: 11in; padding: 0.55in 0.65in 0.9in; page-break-after: always; break-after: page; position: relative; }
-  h1 { font-size: 26px; font-weight: 900; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
-  h2 { font-size: 19px; font-weight: 800; color: #00695c; margin: 14px 0 6px; }
-  h3 { font-size: 16px; font-weight: 700; color: #1a3a6b; margin: 10px 0 4px; }
-  .subtitle { font-size: 13px; color: #555; margin-bottom: 12px; }
-  .topic-tag { display: inline-block; background: #00695c; color: #fff; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 10px; margin-bottom: 12px; }
-  .intro-box { background: #e0f2f1; border-left: 4px solid #00695c; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 13px; line-height: 1.6; }
-  .problem-block { margin-bottom: 12px; }
-  .ans-line { display: block; border-bottom: 2px solid #333; width: 180px; height: 28px; margin: 6px 0 2px; }
-  .ans-line-long { display: block; border-bottom: 2px solid #333; width: 340px; height: 28px; margin: 6px 0 2px; }
+  body { font-family: 'Nunito', sans-serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+  h1 { font-size: 22px; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #00695c; margin: 14px 0 6px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; background: #00695c; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+  .intro-box { background: #e0f2f1; border-left: 4px solid #00695c; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+  .problem-block { margin-bottom: 14px; }
+  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
   .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; }
-  .box-blank { border: 2px solid #333; min-height: 30px; min-width: 30px; display: inline-block; margin: 2px; padding: 0 4px; vertical-align: middle; }
-  .work-box { border: 2px dashed #aaa; min-height: 80px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
-  .work-box-sm { border: 2px dashed #aaa; min-height: 55px; width: 100%; margin: 4px 0; border-radius: 4px; padding: 4px; }
-  .star { color: #00695c; font-weight: 800; }
-  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 12px; }
-  .challenge-box h3 { color: #b06000; font-size: 14px; }
-  .footer { position: absolute; bottom: 0.35in; left: 0.65in; right: 0.65in; font-size: 11px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
-  .name-date { display: flex; gap: 40px; margin-bottom: 12px; font-size: 13px; }
-  .name-date span { border-bottom: 2px solid #333; min-width: 180px; display: inline-block; }
-  .badge { float: right; background: #00695c; color: #fff; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; text-align: center; line-height: 1.2; margin-top: -10px; }
-  .score-box { border: 2px solid #1a3a6b; border-radius: 6px; padding: 8px 16px; display: inline-block; margin-bottom: 10px; font-size: 13px; font-weight: 700; }
-  .hint { font-size: 12px; color: #555; font-style: italic; }
-  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 14px; line-height: 1.1; font-weight: 700; }
-  .frac .num { border-bottom: 2px solid #333; padding: 0 3px; }
+  .box-blank { border: 1.5px solid #333; min-height: 28px; min-width: 28px; display: inline-block; margin: 2px; padding: 0 4px; vertical-align: middle; }
+  .work-box { border: 1.5px dashed #aaa; min-height: 80px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .work-box-sm { border: 1.5px dashed #aaa; min-height: 50px; width: 100%; margin: 4px 0; border-radius: 4px; padding: 4px; }
+  .star { color: #00695c; font-weight: bold; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .challenge-box h3 { color: #b06000; font-size: 13px; }
+  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge { float: right; background: #00695c; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .score-box { border: 2px solid #1a3a6b; border-radius: 6px; padding: 8px 16px; display: inline-block; margin-bottom: 10px; font-size: 12px; }
+  .hint { font-size: 10px; color: #555; font-style: italic; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 13px; line-height: 1.1; }
+  .frac .num { border-bottom: 1.5px solid #333; padding: 0 3px; }
   .frac .den { padding: 0 3px; }
-  table { border-collapse: collapse; margin: 8px 0; font-size: 13px; }
+  table { border-collapse: collapse; margin: 8px 0; font-size: 12px; }
   td, th { border: 1px solid #888; padding: 5px 8px; text-align: center; }
-  th { background: #00695c; color: #fff; font-weight: 800; }
-  .pv-chart { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { background: #00695c; color: #fff; }
+  /* Place value chart */
+  .pv-chart { width: 100%; border-collapse: collapse; font-size: 11px; }
   .pv-chart td { border: 1px solid #888; height: 28px; min-width: 48px; text-align: center; }
   .pv-chart th { background: #00695c; color: #fff; padding: 4px; }
   .decimal-point-cell { font-size: 18px; font-weight: bold; border: none !important; width: 16px; }
+  /* Grid model for tenths/hundredths */
   .decimal-grid { display: inline-block; border: 2px solid #333; }
   .decimal-grid table { border: none; margin: 0; }
   .decimal-grid td { width: 12px; height: 12px; border: 0.5px solid #bbb; padding: 0; }
   .decimal-filled { background: #80cbc4; }
-  @page { size: letter; margin: 0; }
-  @media print {
-    body { background: #fff; }
-    .page { height: 11in; min-height: unset; overflow: visible; page-break-after: always; break-after: page; }
-  }
 </style>
 </head>
 <body>
@@ -551,16 +547,16 @@
   <div class="grid-2">
     <div class="problem-block">
       6. 8.4 + 3.076 =<br>
-      <div class="work-box" style="min-height:36px;"></div>
+      <div class="work-box-sm"></div>
     </div>
     <div class="problem-block">
       7. 20 − 7.38 =<br>
-      <div class="work-box" style="min-height:36px;"></div>
+      <div class="work-box-sm"></div>
     </div>
   </div>
   <div class="problem-block">
     8. <span class="star">(3 pts)</span> Mei ran 3.75 km on Monday, 4.2 km on Wednesday, and 2.875 km on Friday. How many total km did she run? Round your answer to the nearest tenth.
-    <div class="work-box" style="min-height:36px;"></div>
+    <div class="work-box"></div>
     Total: <span class="ans-line"></span> km &nbsp; Rounded: <span class="ans-line"></span> km
   </div>
 
@@ -568,29 +564,29 @@
   <div class="grid-2">
     <div class="problem-block">
       9. 2.4 × 3.5 =<br>
-      <div class="work-box" style="min-height:36px;"></div>
+      <div class="work-box-sm"></div>
     </div>
     <div class="problem-block">
       10. 0.07 × 0.9 =<br>
-      <div class="work-box" style="min-height:36px;"></div>
+      <div class="work-box-sm"></div>
     </div>
     <div class="problem-block">
       11. 6.48 ÷ 4 =<br>
-      <div class="work-box" style="min-height:36px;"></div>
+      <div class="work-box-sm"></div>
     </div>
     <div class="problem-block">
       12. 4.5 ÷ 0.9 =<br>
-      <div class="work-box" style="min-height:36px;"></div>
+      <div class="work-box-sm"></div>
     </div>
   </div>
   <div class="problem-block">
     13. <span class="star">(2 pts)</span> A bag of trail mix weighs 1.35 kg. There are 6 bags. What is the total weight?
-    <div class="work-box" style="min-height:36px;"></div>
+    <div class="work-box-sm"></div>
     Answer: <span class="ans-line"></span> kg
   </div>
   <div class="problem-block">
     14. <span class="star">(4 pts)</span> You earn $12.50 per hour. You work 8 hours on Saturday and 6.5 hours on Sunday. After spending $24.75 on lunch both days, how much money do you have left?
-    <div class="work-box" style="min-height:44px;"></div>
+    <div class="work-box"></div>
     Answer: $<span class="ans-line"></span>
   </div>
 
