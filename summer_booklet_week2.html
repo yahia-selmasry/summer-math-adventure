@@ -3,51 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <title>Summer Math Booklet – Week 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Georgia', serif; font-size: 13px; color: #1a1a1a; background: #fff; }
-  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
-  h1 { font-size: 22px; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
-  h2 { font-size: 16px; color: #b03a00; margin: 14px 0 6px; }
-  h3 { font-size: 13px; color: #1a3a6b; margin: 10px 0 4px; }
-  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
-  .topic-tag { display: inline-block; background: #2e7d32; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
-  .intro-box { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
-  .problem-block { margin-bottom: 14px; }
+  body { font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 15px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.55in 0.65in 0.9in; page-break-after: always; break-after: page; position: relative; }
+  h1 { font-size: 26px; font-weight: 900; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 19px; font-weight: 800; color: #2e7d32; margin: 14px 0 6px; }
+  h3 { font-size: 16px; font-weight: 700; color: #1a3a6b; margin: 10px 0 4px; }
+  .subtitle { font-size: 13px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; background: #2e7d32; color: #fff; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 10px; margin-bottom: 12px; }
+  .intro-box { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 13px; line-height: 1.6; }
+  .problem-block { margin-bottom: 12px; }
   .problem-block p { line-height: 1.7; margin-bottom: 4px; }
-  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
-  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+  .ans-line { display: block; border-bottom: 2px solid #333; width: 180px; height: 28px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 2px solid #333; width: 340px; height: 28px; margin: 6px 0 2px; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
   .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px 16px; }
-  .box-blank { border: 1.5px solid #333; min-height: 28px; min-width: 28px; display: inline-block; margin: 2px; padding: 0 4px; vertical-align: middle; }
-  .work-box { border: 1.5px dashed #aaa; min-height: 70px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
-  .star { color: #b03a00; font-weight: bold; }
-  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .box-blank { border: 2px solid #333; min-height: 30px; min-width: 30px; display: inline-block; margin: 2px; padding: 0 4px; vertical-align: middle; }
+  .work-box { border: 2px dashed #aaa; min-height: 80px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .star { color: #2e7d32; font-weight: 800; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 12px; }
   .challenge-box h3 { color: #b06000; }
-  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
-  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
-  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
-  .badge { float: right; background: #2e7d32; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
-  .score-box { border: 2px solid #1a3a6b; border-radius: 6px; padding: 8px 16px; display: inline-block; margin-bottom: 10px; font-size: 12px; }
-  .hint { font-size: 10px; color: #555; font-style: italic; }
-  /* Fraction display */
-  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 13px; line-height: 1.1; }
-  .frac .num { border-bottom: 1.5px solid #333; padding: 0 3px; }
+  .footer { position: absolute; bottom: 0.35in; left: 0.65in; right: 0.65in; font-size: 11px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 12px; font-size: 13px; }
+  .name-date span { border-bottom: 2px solid #333; min-width: 180px; display: inline-block; }
+  .badge { float: right; background: #2e7d32; color: #fff; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .score-box { border: 2px solid #1a3a6b; border-radius: 6px; padding: 8px 16px; display: inline-block; margin-bottom: 10px; font-size: 13px; font-weight: 700; }
+  .hint { font-size: 12px; color: #555; font-style: italic; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 14px; line-height: 1.1; font-weight: 700; }
+  .frac .num { border-bottom: 2px solid #333; padding: 0 3px; }
   .frac .den { padding: 0 3px; }
-  /* Number line */
   .nl-container { position: relative; margin: 16px 8px 8px; height: 40px; }
   .nl-line { position: absolute; top: 20px; left: 20px; right: 20px; height: 3px; background: #333; }
   .nl-arrow-r { position: absolute; top: 14px; right: 14px; width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 10px solid #333; }
-  /* Fraction bar model */
-  .bar-model { border: 1.5px solid #333; height: 24px; display: flex; margin: 6px 0; }
-  .bar-seg { border-right: 1px solid #333; flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+  .bar-model { border: 2px solid #333; height: 26px; display: flex; margin: 6px 0; }
+  .bar-seg { border-right: 1px solid #333; flex: 1; display: flex; align-items: center; justify-content: center; font-size: 11px; }
   .bar-seg:last-child { border-right: none; }
   .bar-filled { background: #a5d6a7; }
-  table { border-collapse: collapse; margin: 8px 0; font-size: 12px; width: 100%; }
+  table { border-collapse: collapse; margin: 8px 0; font-size: 13px; width: 100%; }
   td, th { border: 1px solid #888; padding: 5px 8px; text-align: center; }
-  th { background: #2e7d32; color: #fff; }
+  th { background: #2e7d32; color: #fff; font-weight: 800; }
   .circle-frac { display: inline-block; width: 48px; height: 48px; border-radius: 50%; border: 2px solid #333; margin: 4px; vertical-align: middle; position: relative; overflow: hidden; }
+  @page { size: letter; margin: 0; }
+  @media print {
+    body { background: #fff; }
+    .page { height: 11in; min-height: unset; overflow: visible; page-break-after: always; break-after: page; }
+  }
 </style>
 </head>
 <body>

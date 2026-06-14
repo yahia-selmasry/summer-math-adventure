@@ -3,26 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Math Comics – Sample Space &amp; Tree Diagrams</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap');
 * { box-sizing:border-box; margin:0; padding:0; }
-body { background:#f5c842; font-family:'Comic Neue','Comic Sans MS',cursive; padding:24px; max-width:860px; margin:0 auto; }
-.comic-page { background:#f5c842; padding:16px; page-break-after:always; }
+body { background:#f5c842; font-family:'Nunito','Arial Rounded MT Bold',sans-serif; padding:24px; max-width:860px; margin:0 auto; }
+.comic-page { background:#f5c842; padding:16px; }
 .row { display:flex; gap:8px; margin-bottom:8px; }
-.panel { border:3px solid #1a1a1a; border-radius:6px; padding:14px; position:relative; overflow:hidden; flex:1; }
-.panel.bg-sky { background:#cce8f5; } .panel.bg-green { background:#c8e6c9; }
-.panel.bg-peach { background:#ffe0cc; } .panel.bg-tan { background:#f5e6c8; }
+.panel { border:3px solid #1a1a1a; border-radius:6px; padding:14px; position:relative; flex:1; }
+.panel.bg-sky { background:#cce8f5; }
+.panel.bg-green { background:#c8e6c9; }
+.panel.bg-peach { background:#ffe0cc; }
+.panel.bg-tan { background:#f5e6c8; }
 .panel.w2 { flex:2; }
-.title-card { display:inline-block; background:#0277bd; color:#fff; font-family:'Bangers','Impact',sans-serif; font-size:24px; letter-spacing:2px; padding:6px 16px 4px; border:3px solid #1a1a1a; border-radius:8px; margin-bottom:10px; text-shadow:2px 2px 0 #01579b; }
-.title-card .sub { font-size:13px; display:block; font-family:'Comic Neue',cursive; text-shadow:none; letter-spacing:1px; }
-.bubble { background:#fff; border:2.5px solid #1a1a1a; border-radius:18px; padding:8px 12px; font-size:13.5px; line-height:1.45; position:relative; display:inline-block; max-width:220px; font-weight:700; margin:4px; }
+.title-card { display:inline-block; background:#0277bd; color:#fff; font-family:'Bangers','Impact',sans-serif; font-size:26px; letter-spacing:2px; padding:6px 16px 4px; border:3px solid #1a1a1a; border-radius:8px; margin-bottom:10px; text-shadow:2px 2px 0 #01579b; }
+.title-card .sub { font-size:13px; display:block; font-family:'Nunito',sans-serif; text-shadow:none; letter-spacing:1px; font-weight:700; }
+.bubble { background:#fff; border:2.5px solid #1a1a1a; border-radius:18px; padding:8px 12px; font-size:14px; line-height:1.5; position:relative; display:inline-block; font-weight:700; margin:4px; }
 .bubble.left::after { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
 .bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
 .bubble.right::after { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
 .bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
 .bubble.top-left::after { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
 .bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
-.bubble.sm { font-size:12px; max-width:180px; }
+.bubble.big { font-size:16px; }
 .scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:100px; padding-top:8px; }
 .zara { width:70px; height:110px; position:relative; flex-shrink:0; }
 .zara .body { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
@@ -41,21 +43,16 @@ body { background:#f5c842; font-family:'Comic Neue','Comic Sans MS',cursive; pad
 .max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
 .max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
 .max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
-.math-box { background:#fff; border:3px solid #1a1a1a; border-radius:8px; padding:8px 14px; font-size:16px; font-weight:700; display:inline-block; margin:4px; text-align:center; }
+.math-box { background:#fff; border:3px solid #1a1a1a; border-radius:8px; padding:8px 14px; font-size:15px; font-weight:700; display:inline-block; margin:4px; text-align:center; }
 .math-box.blue { background:#e3f2fd; border-color:#0277bd; }
 .math-box.green { background:#e8f5e9; border-color:#2e7d32; }
 .math-box.red { background:#fce4ec; border-color:#c62828; }
 .math-box.orange { background:#fff3e0; border-color:#e65100; }
-sup { font-size:0.65em; vertical-align:super; }
-.think-sign { background:#c62828; color:#fff; font-size:11px; font-weight:700; text-align:center; padding:10px; clip-path:polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%); width:88px; height:88px; display:flex; align-items:center; justify-content:center; line-height:1.3; flex-shrink:0; }
-/* tree diagram */
-.tree { font-size:12px; font-weight:700; }
-.tree-root { display:flex; flex-direction:column; align-items:flex-start; gap:4px; }
-.tree-branch { display:flex; align-items:center; gap:4px; }
-.tree-node { background:#0277bd; color:#fff; border-radius:6px; padding:2px 8px; font-size:12px; }
-.tree-leaf { background:#e8f5e9; border:2px solid #2e7d32; border-radius:6px; padding:2px 8px; font-size:11px; }
-.tree-line { color:#999; }
-.outcome-chip { display:inline-block; background:#fff3e0; border:2px solid #e65100; border-radius:8px; padding:2px 6px; font-size:11px; font-weight:700; margin:2px; }
+.outcome-chip { display:inline-block; background:#fff3e0; border:2px solid #e65100; border-radius:8px; padding:2px 7px; font-size:12px; font-weight:700; margin:2px; }
+.think-box { background:#c62828; color:#fff; font-size:13px; font-weight:800; text-align:center; padding:14px 12px; border-radius:12px; border:3px solid #7a0000; line-height:1.5; }
+.think-box .label { font-family:'Bangers',sans-serif; font-size:17px; letter-spacing:1px; display:block; margin-bottom:4px; }
+@page { size: letter; margin: 0.5in; }
+@media print { body { background:#f5c842; padding:0; } }
 </style>
 </head>
 <body>
@@ -63,21 +60,19 @@ sup { font-size:0.65em; vertical-align:super; }
 
   <!-- ROW 1: INTRO -->
   <div class="row">
-    <div class="panel bg-sky" style="min-height:155px;">
+    <div class="panel bg-sky" style="min-height:160px;">
       <div class="title-card">
         🌳 Sample Space &amp; Tree Diagrams
         <span class="sub">List ALL possible outcomes — miss none!</span>
       </div>
       <div class="scene">
         <div style="display:flex;flex-direction:column;align-items:center;">
-          <div class="bubble left" style="max-width:190px;margin-bottom:18px;">Max, for lunch you can pick Turkey or Veggie AND Water or Juice. How many combos?</div>
+          <div class="bubble left" style="max-width:200px;margin-bottom:18px;">Max, for lunch you can pick Turkey or Veggie AND Water or Juice. How many combos?</div>
           <div class="zara"><div class="body"></div><div class="head"></div><div class="snout"></div><div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div></div>
         </div>
-        <div style="text-align:center;padding:10px;font-size:24px;">
-          🥪 + 🥤 = ?
-        </div>
+        <div style="text-align:center;padding:10px;font-size:28px;">🥪 + 🥤 = ?</div>
         <div style="display:flex;flex-direction:column;align-items:center;">
-          <div class="bubble right" style="max-width:180px;margin-bottom:18px;">I keep losing track when I try to list them! Is there a smarter way?</div>
+          <div class="bubble right" style="max-width:190px;margin-bottom:18px;">I keep losing track when I try to list them! Is there a smarter way?</div>
           <div class="max"><div class="body"></div><div class="head"></div><div class="eye"></div><div class="eye r"></div><div class="horn"></div><div class="fang"></div></div>
         </div>
       </div>
@@ -87,38 +82,35 @@ sup { font-size:0.65em; vertical-align:super; }
   <!-- ROW 2: SAMPLE SPACE + TREE DIAGRAM -->
   <div class="row">
     <div class="panel bg-peach">
-      <div class="bubble top-left" style="max-width:200px;margin-bottom:16px;">
+      <div class="bubble top-left" style="max-width:220px;margin-bottom:20px;">
         A <strong>tree diagram</strong> shows every branch of choices!
       </div>
-      <div style="margin-top:36px;">
-        <!-- Tree diagram -->
-        <div style="font-size:13px;line-height:1.8;font-family:monospace;">
-          <div style="color:#0277bd;font-weight:700;">START</div>
-          <div>├── <span style="color:#0277bd;font-weight:700;">Turkey</span></div>
-          <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span style="color:#2e7d32;font-weight:700;">Water</span> &nbsp;&nbsp;&nbsp;<span class="outcome-chip">Turkey + Water</span></div>
-          <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span style="color:#2e7d32;font-weight:700;">Juice</span> &nbsp;&nbsp;&nbsp;&nbsp;<span class="outcome-chip">Turkey + Juice</span></div>
-          <div>└── <span style="color:#0277bd;font-weight:700;">Veggie</span></div>
-          <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span style="color:#2e7d32;font-weight:700;">Water</span> &nbsp;&nbsp;&nbsp;<span class="outcome-chip">Veggie + Water</span></div>
-          <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span style="color:#2e7d32;font-weight:700;">Juice</span> &nbsp;&nbsp;&nbsp;&nbsp;<span class="outcome-chip">Veggie + Juice</span></div>
+      <div style="margin-top:40px;">
+        <div style="font-size:13px;line-height:2;font-family:monospace;font-weight:700;">
+          <div style="color:#0277bd;">START</div>
+          <div>├── <span style="color:#0277bd;">Turkey</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span style="color:#2e7d32;">Water</span> &nbsp;<span class="outcome-chip">Turkey + Water</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span style="color:#2e7d32;">Juice</span> &nbsp;&nbsp;<span class="outcome-chip">Turkey + Juice</span></div>
+          <div>└── <span style="color:#0277bd;">Veggie</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span style="color:#2e7d32;">Water</span> &nbsp;<span class="outcome-chip">Veggie + Water</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span style="color:#2e7d32;">Juice</span> &nbsp;&nbsp;<span class="outcome-chip">Veggie + Juice</span></div>
         </div>
-        <div style="margin-top:8px;" class="math-box blue" style="font-size:13px;">
-          Total: <span style="color:#c62828;font-size:18px;">4</span> outcomes
-        </div>
+        <div style="margin-top:10px;" class="math-box blue">Total: <span style="color:#c62828;font-size:18px;">4</span> outcomes</div>
       </div>
     </div>
 
     <div class="panel bg-green">
-      <div class="bubble top-left" style="max-width:240px;margin-bottom:16px;">
-        The <strong>Sample Space</strong> is just the full list: {TW, TJ, VW, VJ}.<br>Once you have it, probability is easy!
+      <div class="bubble top-left" style="max-width:260px;margin-bottom:20px;">
+        The <strong>Sample Space</strong> is the full list: {TW, TJ, VW, VJ}.<br>Once you have it, probability is easy!
       </div>
-      <div style="margin-top:36px;">
-        <div style="font-size:13px;font-weight:700;margin-bottom:8px;">From our 4 outcomes:</div>
-        <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;">
+      <div style="margin-top:40px;">
+        <div style="font-size:14px;font-weight:700;margin-bottom:10px;">From our 4 outcomes:</div>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;">
           <div>P(Turkey + Juice) = <span class="math-box blue" style="font-size:13px;padding:3px 8px;display:inline;">1/4</span></div>
           <div>P(any Veggie) = <span class="math-box blue" style="font-size:13px;padding:3px 8px;display:inline;">2/4 = 1/2</span></div>
           <div>P(any Water) = <span class="math-box blue" style="font-size:13px;padding:3px 8px;display:inline;">2/4 = 1/2</span></div>
         </div>
-        <div style="margin-top:8px;font-size:11px;color:#555;">Each outcome is equally likely (1/4 each)</div>
+        <div style="margin-top:10px;font-size:12px;color:#555;font-style:italic;">Each outcome is equally likely (1/4 each)</div>
       </div>
     </div>
   </div>
@@ -126,15 +118,14 @@ sup { font-size:0.65em; vertical-align:super; }
   <!-- ROW 3: COUNTING PRINCIPLE -->
   <div class="row">
     <div class="panel bg-tan" style="min-height:170px;">
-      <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div class="zara" style="transform:scale(0.82);transform-origin:bottom left;flex-shrink:0;"><div class="body"></div><div class="head"></div><div class="snout"></div><div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div></div>
+      <div style="display:flex;align-items:flex-start;gap:16px;">
+        <div class="zara" style="transform:scale(0.85);transform-origin:bottom left;flex-shrink:0;margin-top:10px;"><div class="body"></div><div class="head"></div><div class="snout"></div><div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div></div>
         <div style="flex:1;padding-top:6px;">
-          <div class="bubble top-left" style="max-width:290px;margin-bottom:16px;">
-            And here's the shortcut — the <strong>Counting Principle</strong>! Just multiply the number of choices!
+          <div class="bubble top-left" style="max-width:300px;margin-bottom:20px;">
+            Here's the shortcut — the <strong>Counting Principle</strong>! Just multiply the number of choices at each step!
           </div>
-          <div style="margin-top:36px;">
-            <div style="font-size:14px;font-weight:700;margin-bottom:8px;">2 sandwiches × 2 drinks = <span style="color:#c62828;font-size:18px;">4</span> total ✓</div>
-            <div style="font-size:13px;margin-bottom:10px;">Works for any number of choices!</div>
+          <div style="margin-top:40px;">
+            <div style="font-size:15px;font-weight:800;margin-bottom:10px;">2 sandwiches × 2 drinks = <span style="color:#c62828;font-size:20px;">4</span> total ✓</div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;">
               <div class="math-box blue" style="font-size:12px;text-align:left;padding:8px;">
                 Shirts: 4 colors × 3 sizes<br>= <strong style="color:#c62828;">12</strong> outfits
@@ -155,34 +146,38 @@ sup { font-size:0.65em; vertical-align:super; }
     </div>
   </div>
 
-  <!-- ROW 4: COIN + DIE EXAMPLE + THINK -->
+  <!-- ROW 4: COIN + DIE EXAMPLE + CHALLENGE -->
   <div class="row">
     <div class="panel bg-sky">
-      <div style="font-size:13px;font-weight:700;margin-bottom:8px;">Coin + Spinner (R/B/G):</div>
-      <div style="font-size:12px;font-family:monospace;line-height:1.7;">
+      <div style="font-size:14px;font-weight:800;margin-bottom:8px;">Example: Coin + Spinner (Red / Blue / Green)</div>
+      <div style="font-size:13px;font-family:monospace;line-height:2;font-weight:700;">
         H → <span class="outcome-chip">H-R</span> <span class="outcome-chip">H-B</span> <span class="outcome-chip">H-G</span><br>
         T → <span class="outcome-chip">T-R</span> <span class="outcome-chip">T-B</span> <span class="outcome-chip">T-G</span>
       </div>
-      <div style="margin-top:8px;font-size:13px;">
+      <div style="margin-top:10px;font-size:14px;font-weight:700;">
         Total: 2 × 3 = <strong style="color:#c62828;">6</strong> outcomes<br>
         P(H and Red) = <strong style="color:#c62828;">1/6</strong>
       </div>
-      <div class="scene" style="min-height:60px;margin-top:6px;">
+      <div class="scene" style="min-height:70px;margin-top:8px;">
         <div style="display:flex;flex-direction:column;align-items:center;">
-          <div class="bubble right sm" style="margin-bottom:10px;">The tree never misses any outcome! 🌳</div>
-          <div class="max" style="transform:scale(0.75);transform-origin:bottom center;"><div class="body"></div><div class="head"></div><div class="eye"></div><div class="eye r"></div><div class="horn"></div><div class="fang"></div></div>
+          <div class="bubble right" style="max-width:200px;margin-bottom:10px;font-size:13px;">The tree never misses any outcome! 🌳</div>
+          <div class="max" style="transform:scale(0.8);transform-origin:bottom center;"><div class="body"></div><div class="head"></div><div class="eye"></div><div class="eye r"></div><div class="horn"></div><div class="fang"></div></div>
         </div>
       </div>
     </div>
 
-    <div class="panel bg-peach" style="display:flex;align-items:center;gap:12px;">
-      <div class="think-sign">Ice cream: Choc or Vanilla + Waffle, Sugar, or Cup cone. Draw the tree and find P(Choc+Waffle)!</div>
-      <div style="flex:1;font-size:12px;">
-        <div style="font-family:monospace;line-height:1.8;">
-          Choc → W, S, C<br>
-          Vanilla → W, S, C
+    <div class="panel bg-peach">
+      <div class="think-box">
+        <span class="label">⭐ Try It!</span>
+        Ice cream: Choc or Vanilla<br>+ Waffle, Sugar, or Cup cone.<br><br>
+        Draw the tree diagram and find P(Choc + Waffle)!
+      </div>
+      <div style="margin-top:12px;font-size:13px;font-weight:700;">
+        <div style="font-family:monospace;line-height:2;">
+          Choc → <span class="outcome-chip">W</span> <span class="outcome-chip">S</span> <span class="outcome-chip">C</span><br>
+          Vanilla → <span class="outcome-chip">W</span> <span class="outcome-chip">S</span> <span class="outcome-chip">C</span>
         </div>
-        <div style="margin-top:6px;">Total = 2 × 3 = <strong style="color:#c62828;">6</strong></div>
+        <div style="margin-top:8px;">Total = 2 × 3 = <strong style="color:#c62828;">6</strong></div>
         <div>P(Choc+Waffle) = <strong style="color:#c62828;">1/6</strong></div>
       </div>
     </div>
@@ -191,12 +186,12 @@ sup { font-size:0.65em; vertical-align:super; }
   <!-- ROW 5: QUICK RECAP -->
   <div class="row">
     <div class="panel bg-green" style="min-height:70px;">
-      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-        <div style="font-size:14px;font-weight:700;color:#0277bd;">⚡ Quick Recap:</div>
-        <div style="font-size:12px;display:flex;gap:12px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <div style="font-size:15px;font-weight:800;color:#0277bd;">⚡ Quick Recap:</div>
+        <div style="font-size:13px;display:flex;gap:16px;flex-wrap:wrap;font-weight:700;">
           <div>🌳 <strong>Tree diagram</strong> = list every branch</div>
-          <div>📋 <strong>Sample space</strong> = all outcomes in {}</div>
-          <div>✖️ <strong>Counting principle</strong> = multiply the choices</div>
+          <div>📋 <strong>Sample space</strong> = all outcomes in {&nbsp;}</div>
+          <div>✖️ <strong>Counting principle</strong> = multiply choices</div>
           <div>🎯 <strong>Probability</strong> = 1 outcome ÷ total outcomes</div>
         </div>
       </div>
