@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summer Math Practice App</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --w1: #1a3a6b; --w2: #2e7d32; --w3: #6a0080; --w4: #00695c;
+    --w5: #bf360c; --w6: #e65100; --w7: #283593; --w8: #00695c;
+    --accent: #1a3a6b;
+  }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #f0f4f8;
+    color: #1a1a1a;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .app-header {
+    background: var(--accent);
+    color: #fff;
+    padding: 18px 24px 14px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  }
+  .app-header h1 {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: .5px;
+  }
+  .app-header .sub {
+    font-size: 13px;
+    opacity: .8;
+    margin-top: 2px;
+  }
+  .star-badge {
+    font-family: 'Bangers', cursive;
+    font-size: 28px;
+    background: #fff;
+    color: var(--accent);
+    border-radius: 50%;
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ── Layout ── */
+  .app-body {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px 16px 48px;
+  }
+
+  /* ── Week Selector ── */
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .week-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    text-align: left;
+    line-height: 1.35;
+    transition: transform .12s, box-shadow .12s, opacity .12s;
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+    position: relative;
+  }
+  .week-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.22); }
+  .week-btn.active { outline: 3px solid #fff; outline-offset: 2px; box-shadow: 0 0 0 5px rgba(0,0,0,.25); }
+  .week-btn .wlabel { font-size: 11px; font-weight: 700; opacity: .8; display: block; margin-bottom: 2px; }
+  .week-btn .wtopic { font-size: 14px; font-weight: 900; }
+
+  /* ── Session panel ── */
+  #session-panel { display: none; }
+
+  .session-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .session-title {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--accent);
+  }
+  .session-controls { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .btn {
+    border: none;
+    border-radius: 8px;
+    padding: 9px 18px;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    transition: opacity .15s;
+  }
+  .btn:hover { opacity: .85; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-ghost { background: #e0e7ef; color: #333; }
+
+  /* ── Score bar ── */
+  .score-bar {
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    flex-wrap: wrap;
+  }
+  .score-item { text-align: center; }
+  .score-item .num {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .score-item .label { font-size: 11px; color: #777; font-weight: 700; margin-top: 2px; }
+  .score-bar .progress-wrap { flex: 1; min-width: 120px; }
+  .progress-track {
+    height: 10px;
+    background: #e0e7ef;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: var(--accent);
+    transition: width .4s;
+  }
+
+  /* ── Problem cards ── */
+  .problems-list { display: flex; flex-direction: column; gap: 16px; }
+
+  .problem-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    border-left: 5px solid var(--accent);
+    transition: border-color .2s;
+  }
+  .problem-card.correct { border-left-color: #2e7d32; background: #f1f8f2; }
+  .problem-card.wrong   { border-left-color: #c62828; background: #fff5f5; }
+
+  .problem-num {
+    font-size: 11px;
+    font-weight: 800;
+    color: #aaa;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  .problem-text {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .problem-text .frac {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    margin: 0 3px;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  .problem-text .frac .num { border-bottom: 1.5px solid currentColor; padding: 0 2px; }
+  .problem-text .frac .den { padding: 0 2px; }
+
+  .answer-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .answer-input {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    width: 160px;
+    outline: none;
+    transition: border-color .15s;
+  }
+  .answer-input:focus { border-color: var(--accent); }
+  .answer-input.correct { border-color: #2e7d32; background: #e8f5e9; color: #1b5e20; }
+  .answer-input.wrong   { border-color: #c62828; background: #ffebee; color: #b71c1c; }
+
+  .check-btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer;
+    transition: opacity .15s;
+  }
+  .check-btn:hover { opacity: .85; }
+  .check-btn:disabled { opacity: .4; cursor: default; }
+
+  .feedback {
+    display: none;
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .feedback.correct { background: #e8f5e9; color: #1b5e20; display: block; }
+  .feedback.wrong   { background: #ffebee; color: #b71c1c; display: block; }
+
+  .hint-text {
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+    margin-top: 6px;
+  }
+
+  /* ── Completion banner ── */
+  .complete-banner {
+    display: none;
+    background: linear-gradient(135deg, #2e7d32 0%, #1a3a6b 100%);
+    color: #fff;
+    border-radius: 14px;
+    padding: 28px 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .complete-banner h2 { font-size: 28px; font-weight: 900; margin-bottom: 6px; }
+  .complete-banner p  { font-size: 15px; opacity: .9; }
+  .complete-banner .big-score {
+    font-family: 'Bangers', cursive;
+    font-size: 56px;
+    line-height: 1;
+    margin: 10px 0;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 500px) {
+    .answer-input { width: 120px; }
+    .week-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  sup { font-size: 0.7em; vertical-align: super; }
+</style>
+</head>
+<body>
+
+<header class="app-header" id="main-header">
+  <div class="star-badge">★</div>
+  <div>
+    <h1>Summer Math Adventure</h1>
+    <div class="sub">Grade 4 → 5 · Interactive Practice · All 8 Weeks</div>
+  </div>
+</header>
+
+<div class="app-body">
+
+  <!-- Week selector -->
+  <div class="week-grid" id="week-grid">
+    <button class="week-btn" style="background:var(--w1)" data-week="1" onclick="selectWeek(1)">
+      <span class="wlabel">WEEK 1</span>
+      <span class="wtopic">Number Sense</span>
+    </button>
+    <button class="week-btn" style="background:var(--w2)" data-week="2" onclick="selectWeek(2)">
+      <span class="wlabel">WEEK 2</span>
+      <span class="wtopic">Fractions</span>
+    </button>
+    <button class="week-btn" style="background:var(--w3)" data-week="3" onclick="selectWeek(3)">
+      <span class="wlabel">WEEK 3</span>
+      <span class="wtopic">Multiplication &amp; Division</span>
+    </button>
+    <button class="week-btn" style="background:var(--w4)" data-week="4" onclick="selectWeek(4)">
+      <span class="wlabel">WEEK 4</span>
+      <span class="wtopic">Decimals</span>
+    </button>
+    <button class="week-btn" style="background:var(--w5)" data-week="5" onclick="selectWeek(5)">
+      <span class="wlabel">WEEK 5</span>
+      <span class="wtopic">Geometry</span>
+    </button>
+    <button class="week-btn" style="background:var(--w6)" data-week="6" onclick="selectWeek(6)">
+      <span class="wlabel">WEEK 6</span>
+      <span class="wtopic">Exponents</span>
+    </button>
+    <button class="week-btn" style="background:var(--w7)" data-week="7" onclick="selectWeek(7)">
+      <span class="wlabel">WEEK 7</span>
+      <span class="wtopic">Expressions &amp; Equations</span>
+    </button>
+    <button class="week-btn" style="background:var(--w8)" data-week="8" onclick="selectWeek(8)">
+      <span class="wlabel">WEEK 8</span>
+      <span class="wtopic">Probability</span>
+    </button>
+  </div>
+
+  <!-- Session panel -->
+  <div id="session-panel">
+    <div class="session-header">
+      <div class="session-title" id="session-title">Week 1 — Number Sense</div>
+      <div class="session-controls">
+        <button class="btn btn-primary" onclick="newSession()">🔀 New Problems</button>
+        <button class="btn btn-ghost" onclick="checkAll()">✓ Check All</button>
+        <button class="btn btn-ghost" onclick="backToMenu()">← Weeks</button>
+      </div>
+    </div>
+
+    <div class="score-bar" id="score-bar">
+      <div class="score-item">
+        <div class="num" id="score-correct">0</div>
+        <div class="label">Correct</div>
+      </div>
+      <div class="score-item">
+        <div class="num" id="score-total">0</div>
+        <div class="label">Answered</div>
+      </div>
+      <div class="score-item">
+        <div class="num" id="score-pct">–</div>
+        <div class="label">Score</div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="complete-banner" id="complete-banner">
+      <h2>🎉 Session Complete!</h2>
+      <div class="big-score" id="banner-score">0/10</div>
+      <p id="banner-msg">Keep it up — try a new set!</p>
+    </div>
+
+    <div class="problems-list" id="problems-list"></div>
+  </div>
+
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────
+//  UTILITIES
+// ─────────────────────────────────────────────────────────────
+const WEEK_COLORS = ['','#1a3a6b','#2e7d32','#6a0080','#00695c','#bf360c','#e65100','#283593','#00695c'];
+const WEEK_NAMES  = ['','Number Sense','Fractions','Multiplication & Division','Decimals','Geometry','Exponents','Expressions & Equations','Probability'];
+
+let currentWeek = 0;
+let problems = [];
+let sessionAnswered = 0;
+let sessionCorrect = 0;
+
+const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const pick = arr => arr[rand(0, arr.length - 1)];
+const shuffle = arr => [...arr].sort(() => Math.random() - .5);
+
+function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+function lcm(a, b) { return (a * b) / gcd(a, b); }
+
+function frac(n, d) {
+  return `<span class="frac"><span class="num">${n}</span><span class="den">${d}</span></span>`;
+}
+
+// Normalize answer: trim, lowercase, remove trailing zeros after decimal
+function normalizeAns(s) {
+  s = String(s).trim().toLowerCase().replace(/\s+/g, ' ');
+  // if it's a number, parse and reformat
+  const n = Number(s);
+  if (!isNaN(n) && s !== '') return String(n);
+  return s;
+}
+
+function checkAnswer(userAns, correctAns) {
+  const u = normalizeAns(userAns);
+  // correctAns may be array of accepted strings
+  const accepted = Array.isArray(correctAns) ? correctAns : [correctAns];
+  return accepted.some(a => normalizeAns(String(a)) === u);
+}
+
+// ─────────────────────────────────────────────────────────────
+//  PROBLEM GENERATORS — one generator returns {q, a, hint}
+//  q: HTML string for the question
+//  a: string or array of accepted strings
+//  hint: short explanation string
+// ─────────────────────────────────────────────────────────────
+
+// ── WEEK 1: Number Sense ─────────────────────────────────────
+const week1Generators = [
+  // Place value: value of underlined digit
+  () => {
+    const places = ['ones','tens','hundreds','thousands','ten-thousands','hundred-thousands','millions'];
+    const placeVals = [1,10,100,1000,10000,100000,1000000];
+    const pi = rand(1, 6);
+    const digits = Array.from({length: pi+1}, (_, i) => i === 0 ? rand(1,9) : rand(0,9));
+    const num = digits.reduce((acc, d, i) => acc + d * placeVals[i], 0);
+    const targetI = rand(1, pi);
+    const targetDigit = Math.floor(num / placeVals[targetI]) % 10;
+    const value = targetDigit * placeVals[targetI];
+    const formatted = num.toLocaleString();
+    return {
+      q: `What is the <strong>value</strong> of the digit <strong>${targetDigit}</strong> in the number <strong>${formatted}</strong>?`,
+      a: [String(value), value.toLocaleString()],
+      hint: `The digit ${targetDigit} is in the ${places[targetI]} place. Its value = ${targetDigit} × ${placeVals[targetI].toLocaleString()} = ${value.toLocaleString()}.`
+    };
+  },
+  // Rounding to nearest ...
+  () => {
+    const levels = [
+      {name:'ten', factor:10},
+      {name:'hundred', factor:100},
+      {name:'thousand', factor:1000},
+      {name:'ten-thousand', factor:10000},
+      {name:'hundred-thousand', factor:100000},
+      {name:'million', factor:1000000},
+    ];
+    const level = pick(levels.slice(0, 5));
+    const base = rand(1, 9) * level.factor * rand(2, 9);
+    const offset = rand(0, level.factor - 1);
+    const num = base + offset;
+    const rounded = Math.round(num / level.factor) * level.factor;
+    return {
+      q: `Round <strong>${num.toLocaleString()}</strong> to the nearest <strong>${level.name}</strong>.`,
+      a: [String(rounded), rounded.toLocaleString()],
+      hint: `Look at the digit just to the right of the ${level.name} place. ${offset % (level.factor/10) >= level.factor/20 ? 'It is 5 or more, so round up.' : 'It is less than 5, so round down.'} Answer: ${rounded.toLocaleString()}`
+    };
+  },
+  // Expanded form
+  () => {
+    const digits = Array.from({length: rand(4,7)}, (_, i) => i === 0 ? rand(1,9) : rand(0,9));
+    const pv = [1,10,100,1000,10000,100000,1000000];
+    const num = digits.reduce((acc, d, i) => acc + d * pv[i], 0);
+    const expanded = digits.map((d, i) => d > 0 ? `${(d * pv[i]).toLocaleString()}` : null).filter(Boolean).reverse().join(' + ');
+    return {
+      q: `Write <strong>${num.toLocaleString()}</strong> in expanded form. (Use + between parts, e.g. 4,000 + 300 + 5)`,
+      a: expanded,
+      hint: `Break each non-zero digit: ${expanded}`
+    };
+  },
+  // Compare two numbers
+  () => {
+    const a = rand(100000, 9999999);
+    let b = a + pick([-rand(1,999999), rand(1,999999)]);
+    if (b <= 0) b = a + 1;
+    const ans = a > b ? '>' : a < b ? '<' : '=';
+    return {
+      q: `Compare: <strong>${a.toLocaleString()}</strong> ___ <strong>${b.toLocaleString()}</strong><br><em>Type >, &lt;, or =</em>`,
+      a: [ans],
+      hint: `${a.toLocaleString()} ${ans} ${b.toLocaleString()}`
+    };
+  },
+  // Number patterns
+  () => {
+    const types = [
+      () => { const s=rand(1,9)*1000; const r=pick([2,3,5,10]); return {seq:[s,s*r,s*r*r,s*r*r*r], next:s*r*r*r*r, rule:`×${r}`}; },
+      () => { const s=rand(5,20)*10000; const d=rand(1,5)*10000; return {seq:[s,s-d,s-2*d,s-3*d], next:s-4*d, rule:`−${d.toLocaleString()}`}; },
+      () => { const s=rand(2,9)*100; const d=rand(2,8)*100; return {seq:[s,s+d,s+2*d,s+3*d], next:s+4*d, rule:`+${d.toLocaleString()}`}; },
+    ];
+    const {seq, next, rule} = pick(types)();
+    return {
+      q: `Find the pattern: <strong>${seq.map(n=>n.toLocaleString()).join(' → ')} → ?</strong>`,
+      a: [String(next), next.toLocaleString()],
+      hint: `The rule is ${rule}. Next: ${next.toLocaleString()}`
+    };
+  },
+];
+
+// ── WEEK 2: Fractions ────────────────────────────────────────
+const week2Generators = [
+  // Equivalent fractions
+  () => {
+    const d1 = pick([2,3,4,5,6,8]);
+    const n1 = rand(1, d1-1);
+    const factor = rand(2,5);
+    return {
+      q: `Find the missing number: ${frac(n1, d1)} = ${frac('?', d1*factor)}`,
+      a: String(n1 * factor),
+      hint: `Multiply both top and bottom by ${factor}: ${n1}×${factor}=${n1*factor}, denominator = ${d1*factor}`
+    };
+  },
+  // Simplify fraction
+  () => {
+    const bases = [[2,3],[3,4],[4,5],[2,5],[3,7]];
+    const [n0,d0] = pick(bases);
+    const factor = rand(2,5);
+    return {
+      q: `Simplify: ${frac(n0*factor, d0*factor)} — enter as <em>numerator/denominator</em> (e.g. 2/3)`,
+      a: [`${n0}/${d0}`],
+      hint: `GCF is ${factor}. Divide both by ${factor}: ${n0}/${d0}`
+    };
+  },
+  // Add unlike fractions
+  () => {
+    const denoms = [[2,3],[3,4],[4,5],[2,5],[3,8],[4,6]];
+    const [d1,d2] = pick(denoms);
+    const n1 = rand(1, d1-1);
+    const n2 = rand(1, d2-1);
+    const l = lcm(d1,d2);
+    const sum_n = n1*(l/d1) + n2*(l/d2);
+    const g = gcd(sum_n, l);
+    const rn = sum_n/g, rd = l/g;
+    const ans = rd === 1 ? String(rn) : `${rn}/${rd}`;
+    // mixed number form if improper
+    const mixed = rn >= rd ? `${Math.floor(rn/rd)} ${rn%rd}/${rd}` : null;
+    const accepted = [ans];
+    if (mixed) accepted.push(mixed);
+    return {
+      q: `Add: ${frac(n1,d1)} + ${frac(n2,d2)} — enter as <em>numerator/denominator</em> or whole number`,
+      a: accepted,
+      hint: `LCD = ${l}. Convert: ${frac(n1*(l/d1), l)} + ${frac(n2*(l/d2), l)} = ${frac(sum_n,l)}${g>1?` = ${frac(rn,rd)}`:''}${mixed?' = '+mixed:''}`
+    };
+  },
+  // Subtract unlike fractions
+  () => {
+    const denoms = [[2,3],[3,4],[4,5],[2,5],[3,8]];
+    const [d1,d2] = pick(denoms);
+    const l = lcm(d1,d2);
+    let n1, n2;
+    do { n1=rand(1,d1-1); n2=rand(1,d2-1); } while (n1*(l/d1) <= n2*(l/d2));
+    const diff_n = n1*(l/d1) - n2*(l/d2);
+    const g = gcd(diff_n, l);
+    const rn = diff_n/g, rd = l/g;
+    const ans = rd === 1 ? String(rn) : `${rn}/${rd}`;
+    return {
+      q: `Subtract: ${frac(n1,d1)} − ${frac(n2,d2)} — enter as <em>numerator/denominator</em>`,
+      a: [ans],
+      hint: `LCD = ${l}. Difference = ${frac(diff_n,l)}${g>1?` = ${frac(rn,rd)}`:''}. Answer: ${ans}`
+    };
+  },
+  // Multiply fractions
+  () => {
+    const d1 = pick([2,3,4,5,6]);
+    const d2 = pick([2,3,4,5,6]);
+    const n1 = rand(1, d1);
+    const n2 = rand(1, d2);
+    const rn_raw = n1*n2, rd_raw = d1*d2;
+    const g = gcd(rn_raw, rd_raw);
+    const rn = rn_raw/g, rd = rd_raw/g;
+    const ans = rd === 1 ? String(rn) : `${rn}/${rd}`;
+    const mixed = rn > rd ? `${Math.floor(rn/rd)} ${rn%rd}/${rd}` : null;
+    const accepted = [ans];
+    if (mixed && rn%rd !== 0) accepted.push(mixed);
+    return {
+      q: `Multiply: ${frac(n1,d1)} × ${frac(n2,d2)} — enter as <em>numerator/denominator</em> or whole number`,
+      a: accepted,
+      hint: `Multiply straight across: ${n1}×${n2}=<b>${n1*n2}</b> over ${d1}×${d2}=${d1*d2}. Simplified: ${ans}`
+    };
+  },
+  // Compare fractions
+  () => {
+    const pairs = [[3,4,5,8],[2,3,3,5],[5,6,7,8],[1,2,3,7],[7,12,5,8]];
+    const [n1,d1,n2,d2] = pick(pairs);
+    const l = lcm(d1,d2);
+    const lv = n1*(l/d1), rv = n2*(l/d2);
+    const ans = lv > rv ? '>' : lv < rv ? '<' : '=';
+    return {
+      q: `Compare: ${frac(n1,d1)} ___ ${frac(n2,d2)}<br><em>Type >, &lt;, or =</em>`,
+      a: [ans],
+      hint: `LCD = ${l}. ${n1}/${d1} = ${lv}/${l}, ${n2}/${d2} = ${rv}/${l}. So the answer is ${ans}.`
+    };
+  },
+];
+
+// ── WEEK 3: Multiplication & Division ───────────────────────
+const week3Generators = [
+  // Multi-digit multiplication
+  () => {
+    const a = rand(12, 99);
+    const b = rand(12, 99);
+    return {
+      q: `Calculate: <strong>${a} × ${b}</strong>`,
+      a: [String(a*b), (a*b).toLocaleString()],
+      hint: `${a} × ${b} = ${a*b}`
+    };
+  },
+  () => {
+    const a = rand(100, 999);
+    const b = rand(10, 99);
+    return {
+      q: `Calculate: <strong>${a.toLocaleString()} × ${b}</strong>`,
+      a: [String(a*b), (a*b).toLocaleString()],
+      hint: `${a} × ${b} = ${(a*b).toLocaleString()}`
+    };
+  },
+  // Long division
+  () => {
+    const divisor = rand(11, 25);
+    const quotient = rand(20, 99);
+    const remainder = rand(0, divisor - 1);
+    const dividend = divisor * quotient + remainder;
+    const ans = remainder === 0 ? String(quotient) : `${quotient} r${remainder}`;
+    const accepted = remainder === 0 ? [String(quotient), (quotient).toLocaleString()] : [ans, `${quotient} remainder ${remainder}`];
+    return {
+      q: `Divide: <strong>${dividend.toLocaleString()} ÷ ${divisor}</strong> (enter answer, e.g. 45 or 45 r3)`,
+      a: accepted,
+      hint: `${dividend} ÷ ${divisor} = ${quotient}${remainder ? ' remainder '+remainder : ''}. Check: ${divisor}×${quotient}+${remainder}=${dividend}.`
+    };
+  },
+  // Divisibility rules
+  () => {
+    const rules = [
+      {n:2, rule:'divisible by 2 if last digit is even'},
+      {n:3, rule:'divisible by 3 if digit sum is divisible by 3'},
+      {n:5, rule:'divisible by 5 if last digit is 0 or 5'},
+      {n:10,rule:'divisible by 10 if last digit is 0'},
+    ];
+    const {n, rule} = pick(rules);
+    const isDivisible = pick([true, false]);
+    let num;
+    if (isDivisible) {
+      num = rand(100, 999) * n;
+    } else {
+      do { num = rand(100, 9999); } while (num % n === 0);
+    }
+    return {
+      q: `Is <strong>${num.toLocaleString()}</strong> divisible by <strong>${n}</strong>? Type <em>yes</em> or <em>no</em>.`,
+      a: [isDivisible ? 'yes' : 'no'],
+      hint: `${rule}. ${num.toLocaleString()} ${isDivisible ? 'IS' : 'is NOT'} divisible by ${n}.`
+    };
+  },
+  // Factors
+  () => {
+    const nums = [12,15,18,20,24,28,30,36,40,42,48,56,60,72];
+    const num = pick(nums);
+    const factors = [];
+    for (let i = 1; i <= num; i++) { if (num % i === 0) factors.push(i); }
+    return {
+      q: `How many factors does <strong>${num}</strong> have? (Count all numbers that divide evenly into ${num})`,
+      a: [String(factors.length)],
+      hint: `Factors of ${num}: ${factors.join(', ')} → ${factors.length} factors total.`
+    };
+  },
+  // Word problem: multiplication
+  () => {
+    const rows = rand(12, 48);
+    const cols = rand(12, 48);
+    const price = rand(8, 25);
+    return {
+      q: `A theater has <strong>${rows} rows</strong> with <strong>${cols} seats</strong> each. Tickets cost $<strong>${price}</strong>. How much money is collected if the theater is full?`,
+      a: [String(rows*cols*price), `$${(rows*cols*price).toLocaleString()}`, (rows*cols*price).toLocaleString()],
+      hint: `${rows} × ${cols} = ${rows*cols} seats. ${rows*cols} × $${price} = $${(rows*cols*price).toLocaleString()}`
+    };
+  },
+];
+
+// ── WEEK 4: Decimals ─────────────────────────────────────────
+const week4Generators = [
+  // Decimal place value
+  () => {
+    const places = ['tenths','hundredths','thousandths'];
+    const pv = [0.1, 0.01, 0.001];
+    const digits = [rand(1,9), rand(0,9), rand(0,9), rand(0,9)];
+    const num = digits[0] + digits[1]*0.1 + digits[2]*0.01 + digits[3]*0.001;
+    const pi = rand(0,2);
+    const value = (digits[pi+1] * pv[pi]).toFixed(3).replace(/\.?0+$/, '') || '0';
+    return {
+      q: `In <strong>${num.toFixed(3)}</strong>, what is the value of the digit in the <strong>${places[pi]}</strong> place?`,
+      a: [value, String(parseFloat(value))],
+      hint: `The ${places[pi]} digit is ${digits[pi+1]}. Its value = ${digits[pi+1]} × ${pv[pi]} = ${value}`
+    };
+  },
+  // Round decimal
+  () => {
+    const types = [
+      {name:'tenth', factor:10},
+      {name:'hundredth', factor:100},
+    ];
+    const {name, factor} = pick(types);
+    const raw = rand(100, 9999) / 1000;
+    const rounded = Math.round(raw * factor) / factor;
+    return {
+      q: `Round <strong>${raw.toFixed(3)}</strong> to the nearest <strong>${name}</strong>.`,
+      a: [String(rounded), rounded.toFixed(name==='tenth'?1:2)],
+      hint: `Answer: ${rounded.toFixed(name==='tenth'?1:2)}`
+    };
+  },
+  // Add decimals
+  () => {
+    const a = rand(10,999)/100;
+    const b = rand(10,999)/100;
+    const sum = Math.round((a+b)*100)/100;
+    return {
+      q: `Add: <strong>${a.toFixed(2)} + ${b.toFixed(2)}</strong>`,
+      a: [String(sum), sum.toFixed(2)],
+      hint: `Line up the decimal points: ${a.toFixed(2)} + ${b.toFixed(2)} = ${sum.toFixed(2)}`
+    };
+  },
+  // Subtract decimals
+  () => {
+    let a = rand(100,999)/100, b = rand(10,99)/100;
+    if (a < b) [a, b] = [b, a];
+    const diff = Math.round((a-b)*100)/100;
+    return {
+      q: `Subtract: <strong>${a.toFixed(2)} − ${b.toFixed(2)}</strong>`,
+      a: [String(diff), diff.toFixed(2)],
+      hint: `${a.toFixed(2)} − ${b.toFixed(2)} = ${diff.toFixed(2)}`
+    };
+  },
+  // Compare decimals
+  () => {
+    const a = rand(100, 9999)/1000;
+    const offset = pick([-1,1]) * rand(1,50)/1000;
+    let b = Math.round((a + offset)*1000)/1000;
+    if (b <= 0) b = a + 0.001;
+    const ans = a > b ? '>' : a < b ? '<' : '=';
+    return {
+      q: `Compare: <strong>${a.toFixed(3)}</strong> ___ <strong>${b.toFixed(3)}</strong><br><em>Type >, &lt;, or =</em>`,
+      a: [ans],
+      hint: `${a.toFixed(3)} ${ans} ${b.toFixed(3)}`
+    };
+  },
+  // Decimal as fraction
+  () => {
+    const templates = [
+      () => { const n=rand(1,9); return {dec:`0.${n}`, frac:`${n}/10`}; },
+      () => { const n=rand(10,99); const g=gcd(n,100); return {dec:`0.${String(n).padStart(2,'0')}`, frac:`${n/g}/${100/g}`}; },
+    ];
+    const {dec, frac: f} = pick(templates)();
+    return {
+      q: `Write <strong>${dec}</strong> as a fraction in simplest form (e.g. 3/10)`,
+      a: [f],
+      hint: `${dec} = ${f}`
+    };
+  },
+];
+
+// ── WEEK 5: Geometry ─────────────────────────────────────────
+const week5Generators = [
+  // Area of rectangle
+  () => {
+    const l = rand(4, 25), w = rand(3, 20);
+    return {
+      q: `Find the <strong>area</strong> of a rectangle with length <strong>${l} cm</strong> and width <strong>${w} cm</strong>.`,
+      a: [String(l*w), `${l*w} cm²`, `${l*w} sq cm`],
+      hint: `Area = length × width = ${l} × ${w} = ${l*w} cm²`
+    };
+  },
+  // Perimeter of rectangle
+  () => {
+    const l = rand(4, 25), w = rand(3, 20);
+    return {
+      q: `Find the <strong>perimeter</strong> of a rectangle with length <strong>${l} m</strong> and width <strong>${w} m</strong>.`,
+      a: [String(2*(l+w)), `${2*(l+w)} m`],
+      hint: `Perimeter = 2 × (l + w) = 2 × (${l}+${w}) = ${2*(l+w)} m`
+    };
+  },
+  // Area of triangle
+  () => {
+    const b = rand(4,20)*2, h = rand(3,15)*2;
+    return {
+      q: `Find the <strong>area</strong> of a triangle with base <strong>${b} cm</strong> and height <strong>${h} cm</strong>.`,
+      a: [String((b*h)/2), `${(b*h)/2} cm²`],
+      hint: `Area = ½ × base × height = ½ × ${b} × ${h} = ${b*h/2} cm²`
+    };
+  },
+  // Missing side given area
+  () => {
+    const w = rand(3, 12);
+    const area = w * rand(4, 18);
+    const l = area / w;
+    return {
+      q: `A rectangle has an area of <strong>${area} cm²</strong> and a width of <strong>${w} cm</strong>. What is its length?`,
+      a: [String(l), `${l} cm`],
+      hint: `Length = Area ÷ Width = ${area} ÷ ${w} = ${l} cm`
+    };
+  },
+  // Angle types
+  () => {
+    const angles = [
+      {deg: rand(1,89),   type:'acute'},
+      {deg: 90,           type:'right'},
+      {deg: rand(91,179), type:'obtuse'},
+      {deg: 180,          type:'straight'},
+    ];
+    const {deg, type} = pick(angles);
+    return {
+      q: `An angle measures <strong>${deg}°</strong>. What type of angle is it? (acute, right, obtuse, or straight)`,
+      a: [type],
+      hint: `${deg}° → ${type}. Acute: <90°, Right: 90°, Obtuse: 90°–180°, Straight: 180°`
+    };
+  },
+  // Complementary / supplementary angles
+  () => {
+    const isComp = pick([true, false]);
+    const angle = isComp ? rand(1, 89) : rand(1, 179);
+    const partner = isComp ? 90 - angle : 180 - angle;
+    return {
+      q: `Two angles are <strong>${isComp ? 'complementary' : 'supplementary'}</strong>. One angle is <strong>${angle}°</strong>. What is the other angle?`,
+      a: [String(partner), `${partner}°`],
+      hint: `${isComp?'Complementary':'Supplementary'} means they add to ${isComp?90:180}°. ${isComp?90:180} − ${angle} = ${partner}°`
+    };
+  },
+];
+
+// ── WEEK 6: Exponents ────────────────────────────────────────
+const week6Generators = [
+  // Evaluate power
+  () => {
+    const base = rand(2, 9);
+    const exp = rand(2, 4);
+    const val = Math.pow(base, exp);
+    return {
+      q: `Evaluate: <strong>${base}<sup>${exp}</sup></strong>`,
+      a: [String(val), val.toLocaleString()],
+      hint: `${base}<sup>${exp}</sup> = ${Array(exp).fill(base).join(' × ')} = ${val}`
+    };
+  },
+  // Power of 10
+  () => {
+    const exp = rand(1, 6);
+    const val = Math.pow(10, exp);
+    return {
+      q: `What is <strong>10<sup>${exp}</sup></strong>?`,
+      a: [String(val), val.toLocaleString()],
+      hint: `10<sup>${exp}</sup> = 1 followed by ${exp} zero${exp===1?'':'s'} = ${val.toLocaleString()}`
+    };
+  },
+  // Write in exponential form
+  () => {
+    const base = rand(2, 9);
+    const exp = rand(2, 5);
+    const expanded = Array(exp).fill(base).join(' × ');
+    return {
+      q: `Write <strong>${expanded}</strong> in exponential form (e.g. 3^4 means 3 to the 4th power, enter as 3^4)`,
+      a: [`${base}^${exp}`, `${base}**${exp}`],
+      hint: `${base} multiplied ${exp} times = ${base}^${exp}`
+    };
+  },
+  // Base and exponent identification
+  () => {
+    const base = rand(2,9), exp = rand(2,5);
+    const part = pick(['base','exponent']);
+    return {
+      q: `In <strong>${base}<sup>${exp}</sup></strong>, what is the <strong>${part}</strong>?`,
+      a: [String(part==='base'?base:exp)],
+      hint: `In ${base}<sup>${exp}</sup>: base = ${base}, exponent = ${exp}`
+    };
+  },
+  // Zero and one exponents
+  () => {
+    const base = rand(2,12);
+    const exp = pick([0, 1]);
+    const val = exp === 0 ? 1 : base;
+    return {
+      q: `What is <strong>${base}<sup>${exp}</sup></strong>?`,
+      a: [String(val)],
+      hint: `Any number to the power of ${exp===0?'0 equals 1':'1 equals itself'}. So ${base}<sup>${exp}</sup> = ${val}.`
+    };
+  },
+  // Compare powers
+  () => {
+    const a_base=rand(2,5), a_exp=rand(2,4);
+    const b_base=rand(2,5), b_exp=rand(2,4);
+    const av = Math.pow(a_base,a_exp), bv = Math.pow(b_base,b_exp);
+    const ans = av > bv ? '>' : av < bv ? '<' : '=';
+    return {
+      q: `Compare: <strong>${a_base}<sup>${a_exp}</sup></strong> ___ <strong>${b_base}<sup>${b_exp}</sup></strong><br><em>Type >, &lt;, or =</em>`,
+      a: [ans],
+      hint: `${a_base}<sup>${a_exp}</sup> = ${av}, ${b_base}<sup>${b_exp}</sup> = ${bv}. Answer: ${ans}`
+    };
+  },
+];
+
+// ── WEEK 7: Expressions & Equations ─────────────────────────
+const week7Generators = [
+  // Evaluate expression (one variable)
+  () => {
+    const varName = pick(['x','n','a','m']);
+    const coeff = rand(2,8);
+    const add = rand(0,20);
+    const val = rand(1,10);
+    const result = coeff*val + add;
+    return {
+      q: `Evaluate <strong>${coeff}${varName} + ${add}</strong> when ${varName} = <strong>${val}</strong>`,
+      a: [String(result)],
+      hint: `Substitute: ${coeff}(${val}) + ${add} = ${coeff*val} + ${add} = ${result}`
+    };
+  },
+  // Evaluate expression (subtraction)
+  () => {
+    const varName = pick(['x','n','k']);
+    const coeff = rand(2,8);
+    const sub = rand(1,15);
+    const val = rand(3,12);
+    const result = coeff*val - sub;
+    return {
+      q: `Evaluate <strong>${coeff}${varName} − ${sub}</strong> when ${varName} = <strong>${val}</strong>`,
+      a: [String(result)],
+      hint: `${coeff}(${val}) − ${sub} = ${coeff*val} − ${sub} = ${result}`
+    };
+  },
+  // Solve for x (one-step addition)
+  () => {
+    const x = rand(5, 30);
+    const add = rand(3, 20);
+    const total = x + add;
+    return {
+      q: `Solve for x: &nbsp;<strong>x + ${add} = ${total}</strong>`,
+      a: [String(x)],
+      hint: `Subtract ${add} from both sides: x = ${total} − ${add} = ${x}`
+    };
+  },
+  // Solve for x (one-step multiplication)
+  () => {
+    const x = rand(3, 15);
+    const coeff = rand(2, 9);
+    const product = x * coeff;
+    return {
+      q: `Solve for x: &nbsp;<strong>${coeff}x = ${product}</strong>`,
+      a: [String(x)],
+      hint: `Divide both sides by ${coeff}: x = ${product} ÷ ${coeff} = ${x}`
+    };
+  },
+  // Inequality: true or false
+  () => {
+    const a = rand(1,20), b = rand(1,20), c = rand(1,20);
+    const varName = pick(['n','x']);
+    const op = pick(['<','>','≤','≥']);
+    const opMap = {'<': v=>v<c, '>': v=>v>c, '≤': v=>v<=c, '≥': v=>v>=c};
+    const check = opMap[op](a*b);
+    return {
+      q: `Is the inequality <strong>${a} × ${b} ${op} ${c}</strong> true or false? Type <em>true</em> or <em>false</em>.`,
+      a: [check ? 'true' : 'false'],
+      hint: `${a} × ${b} = ${a*b}. Is ${a*b} ${op} ${c}? ${check ? 'Yes → true' : 'No → false'}`
+    };
+  },
+  // Order of operations
+  () => {
+    const a=rand(2,9), b=rand(2,8), c=rand(1,10);
+    const types = [
+      {q:`${a} + ${b} × ${c}`, a: a + b*c},
+      {q:`(${a} + ${b}) × ${c}`, a: (a+b)*c},
+      {q:`${a} × ${b} + ${c}`, a: a*b + c},
+      {q:`${a*b} ÷ ${a} + ${c}`, a: b + c},
+    ];
+    const {q, a: ans} = pick(types);
+    return {
+      q: `Use order of operations: <strong>${q}</strong>`,
+      a: [String(ans)],
+      hint: `Remember PEMDAS: Parentheses first, then × and ÷, then + and −. Answer: ${ans}`
+    };
+  },
+];
+
+// ── WEEK 8: Probability ──────────────────────────────────────
+const week8Generators = [
+  // Basic probability (simple fraction)
+  () => {
+    const total = pick([4,5,6,8,10,12]);
+    const favorable = rand(1, total-1);
+    const g = gcd(favorable, total);
+    const pn = favorable/g, pd = total/g;
+    const ans = pd === 1 ? '1' : `${pn}/${pd}`;
+    const colors = ['red','blue','green','yellow','purple','orange'];
+    const picked = shuffle(colors).slice(0, total);
+    const target = picked[0];
+    const targetCount = picked.filter(c=>c===target).length;
+    // make count = favorable
+    const marbles = [...Array(favorable).fill(target), ...shuffle(colors.filter(c=>c!==target)).slice(0, total-favorable)];
+    return {
+      q: `A bag has <strong>${marbles.map(c=>`1 ${c}`).join(', ')}</strong> marble${total>1?'s':''}. What is the probability of picking a <strong>${target}</strong> marble? (enter as fraction, e.g. 1/4)`,
+      a: [ans, `${favorable}/${total}`],
+      hint: `P(${target}) = favorable ÷ total = ${favorable}/${total}${g>1?` = ${pn}/${pd}`:''}`
+    };
+  },
+  // Probability as decimal / percent
+  () => {
+    const n = rand(1,4), d = pick([4,5,10]);
+    const pct = Math.round(n/d*100);
+    const dec = n/d;
+    return {
+      q: `A probability is ${frac(n,d)}. What is this as a <strong>percent</strong>? (enter just the number, e.g. 25)`,
+      a: [String(pct), `${pct}%`],
+      hint: `${n}/${d} × 100 = ${pct}%`
+    };
+  },
+  // Complement
+  () => {
+    const n = rand(1,5), d = pick([6,8,10,12]);
+    const g = gcd(n,d);
+    const compN = d-n, compG = gcd(compN, d);
+    const ans = `${compN/compG}/${d/compG}`;
+    return {
+      q: `The probability of an event is ${frac(n,d)}. What is the probability it does <strong>NOT</strong> happen? (enter as fraction)`,
+      a: [ans, `${compN}/${d}`],
+      hint: `P(not event) = 1 − ${n}/${d} = ${d-n}/${d}${compG>1?` = ${ans}`:''}`
+    };
+  },
+  // Coin flips — sample space
+  () => {
+    const flips = rand(1, 2);
+    const space = flips === 1 ? 2 : 4;
+    const outcomes = flips === 1 ? ['H','T'] : ['HH','HT','TH','TT'];
+    const target = pick(outcomes);
+    const count = outcomes.filter(o=>o===target).length;
+    const g = gcd(count, space);
+    const ans = `${count/g}/${space/g}`;
+    return {
+      q: `A fair coin is flipped <strong>${flips}</strong> time${flips>1?'s':''}. How many total outcomes are possible?`,
+      a: [String(space)],
+      hint: `Each flip has 2 outcomes (H or T). Total outcomes = 2<sup>${flips}</sup> = ${space}`
+    };
+  },
+  // Dice probability
+  () => {
+    const sides = 6;
+    const target = rand(1,6);
+    const favorable = 1;
+    const g = gcd(favorable, sides);
+    const ans = `${favorable/g}/${sides/g}`;
+    return {
+      q: `You roll a fair 6-sided die. What is the probability of rolling a <strong>${target}</strong>? (enter as fraction)`,
+      a: [ans],
+      hint: `1 outcome out of 6 equally likely. P(${target}) = 1/6`
+    };
+  },
+  // Expected outcomes
+  () => {
+    const prob_n = rand(1,3), prob_d = pick([4,5,6]);
+    const trials = prob_d * rand(10, 30);
+    const expected = Math.round(trials * prob_n / prob_d);
+    return {
+      q: `The probability of winning a game is ${frac(prob_n, prob_d)}. If you play <strong>${trials}</strong> times, about how many times would you expect to win?`,
+      a: [String(expected)],
+      hint: `Expected wins = probability × trials = ${prob_n}/${prob_d} × ${trials} = ${expected}`
+    };
+  },
+];
+
+const GENERATORS = {
+  1: week1Generators,
+  2: week2Generators,
+  3: week3Generators,
+  4: week4Generators,
+  5: week5Generators,
+  6: week6Generators,
+  7: week7Generators,
+  8: week8Generators,
+};
+
+// ─────────────────────────────────────────────────────────────
+//  SESSION MANAGEMENT
+// ─────────────────────────────────────────────────────────────
+const PROBLEMS_PER_SESSION = 10;
+
+function selectWeek(week) {
+  currentWeek = week;
+  const color = WEEK_COLORS[week];
+
+  // Update accent color
+  document.documentElement.style.setProperty('--accent', color);
+  document.getElementById('main-header').style.background = color;
+  document.querySelector('.star-badge').style.color = color;
+
+  // Mark active button
+  document.querySelectorAll('.week-btn').forEach(b => b.classList.toggle('active', +b.dataset.week === week));
+
+  document.getElementById('session-title').textContent = `Week ${week} — ${WEEK_NAMES[week]}`;
+  document.getElementById('session-panel').style.display = 'block';
+
+  newSession();
+  document.getElementById('session-panel').scrollIntoView({behavior:'smooth'});
+}
+
+function backToMenu() {
+  document.getElementById('session-panel').style.display = 'none';
+  document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+  currentWeek = 0;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function newSession() {
+  sessionAnswered = 0;
+  sessionCorrect = 0;
+  updateScoreBar();
+  document.getElementById('complete-banner').style.display = 'none';
+
+  const gens = GENERATORS[currentWeek];
+  const chosen = [];
+  for (let i = 0; i < PROBLEMS_PER_SESSION; i++) {
+    chosen.push(gens[i % gens.length]());
+  }
+  // Shuffle which generator runs first each time
+  const shuffledGens = shuffle([...Array(gens.length).keys()]);
+  problems = [];
+  for (let i = 0; i < PROBLEMS_PER_SESSION; i++) {
+    problems.push(gens[shuffledGens[i % shuffledGens.length]]());
+  }
+
+  renderProblems();
+}
+
+function renderProblems() {
+  const list = document.getElementById('problems-list');
+  list.innerHTML = '';
+  problems.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'problem-card';
+    card.id = `card-${i}`;
+    card.innerHTML = `
+      <div class="problem-num">Problem ${i+1} of ${problems.length}</div>
+      <div class="problem-text">${p.q}</div>
+      <div class="answer-row">
+        <input class="answer-input" id="ans-${i}" type="text" placeholder="Your answer…" autocomplete="off"
+          onkeydown="if(event.key==='Enter') checkOne(${i})">
+        <button class="check-btn" id="btn-${i}" onclick="checkOne(${i})">Check ✓</button>
+      </div>
+      <div class="feedback" id="fb-${i}"></div>
+    `;
+    list.appendChild(card);
+  });
+}
+
+function checkOne(i) {
+  const input = document.getElementById(`ans-${i}`);
+  const fb = document.getElementById(`fb-${i}`);
+  const card = document.getElementById(`card-${i}`);
+  const btn = document.getElementById(`btn-${i}`);
+
+  if (btn.disabled) return;
+
+  const userAns = input.value.trim();
+  if (!userAns) { input.focus(); return; }
+
+  const isCorrect = checkAnswer(userAns, problems[i].a);
+
+  input.classList.toggle('correct', isCorrect);
+  input.classList.toggle('wrong', !isCorrect);
+  card.classList.toggle('correct', isCorrect);
+  card.classList.toggle('wrong', !isCorrect);
+
+  if (isCorrect) {
+    fb.className = 'feedback correct';
+    fb.textContent = '✓ Correct! Great work!';
+  } else {
+    const correct = Array.isArray(problems[i].a) ? problems[i].a[0] : problems[i].a;
+    fb.className = 'feedback wrong';
+    fb.innerHTML = `✗ Not quite. The answer is <strong>${correct}</strong>.<br><span class="hint-text">💡 ${problems[i].hint}</span>`;
+  }
+
+  btn.disabled = true;
+  input.disabled = true;
+
+  sessionAnswered++;
+  if (isCorrect) sessionCorrect++;
+  updateScoreBar();
+
+  if (sessionAnswered === problems.length) showComplete();
+}
+
+function checkAll() {
+  problems.forEach((_, i) => {
+    if (!document.getElementById(`btn-${i}`).disabled) checkOne(i);
+  });
+}
+
+function updateScoreBar() {
+  document.getElementById('score-correct').textContent = sessionCorrect;
+  document.getElementById('score-total').textContent = sessionAnswered;
+  const pct = sessionAnswered > 0 ? Math.round(sessionCorrect / sessionAnswered * 100) : 0;
+  document.getElementById('score-pct').textContent = sessionAnswered > 0 ? `${pct}%` : '–';
+  const progress = (sessionAnswered / problems.length) * 100;
+  document.getElementById('progress-fill').style.width = `${progress}%`;
+}
+
+function showComplete() {
+  const banner = document.getElementById('complete-banner');
+  banner.style.display = 'block';
+  document.getElementById('banner-score').textContent = `${sessionCorrect}/${problems.length}`;
+  const pct = Math.round(sessionCorrect / problems.length * 100);
+  const messages = [
+    pct === 100 ? '🌟 Perfect score! You\'re a math superstar!' : '',
+    pct >= 80   ? '🎉 Excellent work! Keep it up!' : '',
+    pct >= 60   ? '👍 Good effort! Review the hints and try again.' : '',
+    pct <  60   ? '💪 Keep practicing — you\'ll get there!' : '',
+  ].filter(Boolean);
+  document.getElementById('banner-msg').textContent = messages[0];
+  banner.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
