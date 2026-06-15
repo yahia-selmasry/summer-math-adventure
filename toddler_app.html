@@ -790,6 +790,24 @@ const MATH_MODULES=[
 const STICKER_SLOTS=30;
 
 /* ═══════════════════════════════════════
+   AUDIO UNLOCK
+   Browsers block speechSynthesis until a user gesture. On first tap anywhere,
+   we fire a silent utterance to unlock the audio context for the session.
+═══════════════════════════════════════ */
+let _audioUnlocked=false;
+function unlockAudio(){
+  if(_audioUnlocked||!window.speechSynthesis)return;
+  _audioUnlocked=true;
+  // Trigger voice list load
+  window.speechSynthesis.getVoices();
+  // Fire a silent utterance so Chrome marks the context as user-activated
+  const u=new SpeechSynthesisUtterance(' ');
+  u.volume=0;u.rate=2;
+  window.speechSynthesis.speak(u);
+}
+document.addEventListener('pointerdown',unlockAudio,{once:true,capture:true});
+
+/* ═══════════════════════════════════════
    HOOKS
 ═══════════════════════════════════════ */
 // Pick the warmest, most natural-sounding English voice available on this device
@@ -820,11 +838,20 @@ function useSpeedSpeech(){
   const speak=useCallback((text,lang='en-US',rate=0.8)=>{
     if(!window.speechSynthesis)return;
     window.speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text);
-    const v=getBestVoice();
-    if(v&&/^en/i.test(lang))u.voice=v;
-    u.lang=lang;u.rate=rate;u.pitch=1.05;u.volume=1;
-    window.speechSynthesis.speak(u);
+    const fire=()=>{
+      const u=new SpeechSynthesisUtterance(text);
+      const v=getBestVoice();
+      if(v&&/^en/i.test(lang))u.voice=v;
+      u.lang=lang;u.rate=rate;u.pitch=1.05;u.volume=1;
+      window.speechSynthesis.speak(u);
+    };
+    // If voices aren't loaded yet, wait for them then retry once
+    if(!window.speechSynthesis.getVoices().length){
+      const prev=window.speechSynthesis.onvoiceschanged;
+      window.speechSynthesis.onvoiceschanged=()=>{_bestVoice=null;getBestVoice();if(prev)prev();fire();};
+    } else {
+      fire();
+    }
   },[]);
   const speakRepeat=useCallback((text,lang,rate,times=3,delayMs=1200)=>{
     if(!window.speechSynthesis)return;
