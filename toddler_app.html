@@ -795,17 +795,26 @@ const STICKER_SLOTS=30;
    we fire a silent utterance to unlock the audio context for the session.
 ═══════════════════════════════════════ */
 let _audioUnlocked=false;
-function unlockAudio(){
-  if(_audioUnlocked||!window.speechSynthesis)return;
-  _audioUnlocked=true;
-  // Trigger voice list load
-  window.speechSynthesis.getVoices();
-  // Fire a silent utterance so Chrome marks the context as user-activated
-  const u=new SpeechSynthesisUtterance(' ');
-  u.volume=0;u.rate=2;
-  window.speechSynthesis.speak(u);
+let _audioCtx=null;
+function getAudioCtx(){
+  if(!_audioCtx)_audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  return _audioCtx;
 }
-document.addEventListener('pointerdown',unlockAudio,{once:true,capture:true});
+function unlockAudio(){
+  if(_audioUnlocked)return;
+  _audioUnlocked=true;
+  // Resume AudioContext (required by Chrome autoplay policy)
+  try{const ctx=getAudioCtx();if(ctx.state==='suspended')ctx.resume();}catch(e){}
+  // Pre-load voice list
+  if(window.speechSynthesis){
+    window.speechSynthesis.getVoices();
+    // Silent utterance to mark speechSynthesis as user-activated
+    const u=new SpeechSynthesisUtterance(' ');
+    u.volume=0;u.rate=10;
+    window.speechSynthesis.speak(u);
+  }
+}
+document.addEventListener('pointerdown',unlockAudio,{capture:true});
 
 /* ═══════════════════════════════════════
    HOOKS
@@ -838,6 +847,8 @@ function useSpeedSpeech(){
   const speak=useCallback((text,lang='en-US',rate=0.8)=>{
     if(!window.speechSynthesis)return;
     window.speechSynthesis.cancel();
+    // Ensure AudioContext is resumed before speaking
+    try{const ctx=getAudioCtx();if(ctx.state==='suspended')ctx.resume();}catch(e){}
     const fire=()=>{
       const u=new SpeechSynthesisUtterance(text);
       const v=getBestVoice();
@@ -2108,7 +2119,7 @@ function MathWorld({onHome,stickerBoard}){
 /* ═══════════════════════════════════════
    HOME SCREEN
 ═══════════════════════════════════════ */
-function HomeScreen({onArabic,onMath,stickers}){
+function HomeScreen({onMath,stickers}){
   const{speak}=useSpeedSpeech();
   return<div className="screen home-bg" style={{justifyContent:'flex-start',alignItems:'center'}}>
     {[{t:'6%',l:'8%'},{t:'10%',r:'10%'},{t:'18%',l:'45%'},{t:'4%',l:'30%'}].map((s,i)=>(
@@ -2118,17 +2129,12 @@ function HomeScreen({onArabic,onMath,stickers}){
       <span key={i} className="cloud-deco" style={{top:c.t,left:c.l,right:c.r,animationDelay:`${i*.7}s`}} aria-hidden="true">☁️</span>
     ))}
     <h1 className="home-title">🌟 Little Stars<br/>Learning</h1>
-    <p className="home-subtitle">Arabic Letters &amp; Math for Little Learners</p>
+    <p className="home-subtitle">Math &amp; Logic for Little Learners</p>
     <div style={{display:'flex',gap:10,marginTop:12,background:'rgba(255,255,255,.55)',borderRadius:20,padding:'7px 16px',boxShadow:'0 2px 8px rgba(0,0,0,.08)'}}>
       <span style={{fontFamily:'Nunito',fontWeight:700,fontSize:14,color:'#3a6080'}}>🏆 {stickers.length} stickers earned</span>
     </div>
-    <div className="door-grid">
-      <button className="door-card door-arabic" onClick={()=>{speak("Let's learn Arabic letters!",'ar-SA',.8);onArabic();}} aria-label="Open Arabic Letters world">
-        <span className="door-mascot" role="img" aria-hidden="true">🦉</span>
-        <div className="door-label">Arabic<br/>Letters 🌙</div>
-        <div className="door-sub" style={{color:'rgba(255,229,122,.7)'}}>16 letters • Hunt • Match</div>
-      </button>
-      <button className="door-card door-math" onClick={()=>{speak("Let's do math!",'en-US',.8);onMath();}} aria-label="Open Math world">
+    <div style={{marginTop:28,width:'100%',maxWidth:360,display:'flex',justifyContent:'center'}}>
+      <button className="door-card door-math" style={{width:'100%',maxWidth:320,minHeight:220}} onClick={()=>{speak("Let's do math!",'en-US',.8);onMath();}} aria-label="Open Math world">
         <span className="door-mascot" role="img" aria-hidden="true">🐰</span>
         <div className="door-label">Math &amp;<br/>Logic ☀️</div>
         <div className="door-sub" style={{color:'rgba(27,58,92,.6)'}}>🎬 Cartoons + 6 activities</div>
@@ -2149,8 +2155,7 @@ function App(){
   const[screen,setScreen]=useState('home');
   const stickerBoard=useStickerBoard();
   return<div>
-    {screen==='home'&&<HomeScreen onArabic={()=>setScreen('arabic')} onMath={()=>setScreen('math')} stickers={stickerBoard.stickers}/>}
-    {screen==='arabic'&&<ArabicWorld onHome={()=>setScreen('home')} stickerBoard={stickerBoard}/>}
+    {screen==='home'&&<HomeScreen onMath={()=>setScreen('math')} stickers={stickerBoard.stickers}/>}
     {screen==='math'&&<MathWorld onHome={()=>setScreen('home')} stickerBoard={stickerBoard}/>}
   </div>;
 }
