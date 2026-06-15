@@ -790,101 +790,94 @@ const MATH_MODULES=[
 const STICKER_SLOTS=30;
 
 /* ═══════════════════════════════════════
-   AUDIO UNLOCK
-   Browsers block speechSynthesis until a user gesture. On first tap anywhere,
-   we fire a silent utterance to unlock the audio context for the session.
+   SPEECH ENGINE
+   speechSynthesis only works when called inside (or very shortly after) a
+   real user gesture. We track whether we are inside a gesture with a flag
+   that is set on pointerdown and cleared after 500 ms. Calls that arrive
+   outside that window are queued and replayed on the next tap.
 ═══════════════════════════════════════ */
-let _audioUnlocked=false;
-let _audioCtx=null;
-function getAudioCtx(){
-  if(!_audioCtx)_audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-  return _audioCtx;
-}
-function unlockAudio(){
-  if(_audioUnlocked)return;
-  _audioUnlocked=true;
-  // Resume AudioContext (required by Chrome autoplay policy)
-  try{const ctx=getAudioCtx();if(ctx.state==='suspended')ctx.resume();}catch(e){}
-  // Pre-load voice list
-  if(window.speechSynthesis){
-    window.speechSynthesis.getVoices();
-    // Silent utterance to mark speechSynthesis as user-activated
-    const u=new SpeechSynthesisUtterance(' ');
-    u.volume=0;u.rate=10;
-    window.speechSynthesis.speak(u);
+let _inGesture=false;
+let _gestureTimer=null;
+let _pendingUtterance=null; // only keep the latest pending
+let _voicesReady=false;
+let _bestVoice=null;
+
+function _markGesture(){
+  _inGesture=true;
+  clearTimeout(_gestureTimer);
+  _gestureTimer=setTimeout(()=>{_inGesture=false;},500);
+  // flush any queued utterance
+  if(_pendingUtterance){
+    const p=_pendingUtterance;_pendingUtterance=null;
+    _doSpeak(p.text,p.lang,p.rate);
   }
 }
-document.addEventListener('pointerdown',unlockAudio,{capture:true});
+document.addEventListener('pointerdown',_markGesture,{capture:true});
 
-/* ═══════════════════════════════════════
-   HOOKS
-═══════════════════════════════════════ */
-// Pick the warmest, most natural-sounding English voice available on this device
-let _bestVoice=null;
-function getBestVoice(){
+// pre-load voices as early as possible
+function _initVoices(){
+  if(!window.speechSynthesis)return;
+  const load=()=>{
+    const vv=window.speechSynthesis.getVoices();
+    if(vv.length){_voicesReady=true;_bestVoice=null;_pickVoice();}
+  };
+  load();
+  window.speechSynthesis.onvoiceschanged=load;
+}
+_initVoices();
+
+function _pickVoice(){
   if(_bestVoice)return _bestVoice;
-  const voices=window.speechSynthesis.getVoices();
-  if(!voices.length)return null;
-  // Priority list: neural / enhanced / well-known warm voices
+  const vv=window.speechSynthesis.getVoices();
+  if(!vv.length)return null;
   const priority=[
-    v=>v.name==='Samantha',                      // iOS/macOS – very natural
-    v=>v.name==='Karen',                          // iOS Australian – warm
-    v=>v.name==='Moira',                          // macOS Irish
-    v=>v.name==='Google US English',              // Chrome – much better than eSpeak
-    v=>/natural|enhanced/i.test(v.name)&&/en[-_]US/i.test(v.lang),
+    v=>v.name==='Samantha',
+    v=>v.name==='Karen',
+    v=>v.name==='Google US English',
     v=>/natural|enhanced/i.test(v.name)&&/en/i.test(v.lang),
-    v=>/en[-_]US/i.test(v.lang)&&!/eSpeak|festival/i.test(v.name),
+    v=>/en[-_]US/i.test(v.lang),
     v=>/en/i.test(v.lang),
   ];
-  for(const test of priority){
-    const found=voices.find(test);
-    if(found){_bestVoice=found;return found;}
-  }
+  for(const t of priority){const f=vv.find(t);if(f){_bestVoice=f;return f;}}
   return null;
+}
+
+function _doSpeak(text,lang,rate){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  const v=_pickVoice();
+  if(v&&/^en/i.test(lang))u.voice=v;
+  u.lang=lang;u.rate=rate;u.pitch=1.1;u.volume=1;
+  window.speechSynthesis.speak(u);
 }
 
 function useSpeedSpeech(){
   const speak=useCallback((text,lang='en-US',rate=0.8)=>{
     if(!window.speechSynthesis)return;
-    window.speechSynthesis.cancel();
-    // Ensure AudioContext is resumed before speaking
-    try{const ctx=getAudioCtx();if(ctx.state==='suspended')ctx.resume();}catch(e){}
-    const fire=()=>{
-      const u=new SpeechSynthesisUtterance(text);
-      const v=getBestVoice();
-      if(v&&/^en/i.test(lang))u.voice=v;
-      u.lang=lang;u.rate=rate;u.pitch=1.05;u.volume=1;
-      window.speechSynthesis.speak(u);
-    };
-    // If voices aren't loaded yet, wait for them then retry once
-    if(!window.speechSynthesis.getVoices().length){
-      const prev=window.speechSynthesis.onvoiceschanged;
-      window.speechSynthesis.onvoiceschanged=()=>{_bestVoice=null;getBestVoice();if(prev)prev();fire();};
+    if(_inGesture){
+      // called directly from a tap — fire immediately
+      _pendingUtterance=null;
+      _doSpeak(text,lang,rate);
     } else {
-      fire();
+      // called from useEffect / setTimeout — queue it for next tap
+      _pendingUtterance={text,lang,rate};
     }
   },[]);
-  const speakRepeat=useCallback((text,lang,rate,times=3,delayMs=1200)=>{
+  const speakRepeat=useCallback((text,lang='en-US',rate=0.8,times=3,delayMs=1200)=>{
     if(!window.speechSynthesis)return;
-    window.speechSynthesis.cancel();
     let i=0;
     const fire=()=>{
       if(i>=times)return;
       const u=new SpeechSynthesisUtterance(text);
-      const v=getBestVoice();
+      const v=_pickVoice();
       if(v&&/^en/i.test(lang))u.voice=v;
-      u.lang=lang;u.rate=rate;u.pitch=1.05;u.volume=1;
+      u.lang=lang;u.rate=rate;u.pitch=1.1;u.volume=1;
       u.onend=()=>{i++;if(i<times)setTimeout(fire,delayMs);};
       window.speechSynthesis.speak(u);i++;
     };
-    fire();
-  },[]);
-  // Warm up voice list on first call (voices load async)
-  useEffect(()=>{
-    if(window.speechSynthesis){
-      window.speechSynthesis.getVoices();
-      window.speechSynthesis.onvoiceschanged=()=>{_bestVoice=null;getBestVoice();};
-    }
+    if(_inGesture){window.speechSynthesis.cancel();fire();}
+    else{_pendingUtterance={text,lang,rate};}
   },[]);
   return{speak,speakRepeat};
 }
