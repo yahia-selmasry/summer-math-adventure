@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Little Stars Learning 🌟</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+:root {
+  --sky:#87CEEB;--peach:#FFCBA4;--mint:#B5EAD7;--gold:#FFD166;--cream:#FFFDF7;
+  --navy:#1B3A5C;--night:#0D1B3E;--star:#FFE57A;--lantern:#FF8C42;
+  --meadow:#C8F0C0;--coral:#FF6B6B;--lilac:#C3B1E1;--rose:#FFB3C6;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Fredoka One',sans-serif;background:var(--cream);min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent;user-select:none;}
+#root{min-height:100vh;}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes bounce{0%,100%{transform:scale(1)}30%{transform:scale(1.25)}60%{transform:scale(0.92)}80%{transform:scale(1.08)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.55}}
+@keyframes sparkle{0%{transform:scale(0)rotate(0deg);opacity:0}50%{transform:scale(1.4)rotate(180deg);opacity:1}100%{transform:scale(1)rotate(360deg);opacity:1}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes wobble{0%,100%{transform:rotate(0)}20%{transform:rotate(-8deg)}40%{transform:rotate(8deg)}60%{transform:rotate(-5deg)}80%{transform:rotate(5deg)}}
+@keyframes glow{0%,100%{box-shadow:0 0 10px rgba(255,209,102,.4)}50%{box-shadow:0 0 35px rgba(255,209,102,.95),0 0 60px rgba(255,180,50,.5)}}
+@keyframes starTwinkle{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+@keyframes cloudDrift{0%{transform:translateX(-10px)}100%{transform:translateX(10px)}}
+@keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.35)}70%{transform:scale(.9)}100%{transform:scale(1)}}
+@keyframes stickerDrop{0%{transform:scale(0)rotate(-20deg);opacity:0}60%{transform:scale(1.3)rotate(5deg);opacity:1}100%{transform:scale(1)rotate(0deg);opacity:1}}
+@keyframes radialGlow{0%{box-shadow:0 0 0 0 rgba(255,209,102,.7)}100%{box-shadow:0 0 0 40px rgba(255,209,102,0)}}
+@keyframes moonGlow{0%,100%{filter:drop-shadow(0 0 8px rgba(255,229,122,.5))}50%{filter:drop-shadow(0 0 20px rgba(255,229,122,.9))}}
+@keyframes popIn{0%{transform:scale(0);opacity:0}80%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+.screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px 16px 40px;animation:fadeIn .3s ease forwards;position:relative;overflow:hidden;}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-width:88px;min-height:88px;border:none;border-radius:24px;cursor:pointer;font-family:'Fredoka One',sans-serif;font-size:22px;color:var(--navy);transition:transform .12s cubic-bezier(.34,1.56,.64,1);outline:none;-webkit-tap-highlight-color:transparent;}
+.btn:active{transform:scale(.88)!important;}
+.btn:focus-visible{outline:3px solid var(--navy);outline-offset:3px;}
+.btn-primary{background:linear-gradient(135deg,var(--gold),#FFB300);box-shadow:0 6px 0 #B8800A,0 8px 20px rgba(0,0,0,.18);}
+.btn-soft{background:#fff;box-shadow:0 5px 0 #C8C8C8,0 6px 18px rgba(0,0,0,.12);}
+.back-btn{position:fixed;top:16px;left:16px;width:56px;height:56px;min-width:56px;min-height:56px;border-radius:50%;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);box-shadow:0 4px 16px rgba(0,0,0,.15);font-size:24px;z-index:100;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s;}
+.back-btn:active{transform:scale(.88);}
+.sticker-tray-btn{position:fixed;top:16px;right:16px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#FFB300);box-shadow:0 4px 12px rgba(0,0,0,.2);font-size:26px;z-index:100;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;animation:glow 2.5s ease-in-out infinite;transition:transform .15s;}
+.sticker-tray-btn:active{transform:scale(.88);}
+.next-btn{background:linear-gradient(135deg,var(--gold),#FFB300);border-radius:20px;padding:12px 28px;font-size:18px;font-family:'Fredoka One',sans-serif;color:var(--navy);border:none;cursor:pointer;box-shadow:0 4px 0 #B8800A,0 6px 16px rgba(0,0,0,.15);transition:transform .12s cubic-bezier(.34,1.56,.64,1);min-height:52px;margin-top:12px;min-width:140px;}
+.next-btn:active{transform:scale(.88);}
+.say-it-btn{background:linear-gradient(135deg,#C3B1E1,#9B7FD4);border-radius:20px;padding:12px 24px;font-size:17px;font-family:'Fredoka One',sans-serif;color:#fff;border:none;cursor:pointer;box-shadow:0 4px 0 #6a4fa0,0 6px 16px rgba(0,0,0,.18);transition:transform .12s cubic-bezier(.34,1.56,.64,1);min-height:48px;margin-top:10px;}
+.say-it-btn:active{transform:scale(.88);}
+
+/* home */
+.home-bg{background:linear-gradient(180deg,#C9E8FF 0%,#A8D8F0 40%,#B5EAD7 100%);}
+.home-title{font-size:clamp(26px,8vw,46px);color:var(--navy);text-align:center;margin-top:36px;text-shadow:0 3px 0 rgba(255,255,255,.7);line-height:1.2;}
+.home-subtitle{font-family:'Nunito',sans-serif;font-weight:700;font-size:15px;color:#3a6080;margin-top:6px;text-align:center;}
+.door-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px;width:100%;max-width:480px;}
+.door-card{border-radius:32px;padding:24px 14px 20px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;border:none;transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .18s;min-height:190px;position:relative;overflow:hidden;font-family:'Fredoka One',sans-serif;}
+.door-card:active{transform:scale(.93)!important;}
+.door-card:hover{transform:translateY(-6px)scale(1.02);}
+.door-arabic{background:linear-gradient(160deg,#1a2a6c 0%,#2d1b69 60%,#0D1B3E 100%);box-shadow:0 10px 0 #0a1230,0 16px 40px rgba(13,27,62,.45);color:var(--star);}
+.door-math{background:linear-gradient(160deg,#56ab2f 0%,#a8e063 100%);box-shadow:0 10px 0 #3a7a1e,0 16px 40px rgba(56,171,47,.35);color:var(--navy);}
+.door-mascot{font-size:52px;animation:float 3s ease-in-out infinite;}
+.door-label{font-size:20px;text-align:center;line-height:1.2;}
+.door-sub{font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;opacity:.8;text-align:center;}
+.star-deco{position:absolute;font-size:14px;animation:starTwinkle 2s ease-in-out infinite;}
+.cloud-deco{position:absolute;font-size:28px;opacity:.7;animation:cloudDrift 4s ease-in-out infinite alternate;}
+
+/* arabic world */
+.arabic-bg{background:radial-gradient(ellipse at 50% 0%,#1a3a7c 0%,var(--night) 70%);color:var(--cream);}
+.math-bg{background:linear-gradient(180deg,#d4f5e9 0%,#c8f0c0 40%,#e8f8b0 100%);}
+.world-title{font-size:24px;margin-top:68px;text-align:center;}
+.arabic-world-title{color:var(--star);}
+.math-world-title{color:var(--navy);}
+.session-timer{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border-radius:20px;padding:6px 14px;font-size:13px;font-family:'Nunito',sans-serif;margin-top:68px;color:rgba(255,255,255,.75);}
+.math-session-timer{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.55);border-radius:20px;padding:6px 14px;font-size:13px;font-family:'Nunito',sans-serif;margin-top:68px;color:var(--navy);box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.timer-track{width:60px;height:10px;background:rgba(255,255,255,.15);border-radius:10px;overflow:hidden;}
+.timer-fill-moon{height:100%;background:linear-gradient(90deg,var(--star),var(--lantern));border-radius:10px;transition:width 1s linear;}
+.timer-track-sun{width:60px;height:10px;background:rgba(0,0,0,.12);border-radius:10px;overflow:hidden;}
+.timer-fill-sun{height:100%;background:linear-gradient(90deg,#FFD700,#FF8C00);border-radius:10px;transition:width 1s linear;}
+.arabic-letter-card{background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.05));border:2px solid rgba(255,229,122,.3);border-radius:36px;padding:24px 20px;text-align:center;width:100%;max-width:400px;margin-top:12px;backdrop-filter:blur(10px);}
+.arabic-letter-big{font-size:clamp(76px,20vw,120px);line-height:1;color:var(--star);font-family:'Nunito',sans-serif;font-weight:900;text-shadow:0 0 30px rgba(255,229,122,.6);animation:moonGlow 2s ease-in-out infinite;direction:rtl;display:block;margin:6px auto;}
+.letter-word-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px;flex-wrap:wrap;}
+.letter-word{font-size:19px;font-family:'Nunito',sans-serif;direction:rtl;color:rgba(255,255,255,.9);}
+.letter-emoji{font-size:30px;}
+.mouth-hint{display:inline-block;background:rgba(255,255,255,.12);border-radius:12px;padding:5px 12px;font-size:12px;font-family:'Nunito',sans-serif;color:rgba(255,255,255,.7);margin-top:8px;}
+.sound-wave{display:flex;gap:4px;align-items:center;justify-content:center;height:28px;}
+.wave-bar{width:5px;background:var(--star);border-radius:3px;animation:pulse .6s ease-in-out infinite;}
+.trace-container{position:relative;margin:14px auto 0;width:200px;height:200px;}
+.trace-label-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:130px;color:rgba(255,229,122,.08);font-family:'Nunito',sans-serif;font-weight:900;direction:rtl;pointer-events:none;z-index:0;}
+.trace-canvas{position:absolute;inset:0;z-index:1;border-radius:20px;border:2px dashed rgba(255,229,122,.4);cursor:crosshair;touch-action:none;}
+.recall-choices{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.recall-letter-btn{width:100px;height:100px;border-radius:24px;background:rgba(255,255,255,.1);border:2px solid rgba(255,229,122,.25);font-size:56px;font-family:'Nunito',sans-serif;font-weight:900;color:var(--star);direction:rtl;cursor:pointer;transition:transform .15s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;justify-content:center;}
+.recall-letter-btn:active{transform:scale(.88);}
+.recall-letter-btn.correct{background:rgba(181,234,215,.3);border-color:var(--mint);animation:correctPop .5s ease forwards;}
+.recall-letter-btn.tapped{animation:wobble .4s ease;background:rgba(255,255,255,.18);}
+.play-sound-btn{background:linear-gradient(135deg,var(--star),var(--lantern));border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;font-size:26px;margin:10px auto 0;box-shadow:0 5px 0 #B85A00,0 8px 20px rgba(0,0,0,.25);transition:transform .12s cubic-bezier(.34,1.56,.64,1);}
+.play-sound-btn:active{transform:scale(.85);}
+.progress-dots{display:flex;gap:8px;justify-content:center;margin-top:12px;}
+.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.25);transition:background .3s;}
+.dot.done{background:var(--star);}
+.dot.active{background:rgba(255,255,255,.7);transform:scale(1.3);}
+.math-progress-dots .dot{background:rgba(27,58,92,.2);}
+.math-progress-dots .dot.done{background:var(--navy);}
+.math-progress-dots .dot.active{background:rgba(27,58,92,.55);}
+.step-label{font-family:'Nunito',sans-serif;font-size:13px;opacity:.65;text-align:center;margin-top:5px;}
+.info-chip{display:inline-block;background:rgba(255,255,255,.12);border-radius:20px;padding:5px 14px;font-size:13px;font-family:'Nunito',sans-serif;margin-top:5px;}
+.cpa-label{font-size:11px;font-family:'Nunito',sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(27,58,92,.12);border-radius:12px;padding:3px 10px;color:var(--navy);display:inline-block;margin-bottom:6px;}
+.instruction{font-family:'Nunito',sans-serif;font-weight:800;font-size:18px;text-align:center;color:var(--navy);line-height:1.3;margin-bottom:6px;}
+.rest-banner{background:linear-gradient(135deg,#FFE57A,#FFD166);border-radius:28px;padding:24px 20px;text-align:center;animation:bounce .6s ease;width:100%;max-width:380px;margin-top:20px;box-shadow:0 6px 0 #B8800A,0 10px 24px rgba(0,0,0,.15);}
+
+/* math modules grid */
+.math-module-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;width:100%;max-width:440px;}
+.math-module-btn{background:#fff;border-radius:22px;border:none;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;box-shadow:0 5px 0 #C5D5B0,0 8px 20px rgba(0,0,0,.1);transition:transform .15s cubic-bezier(.34,1.56,.64,1);font-family:'Fredoka One',sans-serif;color:var(--navy);min-height:105px;font-size:14px;text-align:center;line-height:1.2;}
+.math-module-btn:active{transform:scale(.9)translateY(4px);box-shadow:0 1px 0 #C5D5B0;}
+.math-module-btn .mod-icon{font-size:36px;}
+.math-module-btn.wide{grid-column:span 2;}
+
+/* counting */
+.animal-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;min-height:100px;background:rgba(255,255,255,.6);border-radius:24px;padding:16px;margin:12px 0;}
+.animal-emoji{font-size:42px;cursor:pointer;animation:popIn .35s cubic-bezier(.34,1.56,.64,1) forwards;}
+.count-btn{width:100%;padding:16px;font-size:19px;border-radius:18px;background:linear-gradient(135deg,var(--mint),#7FD9B5);border:none;cursor:pointer;font-family:'Fredoka One',sans-serif;color:var(--navy);box-shadow:0 5px 0 #4EAD8A,0 8px 18px rgba(0,0,0,.1);transition:transform .12s cubic-bezier(.34,1.56,.64,1);min-height:80px;}
+.count-btn:active{transform:scale(.92)translateY(4px);}
+.numeral-display{font-size:80px;color:var(--navy);line-height:1;text-shadow:0 4px 0 rgba(0,0,0,.1);}
+.numeral-display.pop{animation:bounce .5s ease;}
+
+/* shapes */
+.shape-drop-zone{border:3px dashed rgba(27,58,92,.3);border-radius:16px;width:100px;height:100px;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s;}
+.shape-drop-zone.over{background:rgba(181,234,215,.4);border-color:#4EAD8A;}
+.shape-drop-zone.success{background:rgba(181,234,215,.5);border-color:var(--mint);animation:correctPop .5s ease;}
+.shapes-choices{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px;}
+.shape-choice{background:#fff;border-radius:18px;width:84px;height:84px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 0 #D0D0D0,0 6px 14px rgba(0,0,0,.1);cursor:pointer;border:none;transition:transform .15s cubic-bezier(.34,1.56,.64,1);}
+.shape-choice:active{transform:scale(.88);}
+.shape-choice.correct{background:rgba(181,234,215,.6);animation:radialGlow .6s ease,correctPop .5s ease;}
+
+/* patterns */
+.pattern-row{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;background:rgba(255,255,255,.6);border-radius:22px;padding:16px;margin:12px 0;}
+.pattern-item{font-size:40px;}
+.pattern-blank{width:56px;height:56px;background:rgba(27,58,92,.08);border-radius:14px;border:3px dashed rgba(27,58,92,.25);display:flex;align-items:center;justify-content:center;font-size:22px;color:rgba(27,58,92,.3);}
+.pattern-choices{display:flex;gap:18px;justify-content:center;margin-top:14px;}
+.pattern-choice{width:84px;height:84px;border-radius:18px;background:#fff;border:none;font-size:42px;cursor:pointer;box-shadow:0 4px 0 #D0D0D0,0 6px 14px rgba(0,0,0,.1);transition:transform .15s cubic-bezier(.34,1.56,.64,1);}
+.pattern-choice:active{transform:scale(.88);}
+.pattern-choice.correct{background:rgba(181,234,215,.6);animation:radialGlow .6s ease,correctPop .5s ease;}
+.pattern-choice.tapped{animation:wobble .4s ease;}
+
+/* size */
+.size-question{font-family:'Nunito',sans-serif;font-weight:800;font-size:19px;color:var(--navy);margin:10px 0 18px;line-height:1.3;text-align:center;}
+.size-choices{display:flex;gap:16px;justify-content:center;align-items:flex-end;flex-wrap:wrap;}
+.size-choice{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;background:rgba(255,255,255,.65);border-radius:22px;padding:14px;border:3px solid transparent;min-width:110px;min-height:88px;transition:transform .15s cubic-bezier(.34,1.56,.64,1),border-color .2s;font-family:'Nunito',sans-serif;font-weight:800;color:var(--navy);font-size:13px;}
+.size-choice:active{transform:scale(.9);}
+.size-choice.correct{border-color:#4EAD8A;background:rgba(181,234,215,.5);animation:correctPop .5s ease;}
+.size-choice.tapped{animation:wobble .4s ease;}
+
+/* color sort */
+.sort-items-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;background:rgba(255,255,255,.6);border-radius:22px;padding:14px;margin:10px 0;}
+.sort-item{font-size:38px;cursor:pointer;transition:transform .15s;border:3px solid transparent;border-radius:12px;padding:4px;}
+.sort-item.selected{border-color:var(--navy);transform:scale(1.2);background:rgba(27,58,92,.1);}
+.sort-buckets{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:12px;}
+.sort-bucket{width:84px;min-height:84px;border-radius:18px;border:3px dashed rgba(27,58,92,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:transform .15s,border-color .2s;padding:6px;font-family:'Nunito',sans-serif;font-weight:700;font-size:11px;color:var(--navy);}
+.sort-bucket:active{transform:scale(.92);}
+.sort-bucket.lit{border-color:var(--gold);background:rgba(255,209,102,.15);}
+.sorted-emoji{font-size:20px;}
+
+/* addition */
+.addition-row{display:flex;align-items:center;gap:12px;justify-content:center;background:rgba(255,255,255,.65);border-radius:24px;padding:18px;margin:12px 0;flex-wrap:wrap;}
+.add-group{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:10px;min-width:60px;}
+.add-emoji{font-size:34px;animation:popIn .3s ease forwards;}
+.add-op{font-size:36px;color:var(--navy);font-weight:900;}
+.add-answer-choices{display:flex;gap:16px;justify-content:center;margin-top:12px;flex-wrap:wrap;}
+.add-choice{width:84px;height:84px;border-radius:20px;background:#fff;border:none;font-size:34px;font-family:'Fredoka One',sans-serif;color:var(--navy);cursor:pointer;box-shadow:0 4px 0 #D0D0D0,0 6px 14px rgba(0,0,0,.1);transition:transform .15s cubic-bezier(.34,1.56,.64,1);}
+.add-choice:active{transform:scale(.88);}
+.add-choice.correct{background:rgba(181,234,215,.6);animation:radialGlow .6s ease,correctPop .5s ease;}
+.add-choice.tapped{animation:wobble .4s ease;}
+
+/* number comparison */
+.compare-row{display:flex;gap:20px;align-items:center;justify-content:center;margin:14px 0;flex-wrap:wrap;}
+.compare-card{background:rgba(255,255,255,.65);border-radius:22px;padding:16px 20px;text-align:center;min-width:100px;cursor:pointer;border:3px solid transparent;transition:transform .15s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.compare-card:active{transform:scale(.9);}
+.compare-card.correct{border-color:#4EAD8A;background:rgba(181,234,215,.4);animation:correctPop .5s ease;}
+.compare-card.tapped{animation:wobble .4s ease;}
+.compare-num{font-size:58px;color:var(--navy);}
+.compare-emojis{font-size:22px;margin-top:4px;}
+
+/* letter hunt */
+.hunt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0;width:100%;max-width:340px;}
+.hunt-cell{height:80px;border-radius:18px;background:rgba(255,255,255,.1);border:2px solid rgba(255,229,122,.2);display:flex;align-items:center;justify-content:center;font-size:48px;font-family:'Nunito',sans-serif;font-weight:900;color:var(--star);direction:rtl;cursor:pointer;transition:transform .15s cubic-bezier(.34,1.56,.64,1);}
+.hunt-cell:active{transform:scale(.88);}
+.hunt-cell.correct{background:rgba(181,234,215,.3);border-color:var(--mint);animation:correctPop .5s ease;}
+.hunt-cell.wrong{animation:wobble .4s ease;}
+.hunt-cell.disabled{opacity:.45;pointer-events:none;}
+
+/* word builder */
+.word-letters-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px 0;}
+.word-letter-btn{width:70px;height:70px;border-radius:16px;background:rgba(255,255,255,.12);border:2px solid rgba(255,229,122,.3);font-size:36px;font-family:'Nunito',sans-serif;font-weight:900;color:var(--star);direction:rtl;cursor:pointer;transition:transform .15s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;justify-content:center;}
+.word-letter-btn:active{transform:scale(.88);}
+.word-letter-btn.used{opacity:.3;pointer-events:none;}
+.word-display{min-height:70px;background:rgba(255,255,255,.1);border-radius:18px;border:2px dashed rgba(255,229,122,.4);display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 16px;margin:10px 0;direction:rtl;font-size:38px;font-family:'Nunito',sans-serif;font-weight:900;color:var(--star);min-width:200px;}
+
+/* sticker board */
+.sticker-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:200;animation:fadeIn .2s ease;}
+.sticker-modal{background:linear-gradient(135deg,#1a2a6c,#0D1B3E);border-radius:36px;padding:28px 20px;width:90%;max-width:380px;box-shadow:0 24px 60px rgba(0,0,0,.5);border:2px solid rgba(255,229,122,.3);text-align:center;color:var(--star);}
+.sticker-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0;}
+.sticker-slot{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.07);border:2px dashed rgba(255,229,122,.2);display:flex;align-items:center;justify-content:center;font-size:22px;}
+.sticker-slot.earned{animation:stickerDrop .5s cubic-bezier(.34,1.56,.64,1) forwards;border:none;background:rgba(255,229,122,.1);}
+
+/* celebrate */
+.celebrate-overlay{position:fixed;inset:0;pointer-events:none;z-index:150;display:flex;align-items:center;justify-content:center;}
+.celebrate-burst{font-size:80px;animation:sparkle .7s ease forwards;text-align:center;}
+
+/* ── MINI CARTOON ── */
+.cartoon-overlay{position:fixed;inset:0;background:rgba(0,0,0,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:300;animation:fadeIn .25s ease;}
+.cartoon-modal{background:#0a0a1a;border-radius:28px;width:96%;max-width:500px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.7);border:2px solid rgba(255,229,122,.3);}
+.cartoon-header{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,#1a2a6c,#0D1B3E);}
+.cartoon-ep-title{font-size:14px;color:var(--star);font-family:'Fredoka One',sans-serif;}
+.cartoon-close{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+.cartoon-close:hover{background:rgba(255,255,255,.22);}
+.cartoon-stage{position:relative;min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:0;}
+.cartoon-slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 16px 18px;gap:8px;transition:opacity .45s ease,transform .45s ease;}
+.cartoon-slide.active{opacity:1;transform:translateX(0);}
+.cartoon-slide.out-left{opacity:0;transform:translateX(-70px);}
+.cartoon-scene{font-size:60px;line-height:1;text-align:center;animation:float 2.5s ease-in-out infinite;flex-shrink:0;}
+.cartoon-bubble{background:rgba(255,255,255,.97);border-radius:18px;padding:10px 16px;max-width:310px;width:100%;position:relative;box-shadow:0 4px 16px rgba(0,0,0,.3);}
+.cartoon-bubble::before{content:'';position:absolute;top:-10px;left:50%;transform:translateX(-50%);border:6px solid transparent;border-bottom-color:rgba(255,255,255,.97);}
+.cartoon-text{font-family:'Fredoka One',sans-serif;font-size:16px;color:var(--navy);text-align:center;line-height:1.35;}
+.cartoon-sub{font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:rgba(27,58,92,.55);margin-top:4px;text-align:center;}
+/* worked example demo block */
+.demo-block{background:rgba(255,255,255,.1);border:2px solid rgba(255,229,122,.3);border-radius:16px;padding:10px 14px;width:100%;max-width:310px;animation:popIn .4s cubic-bezier(.34,1.56,.64,1);}
+.demo-row{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;}
+.demo-item{font-size:28px;animation:popIn .35s cubic-bezier(.34,1.56,.64,1) both;}
+.demo-op{font-size:26px;color:var(--gold);font-family:'Fredoka One',sans-serif;margin:0 4px;}
+.demo-eq{font-size:24px;color:var(--gold);font-family:'Fredoka One',sans-serif;margin:0 4px;}
+.demo-label{font-family:'Fredoka One',sans-serif;font-size:14px;color:var(--star);text-align:center;margin-top:6px;}
+.demo-result-group{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;align-items:center;}
+.demo-answer-chip{background:var(--gold);border-radius:10px;padding:3px 10px;font-family:'Fredoka One',sans-serif;font-size:14px;color:var(--navy);margin-top:4px;display:inline-block;}
+.demo-compare-wrap{display:flex;gap:10px;align-items:flex-end;justify-content:center;width:100%;}
+.demo-compare-box{flex:1;border-radius:12px;padding:8px 6px;text-align:center;border:2px solid rgba(255,255,255,.15);}
+.demo-compare-box.winner{border-color:var(--gold);background:rgba(255,209,102,.18);}
+.demo-compare-vs{font-size:18px;color:rgba(255,255,255,.5);font-family:'Fredoka One',sans-serif;padding-bottom:10px;}
+.demo-win-badge{background:var(--gold);color:var(--navy);border-radius:8px;font-size:11px;font-family:'Fredoka One',sans-serif;padding:2px 8px;margin-top:4px;display:inline-block;}
+.demo-sort-bucket{background:rgba(0,0,0,.3);border-radius:12px;padding:8px 12px;text-align:center;}
+.demo-sort-label{font-family:'Fredoka One',sans-serif;font-size:13px;color:var(--star);margin-bottom:5px;}
+.demo-fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%;}
+.demo-fact-chip{border-radius:10px;padding:5px 8px;text-align:center;}
+.demo-fact-chip .fact-key{font-family:'Nunito',sans-serif;font-weight:800;font-size:10px;opacity:.7;}
+.demo-fact-chip .fact-val{font-family:'Fredoka One',sans-serif;font-size:14px;color:var(--navy);}
+.demo-examples{font-size:22px;text-align:center;margin-top:4px;}
+/* pattern demo */
+.demo-pattern-seq{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;}
+.demo-pat-item{font-size:30px;}
+.demo-pat-blank{width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.15);border:2px dashed rgba(255,229,122,.6);display:flex;align-items:center;justify-content:center;font-size:16px;color:rgba(255,255,255,.4);}
+.demo-pat-answer{font-size:30px;animation:sparkle .5s ease forwards;}
+.cartoon-footer{padding:12px 16px;background:linear-gradient(90deg,#1a2a6c,#0D1B3E);display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.cartoon-dots{display:flex;gap:7px;align-items:center;}
+.cartoon-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);transition:background .3s,transform .3s;cursor:pointer;}
+.cartoon-dot.active{background:var(--gold);transform:scale(1.4);}
+.cartoon-dot.done{background:rgba(255,229,122,.55);}
+.cartoon-next-btn{background:linear-gradient(135deg,var(--gold),#FFB300);border:none;border-radius:14px;padding:10px 20px;font-family:'Fredoka One',sans-serif;font-size:15px;color:var(--navy);cursor:pointer;transition:transform .12s;min-height:44px;white-space:nowrap;}
+.cartoon-next-btn:active{transform:scale(.9);}
+.cartoon-auto-bar{position:absolute;bottom:0;left:0;height:4px;background:rgba(255,209,102,.6);border-radius:0 4px 4px 0;transition:width linear;}
+
+/* concept intro */
+.concept-intro{background:linear-gradient(135deg,#1a2a6c,#2d1b69);border-radius:28px;padding:22px 18px;text-align:center;width:100%;max-width:420px;margin-top:12px;border:2px solid rgba(255,229,122,.2);}
+.concept-icon{font-size:56px;animation:float 2.5s ease-in-out infinite;}
+.concept-title{font-size:22px;color:var(--star);margin-top:8px;}
+.concept-desc{font-family:'Nunito',sans-serif;font-size:14px;color:rgba(255,255,255,.75);margin-top:6px;line-height:1.5;}
+.watch-btn{background:linear-gradient(135deg,#FF6B6B,#FF4444);border-radius:18px;padding:12px 24px;font-size:17px;font-family:'Fredoka One',sans-serif;color:#fff;border:none;cursor:pointer;box-shadow:0 4px 0 #991010,0 6px 16px rgba(0,0,0,.2);transition:transform .12s;min-height:52px;margin-top:12px;display:flex;align-items:center;gap:8px;margin-left:auto;margin-right:auto;}
+.watch-btn:active{transform:scale(.9);}
+.skip-btn{background:rgba(255,255,255,.1);border:none;border-radius:14px;padding:10px 20px;font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;color:rgba(255,255,255,.6);cursor:pointer;margin-top:8px;transition:background .15s;}
+.skip-btn:hover{background:rgba(255,255,255,.18);}
+
+/* arabic letter matching mini-game */
+.match-pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:360px;margin:10px auto;}
+.match-card{height:70px;border-radius:16px;border:2px solid rgba(255,229,122,.2);background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;transition:transform .15s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.match-card:active{transform:scale(.9);}
+.match-card.letter{font-size:44px;color:var(--star);direction:rtl;}
+.match-card.emoji-card{font-size:36px;}
+.match-card.selected{border-color:var(--gold);background:rgba(255,209,102,.15);}
+.match-card.matched{border-color:var(--mint);background:rgba(181,234,215,.2);opacity:.6;pointer-events:none;}
+.match-card.wrong-flash{animation:wobble .4s ease;}
+
+/* word pick game */
+.word-pick-grid{display:flex;flex-direction:column;gap:12px;width:100%;max-width:360px;margin:12px auto 0;}
+.word-pick-btn{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.09);border:2.5px solid rgba(255,229,122,.2);border-radius:20px;padding:14px 18px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;color:var(--star);direction:rtl;transition:transform .15s cubic-bezier(.34,1.56,.64,1),border-color .2s,background .2s;min-height:78px;}
+.word-pick-btn:active{transform:scale(.93);}
+.word-pick-btn.correct-pick{border-color:var(--mint);background:rgba(181,234,215,.22);animation:correctPop .45s ease;}
+.word-pick-btn.wrong-pick{animation:wobble .4s ease;}
+.word-pick-emoji{font-size:42px;flex-shrink:0;}
+.word-pick-text{font-size:26px;direction:rtl;font-family:'Nunito',sans-serif;font-weight:900;}
+.word-pick-en{font-size:12px;font-weight:700;color:rgba(255,255,255,.45);direction:ltr;font-family:'Nunito',sans-serif;margin-top:2px;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useEffect,useRef,useCallback,useMemo}=React;
+
+/* ═══════════════════════════════════════
+   DATA LAYER
+═══════════════════════════════════════ */
+
+const ARABIC_LETTERS=[
+  {letter:'ب',phoneme:'ba',word:'بطة',wordEn:'Duck',emoji:'🦆',animal:'🦆',animalEn:'Duck',mouth:'👄 lips together',sticker:'🦆',
+   songAr:'بطة بطة يا بطة، رايحة فين يا بطة، رايحة البحر تعوم، وترجع البيت تنوم',
+   songLabel:'بطة بطة يا بطة…',
+   wordChoices:[
+     {word:'بطة',emoji:'🦆',correct:true},
+     {word:'قرد',emoji:'🐒',correct:false},
+     {word:'فيل',emoji:'🐘',correct:false},
+   ]},
+  {letter:'م',phoneme:'ma',word:'موزة',wordEn:'Banana',emoji:'🍌',animal:'🐒',animalEn:'Monkey',mouth:'👄 hum through nose',sticker:'🐒',
+   songAr:'ماما ماما يا ماما، حبيبتي يا ماما، ماما تحبني وأنا أحبها',
+   songLabel:'ماما ماما يا ماما…',
+   wordChoices:[
+     {word:'موزة',emoji:'🍌',correct:true},
+     {word:'بطة',emoji:'🦆',correct:false},
+     {word:'كلب',emoji:'🐕',correct:false},
+   ]},
+  {letter:'و',phoneme:'wa',word:'وردة',wordEn:'Rose',emoji:'🌹',animal:'🦏',animalEn:'Rhino',mouth:'💋 round lips forward',sticker:'🦏',
+   songAr:'وردة وردة يا وردة، حمرا وحلوة يا وردة، ريحتها حلوة وجميلة',
+   songLabel:'وردة وردة يا وردة…',
+   wordChoices:[
+     {word:'وردة',emoji:'🌹',correct:true},
+     {word:'أسد',emoji:'🦁',correct:false},
+     {word:'سمكة',emoji:'🐟',correct:false},
+   ]},
+  {letter:'ا',phoneme:'aa',word:'أسد',wordEn:'Lion',emoji:'🦁',animal:'🦁',animalEn:'Lion',mouth:'😮 open wide',sticker:'🦁',
+   songAr:'أسد أسد يا أسد، ملك الغابة يا أسد، يزأر بالليل ويحرس الغابة',
+   songLabel:'أسد أسد يا أسد…',
+   wordChoices:[
+     {word:'أسد',emoji:'🦁',correct:true},
+     {word:'نمر',emoji:'🐯',correct:false},
+     {word:'دب',emoji:'🐻',correct:false},
+   ]},
+  {letter:'ن',phoneme:'na',word:'نملة',wordEn:'Ant',emoji:'🐜',animal:'🐯',animalEn:'Tiger',mouth:'😬 tongue tip to roof',sticker:'🐯',
+   songAr:'نملة نملة يا نملة، شغولة دايما يا نملة، تشيل الأكل وتمشي بسرعة',
+   songLabel:'نملة نملة يا نملة…',
+   wordChoices:[
+     {word:'نملة',emoji:'🐜',correct:true},
+     {word:'لاما',emoji:'🦙',correct:false},
+     {word:'قرد',emoji:'🦍',correct:false},
+   ]},
+  {letter:'س',phoneme:'sa',word:'سمكة',wordEn:'Fish',emoji:'🐟',animal:'🐟',animalEn:'Fish',mouth:'😬 teeth close, air flows',sticker:'🐟',
+   songAr:'سمكة سمكة في البحر، تعوم تعوم كل النهار، سمكة صغيرة لونها أزرق',
+   songLabel:'سمكة سمكة في البحر…',
+   wordChoices:[
+     {word:'سمكة',emoji:'🐟',correct:true},
+     {word:'وردة',emoji:'🌹',correct:false},
+     {word:'كلب',emoji:'🐕',correct:false},
+   ]},
+  {letter:'ل',phoneme:'la',word:'لبن',wordEn:'Milk',emoji:'🥛',animal:'🦙',animalEn:'Llama',mouth:'😋 tongue to upper teeth',sticker:'🦙',
+   songAr:'لبن لبن يا لبن، ابيض حلو يا لبن، نشرب اللبن ونكبر بسرعة',
+   songLabel:'لبن لبن يا لبن…',
+   wordChoices:[
+     {word:'لبن',emoji:'🥛',correct:true},
+     {word:'موزة',emoji:'🍌',correct:false},
+     {word:'نملة',emoji:'🐜',correct:false},
+   ]},
+  {letter:'ر',phoneme:'ra',word:'رمان',wordEn:'Pomegranate',emoji:'🍎',animal:'🦌',animalEn:'Reindeer',mouth:'😋 tongue taps roof quickly',sticker:'🦌',
+   songAr:'رمان رمان يا رمان، أحمر وحلو يا رمان، فيه حبات كتير وجميلة',
+   songLabel:'رمان رمان يا رمان…',
+   wordChoices:[
+     {word:'رمان',emoji:'🍎',correct:true},
+     {word:'بطة',emoji:'🦆',correct:false},
+     {word:'فيل',emoji:'🐘',correct:false},
+   ]},
+  {letter:'ت',phoneme:'ta',word:'تفاح',wordEn:'Apple',emoji:'🍏',animal:'🐊',animalEn:'Crocodile',mouth:'😬 tongue to top teeth',sticker:'🐊',
+   songAr:'تفاح تفاح يا تفاح، أحمر وحلو يا تفاح، كل التفاح تكبر وتقوى',
+   songLabel:'تفاح تفاح يا تفاح…',
+   wordChoices:[
+     {word:'تفاح',emoji:'🍏',correct:true},
+     {word:'سمكة',emoji:'🐟',correct:false},
+     {word:'أسد',emoji:'🦁',correct:false},
+   ]},
+  {letter:'د',phoneme:'da',word:'دب',wordEn:'Bear',emoji:'🐻',animal:'🐻',animalEn:'Bear',mouth:'😬 tongue tip to top teeth',sticker:'🐻',
+   songAr:'دب دب يا دب، كبير وظريف يا دب، ينام في الشتا ويصحى في الربيع',
+   songLabel:'دب دب يا دب…',
+   wordChoices:[
+     {word:'دب',emoji:'🐻',correct:true},
+     {word:'لبن',emoji:'🥛',correct:false},
+     {word:'رمان',emoji:'🍎',correct:false},
+   ]},
+  {letter:'هـ',phoneme:'ha',word:'هلال',wordEn:'Crescent',emoji:'🌙',animal:'🐹',animalEn:'Hamster',mouth:'😮 gentle breath out',sticker:'🐹',
+   songAr:'هلال هلال يا هلال، في السماء يا هلال، يضوي الليل ويفرح الكل',
+   songLabel:'هلال هلال يا هلال…',
+   wordChoices:[
+     {word:'هلال',emoji:'🌙',correct:true},
+     {word:'تفاح',emoji:'🍏',correct:false},
+     {word:'دب',emoji:'🐻',correct:false},
+   ]},
+  {letter:'ع',phoneme:'aa',word:'عصفور',wordEn:'Bird',emoji:'🐦',animal:'🦭',animalEn:'Seal',mouth:'😮 deep from throat',sticker:'🦭',
+   songAr:'عصفور عصفور يا عصفور، غني غني يا عصفور، يطير في السما ويغني للكل',
+   songLabel:'عصفور عصفور يا عصفور…',
+   wordChoices:[
+     {word:'عصفور',emoji:'🐦',correct:true},
+     {word:'هلال',emoji:'🌙',correct:false},
+     {word:'نملة',emoji:'🐜',correct:false},
+   ]},
+  {letter:'ف',phoneme:'fa',word:'فيل',wordEn:'Elephant',emoji:'🐘',animal:'🐘',animalEn:'Elephant',mouth:'😬 top teeth on bottom lip',sticker:'🐘',
+   songAr:'فيل فيل يا فيل، كبير وظريف يا فيل، خرطومه طويل يرش المياه',
+   songLabel:'فيل فيل يا فيل…',
+   wordChoices:[
+     {word:'فيل',emoji:'🐘',correct:true},
+     {word:'عصفور',emoji:'🐦',correct:false},
+     {word:'دب',emoji:'🐻',correct:false},
+   ]},
+  {letter:'ق',phoneme:'qa',word:'قمر',wordEn:'Moon',emoji:'🌕',animal:'🦍',animalEn:'Gorilla',mouth:'😮 deep back of throat',sticker:'🦍',
+   songAr:'قمر قمر يا قمر، بيضا ويضوي يا قمر، يطلع بالليل ويضوي الدنيا',
+   songLabel:'قمر قمر يا قمر…',
+   wordChoices:[
+     {word:'قمر',emoji:'🌕',correct:true},
+     {word:'فيل',emoji:'🐘',correct:false},
+     {word:'وردة',emoji:'🌹',correct:false},
+   ]},
+  {letter:'ك',phoneme:'ka',word:'كلب',wordEn:'Dog',emoji:'🐕',animal:'🐕',animalEn:'Dog',mouth:'😮 back of tongue up',sticker:'🐕',
+   songAr:'كلب كلب يا كلب، وفي وحلو يا كلب، يحرس البيت ويحب أصحابه',
+   songLabel:'كلب كلب يا كلب…',
+   wordChoices:[
+     {word:'كلب',emoji:'🐕',correct:true},
+     {word:'قمر',emoji:'🌕',correct:false},
+     {word:'لبن',emoji:'🥛',correct:false},
+   ]},
+  {letter:'ج',phoneme:'ja',word:'جمل',wordEn:'Camel',emoji:'🐪',animal:'🐪',animalEn:'Camel',mouth:'😮 mid-tongue arches',sticker:'🐪',
+   songAr:'جمل جمل يا جمل، في الصحرا يا جمل، يمشي ويمشي بدون ماء',
+   songLabel:'جمل جمل يا جمل…',
+   wordChoices:[
+     {word:'جمل',emoji:'🐪',correct:true},
+     {word:'كلب',emoji:'🐕',correct:false},
+     {word:'عصفور',emoji:'🐦',correct:false},
+   ]},
+];
+
+// Words built from learned letters (ب م و ا) for word builder
+const WORD_BUILDER_WORDS=[
+  {word:'بابا',meaning:'Daddy',emoji:'👨',letters:['ب','ا','ب','ا']},
+  {word:'ماما',meaning:'Mummy',emoji:'👩',letters:['م','ا','م','ا']},
+  {word:'باب',meaning:'Door',emoji:'🚪',letters:['ب','ا','ب']},
+];
+
+const COUNTING_ANIMALS=['🐱','🐶','🐰','🐸','🦊','🐼','🐨','🦋','🐯','🦄'];
+
+const SHAPES_DATA=[
+  {name:'Circle',color:'#FF6B6B',svgType:'circle'},
+  {name:'Square',color:'#FFD166',svgType:'rect'},
+  {name:'Triangle',color:'#B5EAD7',svgType:'triangle'},
+  {name:'Star',color:'#C3B1E1',svgType:'star'},
+  {name:'Heart',color:'#FFB3C6',svgType:'heart'},
+  {name:'Diamond',color:'#87CEEB',svgType:'diamond'},
+];
+
+const PATTERN_SETS=[
+  {seq:['🐱','🐶','🐱','🐶'],answer:'🐱',wrong:'🐶'},
+  {seq:['🌟','🌙','🌟','🌙'],answer:'🌟',wrong:'🌙'},
+  {seq:['🍎','🍌','🍎','🍌'],answer:'🍎',wrong:'🍌'},
+  {seq:['🔵','🔴','🔵','🔴'],answer:'🔵',wrong:'🔴'},
+  {seq:['🐘','🐭','🐘','🐭'],answer:'🐘',wrong:'🐭'},
+  {seq:['🌈','☁️','🌈','☁️'],answer:'🌈',wrong:'☁️'},
+  {seq:['🎈','🎀','🎈','🎀'],answer:'🎈',wrong:'🎀'},
+  {seq:['🍕','🍦','🍕','🍦'],answer:'🍕',wrong:'🍦'},
+  // AB C patterns (3-element)
+  {seq:['🐱','🐶','🐸','🐱','🐶'],answer:'🐸',wrong:'🐱'},
+  {seq:['🔴','🔵','🟡','🔴','🔵'],answer:'🟡',wrong:'🔴'},
+];
+
+const SIZE_QUESTIONS=[
+  {question:'Which is BIGGER?',choiceA:{emoji:'🐘',label:'Elephant',size:70},choiceB:{emoji:'🐭',label:'Mouse',size:34},correct:'A',narrator:'Which animal is BIGGER? The elephant or the mouse?'},
+  {question:'Which has MORE apples?',choiceA:{emojis:['🍎','🍎','🍎'],label:'3 apples'},choiceB:{emojis:['🍎'],label:'1 apple'},correct:'A',narrator:'Which bowl has MORE apples?'},
+  {question:'Which is SMALLER?',choiceA:{emoji:'🌳',label:'Big tree',size:60},choiceB:{emoji:'🌱',label:'Seedling',size:32},correct:'B',narrator:'Which one is SMALLER?'},
+  {question:'Which has FEWER fish?',choiceA:{emojis:['🐟','🐟','🐟'],label:'3 fish'},choiceB:{emojis:['🐟'],label:'1 fish'},correct:'B',narrator:'Which group has FEWER fish?'},
+  {question:'Which is TALLER?',choiceA:{emoji:'🦒',label:'Giraffe',size:72},choiceB:{emoji:'🐢',label:'Turtle',size:34},correct:'A',narrator:'Which animal is taller?'},
+  {question:'Which is HEAVIER?',choiceA:{emoji:'🏋️',label:'Weights',size:60},choiceB:{emoji:'🍃',label:'Leaf',size:36},correct:'A',narrator:'Which one is heavier?'},
+];
+
+const COLOR_SORT_DATA=[
+  {emoji:'🍎',color:'red',label:'Red'},
+  {emoji:'🍌',color:'yellow',label:'Yellow'},
+  {emoji:'🍊',color:'orange',label:'Orange'},
+  {emoji:'🍇',color:'purple',label:'Purple'},
+  {emoji:'🌻',color:'yellow',label:'Yellow'},
+  {emoji:'🍒',color:'red',label:'Red'},
+  {emoji:'🥕',color:'orange',label:'Orange'},
+  {emoji:'🫐',color:'purple',label:'Purple'},
+  {emoji:'🍓',color:'red',label:'Red'},
+  {emoji:'🍋',color:'yellow',label:'Yellow'},
+];
+const COLOR_BUCKETS=[
+  {color:'red',label:'Red 🔴',bg:'#FFE5E5',border:'#FF6B6B'},
+  {color:'yellow',label:'Yellow 🟡',bg:'#FFFDE5',border:'#FFD166'},
+  {color:'orange',label:'Orange 🟠',bg:'#FFF3E5',border:'#FF8C42'},
+  {color:'purple',label:'Purple 🟣',bg:'#F5E5FF',border:'#C3B1E1'},
+];
+
+const COLORS_DATA=[
+  {name:'Red',arabic:'أحمر',emoji:'🔴',examples:['🍎','🌹','🍒','❤️'],bg:'#FFE5E5',border:'#FF6B6B',hex:'#FF6B6B'},
+  {name:'Yellow',arabic:'أصفر',emoji:'🟡',examples:['🍌','🌟','🌻','🐥'],bg:'#FFFDE5',border:'#FFD166',hex:'#FFD166'},
+  {name:'Blue',arabic:'أزرق',emoji:'🔵',examples:['💧','🫐','🌊','🧢'],bg:'#E5F0FF',border:'#5B9BD5',hex:'#5B9BD5'},
+  {name:'Green',arabic:'أخضر',emoji:'🟢',examples:['🍃','🐸','🥦','🌳'],bg:'#E5FFE8',border:'#4EAD8A',hex:'#4EAD8A'},
+  {name:'Orange',arabic:'برتقالي',emoji:'🟠',examples:['🍊','🥕','🎃','🦊'],bg:'#FFF3E5',border:'#FF8C42',hex:'#FF8C42'},
+  {name:'Purple',arabic:'بنفسجي',emoji:'🟣',examples:['🍇','🫐','🔮','🌸'],bg:'#F5E5FF',border:'#9B7FD4',hex:'#9B7FD4'},
+];
+
+const ADDITION_PROBLEMS=[
+  {a:1,b:1,emoji:'🐱',choices:[2,3,1]},
+  {a:2,b:1,emoji:'🌟',choices:[3,4,2]},
+  {a:1,b:2,emoji:'🍎',choices:[3,2,4]},
+  {a:2,b:2,emoji:'🐶',choices:[4,3,5]},
+  {a:3,b:1,emoji:'🦋',choices:[4,5,3]},
+  {a:1,b:3,emoji:'🍌',choices:[4,3,5]},
+  {a:2,b:3,emoji:'🌈',choices:[5,4,6]},
+  {a:3,b:2,emoji:'🌙',choices:[5,6,4]},
+  {a:4,b:1,emoji:'🐰',choices:[5,4,6]},
+  {a:1,b:4,emoji:'⭐',choices:[5,6,4]},
+];
+
+// Self-contained animated mini-cartoon scripts — no external dependencies
+// Each concept has 5 slides: scene emoji, speech bubble text, narrator line (TTS), bg gradient
+// Each slide: scene (big emoji), text (bubble), sub (small label),
+// demo (visual worked example shown below bubble — null for no demo),
+// narrate (TTS — slower, pauses via commas, child-friendly phrasing)
+// demo types: 'row' = flex row of items | 'equation' = math expression | 'compare' = two groups
+const CARTOON_SCRIPTS={
+  counting:{
+    title:'🌟 Let\'s Count Together!',
+    bg:'linear-gradient(160deg,#0d1b4e 0%,#1a2a6c 100%)',
+    slides:[
+      {scene:'🐣',
+       text:'Let\'s count animals together!',
+       sub:'Watch me count step by step',
+       demo:null,
+       narrate:'Let us count animals together! I will show you how, step by step.'},
+      {scene:'🐱',
+       text:'ONE cat. Say it: ONE!',
+       sub:'Point your finger and say: one!',
+       demo:{type:'row',items:['🐱'],label:'1'},
+       narrate:'One cat! Hold up one finger. One!'},
+      {scene:'🐱🐱',
+       text:'TWO cats. Count with me: 1… 2!',
+       sub:'Touch each one as you count',
+       demo:{type:'row',items:['🐱','🐱'],label:'2'},
+       narrate:'Two cats! Touch the first one, say one. Touch the second one, say two. One, two!'},
+      {scene:'🐱🐱🐱',
+       text:'THREE cats. 1… 2… 3!',
+       sub:'Each cat gets its own number',
+       demo:{type:'row',items:['🐱','🐱','🐱'],label:'3'},
+       narrate:'Three cats! One, two, three! Every single cat gets its own number when we count.'},
+      {scene:'🐱🐱🐱🐱',
+       text:'FOUR cats. Ready? 1, 2, 3, 4!',
+       sub:'Count out loud every time!',
+       demo:{type:'row',items:['🐱','🐱','🐱','🐱'],label:'4'},
+       narrate:'Four cats! One, two, three, four! Count out loud every single time!'},
+      {scene:'🏆',
+       text:'You learned to count! Let\'s play!',
+       sub:'Tap animals to add them!',
+       demo:null,
+       narrate:'Amazing counting! Now let us play the counting game together!'},
+    ],
+  },
+  shapes:{
+    title:'🔷 Shape Explorer!',
+    bg:'linear-gradient(160deg,#0a3a2a 0%,#1a5a3a 100%)',
+    slides:[
+      {scene:'👀',
+       text:'Let\'s find shapes everywhere!',
+       sub:'Shapes have sides and corners',
+       demo:null,
+       narrate:'Let us explore shapes together! Every shape has its own special look.'},
+      {scene:'⭕',
+       text:'CIRCLE — perfectly round, no corners!',
+       sub:'Like a ball, the sun, a pizza',
+       demo:{type:'shape-fact',shape:'circle',sides:'0 sides',corners:'0 corners',color:'#FF6B6B',examples:'🌕 🍕 ⚽'},
+       narrate:'A circle is perfectly round. It has zero sides and zero corners. The sun is a circle! A ball is a circle!'},
+      {scene:'🟦',
+       text:'SQUARE — 4 sides, all the same!',
+       sub:'Like a window, a cracker, a tile',
+       demo:{type:'shape-fact',shape:'square',sides:'4 equal sides',corners:'4 corners',color:'#FFD166',examples:'🪟 🎲 📦'},
+       narrate:'A square has four sides. All four sides are exactly the same length. Count the corners, one, two, three, four!'},
+      {scene:'🔺',
+       text:'TRIANGLE — 3 sides, 3 corners!',
+       sub:'Like a slice of pizza or a tent',
+       demo:{type:'shape-fact',shape:'triangle',sides:'3 sides',corners:'3 corners',color:'#B5EAD7',examples:'🍕 ⛺ 🎄'},
+       narrate:'A triangle has three sides and three corners. Count them with me! One, two, three sides. One, two, three corners!'},
+      {scene:'⭐',
+       text:'STAR — 5 points! Count them!',
+       sub:'Points are like sharp corners',
+       demo:{type:'shape-fact',shape:'star',sides:'5 points',corners:'5 corners',color:'#FFE57A',examples:'⭐ 🌟 ✨'},
+       narrate:'A star has five pointy corners called points! Can you count them? One, two, three, four, five! Five points!'},
+      {scene:'🔍',
+       text:'Look for shapes in your room!',
+       sub:'Windows = squares, plates = circles!',
+       demo:null,
+       narrate:'Now look around your room! Can you find a circle? A square? A triangle? Shapes are hiding everywhere!'},
+    ],
+  },
+  patterns:{
+    title:'🐱🐶 Pattern Detective!',
+    bg:'linear-gradient(160deg,#1a0a3c 0%,#2d1b69 100%)',
+    slides:[
+      {scene:'🕵️',
+       text:'A pattern repeats — same order, again and again!',
+       sub:'Let me show you how!',
+       demo:null,
+       narrate:'A pattern is something that repeats in the same order, again and again. I will show you!'},
+      {scene:'🐱🐶',
+       text:'Cat, Dog, Cat, Dog… what\'s next?',
+       sub:'The answer is: Cat! It repeats!',
+       demo:{type:'pattern-demo',seq:['🐱','🐶','🐱','🐶','❓'],answer:'🐱',highlight:4},
+       narrate:'Cat, Dog, Cat, Dog. What comes next? It is Cat! Because the pattern repeats! Cat, Dog, Cat, Dog, Cat!'},
+      {scene:'🔴🔵',
+       text:'Red, Blue, Red, Blue… what\'s next?',
+       sub:'Look at the colors repeating!',
+       demo:{type:'pattern-demo',seq:['🔴','🔵','🔴','🔵','❓'],answer:'🔴',highlight:4},
+       narrate:'Red, Blue, Red, Blue. What comes next? Red! The colors take turns going Red, Blue, Red, Blue!'},
+      {scene:'🌟🌙☁️',
+       text:'Star, Moon, Cloud… 3 things repeat!',
+       sub:'This is an A-B-C pattern!',
+       demo:{type:'pattern-demo',seq:['🌟','🌙','☁️','🌟','🌙','❓'],answer:'☁️',highlight:5},
+       narrate:'Star, Moon, Cloud, Star, Moon. What comes next? Cloud! Three things repeat in a row. Star, Moon, Cloud, Star, Moon, Cloud!'},
+      {scene:'🎯',
+       text:'Find the missing one!',
+       sub:'Look, think, pick the right answer',
+       demo:{type:'pattern-demo',seq:['🍎','🍌','🍎','🍌','❓'],answer:'🍎',highlight:4},
+       narrate:'Apple, Banana, Apple, Banana. What is missing at the end? Apple! You are getting so good at patterns!'},
+      {scene:'🏆',
+       text:'You are a Pattern Detective!',
+       sub:'Now let\'s do the pattern game!',
+       demo:null,
+       narrate:'You are an amazing pattern detective! Now let us play the pattern game and find what comes next!'},
+    ],
+  },
+  addition:{
+    title:'➕ Let\'s Add Things!',
+    bg:'linear-gradient(160deg,#1a0a4c 0%,#3a1a6c 100%)',
+    slides:[
+      {scene:'🧺',
+       text:'Adding means putting groups together!',
+       sub:'We count everything at the end',
+       demo:null,
+       narrate:'Adding means we put two groups together and count how many we have in all!'},
+      {scene:'🍎',
+       text:'I have 1 apple in my basket.',
+       sub:'Start: 1 apple',
+       demo:{type:'equation',left:['🍎'],op:'',right:[],result:[],showResult:false,label:'Start with 1'},
+       narrate:'I have one apple in my basket. Just one apple. Can you see it?'},
+      {scene:'🍎➕🍎🍎',
+       text:'I add 2 more apples! Plus means add!',
+       sub:'1 + 2 = … let\'s count!',
+       demo:{type:'equation',left:['🍎'],op:'+',right:['🍎','🍎'],result:[],showResult:false,label:'1 + 2 = ?'},
+       narrate:'Now I put two more apples in! The plus sign means we are adding! One apple, plus two more apples. How many in all?'},
+      {scene:'🍎🍎🍎',
+       text:'Count them all: 1, 2, 3! 1 + 2 = 3!',
+       sub:'Always count every single one!',
+       demo:{type:'equation',left:['🍎'],op:'+',right:['🍎','🍎'],result:['🍎','🍎','🍎'],showResult:true,label:'1 + 2 = 3 ✓'},
+       narrate:'Count them all together! One, two, three! One plus two equals three! Always count every single one!'},
+      {scene:'🐣🐣➕🐣🐣🐣',
+       text:'Try: 2 chicks + 3 chicks = ?',
+       sub:'Count all of them together!',
+       demo:{type:'equation',left:['🐣','🐣'],op:'+',right:['🐣','🐣','🐣'],result:['🐣','🐣','🐣','🐣','🐣'],showResult:true,label:'2 + 3 = 5 ✓'},
+       narrate:'Two baby chicks, plus three more baby chicks. Count them all! One, two, three, four, five! Two plus three equals five!'},
+      {scene:'🎉',
+       text:'You can add! Let\'s practice now!',
+       sub:'Tap the right answer!',
+       demo:null,
+       narrate:'You are amazing at adding! Let us practice together now. Tap the right answer!'},
+    ],
+  },
+  comparison:{
+    title:'⚖️ Bigger, Smaller, More!',
+    bg:'linear-gradient(160deg,#0a2a1a 0%,#1a4a2a 100%)',
+    slides:[
+      {scene:'👀',
+       text:'Let\'s compare — which is MORE or BIGGER?',
+       sub:'Look carefully and decide!',
+       demo:null,
+       narrate:'We are going to compare things! That means we look at two groups and decide which one is more, or bigger, or smaller!'},
+      {scene:'🐘🐭',
+       text:'Elephant vs Mouse — which is BIGGER?',
+       sub:'Look at their sizes!',
+       demo:{type:'compare',left:{items:['🐘'],label:'Elephant',size:72},right:{items:['🐭'],label:'Mouse',size:34},winner:'left',winWord:'BIGGER'},
+       narrate:'Look at the elephant and the mouse! Which one is bigger? The elephant is much, much bigger than the tiny mouse!'},
+      {scene:'🍎🍎🍎',
+       text:'3 apples vs 1 apple — which is MORE?',
+       sub:'Count each group, then compare!',
+       demo:{type:'compare',left:{items:['🍎','🍎','🍎'],label:'3 apples'},right:{items:['🍎'],label:'1 apple'},winner:'left',winWord:'MORE'},
+       narrate:'Count the left group! One, two, three apples. Now count the right group! One apple. Three is more than one! The left group has MORE!'},
+      {scene:'🐶🐶',
+       text:'2 dogs vs 4 dogs — which is FEWER?',
+       sub:'Fewer means less, smaller number',
+       demo:{type:'compare',left:{items:['🐶','🐶'],label:'2 dogs'},right:{items:['🐶','🐶','🐶','🐶'],label:'4 dogs'},winner:'left',winWord:'FEWER'},
+       narrate:'Two dogs on the left. Four dogs on the right. Two is less than four! The left group has fewer dogs. Fewer means a smaller number!'},
+      {scene:'🌳🌱',
+       text:'Tall tree vs tiny seedling — which is SMALLER?',
+       sub:'Smaller means less big!',
+       demo:{type:'compare',left:{items:['🌳'],label:'Big tree',size:68},right:{items:['🌱'],label:'Seedling',size:30},winner:'right',winWord:'SMALLER'},
+       narrate:'The big tree on the left, and the tiny little seedling on the right. Which one is smaller? The seedling is much smaller than the big tree!'},
+      {scene:'🏆',
+       text:'You can compare! Let\'s play!',
+       sub:'Choose bigger, smaller, or more!',
+       demo:null,
+       narrate:'Wonderful comparing! You are so smart! Now let us play the game and compare things together!'},
+    ],
+  },
+  colorsort:{
+    title:'🌈 Color Sort Fun!',
+    bg:'linear-gradient(160deg,#2a0a0a 0%,#4a1a1a 100%)',
+    slides:[
+      {scene:'🌈',
+       text:'Sorting means putting same colors together!',
+       sub:'Let me show you how!',
+       demo:null,
+       narrate:'Sorting, means we put things, that are the same color, into the same group. Let me show you how!'},
+      {scene:'🍎🍒',
+       text:'Apple and Cherry — both RED! They go together!',
+       sub:'Red things go in the red bucket!',
+       demo:{type:'sort-demo',items:['🍎','🍒','🌹'],bucket:'🔴 Red Bucket',color:'#FF6B6B'},
+       narrate:'The apple is red! The cherry is red! The rose is red! They are all the same color, so they all go, in the red bucket, together!'},
+      {scene:'🍌🌻',
+       text:'Banana and Sunflower — both YELLOW!',
+       sub:'Yellow things go in the yellow bucket!',
+       demo:{type:'sort-demo',items:['🍌','🌻','⭐'],bucket:'🟡 Yellow Bucket',color:'#FFD166'},
+       narrate:'The banana is yellow. The sunflower is yellow. The star is yellow. All yellow things, go together, in the yellow bucket!'},
+      {scene:'🍊🥕',
+       text:'Orange and Carrot — both ORANGE!',
+       sub:'Can you spot orange things?',
+       demo:{type:'sort-demo',items:['🍊','🥕'],bucket:'🟠 Orange Bucket',color:'#FF8C42'},
+       narrate:'The orange fruit is orange. The carrot is orange. They are the same color. Into the orange bucket, they go!'},
+      {scene:'🫐🍇',
+       text:'Blueberry and Grapes — both PURPLE!',
+       sub:'Purple things match each other!',
+       demo:{type:'sort-demo',items:['🫐','🍇'],bucket:'🟣 Purple Bucket',color:'#C3B1E1'},
+       narrate:'The blueberry is purple. The grapes are purple. Purple things, go together, in the purple bucket!'},
+      {scene:'🎨',
+       text:'Now YOU sort the colors!',
+       sub:'Tap an item, then tap its color bucket!',
+       demo:null,
+       narrate:'Now it is your turn to sort! Tap a fruit or vegetable, then tap the bucket that matches its color. You can do it!'},
+    ],
+  },
+  colors:{
+    title:'🎨 Learn Your Colors!',
+    bg:'linear-gradient(160deg,#1a0a3c 0%,#2d0a5c 100%)',
+    slides:[
+      {scene:'🎨',
+       text:'Colors make the world beautiful!',
+       sub:'Let\'s learn 6 colors together',
+       demo:null,
+       narrate:'Colors, make the world, so beautiful! Today, we are going to learn, six wonderful colors, together!'},
+      {scene:'🔴',
+       text:'RED — like an apple, a rose, a heart!',
+       sub:'Red is warm and bright!',
+       demo:{type:'sort-demo',items:['🍎','🌹','❤️','🍒'],bucket:'🔴 RED',color:'#FF6B6B'},
+       narrate:'Red! Can you say it? Red! An apple is red. A rose is red. A heart is red. Red is a warm and beautiful color!'},
+      {scene:'🟡',
+       text:'YELLOW — like the sun, a banana, a star!',
+       sub:'Yellow is sunny and happy!',
+       demo:{type:'sort-demo',items:['🌞','🍌','⭐','🌻'],bucket:'🟡 YELLOW',color:'#FFD166'},
+       narrate:'Yellow! Say it with me! Yellow! The sun is yellow. A banana is yellow. A star is yellow. Yellow is such a happy, sunny color!'},
+      {scene:'🔵',
+       text:'BLUE — like the sky, the ocean, a blueberry!',
+       sub:'Blue is calm and cool!',
+       demo:{type:'sort-demo',items:['🌊','💧','🫐','🧢'],bucket:'🔵 BLUE',color:'#5B9BD5'},
+       narrate:'Blue! Can you say blue? Blue! The sky is blue. The ocean is blue. A blueberry is blue. Blue is a calm and cool color!'},
+      {scene:'🟢',
+       text:'GREEN — like leaves, a frog, broccoli!',
+       sub:'Green is the color of nature!',
+       demo:{type:'sort-demo',items:['🍃','🐸','🥦','🌳'],bucket:'🟢 GREEN',color:'#4EAD8A'},
+       narrate:'Green! Say green! Green! Leaves are green. Frogs are green. Trees are green. Green is the color of nature and life!'},
+      {scene:'🎉',
+       text:'Red, Yellow, Blue, Green — you know four colors!',
+       sub:'Now let\'s practice finding colors!',
+       demo:null,
+       narrate:'Amazing! You know red, yellow, blue, and green! You are so smart! Now, let us practice, finding colors, together!'},
+    ],
+  },
+};
+
+const MATH_MODULES=[
+  {id:'counting',icon:'🔢',label:'Count\nwith Me',color:'#B5EAD7',shadow:'#4EAD8A',concept:'counting',desc:'1 through 10'},
+  {id:'shapes',icon:'🔷',label:'Shapes\nMatch',color:'#FFD166',shadow:'#B8800A',concept:'shapes',desc:'6 shapes'},
+  {id:'colors',icon:'🎨',label:'Learn\nColors',color:'#FFB3C6',shadow:'#B05070',concept:'colors',desc:'6 colors'},
+  {id:'patterns',icon:'🐱🐶',label:'What\nComes Next?',color:'#FFCBA4',shadow:'#B86020',concept:'patterns',desc:'AB & ABC patterns'},
+  {id:'addition',icon:'➕',label:'Adding\nFun',color:'#C3B1E1',shadow:'#6a4fa0',concept:'addition',desc:'1+1 through 4+1'},
+  {id:'comparison',icon:'⚖️',label:'More or\nLess?',color:'#FFB3C6',shadow:'#B05070',concept:'comparison',desc:'Bigger, smaller, more'},
+  {id:'colorsort',icon:'🌈',label:'Color\nSort',color:'#87CEEB',shadow:'#3a7aaa',concept:'colorsort',desc:'4 colors'},
+];
+
+const STICKER_SLOTS=30;
+
+/* ═══════════════════════════════════════
+   HOOKS
+═══════════════════════════════════════ */
+// Pick the warmest, most natural-sounding English voice available on this device
+let _bestVoice=null;
+function getBestVoice(){
+  if(_bestVoice)return _bestVoice;
+  const voices=window.speechSynthesis.getVoices();
+  if(!voices.length)return null;
+  // Priority list: neural / enhanced / well-known warm voices
+  const priority=[
+    v=>v.name==='Samantha',                      // iOS/macOS – very natural
+    v=>v.name==='Karen',                          // iOS Australian – warm
+    v=>v.name==='Moira',                          // macOS Irish
+    v=>v.name==='Google US English',              // Chrome – much better than eSpeak
+    v=>/natural|enhanced/i.test(v.name)&&/en[-_]US/i.test(v.lang),
+    v=>/natural|enhanced/i.test(v.name)&&/en/i.test(v.lang),
+    v=>/en[-_]US/i.test(v.lang)&&!/eSpeak|festival/i.test(v.name),
+    v=>/en/i.test(v.lang),
+  ];
+  for(const test of priority){
+    const found=voices.find(test);
+    if(found){_bestVoice=found;return found;}
+  }
+  return null;
+}
+
+function useSpeedSpeech(){
+  const speak=useCallback((text,lang='en-US',rate=0.8)=>{
+    if(!window.speechSynthesis)return;
+    window.speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    const v=getBestVoice();
+    if(v&&/^en/i.test(lang))u.voice=v;
+    u.lang=lang;u.rate=rate;u.pitch=1.05;u.volume=1;
+    window.speechSynthesis.speak(u);
+  },[]);
+  const speakRepeat=useCallback((text,lang,rate,times=3,delayMs=1200)=>{
+    if(!window.speechSynthesis)return;
+    window.speechSynthesis.cancel();
+    let i=0;
+    const fire=()=>{
+      if(i>=times)return;
+      const u=new SpeechSynthesisUtterance(text);
+      const v=getBestVoice();
+      if(v&&/^en/i.test(lang))u.voice=v;
+      u.lang=lang;u.rate=rate;u.pitch=1.05;u.volume=1;
+      u.onend=()=>{i++;if(i<times)setTimeout(fire,delayMs);};
+      window.speechSynthesis.speak(u);i++;
+    };
+    fire();
+  },[]);
+  // Warm up voice list on first call (voices load async)
+  useEffect(()=>{
+    if(window.speechSynthesis){
+      window.speechSynthesis.getVoices();
+      window.speechSynthesis.onvoiceschanged=()=>{_bestVoice=null;getBestVoice();};
+    }
+  },[]);
+  return{speak,speakRepeat};
+}
+
+function useStickerBoard(){
+  const[stickers,setStickers]=useState(()=>{try{return JSON.parse(localStorage.getItem('ls_stickers')||'[]');}catch{return[];}});
+  const addSticker=useCallback((emoji)=>{
+    setStickers(prev=>{const next=[...prev,{emoji,ts:Date.now()}];localStorage.setItem('ls_stickers',JSON.stringify(next));return next;});
+  },[]);
+  return{stickers,addSticker};
+}
+
+function useSessionTracker(worldKey){
+  const sk=`ls_session_${worldKey}`;
+  const[lettersSeen,setLettersSeen]=useState(()=>{try{return JSON.parse(localStorage.getItem(`${sk}_letters`)||'[]');}catch{return[];}});
+  const[elapsed,setElapsed]=useState(0);
+  const startRef=useRef(Date.now());
+  useEffect(()=>{const id=setInterval(()=>setElapsed(Math.floor((Date.now()-startRef.current)/1000)),1000);return()=>clearInterval(id);},[]);
+  const markLetterSeen=useCallback((letter)=>{
+    setLettersSeen(prev=>{if(prev.includes(letter))return prev;const next=[...prev,letter];localStorage.setItem(`${sk}_letters`,JSON.stringify(next));return next;});
+  },[sk]);
+  const maxSecs=540;
+  const progress=Math.min(elapsed/maxSecs,1);
+  const showRest=elapsed>=maxSecs;
+  return{elapsed,progress,showRest,lettersSeen,markLetterSeen};
+}
+
+/* ═══════════════════════════════════════
+   SHARED UI
+═══════════════════════════════════════ */
+function SoundWave(){
+  return<div className="sound-wave" aria-hidden="true">{[12,18,24,16,22].map((h,i)=><div key={i} className="wave-bar" style={{height:h,animationDelay:`${i*.1}s`}}/>)}</div>;
+}
+function ProgressDots({total,current,theme}){
+  return<div className={`progress-dots${theme==='math'?' math-progress-dots':''}`} role="progressbar" aria-valuenow={current} aria-valuemax={total}>
+    {Array.from({length:total}).map((_,i)=><div key={i} className={`dot${i<current?' done':i===current?' active':''}`}/>)}
+  </div>;
+}
+function CelebrationBurst({show}){
+  if(!show)return null;
+  return<div className="celebrate-overlay" aria-live="polite" aria-label="Great job!"><div className="celebrate-burst">🎉</div></div>;
+}
+function RestMoment({onContinue}){
+  return<div className="rest-banner" role="alert">
+    <div style={{fontSize:60,animation:'float 2.5s ease-in-out infinite'}}>☕</div>
+    <div style={{fontSize:22,color:'var(--navy)',marginTop:10}}>Rest time! Great job! 🌟</div>
+    <div style={{fontFamily:'Nunito',fontWeight:700,fontSize:14,color:'#5a4000',marginTop:6}}>You worked so hard! Take a little break.</div>
+    <button className="next-btn" style={{marginTop:18}} onClick={onContinue} aria-label="Keep going">Keep Going! 🚀</button>
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   MINI CARTOON — self-contained animated episode
+═══════════════════════════════════════ */
+const SLIDE_DURATION=7000;// ms per slide — longer so the narration finishes
+
+/* Renders the worked-example demo block for a slide */
+function SlideDemo({demo}){
+  if(!demo)return null;
+  const{type}=demo;
+
+  if(type==='row'){
+    return<div className="demo-block" aria-label={`Example: ${demo.label}`}>
+      <div className="demo-row">
+        {demo.items.map((it,i)=>(
+          <span key={i} className="demo-item" style={{animationDelay:`${i*120}ms`}}>{it}</span>
+        ))}
+      </div>
+      <div className="demo-label">{demo.label}</div>
+    </div>;
+  }
+
+  if(type==='equation'){
+    return<div className="demo-block">
+      <div className="demo-row" style={{gap:6}}>
+        <div className="demo-result-group">{demo.left.map((e,i)=><span key={i} className="demo-item" style={{animationDelay:`${i*100}ms`}}>{e}</span>)}</div>
+        {demo.op&&<span className="demo-op">{demo.op}</span>}
+        {demo.right.length>0&&<div className="demo-result-group">{demo.right.map((e,i)=><span key={i} className="demo-item" style={{animationDelay:`${(demo.left.length+i)*100}ms`}}>{e}</span>)}</div>}
+        {demo.showResult&&demo.result.length>0&&<>
+          <span className="demo-eq">=</span>
+          <div className="demo-result-group">{demo.result.map((e,i)=><span key={i} className="demo-item" style={{animationDelay:`${(demo.left.length+demo.right.length+i)*80}ms`}}>{e}</span>)}</div>
+        </>}
+      </div>
+      <div className="demo-label">{demo.label}</div>
+    </div>;
+  }
+
+  if(type==='compare'){
+    const{left,right,winner,winWord}=demo;
+    return<div className="demo-block">
+      <div className="demo-compare-wrap">
+        <div className={`demo-compare-box${winner==='left'?' winner':''}`}>
+          <div style={{fontSize:left.size?left.size+'px':26,lineHeight:1,textAlign:'center'}}>{left.items.map((e,i)=><span key={i}>{e}</span>)}</div>
+          <div style={{fontFamily:'Nunito',fontWeight:800,fontSize:12,color:'rgba(255,255,255,.8)',marginTop:4}}>{left.label}</div>
+          {winner==='left'&&<div className="demo-win-badge">{winWord}!</div>}
+        </div>
+        <div className="demo-compare-vs">vs</div>
+        <div className={`demo-compare-box${winner==='right'?' winner':''}`}>
+          <div style={{fontSize:right.size?right.size+'px':26,lineHeight:1,textAlign:'center'}}>{right.items.map((e,i)=><span key={i}>{e}</span>)}</div>
+          <div style={{fontFamily:'Nunito',fontWeight:800,fontSize:12,color:'rgba(255,255,255,.8)',marginTop:4}}>{right.label}</div>
+          {winner==='right'&&<div className="demo-win-badge">{winWord}!</div>}
+        </div>
+      </div>
+    </div>;
+  }
+
+  if(type==='sort-demo'){
+    return<div className="demo-block">
+      <div className="demo-sort-bucket">
+        <div className="demo-sort-label">{demo.bucket}</div>
+        <div style={{display:'flex',gap:6,justifyContent:'center',flexWrap:'wrap'}}>
+          {demo.items.map((e,i)=>(
+            <span key={i} className="demo-item" style={{animationDelay:`${i*150}ms`}}>{e}</span>
+          ))}
+        </div>
+      </div>
+    </div>;
+  }
+
+  if(type==='shape-fact'){
+    return<div className="demo-block">
+      <div style={{display:'flex',gap:6,justifyContent:'center',marginBottom:6,flexWrap:'wrap'}}>
+        <div className="demo-fact-chip" style={{background:demo.color+'44'}}>
+          <div className="fact-key">Sides</div>
+          <div className="fact-val" style={{color:demo.color}}>{demo.sides}</div>
+        </div>
+        <div className="demo-fact-chip" style={{background:demo.color+'44'}}>
+          <div className="fact-key">Corners</div>
+          <div className="fact-val" style={{color:demo.color}}>{demo.corners}</div>
+        </div>
+      </div>
+      <div className="demo-examples">{demo.examples}</div>
+    </div>;
+  }
+
+  if(type==='pattern-demo'){
+    return<div className="demo-block">
+      <div className="demo-pattern-seq">
+        {demo.seq.map((item,i)=>{
+          if(item==='❓'){
+            return<div key={i} className={i===demo.highlight?'demo-pat-answer':'demo-pat-blank'}>
+              {i===demo.highlight?demo.answer:'?'}
+            </div>;
+          }
+          return<span key={i} className="demo-pat-item"
+            style={{opacity:i===demo.highlight?.6:1,animationDelay:`${i*80}ms`}}>{item}</span>;
+        })}
+      </div>
+      {demo.answer&&<div className="demo-label">Answer: {demo.answer}</div>}
+    </div>;
+  }
+
+  return null;
+}
+
+function MiniCartoon({concept,onClose}){
+  const script=CARTOON_SCRIPTS[concept];
+  const slides=script?script.slides:[];
+  const[idx,setIdx]=useState(0);
+  const[slidePhase,setSlidePhase]=useState('active');
+  const[barW,setBarW]=useState(0);
+  const timerRef=useRef(null);
+  const{speak}=useSpeedSpeech();
+
+  const goTo=useCallback((nextIdx)=>{
+    window.speechSynthesis&&window.speechSynthesis.cancel();
+    setSlidePhase('out-left');
+    setTimeout(()=>{
+      setIdx(nextIdx);
+      setSlidePhase('active');
+      setBarW(0);
+    },420);
+  },[]);
+
+  useEffect(()=>{
+    if(!slides[idx])return;
+    // small delay so slide animation finishes before speaking
+    const tts=setTimeout(()=>speak(slides[idx].narrate,'en-US',0.65),300);
+    setBarW(0);
+    clearTimeout(timerRef.current);
+    timerRef.current=setTimeout(()=>{
+      if(idx<slides.length-1)goTo(idx+1);
+    },SLIDE_DURATION);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>setBarW(100)));
+    return()=>{clearTimeout(timerRef.current);clearTimeout(tts);};
+  },[idx]);// eslint-disable-line
+
+  if(!script)return null;
+  const slide=slides[idx];
+  const isLast=idx===slides.length-1;
+
+  return<div className="cartoon-overlay" role="dialog" aria-modal="true" aria-label={`Mini cartoon: ${script.title}`}
+    onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
+    <div className="cartoon-modal">
+      <div className="cartoon-header">
+        <div className="cartoon-ep-title">🎬 {script.title}</div>
+        <button className="cartoon-close" onClick={onClose} aria-label="Close cartoon">✕</button>
+      </div>
+
+      <div className="cartoon-stage" style={{background:script.bg}}>
+        <div className={`cartoon-slide ${slidePhase}`}>
+          <div className="cartoon-scene" aria-hidden="true">{slide.scene}</div>
+          <div className="cartoon-bubble">
+            <div className="cartoon-text">{slide.text}</div>
+            {slide.sub&&<div className="cartoon-sub">{slide.sub}</div>}
+          </div>
+          {slide.demo&&<SlideDemo demo={slide.demo}/>}
+        </div>
+        <div className="cartoon-auto-bar" style={{width:`${barW}%`,transition:barW===0?'none':`width ${SLIDE_DURATION}ms linear`}}/>
+      </div>
+
+      <div className="cartoon-footer">
+        <div className="cartoon-dots">
+          {slides.map((_,i)=>(
+            <div key={i} className={`cartoon-dot${i===idx?' active':i<idx?' done':''}`}
+              role="button" aria-label={`Slide ${i+1}`} onClick={()=>i!==idx&&goTo(i)}/>
+          ))}
+        </div>
+        <button className="cartoon-next-btn"
+          onClick={()=>{if(isLast)onClose();else goTo(idx+1);}}
+          aria-label={isLast?'Finish cartoon and practice':'Next slide'}>
+          {isLast?'Let\'s Practice! 🎮':'Next ▶'}
+        </button>
+      </div>
+    </div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   STICKER BOARD
+═══════════════════════════════════════ */
+function StickerBoard({stickers,onClose}){
+  return<div className="sticker-overlay" role="dialog" aria-modal="true" aria-label="Your sticker collection">
+    <div className="sticker-modal">
+      <div style={{fontSize:34,marginBottom:4}}>🏆 My Stickers!</div>
+      <div style={{fontFamily:'Nunito',fontSize:14,opacity:.7,marginBottom:4}}>{stickers.length} of {STICKER_SLOTS} earned</div>
+      <div className="sticker-grid">
+        {Array.from({length:STICKER_SLOTS}).map((_,i)=>(
+          <div key={i} className={`sticker-slot${i<stickers.length?' earned':''}`} style={i<stickers.length?{animationDelay:`${i*.04}s`}:{}}>
+            {i<stickers.length?stickers[i].emoji:''}
+          </div>
+        ))}
+      </div>
+      <button className="next-btn" style={{width:'100%',marginTop:4}} onClick={onClose} aria-label="Close sticker board">✨ Close</button>
+    </div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   ARABIC WORLD — LETTER INTRO
+   Shows: big letter → animal picture → word → mouth cue → sing-along
+═══════════════════════════════════════ */
+function LetterIntro({letterData,onNext,onSayIt,onSayWord,isPlaying,isPlayingWord,onSing,isSinging}){
+  return<div className="arabic-letter-card" role="main" style={{paddingBottom:14}}>
+    {/* Big letter */}
+    <span className="arabic-letter-big" lang="ar" aria-label={`Letter ${letterData.phoneme}`}>{letterData.letter}</span>
+    {isPlaying&&<SoundWave/>}
+
+    {/* Animal picture — large emoji in a glowing circle */}
+    <div style={{display:'flex',flexDirection:'column',alignItems:'center',marginTop:8,gap:4}}>
+      <div style={{
+        width:110,height:110,borderRadius:'50%',
+        background:'rgba(255,229,122,.12)',
+        border:'3px solid rgba(255,229,122,.35)',
+        display:'flex',alignItems:'center',justifyContent:'center',
+        fontSize:72,lineHeight:1,
+        animation:'float 3s ease-in-out infinite',
+        boxShadow:'0 0 24px rgba(255,229,122,.25)',
+      }} role="img" aria-label={letterData.animalEn}>
+        {letterData.animal}
+      </div>
+      {/* Word display — Arabic word + English, tappable to hear */}
+      <button onClick={onSayWord} aria-label={`Hear word: ${letterData.wordEn}`} style={{
+        marginTop:6,background:'rgba(255,255,255,.08)',border:'1.5px solid rgba(255,229,122,.3)',
+        borderRadius:14,padding:'6px 14px',cursor:'pointer',display:'flex',flexDirection:'column',alignItems:'center',gap:2,
+        transition:'transform .12s cubic-bezier(.34,1.56,.64,1)',
+      }}>
+        <span style={{fontFamily:'Nunito',fontWeight:900,fontSize:22,color:'var(--star)',direction:'rtl'}} lang="ar">
+          {isPlayingWord?<><SoundWave/></>:letterData.word}
+        </span>
+        <span style={{fontFamily:'Nunito',fontWeight:700,fontSize:12,color:'rgba(255,255,255,.5)'}}>
+          🔊 {letterData.wordEn}
+        </span>
+      </button>
+    </div>
+
+    <div className="mouth-hint" style={{marginTop:6}} aria-label={letterData.mouth}>{letterData.mouth}</div>
+
+    {/* Buttons row */}
+    <div style={{display:'flex',gap:8,justifyContent:'center',marginTop:12,flexWrap:'wrap'}}>
+      <button className="say-it-btn" onClick={onSayIt} aria-label={`Replay sound: ${letterData.phoneme}`}>
+        👄 Say it!
+      </button>
+      <button className="say-it-btn"
+        onClick={onSing}
+        style={{background:isSinging?'linear-gradient(135deg,#FFD166,#FFB300)':'linear-gradient(135deg,#FFB3C6,#FF8C9E)',color:isSinging?'var(--navy)':'#fff'}}
+        aria-label="Sing the letter song">
+        🎵 {isSinging?'Singing…':'Sing!'}
+      </button>
+      <button className="next-btn" onClick={onNext} aria-label="Continue to word pick">Next ➡️</button>
+    </div>
+
+    {/* Song lyrics shown while singing — Arabic text */}
+    {isSinging&&(
+      <div style={{
+        marginTop:10,background:'rgba(255,229,122,.12)',border:'1.5px solid rgba(255,229,122,.3)',
+        borderRadius:14,padding:'10px 14px',fontFamily:'Nunito',fontWeight:700,
+        fontSize:16,color:'rgba(255,255,255,.9)',textAlign:'center',lineHeight:1.7,
+        animation:'fadeIn .3s ease',direction:'rtl',
+      }} lang="ar">
+        🎵 {letterData.songLabel||letterData.songAr}
+      </div>
+    )}
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   ARABIC WORLD — WORD PICK
+   Child taps the word that starts with the target letter
+═══════════════════════════════════════ */
+function WordPickStep({letterData,onCorrect,speak}){
+  const[tapped,setTapped]=useState(null);
+  const[locked,setLocked]=useState(false);
+  const choices=useMemo(()=>[...letterData.wordChoices].sort(()=>Math.random()-.5),[letterData]);
+
+  const handle=(choice)=>{
+    if(locked)return;
+    setLocked(true);
+    setTapped(choice.word);
+    speak(choice.word,'ar-SA',0.65);
+    if(choice.correct){
+      setTimeout(()=>onCorrect(),1600);
+    } else {
+      setTimeout(()=>{setLocked(false);setTapped(null);},900);
+    }
+  };
+
+  return<div className="arabic-letter-card" style={{padding:'18px 16px 20px'}}>
+    <div style={{fontFamily:'Nunito',fontWeight:800,fontSize:17,color:'rgba(255,255,255,.9)',marginBottom:4,textAlign:'center'}}>
+      🔤 أي كلمة تبدأ بـ <span style={{fontSize:28,color:'var(--star)'}} lang="ar">{letterData.letter}</span> ؟
+    </div>
+    <div style={{fontFamily:'Nunito',fontWeight:700,fontSize:13,color:'rgba(255,255,255,.45)',textAlign:'center',marginBottom:4}}>
+      Which word starts with this letter?
+    </div>
+    <div className="word-pick-grid">
+      {choices.map((ch,i)=>(
+        <button key={i}
+          className={`word-pick-btn${tapped===ch.word&&ch.correct?' correct-pick':tapped===ch.word&&!ch.correct?' wrong-pick':''}`}
+          onClick={()=>handle(ch)}
+          aria-label={`${ch.word} — ${ch.emoji}`}
+          style={{animationDelay:`${i*60}ms`}}>
+          <span className="word-pick-emoji" role="img">{ch.emoji}</span>
+          <div style={{flex:1,textAlign:'right'}}>
+            <div className="word-pick-text" lang="ar">{ch.word}</div>
+          </div>
+        </button>
+      ))}
+    </div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   ARABIC WORLD — TRACE
+═══════════════════════════════════════ */
+function LetterTrace({letterData,onNext}){
+  const canvasRef=useRef(null);
+  const drawing=useRef(false);
+  const[hasDrawn,setHasDrawn]=useState(false);
+  const getPos=(e,c)=>{const r=c.getBoundingClientRect();const s=e.touches?e.touches[0]:e;return{x:s.clientX-r.left,y:s.clientY-r.top};};
+  const startDraw=(e)=>{e.preventDefault();drawing.current=true;const c=canvasRef.current;const ctx=c.getContext('2d');const pos=getPos(e,c);ctx.beginPath();ctx.moveTo(pos.x,pos.y);};
+  const draw=(e)=>{e.preventDefault();if(!drawing.current)return;setHasDrawn(true);const c=canvasRef.current;const ctx=c.getContext('2d');ctx.strokeStyle='#FFE57A';ctx.lineWidth=7;ctx.lineCap='round';const pos=getPos(e,c);ctx.lineTo(pos.x,pos.y);ctx.stroke();};
+  const endDraw=()=>{drawing.current=false;};
+  const clear=()=>{canvasRef.current.getContext('2d').clearRect(0,0,200,200);setHasDrawn(false);};
+  return<div style={{textAlign:'center',width:'100%',maxWidth:400}}>
+    <div style={{fontFamily:'Nunito',fontSize:13,color:'rgba(255,255,255,.65)',marginBottom:4}}>✏️ Trace with your finger!</div>
+    <div className="trace-container">
+      <div className="trace-label-bg" lang="ar">{letterData.letter}</div>
+      <canvas ref={canvasRef} className="trace-canvas" width={200} height={200}
+        onMouseDown={startDraw} onMouseMove={draw} onMouseUp={endDraw} onMouseLeave={endDraw}
+        onTouchStart={startDraw} onTouchMove={draw} onTouchEnd={endDraw}
+        aria-label={`Trace ${letterData.phoneme}`} role="img"/>
+    </div>
+    <div style={{fontFamily:'Nunito',fontSize:12,color:'rgba(255,255,255,.5)',marginTop:6}}>Draw over the dotted letter ✨</div>
+    <div style={{display:'flex',gap:10,justifyContent:'center',marginTop:12}}>
+      {hasDrawn&&<button className="btn btn-soft" style={{minWidth:52,minHeight:52,borderRadius:14,fontSize:18}} onClick={clear} aria-label="Clear canvas">🗑️</button>}
+      <button className="next-btn" onClick={onNext} aria-label="Continue">{hasDrawn?'⭐ Done!':'Skip ➡️'}</button>
+    </div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   ARABIC WORLD — RECALL (2-choice)
+═══════════════════════════════════════ */
+function LetterRecall({letterData,allLetters,onCorrect}){
+  const[tapped,setTapped]=useState(null);
+  const[correct,setCorrect]=useState(null);
+  const[locked,setLocked]=useState(false);
+  const wrongLetter=useMemo(()=>{
+    const others=allLetters.filter(l=>l.letter!==letterData.letter);
+    return others[Math.floor(Math.random()*others.length)];
+  },[letterData,allLetters]);
+  const choices=useMemo(()=>{const p=[letterData,wrongLetter];return Math.random()>.5?p:[p[1],p[0]];},[letterData,wrongLetter]);
+  const handle=(ch)=>{
+    if(locked)return;setLocked(true);setTapped(ch.letter);
+    if(ch.letter===letterData.letter){setCorrect(ch.letter);setTimeout(()=>onCorrect(),1600);}
+    else{setTimeout(()=>{setLocked(false);setTapped(null);},900);}
+  };
+  return<div style={{textAlign:'center',width:'100%',maxWidth:400}}>
+    <div style={{fontFamily:'Nunito',fontWeight:700,fontSize:19,color:'rgba(255,255,255,.9)',margin:'10px 0 18px'}}>👂 Tap the letter you hear!</div>
+    <div className="recall-choices">
+      {choices.map(ch=>(
+        <button key={ch.letter} className={`recall-letter-btn${correct===ch.letter?' correct':tapped===ch.letter&&correct!==ch.letter?' tapped':''}`}
+          onClick={()=>handle(ch)} aria-label={`Letter ${ch.phoneme}`} lang="ar">{ch.letter}</button>
+      ))}
+    </div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   ARABIC WORLD — LETTER HUNT (3-choice)
+═══════════════════════════════════════ */
+function LetterHunt({targetLetter,allLetters,onCorrect,onDone,roundsLeft}){
+  const[cells,setCells]=useState(()=>{
+    const pool=allLetters.filter(l=>l.letter!==targetLetter.letter);
+    const wrong=pool.sort(()=>Math.random()-.5).slice(0,5);
+    return[...wrong,targetLetter].sort(()=>Math.random()-.5);
+  });
+  const[tapped,setTapped]=useState(null);
+  const[correct,setCorrect]=useState(null);
+  const[locked,setLocked]=useState(false);
+  const handle=(cell)=>{
+    if(locked||correct)return;
+    setLocked(true);setTapped(cell.letter);
+    if(cell.letter===targetLetter.letter){setCorrect(cell.letter);setTimeout(onCorrect,1400);}
+    else{setTimeout(()=>{setLocked(false);setTapped(null);},700);}
+  };
+  return<div style={{textAlign:'center',width:'100%',maxWidth:380}}>
+    <div style={{fontFamily:'Nunito',fontWeight:700,fontSize:17,color:'rgba(255,255,255,.9)',margin:'8px 0 4px'}}>
+      🔍 Find the letter: <span style={{fontSize:32,color:'var(--star)'}} lang="ar">{targetLetter.letter}</span>
+    </div>
+    <div style={{fontFamily:'Nunito',fontSize:13,color:'rgba(255,255,255,.55)',marginBottom:6}}>{roundsLeft} finds left</div>
+    <div className="hunt-grid">
+      {cells.map((cell,i)=>(
+        <button key={i} className={`hunt-cell${correct===cell.letter?' correct':tapped===cell.letter&&correct!==cell.letter?' wrong':''}`}
+          onClick={()=>handle(cell)} aria-label={`Letter ${cell.phoneme}`} lang="ar">{cell.letter}</button>
+      ))}
+    </div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   ARABIC WORLD — WORD BUILDER
+═══════════════════════════════════════ */
+function WordBuilder({wordData,onDone,speak}){
+  const[placed,setPlaced]=useState([]);
+  const[usedIdx,setUsedIdx]=useState([]);
+  const[celebrate,setCelebrate]=useState(false);
+  // Shuffled tiles
+  const tiles=useMemo(()=>[...wordData.letters].sort(()=>Math.random()-.5),[wordData]);
+
+  const handleTile=(i)=>{
+    if(usedIdx.includes(i))return;
+    const ch=tiles[i];
+    const nextPlaced=[...placed,ch];
+    setPlaced(nextPlaced);
+    setUsedIdx(p=>[...p,i]);
+    speak(ch,'ar-SA',0.7);
+    if(nextPlaced.length===wordData.letters.length){
+      // check if correct order
+      const attempt=nextPlaced.join('');
+      if(attempt===wordData.word){
+        setCelebrate(true);
+        speak(wordData.word,'ar-SA',0.7);
+        setTimeout(()=>{setCelebrate(false);onDone();},2000);
+      } else {
+        // reset after pause
+        setTimeout(()=>{setPlaced([]);setUsedIdx([]);},800);
+      }
+    }
+  };
+  return<div style={{textAlign:'center',width:'100%',maxWidth:380}}>
+    <CelebrationBurst show={celebrate}/>
+    <div style={{fontFamily:'Nunito',fontWeight:800,fontSize:16,color:'rgba(255,255,255,.85)',marginBottom:6}}>
+      Build the word: {wordData.emoji} {wordData.meaning}
+    </div>
+    <div className="word-display" aria-label={`Current word: ${placed.join('')}`}>
+      {placed.length>0?placed.map((l,i)=><span key={i} lang="ar">{l}</span>):<span style={{opacity:.3,fontSize:24,direction:'ltr'}}>tap letters below</span>}
+    </div>
+    <div className="word-letters-row">
+      {tiles.map((l,i)=>(
+        <button key={i} className={`word-letter-btn${usedIdx.includes(i)?' used':''}`}
+          onClick={()=>handleTile(i)} aria-label={`Tap letter ${l}`} lang="ar">{l}</button>
+      ))}
+    </div>
+    {placed.length>0&&placed.length<wordData.letters.length&&(
+      <button onClick={()=>{setPlaced([]);setUsedIdx([]);}} style={{marginTop:10,background:'rgba(255,255,255,.1)',border:'none',borderRadius:12,padding:'8px 16px',fontFamily:'Nunito',fontWeight:700,fontSize:13,color:'rgba(255,255,255,.6)',cursor:'pointer'}}>↺ Try again</button>
+    )}
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   ARABIC WORLD — LETTER MATCH PAIRS
+═══════════════════════════════════════ */
+function LetterMatch({letters,onDone,speak}){
+  // Match letter → emoji
+  const pairs=useMemo(()=>letters.slice(0,4),[letters]);
+  const[selected,setSelected]=useState(null);// {type:'letter'|'emoji', idx}
+  const[matched,setMatched]=useState([]);// indices of matched pairs
+  const[wrongFlash,setWrongFlash]=useState(null);
+
+  const handleLetter=(idx)=>{
+    if(matched.includes(idx))return;
+    if(selected?.type==='letter'&&selected.idx===idx){setSelected(null);return;}
+    setSelected({type:'letter',idx});
+    speak(pairs[idx].phoneme,'ar-SA',0.7);
+  };
+  const handleEmoji=(idx)=>{
+    if(matched.includes(idx))return;
+    if(!selected||selected.type!=='letter'){setSelected({type:'emoji',idx});return;}
+    if(selected.idx===idx){// correct match
+      const next=[...matched,idx];
+      setMatched(next);
+      setSelected(null);
+      if(next.length===pairs.length)setTimeout(onDone,1200);
+    } else {
+      setWrongFlash(idx);
+      setTimeout(()=>{setWrongFlash(null);setSelected(null);},700);
+    }
+  };
+
+  return<div style={{width:'100%',maxWidth:360,margin:'0 auto',textAlign:'center'}}>
+    <div style={{fontFamily:'Nunito',fontWeight:700,fontSize:16,color:'rgba(255,255,255,.85)',marginBottom:10}}>
+      Match the letter to its picture! 🔗
+    </div>
+    <div className="match-pairs">
+      {pairs.map((p,i)=>(
+        <button key={`l${i}`} className={`match-card letter${selected?.type==='letter'&&selected?.idx===i?' selected':''}${matched.includes(i)?' matched':''}`}
+          onClick={()=>handleLetter(i)} aria-label={`Letter ${p.phoneme}`} lang="ar">{p.letter}</button>
+      ))}
+      {pairs.map((p,i)=>(
+        <button key={`e${i}`} className={`match-card emoji-card${selected?.type==='emoji'&&selected?.idx===i?' selected':''}${matched.includes(i)?' matched':''}${wrongFlash===i?' wrong-flash':''}`}
+          onClick={()=>handleEmoji(i)} aria-label={p.emoji}>{p.emoji}</button>
+      ))}
+    </div>
+    <div style={{fontFamily:'Nunito',fontSize:13,color:'rgba(255,255,255,.5)',marginTop:4}}>
+      Tap a letter, then tap its picture
+    </div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   ARABIC WORLD — MAIN CONTROLLER
+═══════════════════════════════════════ */
+function ArabicWorld({onHome,stickerBoard}){
+  const{speak,speakRepeat}=useSpeedSpeech();
+  const{stickers,addSticker}=stickerBoard;
+  const{progress,showRest,lettersSeen,markLetterSeen}=useSessionTracker('arabic');
+  const[letterIdx,setLetterIdx]=useState(()=>{
+    const seen=JSON.parse(localStorage.getItem('ls_session_arabic_letters')||'[]');
+    const u=ARABIC_LETTERS.findIndex(l=>!seen.includes(l.letter));
+    return u>=0?u:0;
+  });
+  // steps: intro | wordpick | trace | recall | hunt | match
+  const[step,setStep]=useState('intro');
+  const[isPlaying,setIsPlaying]=useState(false);
+  const[isPlayingWord,setIsPlayingWord]=useState(false);
+  const[celebrate,setCelebrate]=useState(false);
+  const[showStickers,setShowStickers]=useState(false);
+  const[restAcked,setRestAcked]=useState(false);
+  const[huntRound,setHuntRound]=useState(0);
+  const[matchRound,setMatchRound]=useState(0);
+  const[wbRound,setWbRound]=useState(0);
+  const[isSinging,setIsSinging]=useState(false);
+
+  const letterData=ARABIC_LETTERS[letterIdx];
+  const HUNT_ROUNDS=3;
+  const MATCH_ROUNDS=2;
+
+  useEffect(()=>{
+    setIsSinging(false);
+    setIsPlayingWord(false);
+    const t=setTimeout(()=>{
+      setIsPlaying(true);
+      speakRepeat(letterData.phoneme,'ar-SA',0.65,3,1200);
+      // after phoneme repeats, speak the full word in Arabic
+      const wordDelay=3*1200+1800;
+      const tw=setTimeout(()=>{
+        setIsPlayingWord(true);
+        speak(letterData.word,'ar-SA',0.65);
+        setTimeout(()=>setIsPlayingWord(false),2000);
+      },wordDelay);
+      setTimeout(()=>setIsPlaying(false),4500);
+      return()=>clearTimeout(tw);
+    },600);
+    markLetterSeen(letterData.letter);
+    return()=>clearTimeout(t);
+  },[letterIdx]);
+
+  const playSoundOnce=()=>{setIsPlaying(true);speak(letterData.phoneme,'ar-SA',0.65);setTimeout(()=>setIsPlaying(false),1500);};
+
+  const playWordOnce=()=>{
+    setIsPlayingWord(true);
+    speak(letterData.word,'ar-SA',0.65);
+    setTimeout(()=>setIsPlayingWord(false),2200);
+  };
+
+  const playSong=()=>{
+    setIsSinging(true);
+    // Sing the Arabic song slowly — repeat twice
+    speak(letterData.songAr,'ar-SA',0.62);
+    const dur=letterData.songAr.length*55+1400;
+    setTimeout(()=>{
+      speak(letterData.songAr,'ar-SA',0.62);
+      setTimeout(()=>setIsSinging(false),dur);
+    },dur);
+  };
+
+  const advance=()=>{
+    const steps=['intro','wordpick','trace','recall','hunt','match'];
+    const cur=steps.indexOf(step);
+    if(cur<steps.length-1){
+      setStep(steps[cur+1]);
+      if(steps[cur+1]==='recall'||steps[cur+1]==='hunt'){
+        setTimeout(()=>{setIsPlaying(true);speak(letterData.phoneme,'ar-SA',0.65);setTimeout(()=>setIsPlaying(false),1500);},400);
+      }
+    } else {
+      // letter complete!
+      handleLetterComplete();
+    }
+  };
+
+  const handleLetterComplete=()=>{
+    setCelebrate(true);
+    addSticker(letterData.sticker);
+    speak('Excellent! You learned a new letter!','en-US',0.85);
+    setTimeout(()=>{
+      setCelebrate(false);
+      setLetterIdx(i=>(i+1)%ARABIC_LETTERS.length);
+      setStep('intro');
+      setHuntRound(0);
+      setMatchRound(0);
+      setWbRound(0);
+    },2200);
+  };
+
+  const handleHuntCorrect=()=>{
+    addSticker('⭐');
+    speak('Found it! Great eyes!','en-US',0.85);
+    if(huntRound+1>=HUNT_ROUNDS){
+      setTimeout(()=>advance(),1000);
+    } else {
+      setHuntRound(r=>r+1);
+    }
+  };
+
+  const timerPct=`${Math.round(progress*100)}%`;
+
+  if(showRest&&!restAcked)return(
+    <div className="screen arabic-bg" style={{justifyContent:'center'}}>
+      <button className="back-btn" onClick={onHome} aria-label="Go home">🏠</button>
+      <RestMoment onContinue={()=>setRestAcked(true)}/>
+    </div>
+  );
+
+  return<div className="screen arabic-bg">
+    {[{top:'8%',left:'10%',d:0},{top:'15%',right:'12%',d:.5},{top:'30%',left:'5%',d:1},{top:'5%',left:'55%',d:.8}].map((s,i)=>(
+      <span key={i} className="star-deco" style={{top:s.top,left:s.left,right:s.right,animationDelay:`${s.d}s`,animationDuration:`${1.5+s.d}s`,color:'#FFE57A',position:'absolute'}} aria-hidden="true">✦</span>
+    ))}
+    <button className="back-btn" onClick={onHome} aria-label="Go home">🏠</button>
+    <button className="sticker-tray-btn" onClick={()=>setShowStickers(true)} aria-label={`Sticker board – ${stickers.length} earned`}>🏆</button>
+    <div className="session-timer" aria-label="Session progress">
+      🌙<div className="timer-track" role="presentation"><div className="timer-fill-moon" style={{width:timerPct}}/></div><span>rest soon</span>
+    </div>
+    <div className="world-title arabic-world-title">🌙 Arabic Letters</div>
+    <div className="info-chip" style={{color:'rgba(255,255,255,.65)',marginBottom:2}}>Letter {letterIdx+1} of {ARABIC_LETTERS.length}</div>
+
+    <ProgressDots total={6} current={['intro','wordpick','trace','recall','hunt','match'].indexOf(step)} theme="arabic"/>
+    <div className="step-label" style={{color:'rgba(255,255,255,.45)'}}>
+      {step==='intro'?'Hear & See':step==='wordpick'?'Pick the Word':step==='trace'?'Trace':step==='recall'?'Recall':step==='hunt'?'Letter Hunt':'Match Pairs'}
+    </div>
+
+    {step==='intro'&&<LetterIntro letterData={letterData} isPlaying={isPlaying} isPlayingWord={isPlayingWord} onSayIt={playSoundOnce} onSayWord={playWordOnce} onNext={advance} onSing={playSong} isSinging={isSinging}/>}
+
+    {step==='wordpick'&&<WordPickStep letterData={letterData} onCorrect={advance} speak={speak}/>}
+
+    {step==='trace'&&<LetterTrace letterData={letterData} onNext={advance}/>}
+
+    {step==='recall'&&(
+      <div className="arabic-letter-card" style={{padding:'14px 20px 18px'}}>
+        {isPlaying&&<SoundWave/>}
+        <LetterRecall letterData={letterData} allLetters={ARABIC_LETTERS} onCorrect={advance}/>
+        <button className="play-sound-btn" onClick={playSoundOnce} style={{marginTop:14}} aria-label="Play sound again">🔊</button>
+      </div>
+    )}
+
+    {step==='hunt'&&(
+      <div className="arabic-letter-card" style={{padding:'14px 16px 18px'}}>
+        <LetterHunt targetLetter={letterData} allLetters={ARABIC_LETTERS} onCorrect={handleHuntCorrect} roundsLeft={HUNT_ROUNDS-huntRound}/>
+        <button className="play-sound-btn" onClick={playSoundOnce} style={{marginTop:10}} aria-label="Play sound again">🔊</button>
+      </div>
+    )}
+
+    {step==='match'&&(
+      <div className="arabic-letter-card" style={{padding:'14px 16px 18px'}}>
+        <LetterMatch letters={ARABIC_LETTERS.slice(Math.max(0,letterIdx-3),letterIdx+1)} onDone={handleLetterComplete} speak={speak}/>
+      </div>
+    )}
+
+    <CelebrationBurst show={celebrate}/>
+    {showStickers&&<StickerBoard stickers={stickers} onClose={()=>setShowStickers(false)}/>}
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   MATH — COUNTING MODULE (1–10)
+═══════════════════════════════════════ */
+function CountingModule({onBack}){
+  const{speak}=useSpeedSpeech();
+  const[round,setRound]=useState(0);
+  const[animals,setAnimals]=useState([]);
+  const[phase,setPhase]=useState('concrete');
+  const[celebrate,setCelebrate]=useState(false);
+  const targetCount=useMemo(()=>round+1,[round]);// 1 through 10
+  const targetAnimal=useMemo(()=>COUNTING_ANIMALS[round%COUNTING_ANIMALS.length],[round]);
+  const WORDS=['one','two','three','four','five','six','seven','eight','nine','ten'];
+
+  const addAnimal=()=>{
+    if(animals.length>=targetCount)return;
+    const next=[...animals,{id:Date.now(),emoji:targetAnimal}];
+    setAnimals(next);
+    speak(`${next.length}`,'en-US',0.8);
+    if(next.length===targetCount){
+      setTimeout(()=>{setPhase('pictorial');speak(`${targetCount}! Let's see the number!`,'en-US',.85);},700);
+    }
+  };
+
+  const handlePictorial=()=>{
+    setPhase('abstract');
+    speak(`${targetCount}! ${WORDS[targetCount-1]}!`,'en-US',.85);
+  };
+
+  const nextRound=()=>{
+    if(round+1>=10){setCelebrate(true);speak('Amazing! You counted to ten! You\'re a star!','en-US',.85);setTimeout(()=>{setCelebrate(false);onBack();},2500);}
+    else{setRound(r=>r+1);setAnimals([]);setPhase('concrete');}
+  };
+
+  return<div style={{width:'100%',maxWidth:420,textAlign:'center'}}>
+    <CelebrationBurst show={celebrate}/>
+    <div className="cpa-label">{phase==='concrete'?'Concrete':phase==='pictorial'?'Pictorial':'Abstract'}</div>
+    <div style={{display:'flex',gap:6,justifyContent:'center',marginBottom:6}}>
+      {Array.from({length:10}).map((_,i)=>(
+        <div key={i} style={{width:18,height:18,borderRadius:'50%',background:i<round?'var(--navy)':i===round?'#4EAD8A':'rgba(27,58,92,.15)',transition:'background .3s'}}/>
+      ))}
+    </div>
+
+    {phase==='concrete'&&<>
+      <div className="instruction">Tap to add {targetAnimal}! Count to {targetCount}!</div>
+      <div className="animal-grid" role="region" aria-live="polite" aria-label="Animal counting area">
+        {animals.map(a=><span key={a.id} className="animal-emoji" role="img" aria-label={targetAnimal}>{a.emoji}</span>)}
+        {animals.length<targetCount&&<span style={{fontSize:26,opacity:.3}} aria-hidden="true">➕</span>}
+      </div>
+      <button className="count-btn" onClick={addAnimal} aria-label={`Add ${targetAnimal}`}>
+        ➕ Add {targetAnimal} ({animals.length}/{targetCount})
+      </button>
+    </>}
+
+    {phase==='pictorial'&&<>
+      <div className="instruction">Count them! 🎉</div>
+      <div className="animal-grid">{animals.map(a=><span key={a.id} className="animal-emoji" role="img">{a.emoji}</span>)}</div>
+      <button className="count-btn" onClick={handlePictorial}>I count {targetCount}! ✨</button>
+    </>}
+
+    {phase==='abstract'&&<>
+      <div className="instruction">The number is…</div>
+      <div className="numeral-display" role="text" aria-label={`Number ${targetCount}`}>{targetCount}</div>
+      <div style={{fontFamily:'Nunito',fontWeight:800,fontSize:22,color:'#4EAD8A',marginTop:6,textTransform:'capitalize'}}>{WORDS[targetCount-1]}!</div>
+      <button className="count-btn" style={{marginTop:14}} onClick={nextRound}>
+        {round+1<10?'Next number ➡️':'🌟 All done!'}
+      </button>
+    </>}
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   MATH — SHAPES MODULE (6 shapes)
+═══════════════════════════════════════ */
+function ShapeSVG({type,color,size=70}){
+  const s=size;
+  if(type==='circle')return<svg width={s} height={s} viewBox="0 0 80 80"><circle cx="40" cy="40" r="35" fill={color}/></svg>;
+  if(type==='rect')return<svg width={s} height={s} viewBox="0 0 80 80"><rect x="8" y="8" width="64" height="64" rx="8" fill={color}/></svg>;
+  if(type==='triangle')return<svg width={s} height={s} viewBox="0 0 80 80"><polygon points="40,6 74,74 6,74" fill={color}/></svg>;
+  if(type==='star')return<svg width={s} height={s} viewBox="0 0 80 80"><polygon points="40,6 49,30 74,30 54,47 62,72 40,57 18,72 26,47 6,30 31,30" fill={color}/></svg>;
+  if(type==='heart')return<svg width={s} height={s} viewBox="0 0 80 80"><path d="M40 70 C40 70 8 50 8 28 C8 16 18 8 28 8 C34 8 40 14 40 14 C40 14 46 8 52 8 C62 8 72 16 72 28 C72 50 40 70 40 70Z" fill={color}/></svg>;
+  if(type==='diamond')return<svg width={s} height={s} viewBox="0 0 80 80"><polygon points="40,6 74,40 40,74 6,40" fill={color}/></svg>;
+  return null;
+}
+
+function ShapesModule({onBack}){
+  const{speak}=useSpeedSpeech();
+  const[idx,setIdx]=useState(0);
+  const[success,setSuccess]=useState(false);
+  const[celebrate,sCelebrate]=useState(false);
+  const shape=SHAPES_DATA[idx];
+  const others=useMemo(()=>{
+    const rest=SHAPES_DATA.filter(s=>s.svgType!==shape.svgType);
+    return[shape,...rest.slice(0,3)].sort(()=>Math.random()-.5);
+  },[idx]);
+
+  useEffect(()=>{speak(`This is a ${shape.name}!`,'en-US',.85);},[idx]);
+
+  const handleChoice=(s)=>{
+    if(s.svgType===shape.svgType){
+      setSuccess(true);speak(`Yes! A ${shape.name}! It dances!`,'en-US',.85);sCelebrate(true);
+      setTimeout(()=>{sCelebrate(false);setSuccess(false);if(idx+1<SHAPES_DATA.length)setIdx(i=>i+1);else onBack();},2000);
+    } else {speak('Try again!','en-US',.8);}
+  };
+
+  return<div style={{width:'100%',maxWidth:420,textAlign:'center'}}>
+    <CelebrationBurst show={celebrate}/>
+    <div className="cpa-label">Shapes</div>
+    <ProgressDots total={SHAPES_DATA.length} current={idx} theme="math"/>
+    <div className="instruction" style={{marginTop:8}}>Match the shape! What is this?</div>
+    <div style={{display:'flex',flexDirection:'column',alignItems:'center',background:'rgba(255,255,255,.6)',borderRadius:24,padding:20,margin:'10px 0'}}>
+      <ShapeSVG type={shape.svgType} color={shape.color} size={90}/>
+      <div style={{fontFamily:'Nunito',fontWeight:800,fontSize:20,color:shape.color,marginTop:8,textShadow:'0 1px 4px rgba(0,0,0,.15)'}}>{shape.name}</div>
+    </div>
+    <div style={{fontFamily:'Nunito',fontWeight:700,fontSize:14,color:'rgba(27,58,92,.55)',marginBottom:10}}>Tap the same shape below:</div>
+    <div className="shapes-choices">
+      {others.map(s=>(
+        <button key={s.svgType} className={`shape-choice${success&&s.svgType===shape.svgType?' correct':''}`}
+          onClick={()=>handleChoice(s)} aria-label={`${s.name}`}
+          draggable onDragStart={e=>e.dataTransfer.setData('shape',s.svgType)}>
+          <ShapeSVG type={s.svgType} color={s.color} size={48}/>
+        </button>
+      ))}
+    </div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   MATH — PATTERNS MODULE
+═══════════════════════════════════════ */
+function PatternsModule({onBack}){
+  const{speak}=useSpeedSpeech();
+  const[pidx,setPidx]=useState(0);
+  const[tapped,setTapped]=useState(null);
+  const[correct,setCorrect]=useState(null);
+  const[locked,setLocked]=useState(false);
+  const[celebrate,sCelebrate]=useState(false);
+  const pat=PATTERN_SETS[pidx];
+  useEffect(()=>{speak('What comes next?','en-US',.85);},[pidx]);
+  const choices=useMemo(()=>Math.random()>.5?[{emoji:pat.answer,ok:true},{emoji:pat.wrong,ok:false}]:[{emoji:pat.wrong,ok:false},{emoji:pat.answer,ok:true}],[pidx]);
+  const handle=(ch)=>{
+    if(locked)return;setLocked(true);setTapped(ch.emoji);
+    if(ch.ok){setCorrect(ch.emoji);speak(`Yes! ${ch.emoji} comes next!`,'en-US',.85);sCelebrate(true);
+      setTimeout(()=>{sCelebrate(false);setCorrect(null);setTapped(null);setLocked(false);if(pidx+1<PATTERN_SETS.length)setPidx(p=>p+1);else onBack();},1800);}
+    else{setTimeout(()=>{setLocked(false);setTapped(null);},800);}
+  };
+  return<div style={{width:'100%',maxWidth:420,textAlign:'center'}}>
+    <CelebrationBurst show={celebrate}/>
+    <div className="cpa-label">Patterns</div>
+    <ProgressDots total={PATTERN_SETS.length} current={pidx} theme="math"/>
+    <div className="instruction" style={{marginTop:8}}>What comes next? 🤔</div>
+    <div className="pattern-row" role="region" aria-label="Pattern">
+      {pat.seq.map((item,i)=><span key={i} className="pattern-item" role="img">{item}</span>)}
+      <div className="pattern-blank" aria-label="?">?</div>
+    </div>
+    <div className="pattern-choices">
+      {choices.map((ch,i)=>(
+        <button key={i} className={`pattern-choice${correct===ch.emoji?' correct':tapped===ch.emoji&&!correct?' tapped':''}`}
+          onClick={()=>handle(ch)} aria-label={ch.emoji}>{ch.emoji}</button>
+      ))}
+    </div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   MATH — ADDITION MODULE
+═══════════════════════════════════════ */
+function AdditionModule({onBack}){
+  const{speak}=useSpeedSpeech();
+  const[pidx,setPidx]=useState(0);
+  const[tapped,setTapped]=useState(null);
+  const[correct,setCorrect]=useState(null);
+  const[locked,setLocked]=useState(false);
+  const[celebrate,sCelebrate]=useState(false);
+  const prob=ADDITION_PROBLEMS[pidx];
+
+  useEffect(()=>{
+    speak(`${prob.a} plus ${prob.b} equals… what?`,'en-US',.8);
+  },[pidx]);
+
+  const choices=useMemo(()=>[...prob.choices].sort(()=>Math.random()-.5),[pidx]);
+
+  const handle=(n)=>{
+    if(locked)return;setLocked(true);setTapped(n);
+    if(n===prob.a+prob.b){
+      setCorrect(n);speak(`${prob.a} plus ${prob.b} equals ${n}! Wonderful!`,'en-US',.85);sCelebrate(true);
+      setTimeout(()=>{sCelebrate(false);setCorrect(null);setTapped(null);setLocked(false);
+        if(pidx+1<ADDITION_PROBLEMS.length)setPidx(p=>p+1);else onBack();},1800);
+    } else {speak('Try again!','en-US',.8);setTimeout(()=>{setLocked(false);setTapped(null);},800);}
+  };
+
+  return<div style={{width:'100%',maxWidth:420,textAlign:'center'}}>
+    <CelebrationBurst show={celebrate}/>
+    <div className="cpa-label">Adding</div>
+    <ProgressDots total={ADDITION_PROBLEMS.length} current={pidx} theme="math"/>
+    <div className="instruction" style={{marginTop:8}}>{prob.a} + {prob.b} = ?</div>
+    <div className="addition-row" role="region" aria-label={`${prob.a} plus ${prob.b}`}>
+      <div className="add-group">{Array.from({length:prob.a}).map((_,i)=><span key={i} className="add-emoji" style={{animationDelay:`${i*.05}s`}}>{prob.emoji}</span>)}</div>
+      <div className="add-op">+</div>
+      <div className="add-group">{Array.from({length:prob.b}).map((_,i)=><span key={i} className="add-emoji" style={{animationDelay:`${i*.05}s`}}>{prob.emoji}</span>)}</div>
+      <div className="add-op">=</div>
+      <div style={{fontSize:42,color:'rgba(27,58,92,.25)',fontWeight:900}}>?</div>
+    </div>
+    <div className="add-answer-choices">
+      {choices.map((n,i)=>(
+        <button key={i} className={`add-choice${correct===n?' correct':tapped===n&&!correct?' tapped':''}`}
+          onClick={()=>handle(n)} aria-label={`Answer: ${n}`}>{n}</button>
+      ))}
+    </div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   MATH — NUMBER COMPARISON MODULE
+═══════════════════════════════════════ */
+function ComparisonModule({onBack}){
+  const{speak}=useSpeedSpeech();
+  const QUESTIONS=useMemo(()=>[
+    {question:'Which number is BIGGER?',a:3,b:5,emoji:'⭐',correct:'B',narr:'Which number is bigger? 3 or 5?'},
+    {question:'Which number is SMALLER?',a:7,b:2,emoji:'🐟',correct:'B',narr:'Which number is smaller? 7 or 2?'},
+    {question:'Which group has MORE?',a:4,b:2,emoji:'🍎',correct:'A',narr:'Which group has more apples?'},
+    {question:'Which number is BIGGER?',a:1,b:9,emoji:'🌟',correct:'B',narr:'1 or 9? Which is bigger?'},
+    {question:'Which group has FEWER?',a:6,b:3,emoji:'🐱',correct:'B',narr:'Which group has fewer cats?'},
+    {question:'Which number is SMALLER?',a:4,b:8,emoji:'🎈',correct:'A',narr:'4 or 8? Which is smaller?'},
+  ],[]);
+  const[qidx,setQidx]=useState(0);
+  const[tapped,setTapped]=useState(null);
+  const[correct,setCorrect]=useState(null);
+  const[locked,setLocked]=useState(false);
+  const[celebrate,sCelebrate]=useState(false);
+  const q=QUESTIONS[qidx];
+  useEffect(()=>{speak(q.narr,'en-US',.85);},[qidx]);
+
+  const handle=(which)=>{
+    if(locked)return;setLocked(true);setTapped(which);
+    if(which===q.correct){
+      setCorrect(which);speak('Yes! Great thinking! 🌟','en-US',.85);sCelebrate(true);
+      setTimeout(()=>{sCelebrate(false);setCorrect(null);setTapped(null);setLocked(false);
+        if(qidx+1<QUESTIONS.length)setQidx(i=>i+1);else onBack();},1800);
+    } else {speak('Try again!','en-US',.8);setTimeout(()=>{setLocked(false);setTapped(null);},800);}
+  };
+
+  return<div style={{width:'100%',maxWidth:420,textAlign:'center'}}>
+    <CelebrationBurst show={celebrate}/>
+    <div className="cpa-label">Compare</div>
+    <ProgressDots total={QUESTIONS.length} current={qidx} theme="math"/>
+    <div className="size-question">{q.question}</div>
+    <div className="compare-row">
+      {(['A','B']).map(which=>{
+        const num=which==='A'?q.a:q.b;
+        return<div key={which} className={`compare-card${correct===which?' correct':tapped===which&&!correct?' tapped':''}`}
+          role="button" tabIndex={0} onClick={()=>handle(which)} aria-label={`Number ${num}`}
+          onKeyPress={e=>e.key==='Enter'&&handle(which)}>
+          <div className="compare-num">{num}</div>
+          <div className="compare-emojis">{Array.from({length:Math.min(num,5)}).map((_,i)=><span key={i}>{q.emoji}</span>)}</div>
+        </div>;
+      })}
+    </div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   MATH — COLORS LEARNING MODULE
+   Flow: show color → big examples → tap to name it (3-choice)
+═══════════════════════════════════════ */
+function ColorsModule({onBack}){
+  const{speak}=useSpeedSpeech();
+  const[cidx,setCidx]=useState(0);
+  const[phase,setPhase]=useState('learn');// learn | quiz
+  const[tapped,setTapped]=useState(null);
+  const[correct,setCorrect]=useState(null);
+  const[locked,setLocked]=useState(false);
+  const[celebrate,sCelebrate]=useState(false);
+  const color=COLORS_DATA[cidx];
+
+  useEffect(()=>{
+    setPhase('learn');setTapped(null);setCorrect(null);setLocked(false);
+    speak(`This color is ${color.name}! ${color.name}!`,'en-US',0.72);
+  },[cidx]);
+
+  const handleLearnNext=()=>{
+    setPhase('quiz');
+    speak(`Which one is ${color.name}?`,'en-US',0.72);
+  };
+
+  // 3-choice quiz — correct + 2 random wrong
+  const choices=useMemo(()=>{
+    const wrong=COLORS_DATA.filter((_,i)=>i!==cidx).sort(()=>Math.random()-.5).slice(0,2);
+    return[color,...wrong].sort(()=>Math.random()-.5);
+  },[cidx]);
+
+  const handleChoice=(c)=>{
+    if(locked)return;
+    setLocked(true);setTapped(c.name);
+    if(c.name===color.name){
+      setCorrect(c.name);
+      speak(`Yes! That is ${color.name}! Great job!`,'en-US',0.72);
+      sCelebrate(true);
+      setTimeout(()=>{
+        sCelebrate(false);setCorrect(null);setTapped(null);setLocked(false);
+        if(cidx+1>=COLORS_DATA.length)onBack();
+        else setCidx(i=>i+1);
+      },1900);
+    } else {
+      speak(`Try again!`,'en-US',0.75);
+      setTimeout(()=>{setLocked(false);setTapped(null);},800);
+    }
+  };
+
+  return<div style={{width:'100%',maxWidth:420,textAlign:'center'}}>
+    <CelebrationBurst show={celebrate}/>
+    <div className="cpa-label">Colors</div>
+    <ProgressDots total={COLORS_DATA.length} current={cidx} theme="math"/>
+
+    {phase==='learn'&&<>
+      <div className="instruction" style={{marginTop:8}}>This color is…</div>
+      {/* big color swatch */}
+      <div style={{width:140,height:140,borderRadius:32,background:color.hex,margin:'12px auto',boxShadow:`0 8px 0 ${color.border}88,0 12px 28px rgba(0,0,0,.18)`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:70,animation:'float 2.5s ease-in-out infinite'}}>
+        {color.emoji}
+      </div>
+      <div style={{fontFamily:'Fredoka One',fontSize:34,color:color.hex,textShadow:`0 3px 0 ${color.border}66`,marginBottom:8}}>{color.name}</div>
+      {/* real-world examples */}
+      <div style={{display:'flex',gap:8,justifyContent:'center',flexWrap:'wrap',background:'rgba(255,255,255,.6)',borderRadius:20,padding:'12px',margin:'8px 0'}}>
+        {color.examples.map((e,i)=>(
+          <span key={i} style={{fontSize:38,animation:`popIn .4s cubic-bezier(.34,1.56,.64,1) ${i*100}ms both`}}
+            role="img" aria-label={color.name}>{e}</span>
+        ))}
+      </div>
+      <div style={{fontFamily:'Nunito',fontWeight:700,fontSize:13,color:'rgba(27,58,92,.55)',marginBottom:10}}>
+        All these things are {color.name}!
+      </div>
+      <button className="next-btn" onClick={handleLearnNext} aria-label={`Quiz time for ${color.name}`}>
+        Quiz time! 🎯
+      </button>
+    </>}
+
+    {phase==='quiz'&&<>
+      <div className="instruction" style={{marginTop:8}}>Which one is <span style={{color:color.hex}}>{color.name}</span>?</div>
+      <div style={{display:'flex',gap:14,justifyContent:'center',flexWrap:'wrap',marginTop:12}}>
+        {choices.map(c=>(
+          <button key={c.name}
+            onClick={()=>handleChoice(c)}
+            style={{
+              width:96,height:96,borderRadius:22,border:`3px solid ${correct===c.name?c.hex:tapped===c.name&&correct!==c.name?'#FF6B6B':'rgba(27,58,92,.15)'}`,
+              background:correct===c.name?c.bg:tapped===c.name&&correct!==c.name?'#FFE5E5':'rgba(255,255,255,.7)',
+              cursor:'pointer',
+              animation:correct===c.name?'correctPop .5s ease':tapped===c.name&&correct!==c.name?'wobble .4s ease':'none',
+              display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:4,
+            }}
+            aria-label={c.name}>
+            <span style={{fontSize:36,lineHeight:1}}>{c.emoji}</span>
+            <span style={{fontFamily:'Fredoka One',fontSize:14,color:c.hex}}>{c.name}</span>
+          </button>
+        ))}
+      </div>
+    </>}
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   MATH — COLOR SORT MODULE
+═══════════════════════════════════════ */
+function ColorSortModule({onBack}){
+  const{speak}=useSpeedSpeech();
+  const[selected,setSelected]=useState(null);
+  const[buckets,setBuckets]=useState({red:[],yellow:[],orange:[],purple:[]});
+  const[remaining,setRemaining]=useState([...COLOR_SORT_DATA]);
+  const[celebrate,sCelebrate]=useState(false);
+  useEffect(()=>{speak('Sort the items by color! Tap an item, then tap its bucket!','en-US',.85);},[]);
+  const handleItem=(item)=>setSelected(selected?.emoji===item.emoji?null:item);
+  const handleBucket=(color)=>{
+    if(!selected)return;
+    if(selected.color===color){
+      const nb={...buckets,[color]:[...buckets[color],selected.emoji]};setBuckets(nb);
+      const nr=remaining.filter(r=>r.emoji!==selected.emoji);setRemaining(nr);
+      setSelected(null);speak(`${selected.emoji} goes in ${color}!`,'en-US',.8);
+      if(nr.length===0){sCelebrate(true);speak('You sorted everything! Amazing!','en-US',.85);setTimeout(()=>{sCelebrate(false);onBack();},2500);}
+    } else {speak('Try a different bucket!','en-US',.8);setSelected(null);}
+  };
+  return<div style={{width:'100%',maxWidth:440,textAlign:'center'}}>
+    <CelebrationBurst show={celebrate}/>
+    <div className="cpa-label">Color Sort</div>
+    <div className="instruction">Sort by color! 🌈</div>
+    <div style={{fontFamily:'Nunito',fontSize:13,color:'rgba(27,58,92,.55)',marginBottom:4}}>Tap item 👆 then tap its color!</div>
+    <div className="sort-items-row" role="region" aria-live="polite">
+      {remaining.map((item,i)=>(
+        <span key={item.emoji+i} className={`sort-item${selected?.emoji===item.emoji?' selected':''}`}
+          role="button" tabIndex={0} onClick={()=>handleItem(item)} aria-label={`${item.emoji} ${item.label}`}
+          onKeyPress={e=>e.key==='Enter'&&handleItem(item)}>{item.emoji}</span>
+      ))}
+      {remaining.length===0&&<span style={{fontSize:40}}>🎉</span>}
+    </div>
+    <div className="sort-buckets">
+      {COLOR_BUCKETS.map(b=>(
+        <div key={b.color} className={`sort-bucket${selected?.color===b.color?' lit':''}`}
+          style={{background:b.bg,borderColor:b.border}} role="button" tabIndex={0}
+          onClick={()=>handleBucket(b.color)} aria-label={`${b.label} bucket`}
+          onKeyPress={e=>e.key==='Enter'&&handleBucket(b.color)}>
+          <div style={{fontFamily:'Nunito',fontWeight:700,fontSize:11,color:b.border,marginBottom:3}}>{b.label}</div>
+          <div style={{display:'flex',flexWrap:'wrap',gap:2,justifyContent:'center'}}>
+            {buckets[b.color].map((e,i)=><span key={i} className="sorted-emoji">{e}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   MATH WORLD — MAIN CONTROLLER
+═══════════════════════════════════════ */
+function MathWorld({onHome,stickerBoard}){
+  const{speak}=useSpeedSpeech();
+  const{addSticker}=stickerBoard;
+  const{progress,showRest}=useSessionTracker('math');
+  const[screen,setScreen]=useState('menu');// menu | intro | module
+  const[activeModule,setActiveModule]=useState(null);
+  const[showCartoon,setShowCartoon]=useState(false);
+  const[restAcked,setRestAcked]=useState(false);
+  const[showStickers,setShowStickers]=useState(false);
+  const timerPct=`${Math.round(progress*100)}%`;
+
+  const launchModule=(mod)=>{
+    setActiveModule(mod);
+    setScreen('intro');
+  };
+
+  const startPractice=()=>{
+    setShowCartoon(false);
+    setScreen('module');
+  };
+
+  const handleModuleDone=()=>{
+    addSticker('⭐');
+    setScreen('menu');
+    setActiveModule(null);
+  };
+
+  const subBack=()=>{setScreen('menu');setActiveModule(null);};
+
+  if(showRest&&!restAcked)return(
+    <div className="screen math-bg" style={{justifyContent:'center'}}>
+      <button className="back-btn" onClick={onHome} aria-label="Go home">🏠</button>
+      <RestMoment onContinue={()=>setRestAcked(true)}/>
+    </div>
+  );
+
+  return<div className="screen math-bg">
+    {[{top:'8%',left:'5%',d:0},{top:'12%',right:'8%',d:1},{top:'25%',left:'50%',d:.5}].map((c,i)=>(
+      <span key={i} className="cloud-deco" style={{top:c.top,left:c.left,right:c.right,animationDelay:`${c.d}s`}} aria-hidden="true">☁️</span>
+    ))}
+    <button className="back-btn" onClick={()=>{if(screen!=='menu')setScreen('menu');else onHome();}} aria-label="Go back">🏠</button>
+    <button className="sticker-tray-btn" onClick={()=>setShowStickers(true)} aria-label={`Sticker board – ${stickerBoard.stickers.length} earned`} style={{fontSize:22}}>🏆</button>
+    <div className="math-session-timer" aria-label="Session progress">
+      ☀️<div className="timer-track-sun"><div className="timer-fill-sun" style={{width:timerPct}}/></div><span style={{fontSize:12}}>rest soon</span>
+    </div>
+    <div className="world-title math-world-title">☀️ Math &amp; Logic</div>
+
+    {/* MODULE MENU */}
+    {screen==='menu'&&(
+      <>
+        <div style={{fontFamily:'Nunito',fontWeight:700,fontSize:14,color:'rgba(27,58,92,.6)',marginBottom:10}}>Pick an activity!</div>
+        <div className="math-module-grid">
+          {MATH_MODULES.map((m)=>(
+            <button key={m.id} className="math-module-btn" style={{background:m.color,boxShadow:`0 5px 0 ${m.shadow},0 8px 20px rgba(0,0,0,.1)`}}
+              onClick={()=>launchModule(m)} aria-label={m.label.replace('\n',' ')}>
+              <span className="mod-icon" aria-hidden="true">{m.icon}</span>
+              <span style={{whiteSpace:'pre-line',lineHeight:1.2}}>{m.label}</span>
+              <span style={{fontFamily:'Nunito',fontWeight:600,fontSize:11,opacity:.65}}>{m.desc}</span>
+            </button>
+          ))}
+        </div>
+      </>
+    )}
+
+    {/* INTRO — watch cartoon or skip */}
+    {screen==='intro'&&activeModule&&(
+      <div style={{width:'100%',maxWidth:420,marginTop:10,animation:'fadeIn .3s ease',display:'flex',flexDirection:'column',alignItems:'center',gap:14}}>
+        <button onClick={subBack} style={{alignSelf:'flex-start',background:'rgba(27,58,92,.1)',border:'none',borderRadius:12,padding:'7px 14px',fontFamily:'Nunito',fontWeight:700,fontSize:13,color:'var(--navy)',cursor:'pointer'}}>← Back</button>
+        <div style={{fontSize:56,animation:'float 2.5s ease-in-out infinite'}}>{activeModule.icon}</div>
+        <div style={{fontFamily:'Fredoka One',fontSize:22,color:'var(--navy)',textAlign:'center'}}>{activeModule.label.replace('\n',' ')}</div>
+        <div style={{fontFamily:'Nunito',fontWeight:700,fontSize:14,color:'rgba(27,58,92,.55)',textAlign:'center'}}>Watch a quick cartoon first — then practice!</div>
+        <button onClick={()=>setShowCartoon(true)}
+          style={{background:'linear-gradient(135deg,#FF6B6B,#FF4444)',border:'none',borderRadius:20,padding:'14px 32px',fontFamily:'Fredoka One',fontSize:18,color:'#fff',cursor:'pointer',boxShadow:'0 5px 0 #991010,0 8px 20px rgba(0,0,0,.2)',display:'flex',alignItems:'center',gap:10,minHeight:60}}
+          aria-label="Watch mini cartoon">
+          🎬 Watch Mini Cartoon
+        </button>
+        <button onClick={startPractice}
+          style={{background:'rgba(27,58,92,.1)',border:'none',borderRadius:14,padding:'11px 28px',fontFamily:'Nunito',fontWeight:700,fontSize:14,color:'rgba(27,58,92,.55)',cursor:'pointer'}}
+          aria-label="Skip cartoon and go to practice">
+          Skip → Go straight to practice
+        </button>
+      </div>
+    )}
+
+    {/* ACTIVE MODULE */}
+    {screen==='module'&&activeModule&&(
+      <div style={{width:'100%',maxWidth:440,marginTop:10,animation:'fadeIn .3s ease'}}>
+        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:10}}>
+          <button onClick={subBack} style={{background:'rgba(27,58,92,.1)',border:'none',borderRadius:12,padding:'7px 14px',fontFamily:'Nunito',fontWeight:700,fontSize:13,color:'var(--navy)',cursor:'pointer'}}>← Back</button>
+          <div style={{fontFamily:'Fredoka One',fontSize:17,color:'var(--navy)'}}>{activeModule.icon} {activeModule.label.replace('\n',' ')}</div>
+          <button onClick={()=>{setShowCartoon(true);}} style={{marginLeft:'auto',background:'rgba(255,100,100,.1)',border:'none',borderRadius:12,padding:'7px 14px',fontFamily:'Nunito',fontWeight:700,fontSize:12,color:'#cc3030',cursor:'pointer'}}>🎬 Cartoon</button>
+        </div>
+        {activeModule.id==='counting'&&<CountingModule onBack={handleModuleDone}/>}
+        {activeModule.id==='shapes'&&<ShapesModule onBack={handleModuleDone}/>}
+        {activeModule.id==='colors'&&<ColorsModule onBack={handleModuleDone}/>}
+        {activeModule.id==='patterns'&&<PatternsModule onBack={handleModuleDone}/>}
+        {activeModule.id==='addition'&&<AdditionModule onBack={handleModuleDone}/>}
+        {activeModule.id==='comparison'&&<ComparisonModule onBack={handleModuleDone}/>}
+        {activeModule.id==='colorsort'&&<ColorSortModule onBack={handleModuleDone}/>}
+      </div>
+    )}
+
+    {/* MINI CARTOON OVERLAY */}
+    {showCartoon&&activeModule&&<MiniCartoon concept={activeModule.concept} onClose={startPractice}/>}
+    {showStickers&&<StickerBoard stickers={stickerBoard.stickers} onClose={()=>setShowStickers(false)}/>}
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   HOME SCREEN
+═══════════════════════════════════════ */
+function HomeScreen({onArabic,onMath,stickers}){
+  const{speak}=useSpeedSpeech();
+  return<div className="screen home-bg" style={{justifyContent:'flex-start',alignItems:'center'}}>
+    {[{t:'6%',l:'8%'},{t:'10%',r:'10%'},{t:'18%',l:'45%'},{t:'4%',l:'30%'}].map((s,i)=>(
+      <span key={i} className="star-deco" style={{top:s.t,left:s.l,right:s.r,fontSize:16+i*3,animationDelay:`${i*.4}s`,animationDuration:`${2+i*.3}s`,color:'#FFD166',position:'absolute'}} aria-hidden="true">✦</span>
+    ))}
+    {[{t:'14%',l:'2%'},{t:'20%',r:'0%'}].map((c,i)=>(
+      <span key={i} className="cloud-deco" style={{top:c.t,left:c.l,right:c.r,animationDelay:`${i*.7}s`}} aria-hidden="true">☁️</span>
+    ))}
+    <h1 className="home-title">🌟 Little Stars<br/>Learning</h1>
+    <p className="home-subtitle">Arabic Letters &amp; Math for Little Learners</p>
+    <div style={{display:'flex',gap:10,marginTop:12,background:'rgba(255,255,255,.55)',borderRadius:20,padding:'7px 16px',boxShadow:'0 2px 8px rgba(0,0,0,.08)'}}>
+      <span style={{fontFamily:'Nunito',fontWeight:700,fontSize:14,color:'#3a6080'}}>🏆 {stickers.length} stickers earned</span>
+    </div>
+    <div className="door-grid">
+      <button className="door-card door-arabic" onClick={()=>{speak("Let's learn Arabic letters!",'ar-SA',.8);onArabic();}} aria-label="Open Arabic Letters world">
+        <span className="door-mascot" role="img" aria-hidden="true">🦉</span>
+        <div className="door-label">Arabic<br/>Letters 🌙</div>
+        <div className="door-sub" style={{color:'rgba(255,229,122,.7)'}}>16 letters • Hunt • Match</div>
+      </button>
+      <button className="door-card door-math" onClick={()=>{speak("Let's do math!",'en-US',.8);onMath();}} aria-label="Open Math world">
+        <span className="door-mascot" role="img" aria-hidden="true">🐰</span>
+        <div className="door-label">Math &amp;<br/>Logic ☀️</div>
+        <div className="door-sub" style={{color:'rgba(27,58,92,.6)'}}>🎬 Cartoons + 6 activities</div>
+      </button>
+    </div>
+    <div style={{marginTop:20,fontFamily:'Nunito',fontWeight:600,fontSize:13,color:'rgba(27,58,92,.5)',textAlign:'center',maxWidth:280,lineHeight:1.6}}>
+      Watch a cartoon, then practice! 🎬✏️<br/>
+      Sessions are 8–10 min with a rest reminder.<br/>
+      Every tap is a win! 🎉
+    </div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════
+   APP ROOT
+═══════════════════════════════════════ */
+function App(){
+  const[screen,setScreen]=useState('home');
+  const stickerBoard=useStickerBoard();
+  return<div>
+    {screen==='home'&&<HomeScreen onArabic={()=>setScreen('arabic')} onMath={()=>setScreen('math')} stickers={stickerBoard.stickers}/>}
+    {screen==='arabic'&&<ArabicWorld onHome={()=>setScreen('home')} stickerBoard={stickerBoard}/>}
+    {screen==='math'&&<MathWorld onHome={()=>setScreen('home')} stickerBoard={stickerBoard}/>}
+  </div>;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
