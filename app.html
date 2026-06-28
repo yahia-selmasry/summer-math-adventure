@@ -608,6 +608,58 @@ const week1Generators = [
       hint: `The rule is ${rule}. Next: ${next.toLocaleString()}`
     };
   },
+
+  // Word problem: population rounding
+  () => {
+    const exact = rand(1, 9) * 100000 + rand(0, 9) * 10000 + rand(100, 9999);
+    const rounded = Math.round(exact / 1000) * 1000;
+    const city = pick(['Springfield','Riverdale','Maplewood','Sunnyvale','Oakfield']);
+    return {
+      q: `The city of ${city} has a population of <strong>${exact.toLocaleString()}</strong>. The local news rounds to the nearest thousand. What number do they report?`,
+      a: [String(rounded), rounded.toLocaleString()],
+      hint: `Round ${exact.toLocaleString()} to the nearest thousand. Look at the hundreds digit: ${Math.floor(exact/100)%10}. Answer: ${rounded.toLocaleString()}`
+    };
+  },
+
+  // Word problem: score comparison
+  () => {
+    const scoreA = rand(1000, 9999) * 10;
+    const scoreB = scoreA + pick([-1,1]) * rand(500, 5000);
+    const diff = Math.abs(scoreA - scoreB);
+    const winner = scoreA > scoreB ? 'Team A' : 'Team B';
+    return {
+      q: `Team A scored <strong>${scoreA.toLocaleString()} points</strong>. Team B scored <strong>${scoreB.toLocaleString()} points</strong>. How many more points did the winning team score?`,
+      a: [String(diff), diff.toLocaleString()],
+      hint: `${winner} won. Difference = |${scoreA.toLocaleString()} − ${scoreB.toLocaleString()}| = ${diff.toLocaleString()}`
+    };
+  },
+
+  // Word problem: estimation (round each to nearest hundred, then add)
+  () => {
+    const mon = rand(1, 9) * 100 + rand(0, 99);
+    const tue = rand(1, 9) * 100 + rand(0, 99);
+    const rMon = Math.round(mon / 100) * 100;
+    const rTue = Math.round(tue / 100) * 100;
+    const est = rMon + rTue;
+    return {
+      q: `A school collected <strong>${mon}</strong> cans on Monday and <strong>${tue}</strong> on Tuesday. Estimate the total by rounding each to the nearest hundred, then adding.`,
+      a: [String(est), est.toLocaleString()],
+      hint: `${mon} ≈ ${rMon}, ${tue} ≈ ${rTue}. Estimated total = ${rMon} + ${rTue} = ${est}`
+    };
+  },
+
+  // Word problem: change and rounding
+  () => {
+    const price = rand(10, 79);
+    const have = rand(price + 5, price + 50);
+    const change = have - price;
+    const roundedChange = Math.round(change / 10) * 10;
+    return {
+      q: `A book costs <strong>$${price}</strong>. You pay with <strong>$${have}</strong>. How much change do you get? Round your change to the nearest ten dollars.`,
+      a: [String(roundedChange), `$${roundedChange}`],
+      hint: `Change = $${have} − $${price} = $${change}. Rounded to nearest ten: $${roundedChange}`
+    };
+  },
 ];
 
 // ── WEEK 2: Fractions ────────────────────────────────────────
@@ -704,6 +756,79 @@ const week2Generators = [
       hint: `LCD = ${l}. ${n1}/${d1} = ${lv}/${l}, ${n2}/${d2} = ${rv}/${l}. So the answer is ${ans}.`
     };
   },
+
+  // Word problem: fraction of a group
+  () => {
+    const d = pick([2, 3, 4, 5]);
+    const n = rand(1, d - 1);
+    const groups = rand(2, 6);
+    const total = d * groups;
+    const ans = n * groups;
+    const sport = pick(['soccer','basketball','tennis','swimming','baseball']);
+    return {
+      q: `There are <strong>${total} students</strong> in a class. ${frac(n, d)} of them play <strong>${sport}</strong>. How many students play ${sport}?`,
+      a: [String(ans)],
+      hint: `${n}/${d} of ${total} = ${total} × ${n} ÷ ${d} = ${ans}`
+    };
+  },
+
+  // Word problem: add fractions (walking)
+  () => {
+    const denoms = [[2,3],[3,4],[4,5],[2,5],[3,8]];
+    const [d1, d2] = pick(denoms);
+    const n1 = rand(1, d1 - 1);
+    const n2 = rand(1, d2 - 1);
+    const l = lcm(d1, d2);
+    const sumN = n1 * (l / d1) + n2 * (l / d2);
+    const g = gcd(sumN, l);
+    const rn = sumN / g, rd = l / g;
+    const ans = rd === 1 ? String(rn) : `${rn}/${rd}`;
+    const mixed = rn > rd ? `${Math.floor(rn/rd)} ${rn%rd}/${rd}` : null;
+    const accepted = [ans];
+    if (mixed && rn % rd !== 0) accepted.push(mixed);
+    return {
+      q: `Zara walked ${frac(n1, d1)} mile to school and ${frac(n2, d2)} mile to the store. How far did she walk in total? (enter as fraction)`,
+      a: accepted,
+      hint: `LCD = ${l}. ${n1}/${d1} + ${n2}/${d2} = ${n1*(l/d1)}/${l} + ${n2*(l/d2)}/${l} = ${sumN}/${l}${g>1?' = '+ans:''}${mixed?' = '+mixed:''}`
+    };
+  },
+
+  // Word problem: subtract fractions (juice pitcher)
+  () => {
+    const denoms = [[2,3],[3,4],[4,5],[3,8],[5,6]];
+    const [d1, d2] = pick(denoms);
+    const l = lcm(d1, d2);
+    let n1, n2;
+    do { n1 = rand(1, d1 - 1); n2 = rand(1, d2 - 1); } while (n1 * (l / d1) <= n2 * (l / d2));
+    const diffN = n1 * (l / d1) - n2 * (l / d2);
+    const g = gcd(diffN, l);
+    const rn = diffN / g, rd = l / g;
+    const ans = rd === 1 ? String(rn) : `${rn}/${rd}`;
+    return {
+      q: `A pitcher has ${frac(n1, d1)} liter of juice. You drink ${frac(n2, d2)} liter. How much juice is left? (enter as fraction)`,
+      a: [ans],
+      hint: `LCD = ${l}. ${n1}/${d1} − ${n2}/${d2} = ${n1*(l/d1)}/${l} − ${n2*(l/d2)}/${l} = ${diffN}/${l}${g>1?' = '+ans:''}`
+    };
+  },
+
+  // Word problem: multiply fraction of a recipe
+  () => {
+    const whole = pick([2, 3, 4, 6]);
+    const d = pick([2, 3, 4]);
+    const n = rand(1, d - 1);
+    const rawN = whole * n, rawD = d;
+    const g = gcd(rawN, rawD);
+    const rn = rawN / g, rd = rawD / g;
+    const ans = rd === 1 ? String(rn) : `${rn}/${rd}`;
+    const mixed = rn > rd ? `${Math.floor(rn/rd)} ${rn%rd}/${rd}` : null;
+    const accepted = [ans];
+    if (mixed && rn % rd !== 0) accepted.push(mixed);
+    return {
+      q: `A recipe needs <strong>${whole} cups of sugar</strong>. Zara makes ${frac(n, d)} of the recipe. How many cups of sugar does she use? (enter as fraction or whole number)`,
+      a: accepted,
+      hint: `${whole} × ${n}/${d} = ${whole*n}/${d}${g>1?' = '+ans:''}${mixed?' = '+mixed:''}`
+    };
+  },
 ];
 
 // ── WEEK 3: Multiplication & Division ───────────────────────
@@ -784,6 +909,61 @@ const week3Generators = [
       q: `A theater has <strong>${rows} rows</strong> with <strong>${cols} seats</strong> each. Tickets cost $<strong>${price}</strong>. How much money is collected if the theater is full?`,
       a: [String(rows*cols*price), `$${(rows*cols*price).toLocaleString()}`, (rows*cols*price).toLocaleString()],
       hint: `${rows} × ${cols} = ${rows*cols} seats. ${rows*cols} × $${price} = $${(rows*cols*price).toLocaleString()}`
+    };
+  },
+
+  // Word problem: multi-step money (pencils + notebooks)
+  () => {
+    const pencilCost = rand(1, 3);
+    const notebookCost = rand(2, 5);
+    const numPencils = rand(3, 12);
+    const numNotebooks = rand(2, 6);
+    const total = pencilCost * numPencils + notebookCost * numNotebooks;
+    return {
+      q: `Pencils cost <strong>$${pencilCost}</strong> each. Notebooks cost <strong>$${notebookCost}</strong> each. Max buys <strong>${numPencils} pencils</strong> and <strong>${numNotebooks} notebooks</strong>. What is the total cost?`,
+      a: [String(total), `$${total}`],
+      hint: `${numPencils} × $${pencilCost} = $${numPencils*pencilCost}. ${numNotebooks} × $${notebookCost} = $${numNotebooks*notebookCost}. Total = $${numPencils*pencilCost} + $${numNotebooks*notebookCost} = $${total}`
+    };
+  },
+
+  // Word problem: division with remainder (students in groups)
+  () => {
+    const groupSize = rand(4, 9);
+    const fullGroups = rand(5, 15);
+    const remainder = rand(1, groupSize - 1);
+    const total = fullGroups * groupSize + remainder;
+    return {
+      q: `<strong>${total} students</strong> are split into groups of <strong>${groupSize}</strong>. How many students are <strong>left over</strong> after making as many full groups as possible?`,
+      a: [String(remainder)],
+      hint: `${total} ÷ ${groupSize} = ${fullGroups} full groups with ${remainder} left over. (${fullGroups} × ${groupSize} = ${fullGroups*groupSize}, and ${total} − ${fullGroups*groupSize} = ${remainder})`
+    };
+  },
+
+  // Word problem: area with tile cost
+  () => {
+    const length = rand(5, 15);
+    const width = rand(4, 12);
+    const costPerSqFt = rand(3, 8);
+    const area = length * width;
+    const total = area * costPerSqFt;
+    return {
+      q: `A room is <strong>${length} feet long</strong> and <strong>${width} feet wide</strong>. Tiles cost <strong>$${costPerSqFt} per square foot</strong>. What is the total cost to tile the floor?`,
+      a: [String(total), `$${total.toLocaleString()}`, total.toLocaleString()],
+      hint: `Area = ${length} × ${width} = ${area} sq ft. Total cost = ${area} × $${costPerSqFt} = $${total.toLocaleString()}`
+    };
+  },
+
+  // Word problem: packing boxes (muffins)
+  () => {
+    const boxSize = rand(4, 8);
+    const fullBoxes = rand(6, 18);
+    const leftover = rand(1, boxSize - 1);
+    const total = fullBoxes * boxSize + leftover;
+    const item = pick(['muffins','cookies','cupcakes','rolls','donuts']);
+    return {
+      q: `A baker makes <strong>${total} ${item}</strong>. Each box holds <strong>${boxSize}</strong>. How many full boxes can the baker fill?`,
+      a: [String(fullBoxes)],
+      hint: `${total} ÷ ${boxSize} = ${fullBoxes} full boxes (with ${leftover} ${item} left over). ${fullBoxes} × ${boxSize} = ${fullBoxes*boxSize}`
     };
   },
 ];
@@ -867,6 +1047,66 @@ const week4Generators = [
       hint: `${dec} = ${f}`
     };
   },
+
+  // Word problem: shopping total
+  () => {
+    const p1 = (rand(50, 499) / 100);
+    const p2 = (rand(50, 499) / 100);
+    const p3 = (rand(50, 299) / 100);
+    const total = Math.round((p1 + p2 + p3) * 100) / 100;
+    const items = pick([
+      ['a sandwich','a juice box','an apple'],
+      ['a notebook','a pen','an eraser'],
+      ['a book','a bookmark','a pencil case'],
+    ]);
+    return {
+      q: `Zara buys ${items[0]} for <strong>$${p1.toFixed(2)}</strong>, ${items[1]} for <strong>$${p2.toFixed(2)}</strong>, and ${items[2]} for <strong>$${p3.toFixed(2)}</strong>. What is the total cost?`,
+      a: [`$${total.toFixed(2)}`, total.toFixed(2), String(total)],
+      hint: `$${p1.toFixed(2)} + $${p2.toFixed(2)} + $${p3.toFixed(2)} = $${total.toFixed(2)}`
+    };
+  },
+
+  // Word problem: change from money
+  () => {
+    const paid = pick([5, 10, 20]);
+    const spent = (rand(50, paid * 100 - 50) / 100);
+    const change = Math.round((paid - spent) * 100) / 100;
+    return {
+      q: `Max has <strong>$${paid}.00</strong>. He buys a snack for <strong>$${spent.toFixed(2)}</strong>. How much change does he get back?`,
+      a: [`$${change.toFixed(2)}`, change.toFixed(2)],
+      hint: `$${paid}.00 − $${spent.toFixed(2)} = $${change.toFixed(2)}`
+    };
+  },
+
+  // Word problem: decimal comparison (race times)
+  () => {
+    const base = rand(10, 30) + rand(1, 99) / 100;
+    const diff = rand(5, 99) / 100;
+    const timeA = Math.round(base * 100) / 100;
+    const timeB = Math.round((base + diff) * 100) / 100;
+    const faster = timeA < timeB ? 'Runner A' : 'Runner B';
+    const d = Math.round(Math.abs(timeA - timeB) * 100) / 100;
+    return {
+      q: `Runner A finished a race in <strong>${timeA.toFixed(2)} seconds</strong>. Runner B finished in <strong>${timeB.toFixed(2)} seconds</strong>. How much faster was the winner? (in seconds)`,
+      a: [d.toFixed(2), String(d)],
+      hint: `${faster} won. Difference = |${timeA.toFixed(2)} − ${timeB.toFixed(2)}| = ${d.toFixed(2)} seconds`
+    };
+  },
+
+  // Word problem: unit price
+  () => {
+    const qty = pick([4, 5, 8, 10]);
+    const unitCents = rand(25, 199);
+    const totalCents = qty * unitCents;
+    const totalDollars = (totalCents / 100).toFixed(2);
+    const unitDollars = (unitCents / 100).toFixed(2);
+    const item = pick(['markers','stickers','granola bars','erasers','juice boxes']);
+    return {
+      q: `A pack of <strong>${qty} ${item}</strong> costs <strong>$${totalDollars}</strong>. What does <strong>one ${item.slice(0,-1)}</strong> cost? (round to the nearest cent)`,
+      a: [`$${unitDollars}`, unitDollars],
+      hint: `$${totalDollars} ÷ ${qty} = $${unitDollars} per item`
+    };
+  },
 ];
 
 // ── WEEK 5: Geometry ─────────────────────────────────────────
@@ -933,6 +1173,56 @@ const week5Generators = [
       q: `Two angles are <strong>${isComp ? 'complementary' : 'supplementary'}</strong>. One angle is <strong>${angle}°</strong>. What is the other angle?`,
       a: [String(partner), `${partner}°`],
       hint: `${isComp?'Complementary':'Supplementary'} means they add to ${isComp?90:180}°. ${isComp?90:180} − ${angle} = ${partner}°`
+    };
+  },
+
+  // Word problem: fencing a yard
+  () => {
+    const l = rand(8, 30);
+    const w = rand(5, 20);
+    const perim = 2 * (l + w);
+    return {
+      q: `A rectangular yard is <strong>${l} feet long</strong> and <strong>${w} feet wide</strong>. How many feet of fencing are needed to go all the way around?`,
+      a: [String(perim), `${perim} feet`, `${perim} ft`],
+      hint: `Perimeter = 2 × (length + width) = 2 × (${l} + ${w}) = 2 × ${l+w} = ${perim} feet`
+    };
+  },
+
+  // Word problem: carpet cost
+  () => {
+    const l = rand(6, 18);
+    const w = rand(5, 14);
+    const costPerSqFt = rand(2, 6);
+    const area = l * w;
+    const total = area * costPerSqFt;
+    return {
+      q: `A room is <strong>${l} ft long</strong> and <strong>${w} ft wide</strong>. Carpet costs <strong>$${costPerSqFt} per square foot</strong>. What is the total cost to carpet the room?`,
+      a: [String(total), `$${total.toLocaleString()}`, total.toLocaleString()],
+      hint: `Area = ${l} × ${w} = ${area} sq ft. Cost = ${area} × $${costPerSqFt} = $${total.toLocaleString()}`
+    };
+  },
+
+  // Word problem: triangle area (garden)
+  () => {
+    const b = rand(4, 20) * 2;
+    const h = rand(3, 15) * 2;
+    const area = (b * h) / 2;
+    return {
+      q: `A triangular garden has a base of <strong>${b} ft</strong> and a height of <strong>${h} ft</strong>. What is the area of the garden?`,
+      a: [String(area), `${area} sq ft`, `${area} ft²`],
+      hint: `Area = ½ × base × height = ½ × ${b} × ${h} = ${area} sq ft`
+    };
+  },
+
+  // Word problem: missing side from perimeter
+  () => {
+    const w = rand(4, 15);
+    const l = rand(w + 2, w + 18);
+    const perim = 2 * (l + w);
+    return {
+      q: `A rectangle has a perimeter of <strong>${perim} ft</strong>. One side is <strong>${l} ft</strong>. What is the width?`,
+      a: [String(w), `${w} ft`],
+      hint: `Perimeter = 2 × (l + w). So ${perim} = 2 × (${l} + w) → ${perim/2} = ${l} + w → w = ${perim/2} − ${l} = ${w} ft`
     };
   },
 ];
@@ -1002,6 +1292,54 @@ const week6Generators = [
       q: `Compare: <strong>${a_base}<sup>${a_exp}</sup></strong> ___ <strong>${b_base}<sup>${b_exp}</sup></strong><br><em>Type >, &lt;, or =</em>`,
       a: [ans],
       hint: `${a_base}<sup>${a_exp}</sup> = ${av}, ${b_base}<sup>${b_exp}</sup> = ${bv}. Answer: ${ans}`
+    };
+  },
+
+  // Word problem: powers of 10 (computer memory)
+  () => {
+    const exp = rand(3, 6);
+    const val = Math.pow(10, exp);
+    const unit = exp <= 3 ? 'kilobytes' : exp <= 6 ? 'megabytes' : 'gigabytes';
+    return {
+      q: `A USB drive stores <strong>10<sup>${exp}</sup> bytes</strong> of data. Write that as a regular number.`,
+      a: [String(val), val.toLocaleString()],
+      hint: `10<sup>${exp}</sup> = 1 followed by ${exp} zeros = ${val.toLocaleString()}`
+    };
+  },
+
+  // Word problem: bacteria doubling (2^n)
+  () => {
+    const hours = rand(3, 7);
+    const result = Math.pow(2, hours);
+    return {
+      q: `Bacteria double every hour. You start with <strong>1 bacterium</strong>. After <strong>${hours} hours</strong>, how many bacteria are there? (Hint: 2<sup>${hours}</sup>)`,
+      a: [String(result), result.toLocaleString()],
+      hint: `After each hour the count doubles: 2<sup>${hours}</sup> = ${Array.from({length:hours},(_,i)=>Math.pow(2,i+1)).join(', ')}. Answer: ${result}`
+    };
+  },
+
+  // Word problem: perfect square playground
+  () => {
+    const side = pick([4, 5, 6, 7, 8, 9, 10, 11, 12]);
+    const area = side * side;
+    return {
+      q: `A square playground has an area of <strong>${area} square feet</strong>. What is the length of one side?`,
+      a: [String(side), `${side} feet`, `${side} ft`],
+      hint: `Find the square root of ${area}. Since ${side} × ${side} = ${area}, the side length = ${side} feet`
+    };
+  },
+
+  // Word problem: exponent comparison (by how much)
+  () => {
+    const pairs = [[2,5,3,3],[3,4,5,2],[4,3,2,6],[2,4,3,2],[5,2,4,2]];
+    const [b1,e1,b2,e2] = pick(pairs);
+    const v1 = Math.pow(b1,e1), v2 = Math.pow(b2,e2);
+    const bigger = v1 >= v2 ? `${b1}<sup>${e1}</sup>` : `${b2}<sup>${e2}</sup>`;
+    const diff = Math.abs(v1-v2);
+    return {
+      q: `Which is bigger: <strong>${b1}<sup>${e1}</sup></strong> or <strong>${b2}<sup>${e2}</sup></strong>? By how much?`,
+      a: [String(diff)],
+      hint: `${b1}<sup>${e1}</sup> = ${v1}, ${b2}<sup>${e2}</sup> = ${v2}. ${bigger} is bigger. Difference = |${v1} − ${v2}| = ${diff}`
     };
   },
 ];
@@ -1083,6 +1421,56 @@ const week7Generators = [
       q: `Use order of operations: <strong>${q}</strong>`,
       a: [String(ans)],
       hint: `Remember PEMDAS: Parentheses first, then × and ÷, then + and −. Answer: ${ans}`
+    };
+  },
+
+  // Word problem: cards (3x as many, total n)
+  () => {
+    const zara = rand(5, 15);
+    const max = 3 * zara;
+    const total = zara + max;
+    return {
+      q: `Max has <strong>3 times</strong> as many trading cards as Zara. Together they have <strong>${total} cards</strong>. How many cards does <strong>Zara</strong> have?`,
+      a: [String(zara)],
+      hint: `Let Zara = z, Max = 3z. Then z + 3z = ${total} → 4z = ${total} → z = ${total} ÷ 4 = ${zara}`
+    };
+  },
+
+  // Word problem: two-step (hours to save up)
+  () => {
+    const hourlyRate = pick([5, 6, 8, 10, 12]);
+    const saved = rand(5, 40);
+    const hours = rand(3, 10);
+    const goal = saved + hourlyRate * hours;
+    return {
+      q: `Zara earns <strong>$${hourlyRate} per hour</strong> babysitting. She already has <strong>$${saved}</strong> saved. How many hours must she work to reach <strong>$${goal}</strong>?`,
+      a: [String(hours), `${hours} hours`],
+      hint: `${saved} + ${hourlyRate}h = ${goal} → ${hourlyRate}h = ${goal-saved} → h = ${goal-saved} ÷ ${hourlyRate} = ${hours}`
+    };
+  },
+
+  // Word problem: inequality (boxes needed)
+  () => {
+    const capacity = rand(6, 12);
+    const items = rand(capacity + 1, capacity * 8);
+    const minBoxes = Math.ceil(items / capacity);
+    return {
+      q: `Each box holds <strong>${capacity} items</strong>. You have <strong>${items} items</strong>. What is the <strong>minimum number of boxes</strong> you need?`,
+      a: [String(minBoxes)],
+      hint: `${items} ÷ ${capacity} = ${Math.floor(items/capacity)} remainder ${items%capacity}. Since there are leftovers, you need ${minBoxes} boxes total.`
+    };
+  },
+
+  // Word problem: temperature drop
+  () => {
+    const start = rand(60, 90);
+    const drop = rand(2, 8);
+    const hours = rand(3, 7);
+    const final = start - drop * hours;
+    return {
+      q: `The temperature starts at <strong>${start}°F</strong>. It drops <strong>${drop}° each hour</strong>. What is the temperature after <strong>${hours} hours</strong>?`,
+      a: [String(final), `${final}°F`, `${final}°`],
+      hint: `${start} − (${drop} × ${hours}) = ${start} − ${drop*hours} = ${final}°F`
     };
   },
 ];
@@ -1168,6 +1556,61 @@ const week8Generators = [
       q: `The probability of winning a game is ${frac(prob_n, prob_d)}. If you play <strong>${trials}</strong> times, about how many times would you expect to win?`,
       a: [String(expected)],
       hint: `Expected wins = probability × trials = ${prob_n}/${prob_d} × ${trials} = ${expected}`
+    };
+  },
+
+  // Word problem: marble bag (R, B, G)
+  () => {
+    const r = rand(2, 6), b = rand(2, 6), g = rand(2, 5);
+    const total = r + b + g;
+    const gcd_rg = gcd(r, total);
+    const pn = r / gcd_rg, pd = total / gcd_rg;
+    const ans = pd === 1 ? '1' : `${pn}/${pd}`;
+    return {
+      q: `A bag has <strong>${r} red</strong>, <strong>${b} blue</strong>, and <strong>${g} green</strong> marbles. What is the probability of drawing a <strong>red</strong> marble? (enter as fraction)`,
+      a: [ans, `${r}/${total}`],
+      hint: `P(red) = red marbles ÷ total = ${r}/${total}${gcd_rg>1?' = '+ans:''}`
+    };
+  },
+
+  // Word problem: spinner (green sections)
+  () => {
+    const total = pick([8, 10, 12]);
+    const red = rand(2, Math.floor(total/2));
+    const blue = rand(1, total - red - 1);
+    const green = total - red - blue;
+    const g = gcd(green, total);
+    const pn = green / g, pd = total / g;
+    const ans = pd === 1 ? '1' : `${pn}/${pd}`;
+    return {
+      q: `A spinner has <strong>${total} equal sections</strong>: <strong>${red}</strong> are red, <strong>${blue}</strong> are blue, and the rest are green. What is P(green)? (enter as fraction)`,
+      a: [ans, `${green}/${total}`],
+      hint: `Green sections = ${total} − ${red} − ${blue} = ${green}. P(green) = ${green}/${total}${g>1?' = '+ans:''}`
+    };
+  },
+
+  // Word problem: expected coin flips (heads)
+  () => {
+    const flips = pick([10, 20, 30, 40, 50, 100]);
+    const expected = flips / 2;
+    return {
+      q: `You flip a fair coin <strong>${flips} times</strong>. About how many times do you expect to get <strong>heads</strong>?`,
+      a: [String(expected)],
+      hint: `P(heads) = 1/2. Expected heads = 1/2 × ${flips} = ${expected}`
+    };
+  },
+
+  // Word problem: P(NOT event)
+  () => {
+    const n = rand(1, 5), d = pick([6, 8, 10, 12]);
+    const g = gcd(n, d);
+    const compN = d - n, compG = gcd(compN, d);
+    const ans = `${compN/compG}/${d/compG}`;
+    const event = pick(['it rains','the spinner lands on red','you roll a 3','you draw an ace']);
+    return {
+      q: `The probability that <em>${event}</em> is ${frac(n, d)}. What is the probability it does <strong>NOT</strong> happen? (enter as fraction)`,
+      a: [ans, `${compN}/${d}`],
+      hint: `P(not event) = 1 − ${n}/${d} = ${d-n}/${d}${compG>1?' = '+ans:''}`
     };
   },
 ];
