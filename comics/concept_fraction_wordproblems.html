@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Comics – Fraction Word Problems</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #fdf3c0;
+  font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 16px;
+  padding: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.comic-page { background: #fdf3c0; padding: 16px; page-break-after: always; }
+.row { display: flex; gap: 8px; margin-bottom: 8px; }
+.panel {
+  border: 3px solid #1a1a1a; border-radius: 6px; padding: 14px;
+  position: relative; overflow: visible; flex: 1;
+}
+.panel.bg-sky    { background: #cce8f5; }
+.panel.bg-green  { background: #c8e6c9; }
+.panel.bg-peach  { background: #ffe0cc; }
+.panel.bg-tan    { background: #f5e6c8; }
+.panel.bg-white  { background: #ffffff; }
+.panel.bg-indigo { background: #e8eaf6; }
+.panel.bg-purple { background: #f3e5f5; }
+.panel.bg-teal   { background: #e0f2f1; }
+.panel.bg-lime   { background: #f0f4c3; }
+.panel.full { flex: none; width: 100%; }
+.panel.w2 { flex: 2; }
+
+.title-card {
+  display: inline-block; background: #2e7d32; color: #fff;
+  font-family: 'Bangers','Impact',sans-serif; font-size: 26px;
+  letter-spacing: 2px; padding: 6px 18px 4px;
+  border: 3px solid #1a1a1a; border-radius: 8px; margin-bottom: 10px;
+  line-height: 1.1; text-shadow: 2px 2px 0 #0a3012;
+}
+.title-card .subtitle { font-size: 13px; letter-spacing: 1px; display: block; font-family: 'Nunito', sans-serif; font-weight: 700; text-shadow: none; }
+
+.bubble {
+  background: #fff; border: 2.5px solid #1a1a1a; border-radius: 18px;
+  padding: 8px 12px; font-size: 15px; line-height: 1.45;
+  position: relative; display: inline-block; max-width: 220px;
+  font-weight: 700; margin: 4px;
+}
+.bubble.left::after  { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after  { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after  { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.big { font-size: 15px; max-width: 300px; }
+.bubble.sm  { font-size: 12px; max-width: 180px; }
+
+.scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:120px; padding-top:8px; }
+
+.zara { width:70px; height:110px; position:relative; flex-shrink:0; }
+.zara .body  { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head  { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye   { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair  { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm   { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail  { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+
+.max { width:56px; height:80px; position:relative; flex-shrink:0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye  { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+
+.math-box { background:#fff; border:3px solid #1a1a1a; border-radius:8px; padding:10px 16px; font-size:16px; font-weight:700; display:inline-block; margin:6px 4px; text-align:center; }
+.math-box.green  { background:#e8f5e9; border-color:#2e7d32; }
+.math-box.orange { background:#fff3e0; border-color:#e65100; }
+.math-box.blue   { background:#e3f2fd; border-color:#283593; }
+
+.step-tag { display:inline-block; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; margin-right:4px; }
+
+.frac { display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 3px; font-size:1em; line-height:1.1; font-weight:700; }
+.frac .num { border-bottom:2px solid #1a1a1a; padding:0 3px; }
+.frac .den { padding:0 3px; }
+
+.think-sign {
+  background: #2e7d32; color: #fff; font-size: 11px; font-weight: 700; text-align: center;
+  border-radius: 12px; width: 80px; height: 80px;
+  display: flex; align-items: center; justify-content: line-height; justify-content: center; line-height: 1.3;
+}
+.think-wrap { position:absolute; bottom:10px; right:10px; }
+
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  .row { flex-direction: column; }
+  .panel.w2 { flex: unset; }
+  .bubble { max-width: 90%; font-size: 12px; }
+  .scene { flex-wrap: wrap; justify-content: center; }
+  .math-box { font-size: 13px !important; }
+  .title-card { font-size: 20px; }
+}
+@media (max-width: 820px) and (min-width: 601px) {
+  body { padding: 14px; }
+  .row { flex-wrap: wrap; }
+  .panel { min-width: 280px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="comic-page">
+
+  <!-- ROW 1: TITLE -->
+  <div class="row">
+    <div class="panel bg-green full" style="min-height:150px;">
+      <div class="title-card">
+        🍕 FRACTION WORD PROBLEMS!
+        <span class="subtitle">Read it · Draw it · Set it up · Solve it · Check it</span>
+      </div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble left big" style="margin-bottom:18px;">
+            The secret to fraction<br>word problems? Always ask:<br><strong>"Fraction OF what?"</strong><br>That tells you what to multiply!
+          </div>
+          <div class="zara">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:10px;">
+          <div style="background:#fff;border:3px solid #2e7d32;border-radius:10px;padding:12px;font-size:13px;max-width:220px;">
+            <strong style="color:#2e7d32;">The 5-Step Plan:</strong><br>
+            <span class="step-tag" style="background:#2e7d32;">1</span> Read &amp; underline numbers<br>
+            <span class="step-tag" style="background:#1565c0;">2</span> Draw a picture or bar<br>
+            <span class="step-tag" style="background:#6a1b9a;">3</span> Choose + − × ÷<br>
+            <span class="step-tag" style="background:#b03a00;">4</span> Calculate carefully<br>
+            <span class="step-tag" style="background:#37474f;">5</span> Check: does it make sense?
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble right" style="margin-bottom:18px;">
+            Draw a pizza or a<br>candy bar to see it!<br>Pictures make<br>fractions easy! 🎨
+          </div>
+          <div class="max">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: WHICH OPERATION? -->
+  <div class="row">
+    <div class="panel bg-indigo full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a237e;">🔍 Which Operation Do I Use?</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;font-size:13px;">
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:8px;">
+          <strong style="color:#2e7d32;">➕ ADD fractions when...</strong><br>
+          You're combining parts:<br>
+          "ate <sup>1</sup>/<sub>3</sub> and then <sup>1</sup>/<sub>4</sub> more"<br>
+          "total eaten altogether"
+        </div>
+        <div style="background:#fce4ec;border:2px solid #c62828;border-radius:8px;padding:8px;">
+          <strong style="color:#c62828;">➖ SUBTRACT fractions when...</strong><br>
+          You're finding what's left:<br>
+          "had <sup>3</sup>/<sub>4</sub>, used <sup>1</sup>/<sub>3</sub>"<br>
+          "how much remains?"
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:8px;">
+          <strong style="color:#e65100;">✖️ MULTIPLY fractions when...</strong><br>
+          You see "of":<br>
+          "<sup>2</sup>/<sub>3</sub> <strong>of</strong> 12 students"<br>
+          "<sup>1</sup>/<sub>2</sub> <strong>of</strong> 4<sup>1</sup>/<sub>2</sub> cups"
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:8px;">
+          <strong style="color:#283593;">➗ DIVIDE fractions when...</strong><br>
+          You're splitting into groups:<br>
+          "share <sup>3</sup>/<sub>4</sub> pizza among 3"<br>
+          "how many <sup>1</sup>/<sub>2</sub>s fit in 6?"
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: WORKED EXAMPLES side by side -->
+  <div class="row">
+    <div class="panel bg-green" style="flex:1.2;">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#1b5e20;">✅ Example 1 — ADD (different denominators)</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"Zara ate <span class="frac"><span class="num">1</span><span class="den">3</span></span> of a pizza at lunch and <span class="frac"><span class="num">1</span><span class="den">4</span></span> at dinner. How much did she eat in all?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#2e7d32;">1</span> Underline: <strong>⅓ + ¼</strong><br>
+        <span class="step-tag" style="background:#1565c0;">2</span> Draw: 2 fraction bars<br>
+        <span class="step-tag" style="background:#6a1b9a;">3</span> Operation: <strong>ADD</strong> (combining)<br>
+        <span class="step-tag" style="background:#b03a00;">4</span> LCD = 12<br>
+        &nbsp;&nbsp;&nbsp;<span class="frac"><span class="num">1</span><span class="den">3</span></span> = <span class="frac"><span class="num">4</span><span class="den">12</span></span> &nbsp;&nbsp; <span class="frac"><span class="num">1</span><span class="den">4</span></span> = <span class="frac"><span class="num">3</span><span class="den">12</span></span><br>
+        &nbsp;&nbsp;&nbsp;<span class="frac"><span class="num">4</span><span class="den">12</span></span> + <span class="frac"><span class="num">3</span><span class="den">12</span></span> = <strong style="color:#1b5e20;"><span class="frac"><span class="num">7</span><span class="den">12</span></span></strong><br>
+        <span class="step-tag" style="background:#37474f;">5</span> Makes sense? ⅓ ≈ 0.33, ¼ = 0.25, sum ≈ 0.58 ✓
+      </div>
+    </div>
+    <div class="panel bg-peach">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#bf360c;">✅ Example 2 — MULTIPLY ("of" a whole)</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"A bag has 24 marbles. <span class="frac"><span class="num">3</span><span class="den">8</span></span> of them are red. How many red marbles?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#2e7d32;">1</span> Underline: <strong>³⁄₈ of 24</strong><br>
+        <span class="step-tag" style="background:#1565c0;">2</span> Draw: 24 dots in 8 groups<br>
+        <span class="step-tag" style="background:#6a1b9a;">3</span> "of" = <strong>MULTIPLY</strong><br>
+        <span class="step-tag" style="background:#b03a00;">4</span> <span class="frac"><span class="num">3</span><span class="den">8</span></span> × 24 = <span class="frac"><span class="num">3 × 24</span><span class="den">8</span></span> = <span class="frac"><span class="num">72</span><span class="den">8</span></span> = <strong style="color:#bf360c;">9</strong><br>
+        <span class="step-tag" style="background:#37474f;">5</span> Check: 24 ÷ 8 = 3 per group<br>
+        &nbsp;&nbsp;&nbsp;3 groups × 3 = 9 ✓
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 2 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: SUBTRACT AND MIXED NUMBER EXAMPLES -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:170px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#0d47a1;">✅ Example 3 — SUBTRACT (finding what's left)</div>
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+            <em>"Max had <span class="frac"><span class="num">5</span><span class="den">6</span></span> of a cake. He ate <span class="frac"><span class="num">1</span><span class="den">4</span></span> of the <em>whole</em> cake. How much is left?"</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#2e7d32;">1</span> Underline: <strong>⁵⁄₆ − ¼</strong><br>
+              <span class="step-tag" style="background:#6a1b9a;">3</span> Operation: <strong>SUBTRACT</strong><br>
+              <span class="step-tag" style="background:#b03a00;">4</span> LCD of 6 and 4 = <strong>12</strong><br>
+              &nbsp;&nbsp;&nbsp;<span class="frac"><span class="num">5</span><span class="den">6</span></span> = <span class="frac"><span class="num">10</span><span class="den">12</span></span> &nbsp; <span class="frac"><span class="num">1</span><span class="den">4</span></span> = <span class="frac"><span class="num">3</span><span class="den">12</span></span>
+            </div>
+            <div style="line-height:2.0;">
+              <span class="frac"><span class="num">10</span><span class="den">12</span></span> − <span class="frac"><span class="num">3</span><span class="den">12</span></span> = <strong style="color:#0d47a1;"><span class="frac"><span class="num">7</span><span class="den">12</span></span></strong><br>
+              <span class="step-tag" style="background:#37474f;">5</span> Makes sense?<br>
+              ⁵⁄₆ ≈ 0.83, ate 0.25<br>
+              0.83 − 0.25 ≈ 0.58 ≈ ⁷⁄₁₂ ✓
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:10px;flex-shrink:0;">
+          <div class="bubble top-left sm" style="margin-bottom:16px;">
+            Subtract = "what's<br>left over" or<br>"how much more?"
+          </div>
+          <div class="zara" style="transform:scale(0.8);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: MIXED NUMBER WORD PROBLEM -->
+  <div class="row">
+    <div class="panel bg-teal full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#004d40;">✅ Example 4 — Mixed Numbers ("of" with a mixed number)</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+        <em>"A hiking trail is 4<span class="frac"><span class="num">1</span><span class="den">2</span></span> miles long. Zara walked <span class="frac"><span class="num">2</span><span class="den">3</span></span> of the trail. How far did she walk?"</em>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+        <div style="line-height:2.1;">
+          <span class="step-tag" style="background:#2e7d32;">1</span> Underline: <strong>⅔ of 4½</strong><br>
+          <span class="step-tag" style="background:#1565c0;">2</span> 4½ miles → draw a bar divided into thirds<br>
+          <span class="step-tag" style="background:#6a1b9a;">3</span> "of" = <strong>MULTIPLY</strong><br>
+          <span class="step-tag" style="background:#b03a00;">4</span> Convert: 4½ = <span class="frac"><span class="num">9</span><span class="den">2</span></span>
+        </div>
+        <div style="line-height:2.1;">
+          &nbsp;&nbsp;&nbsp;<span class="frac"><span class="num">2</span><span class="den">3</span></span> × <span class="frac"><span class="num">9</span><span class="den">2</span></span> = <span class="frac"><span class="num">18</span><span class="den">6</span></span> = <strong style="color:#004d40;">3 miles</strong><br>
+          <span class="step-tag" style="background:#37474f;">5</span> Check: ⅔ of ~4.5<br>
+          ≈ 0.67 × 4.5 ≈ 3.0 ✓<br>
+          <span style="color:#1b5e20;font-weight:800;">She walked 3 miles!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: COMMON MISTAKES + PRO TIPS -->
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;">⚠️ CLASSIC MISTAKES</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ❌ Adding the denominators: <strike>¼ + ½ = ²⁄₆</strike> ✗<br>
+        ❌ Forgetting to convert mixed numbers before multiplying<br>
+        ❌ Not finding the LCD before adding/subtracting<br>
+        ❌ Multiplying when you should be adding (missing the key word)<br>
+        ❌ Not simplifying the final answer<br>
+        ❌ Forgetting the units (miles, cups, pieces…)
+      </div>
+    </div>
+    <div class="panel bg-lime">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#558b2f;">💡 PRO TIPS</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ✓ Circle <strong>"of"</strong> → it always means multiply<br>
+        ✓ "Altogether / total / in all" → ADD<br>
+        ✓ "Left / remain / difference" → SUBTRACT<br>
+        ✓ Always convert mixed numbers to improper fractions first<br>
+        ✓ Draw a bar model — it's not cheating, it's smart!<br>
+        ✓ Estimate first: does your answer make sense?
+      </div>
+      <div class="think-wrap">
+        <div class="think-sign">TRY<br>IT!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: PRACTICE PROBLEMS -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a1a1a;">📝 Your Turn — Try These!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:10px;">
+          <strong>1.</strong> A recipe needs <span class="frac"><span class="num">2</span><span class="den">3</span></span> cup of sugar and <span class="frac"><span class="num">3</span><span class="den">4</span></span> cup of flour. How many cups of dry ingredients total?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+        <div style="background:#fce4ec;border:2px solid #c62828;border-radius:8px;padding:10px;">
+          <strong>2.</strong> A ribbon is <span class="frac"><span class="num">7</span><span class="den">8</span></span> yard long. Zara cuts off <span class="frac"><span class="num">1</span><span class="den">3</span></span> yard. How much ribbon is left?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:10px;">
+          <strong>3.</strong> Max has 36 stickers. <span class="frac"><span class="num">5</span><span class="den">9</span></span> of them are gold stars. How many gold stars does he have?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong>4.</strong> A tank holds 6<span class="frac"><span class="num">1</span><span class="den">4</span></span> gallons. It is <span class="frac"><span class="num">3</span><span class="den">5</span></span> full. How many gallons are in it?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 2 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 3: CHALLENGE -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: MULTI-STEP EXAMPLE -->
+  <div class="row">
+    <div class="panel bg-purple full" style="min-height:160px;">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#4a148c;">🏆 Level Up — Multi-Step Fraction Word Problems</div>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;">
+          <div class="bubble left sm" style="margin-bottom:14px;">
+            Multi-step = do it<br>one piece at a time!
+          </div>
+          <div class="max" style="transform:scale(0.85);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+        <div style="flex:1;">
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;margin-bottom:10px;">
+            <strong>Example:</strong> <em>"A class of 30 students: <span class="frac"><span class="num">3</span><span class="den">5</span></span> chose soccer, <span class="frac"><span class="num">1</span><span class="den">6</span></span> chose swimming. The rest chose basketball. How many chose each sport?"</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#4a148c;">Soccer</span><br>
+              <span class="frac"><span class="num">3</span><span class="den">5</span></span> × 30 = <span class="frac"><span class="num">90</span><span class="den">5</span></span> = <strong style="color:#4a148c;">18 students</strong><br><br>
+              <span class="step-tag" style="background:#1565c0;">Swimming</span><br>
+              <span class="frac"><span class="num">1</span><span class="den">6</span></span> × 30 = <span class="frac"><span class="num">30</span><span class="den">6</span></span> = <strong style="color:#1565c0;">5 students</strong>
+            </div>
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#1b5e20;">Basketball</span><br>
+              30 − 18 − 5 = <strong style="color:#1b5e20;">7 students</strong><br><br>
+              <span class="step-tag" style="background:#b03a00;">Check</span><br>
+              18 + 5 + 7 = 30 ✓<br>
+              <span style="color:#1b5e20;font-weight:800;">All students accounted for!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: CHALLENGE PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:12px;color:#b03a00;">⭐ Challenge Problems — Show ALL your work!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#f3e5f5;border:2px solid #6a1b9a;border-radius:8px;padding:10px;">
+          <strong style="color:#6a1b9a;">5.</strong> A garden is <span class="frac"><span class="num">3</span><span class="den">4</span></span> yard wide and <span class="frac"><span class="num">5</span><span class="den">6</span></span> yard long. What is its area?<br>
+          (Area = length × width)<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Area = ________ sq yards
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:10px;">
+          <strong style="color:#e65100;">6.</strong> Zara baked 48 cookies. She gave <span class="frac"><span class="num">1</span><span class="den">4</span></span> to her class and <span class="frac"><span class="num">1</span><span class="den">3</span></span> to her family. How many cookies did she give away? How many are left?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Given: ________ &nbsp; Left: ________
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong style="color:#283593;">7.</strong> Max jogged 2<span class="frac"><span class="num">3</span><span class="den">4</span></span> miles on Monday and 1<span class="frac"><span class="num">5</span><span class="den">8</span></span> miles on Tuesday. How many more miles did he jog on Monday than Tuesday?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Answer: ________ miles
+        </div>
+        <div style="background:#e0f2f1;border:2px solid #00695c;border-radius:8px;padding:10px;">
+          <strong style="color:#00695c;">8. (Super Challenge!)</strong> A school has 240 students. <span class="frac"><span class="num">5</span><span class="den">8</span></span> are girls. Of the girls, <span class="frac"><span class="num">2</span><span class="den">5</span></span> play sports. How many girls play sports?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Answer: ________ girls
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: ANSWER KEY -->
+  <div class="row">
+    <div class="panel bg-tan full">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#5d4037;">🔑 Answer Key (Try first! Peek only if stuck.)</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:12px;">
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>1.</strong> <span class="frac"><span class="num">2</span><span class="den">3</span></span>+<span class="frac"><span class="num">3</span><span class="den">4</span></span>=<span class="frac"><span class="num">8</span><span class="den">12</span></span>+<span class="frac"><span class="num">9</span><span class="den">12</span></span>=<strong style="color:#2e7d32;"><span class="frac"><span class="num">17</span><span class="den">12</span></span> = 1<span class="frac"><span class="num">5</span><span class="den">12</span></span> cups</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>2.</strong> <span class="frac"><span class="num">7</span><span class="den">8</span></span>−<span class="frac"><span class="num">1</span><span class="den">3</span></span>=<span class="frac"><span class="num">21</span><span class="den">24</span></span>−<span class="frac"><span class="num">8</span><span class="den">24</span></span>=<strong style="color:#c62828;"><span class="frac"><span class="num">13</span><span class="den">24</span></span> yard</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>3.</strong> <span class="frac"><span class="num">5</span><span class="den">9</span></span>×36=<strong style="color:#e65100;">20 stars</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>4.</strong> <span class="frac"><span class="num">3</span><span class="den">5</span></span>×<span class="frac"><span class="num">25</span><span class="den">4</span></span>=<span class="frac"><span class="num">75</span><span class="den">20</span></span>=<strong style="color:#283593;">3<span class="frac"><span class="num">3</span><span class="den">4</span></span> gal</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>5.</strong> <span class="frac"><span class="num">3</span><span class="den">4</span></span>×<span class="frac"><span class="num">5</span><span class="den">6</span></span>=<strong style="color:#6a1b9a;"><span class="frac"><span class="num">5</span><span class="den">8</span></span> sq yd</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>6.</strong> 12+16=28 given; <strong style="color:#e65100;">48−28=20 left</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>7.</strong> 2<span class="frac"><span class="num">3</span><span class="den">4</span></span>−1<span class="frac"><span class="num">5</span><span class="den">8</span></span>=<strong style="color:#283593;">1<span class="frac"><span class="num">1</span><span class="den">8</span></span> miles</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>8.</strong> 150 girls; <span class="frac"><span class="num">2</span><span class="den">5</span></span>×150=<strong style="color:#00695c;">60 girls</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 3 -->
+
+</body>
+</html>
