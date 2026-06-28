@@ -438,20 +438,89 @@ function frac(n, d) {
   return `<span class="frac"><span class="num">${n}</span><span class="den">${d}</span></span>`;
 }
 
-// Normalize answer: trim, lowercase, remove trailing zeros after decimal
+// ── Smart answer normalizer ───────────────────────────────────
+// Produces a canonical string from any kid input so that:
+//   "3 / 4" "3/4" "3 /4" all → "3/4"
+//   "2 3/4" "2  3/4" "2   3 / 4" all → "2 3/4" (mixed number)
+//   "45r3" "45 r 3" "45 r3" all → "45 r3"
+//   "1,234" "1234" → "1234"
+//   "0.50" "0.5" → "0.5"
+//   "9 cm²" "9cm2" "9 cm2" → stripped to "9" for numeric match
+//   unreduced "6/8" → also accepted when correct is "3/4"
 function normalizeAns(s) {
-  s = String(s).trim().toLowerCase().replace(/\s+/g, ' ');
-  // if it's a number, parse and reformat
+  s = String(s).trim().toLowerCase();
+  // strip commas from numbers (1,234 → 1234)
+  s = s.replace(/,/g, '');
+  // collapse all whitespace
+  s = s.replace(/\s+/g, ' ').trim();
+  // strip common unit suffixes so "9 cm²" matches "9"
+  s = s.replace(/\s*(cm²|cm2|m²|m2|sq\s*cm|sq\s*m|sq\s*ft|sq\s*in|ft²|ft2|in²|in2|yards?|miles?|km|lbs?|oz|kg|g|°|degrees?|%)\s*$/i, '').trim();
+  // normalize remainder notation: "45r3" "45 r 3" "45 r3" → "45 r3"
+  s = s.replace(/^(\d+)\s*r\s*(\d+)$/, '$1 r$2');
+  // normalize fraction spacing: "3 / 4" → "3/4", "3/ 4" → "3/4"
+  s = s.replace(/(\d)\s*\/\s*(\d)/g, '$1/$2');
+  // normalize mixed number: "2  3/4" → "2 3/4" (already collapsed spaces above)
+  // if pure number, parse to remove trailing zeros
   const n = Number(s);
   if (!isNaN(n) && s !== '') return String(n);
   return s;
 }
 
+// Reduce a fraction n/d to lowest terms, return "n/d" string (or "n" if d==1)
+function reduceFrac(n, d) {
+  if (d === 0) return String(n);
+  const g = gcd(Math.abs(n), Math.abs(d));
+  const rn = n / g, rd = d / g;
+  return rd === 1 ? String(rn) : `${rn}/${rd}`;
+}
+
+// Parse a user fraction/mixed-number string into {n, d} over common denom, or null
+function parseFrac(s) {
+  // pure fraction "3/4"
+  const fmatch = s.match(/^(-?\d+)\/(\d+)$/);
+  if (fmatch) return { n: parseInt(fmatch[1]), d: parseInt(fmatch[2]) };
+  // mixed number "2 3/4"
+  const mmatch = s.match(/^(-?\d+) (\d+)\/(\d+)$/);
+  if (mmatch) {
+    const whole = parseInt(mmatch[1]);
+    const num = parseInt(mmatch[2]);
+    const den = parseInt(mmatch[3]);
+    return { n: whole * den + num, d: den };
+  }
+  return null;
+}
+
 function checkAnswer(userAns, correctAns) {
   const u = normalizeAns(userAns);
-  // correctAns may be array of accepted strings
   const accepted = Array.isArray(correctAns) ? correctAns : [correctAns];
-  return accepted.some(a => normalizeAns(String(a)) === u);
+  // exact match (normalized)
+  if (accepted.some(a => normalizeAns(String(a)) === u)) return true;
+  // fraction equivalence: if user typed an unreduced fraction, accept if it reduces to correct
+  const uFrac = parseFrac(u);
+  if (uFrac) {
+    const uReduced = reduceFrac(uFrac.n, uFrac.d);
+    if (accepted.some(a => normalizeAns(String(a)) === uReduced)) return true;
+    // also check if correct answer is a fraction and they're numerically equal
+    for (const a of accepted) {
+      const aFrac = parseFrac(normalizeAns(String(a)));
+      if (aFrac && uFrac.n * aFrac.d === aFrac.n * uFrac.d) return true;
+    }
+  }
+  // numeric equivalence: "0.50" == "0.5", "1.00" == "1"
+  // only apply when the input is a plain number (not a fraction string)
+  if (!u.includes('/')) {
+    const uNum = parseFloat(u);
+    if (!isNaN(uNum)) {
+      for (const a of accepted) {
+        const aN = normalizeAns(String(a));
+        if (!aN.includes('/')) {
+          const aNum = parseFloat(aN);
+          if (!isNaN(aNum) && Math.abs(uNum - aNum) < 0.0001) return true;
+        }
+      }
+    }
+  }
+  return false;
 }
 
 // ─────────────────────────────────────────────────────────────
