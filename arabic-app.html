@@ -1559,7 +1559,7 @@ const STORY_THEMES = [
   {key:"season",   label:"فُصُول",    emoji:"🌸", color:"#ec4899"},
 ];
 
-function HomeScreen({ lessons, banks, progress, contentLoaded, onLesson, onDrill, onDashboard, onPrint, onPrintAll, onGrammar }) {
+function HomeScreen({ lessons, banks, progress, contentLoaded, onLesson, onDrill, onDashboard, onPrint, onPrintAll, onGrammar, onVocab }) {
   const [activeWeek, setActiveWeek] = useState("all");
   const [activeFilter, setActiveFilter] = useState("all");
   const [activeStoryTheme, setActiveStoryTheme] = useState("all");
@@ -1731,8 +1731,8 @@ function HomeScreen({ lessons, banks, progress, contentLoaded, onLesson, onDrill
           })
         ),
 
-    // drill + dashboard + grammar row
-    e("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12,marginBottom:24}},
+    // 2×2 quick-access grid
+    e("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:24}},
       e("button",{onClick:onDrill,
         style:{background:"linear-gradient(135deg,#fdf4ff,#ede9fe)",border:"2px solid #e9d5ff",
           borderRadius:20,padding:"16px 10px",cursor:"pointer",textAlign:"center",
@@ -1740,6 +1740,14 @@ function HomeScreen({ lessons, banks, progress, contentLoaded, onLesson, onDrill
         e("div",{style:{fontSize:32,marginBottom:6}},"⚡"),
         e("p",{style:{...AF,fontSize:15,fontWeight:900,color:"#7c3aed",direction:"rtl",margin:"0 0 2px"}},"التَّدْرِيب"),
         e("p",{style:{fontSize:11,color:P.gray,margin:0,fontWeight:700}},`${totalItems} كلمة`)
+      ),
+      e("button",{onClick:onVocab,
+        style:{background:"linear-gradient(135deg,#fce7f3,#fdf2f8)",border:"2px solid #fbcfe8",
+          borderRadius:20,padding:"16px 10px",cursor:"pointer",textAlign:"center",
+          boxShadow:"0 4px 16px rgba(219,39,119,.12)"}},
+        e("div",{style:{fontSize:32,marginBottom:6}},"📚"),
+        e("p",{style:{...AF,fontSize:15,fontWeight:900,color:VP.pink,direction:"rtl",margin:"0 0 2px"}},"مُفْرَدَات"),
+        e("p",{style:{fontSize:11,color:P.gray,margin:0,fontWeight:700}},`${VOCAB_PACKS.length} موضوع`)
       ),
       e("button",{onClick:onGrammar,
         style:{background:"linear-gradient(135deg,#dbeafe,#e0e7ff)",border:"2px solid #bfdbfe",
@@ -2714,6 +2722,523 @@ function IslamicStudies({ onHome }) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
+// VOCABULARY MODULE (مُفْرَدَات)
+// ══════════════════════════════════════════════════════════════════════════════
+
+const VP = {
+  pink:"#db2777",   pinkL:"#fce7f3",
+  indigo:"#4338ca", indigoL:"#e0e7ff",
+  lime:"#65a30d",   limeL:"#ecfccb",
+  cyan:"#0891b2",   cyanL:"#cffafe",
+  amber:"#d97706",  amberL:"#fef3c7",
+  rose:"#e11d48",   roseL:"#ffe4e6",
+  teal:"#0f766e",   tealL:"#ccfbf1",
+  violet:"#7c3aed", violetL:"#ede9fe",
+  orange:"#ea580c", orangeL:"#ffedd5",
+  green:"#15803d",  greenL:"#dcfce7",
+  blue:"#1d4ed8",   blueL:"#dbeafe",
+  red:"#dc2626",    redL:"#fee2e2",
+  gold:"#b45309",   goldL:"#fef9c3",
+};
+
+const VOCAB_PACKS = [
+  {
+    id:"opposites", emoji:"↔️", titleAr:"الأَضْدَاد", titleEn:"Opposites", color:VP.rose, bg:VP.roseL,
+    tagline:"Learn pairs of opposite words",
+    words:[
+      {emoji:"☀️",ar:"كَبِير",   en:"Big",     opposite:{emoji:"🐜",ar:"صَغِير",  en:"Small"}},
+      {emoji:"⬆️",ar:"فَوْقَ",   en:"Up",      opposite:{emoji:"⬇️",ar:"تَحْتَ",  en:"Down"}},
+      {emoji:"😊",ar:"سَعِيد",   en:"Happy",   opposite:{emoji:"😢",ar:"حَزِين",  en:"Sad"}},
+      {emoji:"☀️",ar:"نَهَار",   en:"Day",     opposite:{emoji:"🌙",ar:"لَيْل",   en:"Night"}},
+      {emoji:"🔥",ar:"حَارّ",    en:"Hot",     opposite:{emoji:"❄️",ar:"بَارِد",  en:"Cold"}},
+      {emoji:"🏃",ar:"سَرِيع",   en:"Fast",    opposite:{emoji:"🐢",ar:"بَطِيء",  en:"Slow"}},
+      {emoji:"📖",ar:"مَفْتُوح", en:"Open",    opposite:{emoji:"📕",ar:"مُغْلَق", en:"Closed"}},
+      {emoji:"🌅",ar:"قَدِيم",   en:"Old",     opposite:{emoji:"✨",ar:"جَدِيد",  en:"New"}},
+      {emoji:"💪",ar:"قَوِيّ",   en:"Strong",  opposite:{emoji:"🪶",ar:"ضَعِيف",  en:"Weak"}},
+      {emoji:"🧹",ar:"نَظِيف",   en:"Clean",   opposite:{emoji:"🗑️",ar:"وَسِخ",   en:"Dirty"}},
+    ],
+    quiz:[
+      {q:"مَا ضِدُّ كَبِير؟",opts:["حَزِين","صَغِير","بَطِيء"],ans:1},
+      {q:"مَا ضِدُّ سَعِيد؟",opts:["سَرِيع","نَظِيف","حَزِين"],ans:2},
+      {q:"مَا ضِدُّ حَارّ؟",opts:["بَارِد","مُغْلَق","قَدِيم"],ans:0},
+      {q:"مَا ضِدُّ سَرِيع؟",opts:["ضَعِيف","بَطِيء","فَوْقَ"],ans:1},
+      {q:"مَا ضِدُّ نَظِيف؟",opts:["وَسِخ","قَوِيّ","جَدِيد"],ans:0},
+    ]
+  },
+  {
+    id:"shapes", emoji:"🔷", titleAr:"الأَشْكَال", titleEn:"Shapes", color:VP.indigo, bg:VP.indigoL,
+    tagline:"Circle, square, triangle and more",
+    words:[
+      {emoji:"⭕",ar:"دَائِرَة",   en:"Circle"},
+      {emoji:"⬛",ar:"مُرَبَّع",   en:"Square"},
+      {emoji:"🔺",ar:"مُثَلَّث",   en:"Triangle"},
+      {emoji:"⬜",ar:"مُسْتَطِيل", en:"Rectangle"},
+      {emoji:"⭐",ar:"نَجْمَة",    en:"Star"},
+      {emoji:"💎",ar:"مُعَيَّن",   en:"Diamond"},
+      {emoji:"🔶",ar:"شَبَه مُنْحَرِف",en:"Trapezoid"},
+      {emoji:"🫀",ar:"قَلْب",      en:"Heart"},
+      {emoji:"🔷",ar:"مُضَلَّع",   en:"Hexagon"},
+      {emoji:"🌙",ar:"هِلَال",     en:"Crescent"},
+    ],
+    quiz:[
+      {q:"كَيْفَ نُسَمِّي هَذَا الشَّكْل؟ ⭕",opts:["مُرَبَّع","دَائِرَة","مُثَلَّث"],ans:1},
+      {q:"كَيْفَ نُسَمِّي هَذَا الشَّكْل؟ 🔺",opts:["نَجْمَة","قَلْب","مُثَلَّث"],ans:2},
+      {q:"كَيْفَ نُسَمِّي هَذَا الشَّكْل؟ ⭐",opts:["نَجْمَة","هِلَال","مُعَيَّن"],ans:0},
+      {q:"كَمْ ضِلْعًا لِلْمُرَبَّع؟",opts:["ثَلَاثَة","أَرْبَعَة","خَمْسَة"],ans:1},
+      {q:"كَيْفَ نُسَمِّي هَذَا الشَّكْل؟ ⬛",opts:["مُثَلَّث","دَائِرَة","مُرَبَّع"],ans:2},
+    ]
+  },
+  {
+    id:"senses", emoji:"👁️", titleAr:"الحَوَاسُّ الخَمْس", titleEn:"The Five Senses", color:VP.violet, bg:VP.violetL,
+    tagline:"How we feel the world around us",
+    words:[
+      {emoji:"👁️",ar:"البَصَر",   en:"Sight",   sentence:"أَرَى الأَلْوَانَ بِعَيْنِي."},
+      {emoji:"👂",ar:"السَّمْع",   en:"Hearing", sentence:"أَسْمَعُ المُوسِيقَى بِأُذُنِي."},
+      {emoji:"👃",ar:"الشَّمّ",    en:"Smell",   sentence:"أَشُمُّ الوَرْدَ بِأَنْفِي."},
+      {emoji:"👅",ar:"التَّذَوُّق",en:"Taste",   sentence:"أَتَذَوَّقُ الطَّعَامَ بِلِسَانِي."},
+      {emoji:"✋",ar:"اللَّمْس",   en:"Touch",   sentence:"أَلْمَسُ الكِتَابَ بِيَدِي."},
+      {emoji:"👁️",ar:"عَيْن",     en:"Eye"},
+      {emoji:"👂",ar:"أُذُن",      en:"Ear"},
+      {emoji:"👃",ar:"أَنْف",      en:"Nose"},
+      {emoji:"👅",ar:"لِسَان",     en:"Tongue"},
+      {emoji:"✋",ar:"يَد",        en:"Hand"},
+    ],
+    quiz:[
+      {q:"بِمَاذَا نَرَى؟",opts:["بِالأُذُن","بِالعَيْن","بِالأَنْف"],ans:1},
+      {q:"بِمَاذَا نَسْمَع؟",opts:["بِاليَد","بِالعَيْن","بِالأُذُن"],ans:2},
+      {q:"بِمَاذَا نَشُمّ؟",opts:["بِالأَنْف","بِاللِّسَان","بِاليَد"],ans:0},
+      {q:"بِمَاذَا نَتَذَوَّق؟",opts:["بِالأُذُن","بِاللِّسَان","بِالعَيْن"],ans:1},
+      {q:"بِمَاذَا نَلْمَس؟",opts:["بِاليَد","بِالأَنْف","بِالعَيْن"],ans:0},
+    ]
+  },
+  {
+    id:"transportation", emoji:"🚗", titleAr:"وَسَائِل النَّقْل", titleEn:"Transportation", color:VP.cyan, bg:VP.cyanL,
+    tagline:"Cars, trains, planes and boats",
+    words:[
+      {emoji:"🚗",ar:"سَيَّارَة",  en:"Car"},
+      {emoji:"🚌",ar:"حَافِلَة",   en:"Bus"},
+      {emoji:"🚆",ar:"قِطَار",     en:"Train"},
+      {emoji:"✈️",ar:"طَيَّارَة",  en:"Airplane"},
+      {emoji:"🚢",ar:"سَفِينَة",   en:"Ship"},
+      {emoji:"🚲",ar:"دَرَّاجَة",  en:"Bicycle"},
+      {emoji:"🛵",ar:"دَرَّاجَة نَارِيَّة",en:"Motorcycle"},
+      {emoji:"🚁",ar:"طَائِرَة مِرْوَحِيَّة",en:"Helicopter"},
+      {emoji:"🚕",ar:"تَاكْسِي",   en:"Taxi"},
+      {emoji:"🚒",ar:"سَيَّارَة إِطْفَاء",en:"Fire Truck"},
+    ],
+    quiz:[
+      {q:"مَا هَذِهِ؟ ✈️",opts:["سَفِينَة","طَيَّارَة","حَافِلَة"],ans:1},
+      {q:"مَا هَذَا؟ 🚆",opts:["قِطَار","تَاكْسِي","سَيَّارَة"],ans:0},
+      {q:"مَا هَذِهِ؟ 🚲",opts:["دَرَّاجَة نَارِيَّة","سَيَّارَة","دَرَّاجَة"],ans:2},
+      {q:"مَا هَذِهِ؟ 🚢",opts:["طَيَّارَة","سَفِينَة","حَافِلَة"],ans:1},
+      {q:"مَا هَذَا؟ 🚁",opts:["طَائِرَة مِرْوَحِيَّة","قِطَار","تَاكْسِي"],ans:0},
+    ]
+  },
+  {
+    id:"forest-animals", emoji:"🦁", titleAr:"حَيَوَانَاتُ الغَابَة", titleEn:"Forest Animals", color:VP.lime, bg:VP.limeL,
+    tagline:"Wild creatures of the jungle and forest",
+    words:[
+      {emoji:"🦁",ar:"أَسَد",   en:"Lion"},
+      {emoji:"🐯",ar:"نَمِر",   en:"Tiger"},
+      {emoji:"🐘",ar:"فِيل",   en:"Elephant"},
+      {emoji:"🦒",ar:"زَرَافَة", en:"Giraffe"},
+      {emoji:"🐒",ar:"قِرْد",   en:"Monkey"},
+      {emoji:"🐊",ar:"تِمْسَاح",en:"Crocodile"},
+      {emoji:"🦊",ar:"ثَعْلَب", en:"Fox"},
+      {emoji:"🐺",ar:"ذِئْب",   en:"Wolf"},
+      {emoji:"🦓",ar:"حِمَار وَحْشِيّ",en:"Zebra"},
+      {emoji:"🦏",ar:"وَحِيد القَرْن",en:"Rhinoceros"},
+    ],
+    quiz:[
+      {q:"مَا هَذَا الحَيَوَان؟ 🦁",opts:["نَمِر","فِيل","أَسَد"],ans:2},
+      {q:"مَا هَذَا الحَيَوَان؟ 🐘",opts:["فِيل","زَرَافَة","قِرْد"],ans:0},
+      {q:"مَا هَذَا الحَيَوَان؟ 🦒",opts:["ذِئْب","زَرَافَة","ثَعْلَب"],ans:1},
+      {q:"مَا هَذَا الحَيَوَان؟ 🦊",opts:["ثَعْلَب","تِمْسَاح","نَمِر"],ans:0},
+      {q:"مَا هَذَا الحَيَوَان؟ 🐒",opts:["أَسَد","حِمَار وَحْشِيّ","قِرْد"],ans:2},
+    ]
+  },
+  {
+    id:"community-helpers", emoji:"👩‍⚕️", titleAr:"المِهَن", titleEn:"Community Helpers", color:VP.blue, bg:VP.blueL,
+    tagline:"People who help our community",
+    words:[
+      {emoji:"👨‍⚕️",ar:"طَبِيب",     en:"Doctor",    sentence:"الطَّبِيبُ يُعَالِجُ المَرِيض."},
+      {emoji:"👩‍🏫",ar:"مُعَلِّمَة",  en:"Teacher",   sentence:"المُعَلِّمَةُ تُعَلِّمُ الطُّلَّاب."},
+      {emoji:"👮",ar:"شُرْطِيّ",     en:"Policeman", sentence:"الشُّرْطِيُّ يَحْمِي النَّاس."},
+      {emoji:"🧑‍🚒",ar:"رَجُل إِطْفَاء",en:"Firefighter",sentence:"رَجُلُ الإِطْفَاءِ يُطْفِئُ الحَرِيق."},
+      {emoji:"🧑‍🍳",ar:"طَبَّاخ",    en:"Chef",      sentence:"الطَّبَّاخُ يَصْنَعُ الطَّعَام."},
+      {emoji:"✈️",ar:"طَيَّار",      en:"Pilot"},
+      {emoji:"👨‍🌾",ar:"فَلَّاح",    en:"Farmer"},
+      {emoji:"👨‍⚙️",ar:"مُهَنْدِس",  en:"Engineer"},
+      {emoji:"👨‍💼",ar:"مُدِير",      en:"Manager"},
+      {emoji:"🧑‍⚕️",ar:"مُمَرِّض",   en:"Nurse"},
+    ],
+    quiz:[
+      {q:"مَنِ الَّذِي يُعَالِجُ المَرِيض؟",opts:["الطَّبِيب","الطَّيَّار","الطَّبَّاخ"],ans:0},
+      {q:"مَنِ الَّذِي يُعَلِّمُ الطُّلَّاب؟",opts:["الشُّرْطِيّ","المُعَلِّمَة","الفَلَّاح"],ans:1},
+      {q:"مَنِ الَّذِي يَقُودُ الطَّيَّارَة؟",opts:["المُمَرِّض","المُهَنْدِس","الطَّيَّار"],ans:2},
+      {q:"مَنِ الَّذِي يَحْمِي النَّاس؟",opts:["الشُّرْطِيّ","الطَّبَّاخ","الفَلَّاح"],ans:0},
+      {q:"مَنِ الَّذِي يُطْفِئُ الحَرِيق؟",opts:["المُدِير","رَجُل إِطْفَاء","الطَّبِيب"],ans:1},
+    ]
+  },
+  {
+    id:"farm-animals", emoji:"🐄", titleAr:"حَيَوَانَاتُ المَزْرَعَة", titleEn:"Farm Animals", color:VP.amber, bg:VP.amberL,
+    tagline:"Animals we find on a farm",
+    words:[
+      {emoji:"🐄",ar:"بَقَرَة",  en:"Cow",     sentence:"البَقَرَةُ تُعْطِينَا الحَلِيب."},
+      {emoji:"🐑",ar:"خَرُوف",  en:"Sheep",   sentence:"الخَرُوفُ صُوفُهُ دَافِئ."},
+      {emoji:"🐔",ar:"دَجَاجَة", en:"Chicken", sentence:"الدَّجَاجَةُ تَضَعُ البَيْض."},
+      {emoji:"🐷",ar:"خِنْزِير", en:"Pig"},
+      {emoji:"🐴",ar:"حِصَان",  en:"Horse",   sentence:"الحِصَانُ يَجْرِي بِسُرْعَة."},
+      {emoji:"🐐",ar:"مَاعِز",  en:"Goat"},
+      {emoji:"🦆",ar:"بَطَّة",  en:"Duck"},
+      {emoji:"🐰",ar:"أَرْنَب", en:"Rabbit"},
+      {emoji:"🐕",ar:"كَلْب",   en:"Dog"},
+      {emoji:"🐈",ar:"قِطَّة",  en:"Cat"},
+    ],
+    quiz:[
+      {q:"مَا هَذَا الحَيَوَان؟ 🐄",opts:["خَرُوف","بَقَرَة","مَاعِز"],ans:1},
+      {q:"مَنْ يُعْطِينَا البَيْض؟",opts:["الحِصَان","البَقَرَة","الدَّجَاجَة"],ans:2},
+      {q:"مَا هَذَا الحَيَوَان؟ 🐴",opts:["حِصَان","كَلْب","أَرْنَب"],ans:0},
+      {q:"مَا هَذَا الحَيَوَان؟ 🐑",opts:["قِطَّة","خَرُوف","بَطَّة"],ans:1},
+      {q:"مَنْ يُعْطِينَا الحَلِيب؟",opts:["الأَرْنَب","البَقَرَة","الكَلْب"],ans:1},
+    ]
+  },
+  {
+    id:"clothing", emoji:"👕", titleAr:"المَلَابِس", titleEn:"Clothing", color:VP.pink, bg:VP.pinkL,
+    tagline:"What we wear every day",
+    words:[
+      {emoji:"👕",ar:"قَمِيص",    en:"Shirt"},
+      {emoji:"👖",ar:"بَنْطَلُون", en:"Trousers"},
+      {emoji:"👗",ar:"فُسْتَان",   en:"Dress"},
+      {emoji:"🧥",ar:"مِعْطَف",   en:"Coat"},
+      {emoji:"👟",ar:"حِذَاء",    en:"Shoe"},
+      {emoji:"🧢",ar:"قُبَّعَة",   en:"Hat"},
+      {emoji:"🧤",ar:"قُفَّاز",   en:"Glove"},
+      {emoji:"🧣",ar:"وِشَاح",    en:"Scarf"},
+      {emoji:"👙",ar:"بَدْلَة سِبَاحَة",en:"Swimsuit"},
+      {emoji:"🥾",ar:"جَزْمَة",   en:"Boot"},
+    ],
+    quiz:[
+      {q:"مَا هَذَا؟ 👕",opts:["فُسْتَان","قَمِيص","مِعْطَف"],ans:1},
+      {q:"مَا هَذَا؟ 🧢",opts:["قُبَّعَة","وِشَاح","قُفَّاز"],ans:0},
+      {q:"مَا هَذَا؟ 👗",opts:["بَنْطَلُون","مِعْطَف","فُسْتَان"],ans:2},
+      {q:"مَا هَذَا؟ 🧤",opts:["جَزْمَة","قُفَّاز","حِذَاء"],ans:1},
+      {q:"مَا هَذَا؟ 🥾",opts:["جَزْمَة","وِشَاح","قَمِيص"],ans:0},
+    ]
+  },
+  {
+    id:"numbers", emoji:"🔢", titleAr:"الأَعْدَاد", titleEn:"Numbers 1–10", color:VP.red, bg:VP.redL,
+    tagline:"Count to ten in Arabic",
+    words:[
+      {emoji:"1️⃣",ar:"وَاحِد",  en:"One"},
+      {emoji:"2️⃣",ar:"اثْنَان", en:"Two"},
+      {emoji:"3️⃣",ar:"ثَلَاثَة",en:"Three"},
+      {emoji:"4️⃣",ar:"أَرْبَعَة",en:"Four"},
+      {emoji:"5️⃣",ar:"خَمْسَة", en:"Five"},
+      {emoji:"6️⃣",ar:"سِتَّة",  en:"Six"},
+      {emoji:"7️⃣",ar:"سَبْعَة", en:"Seven"},
+      {emoji:"8️⃣",ar:"ثَمَانِيَة",en:"Eight"},
+      {emoji:"9️⃣",ar:"تِسْعَة", en:"Nine"},
+      {emoji:"🔟",ar:"عَشَرَة",  en:"Ten"},
+    ],
+    quiz:[
+      {q:"مَا اسْمُ هَذَا العَدَد؟ 3️⃣",opts:["اثْنَان","ثَلَاثَة","أَرْبَعَة"],ans:1},
+      {q:"مَا اسْمُ هَذَا العَدَد؟ 7️⃣",opts:["سِتَّة","ثَمَانِيَة","سَبْعَة"],ans:2},
+      {q:"مَا اسْمُ هَذَا العَدَد؟ 1️⃣",opts:["وَاحِد","اثْنَان","خَمْسَة"],ans:0},
+      {q:"مَا اسْمُ هَذَا العَدَد؟ 🔟",opts:["تِسْعَة","عَشَرَة","ثَمَانِيَة"],ans:1},
+      {q:"مَا اسْمُ هَذَا العَدَد؟ 5️⃣",opts:["أَرْبَعَة","سِتَّة","خَمْسَة"],ans:2},
+    ]
+  },
+  {
+    id:"seasons", emoji:"🌸", titleAr:"فُصُولُ السَّنَة", titleEn:"Seasons", color:VP.teal, bg:VP.tealL,
+    tagline:"Spring, Summer, Autumn and Winter",
+    words:[
+      {emoji:"🌸",ar:"الرَّبِيع", en:"Spring",  sentence:"فِي الرَّبِيعِ تَتَفَتَّحُ الأَزْهَار."},
+      {emoji:"☀️",ar:"الصَّيْف", en:"Summer",  sentence:"فِي الصَّيْفِ يَكُونُ الجَوُّ حَارًّا."},
+      {emoji:"🍂",ar:"الخَرِيف",en:"Autumn",  sentence:"فِي الخَرِيفِ تَسْقُطُ الأَوْرَاق."},
+      {emoji:"❄️",ar:"الشِّتَاء",en:"Winter",  sentence:"فِي الشِّتَاءِ يَكُونُ الجَوُّ بَارِدًا."},
+      {emoji:"🌧️",ar:"مَطَر",    en:"Rain"},
+      {emoji:"🌨️",ar:"ثَلْج",    en:"Snow"},
+      {emoji:"🌤️",ar:"شَمْس",    en:"Sun"},
+      {emoji:"💨",ar:"رِيَاح",   en:"Wind"},
+      {emoji:"🌈",ar:"قَوْسُ قُزَح",en:"Rainbow"},
+      {emoji:"☁️",ar:"سَحَاب",   en:"Clouds"},
+    ],
+    quiz:[
+      {q:"أَيُّ فَصْلٍ تَتَفَتَّحُ فِيهِ الأَزْهَار؟",opts:["الشِّتَاء","الرَّبِيع","الخَرِيف"],ans:1},
+      {q:"أَيُّ فَصْلٍ يَكُونُ حَارًّا؟",opts:["الصَّيْف","الشِّتَاء","الرَّبِيع"],ans:0},
+      {q:"مَا هَذَا؟ 🍂",opts:["ثَلْج","مَطَر","الخَرِيف"],ans:2},
+      {q:"أَيُّ فَصْلٍ يَسْقُطُ فِيهِ الثَّلْج؟",opts:["الصَّيْف","الرَّبِيع","الشِّتَاء"],ans:2},
+      {q:"مَا هَذَا؟ 🌈",opts:["سَحَاب","قَوْسُ قُزَح","رِيَاح"],ans:1},
+    ]
+  },
+  {
+    id:"birds", emoji:"🐦", titleAr:"الطُّيُور", titleEn:"Birds", color:VP.orange, bg:VP.orangeL,
+    tagline:"Feathered friends from around the world",
+    words:[
+      {emoji:"🦅",ar:"نَسْر",    en:"Eagle"},
+      {emoji:"🦜",ar:"بَبَّغَاء", en:"Parrot"},
+      {emoji:"🦆",ar:"بَطَّة",   en:"Duck"},
+      {emoji:"🦢",ar:"إِوَزَّة", en:"Goose"},
+      {emoji:"🦉",ar:"بُومَة",   en:"Owl"},
+      {emoji:"🐦",ar:"عُصْفُور", en:"Sparrow"},
+      {emoji:"🕊️",ar:"حَمَامَة", en:"Dove"},
+      {emoji:"🦚",ar:"طَاوُوس", en:"Peacock"},
+      {emoji:"🐧",ar:"بِطْرِيق", en:"Penguin"},
+      {emoji:"🐓",ar:"دِيك",    en:"Rooster"},
+    ],
+    quiz:[
+      {q:"مَا هَذَا الطَّائِر؟ 🦅",opts:["بُومَة","نَسْر","بَبَّغَاء"],ans:1},
+      {q:"مَا هَذَا الطَّائِر؟ 🦜",opts:["طَاوُوس","بَطَّة","بَبَّغَاء"],ans:2},
+      {q:"مَا هَذَا الطَّائِر؟ 🕊️",opts:["حَمَامَة","دِيك","عُصْفُور"],ans:0},
+      {q:"مَا هَذَا الطَّائِر؟ 🦉",opts:["بِطْرِيق","بُومَة","إِوَزَّة"],ans:1},
+      {q:"مَا هَذَا الطَّائِر؟ 🦚",opts:["نَسْر","دِيك","طَاوُوس"],ans:2},
+    ]
+  },
+  {
+    id:"colors", emoji:"🎨", titleAr:"الأَلْوَان", titleEn:"Colors", color:VP.violet, bg:VP.violetL,
+    tagline:"A rainbow of colors in Arabic",
+    words:[
+      {emoji:"🔴",ar:"أَحْمَر",  en:"Red"},
+      {emoji:"🔵",ar:"أَزْرَق",  en:"Blue"},
+      {emoji:"🟡",ar:"أَصْفَر",  en:"Yellow"},
+      {emoji:"🟢",ar:"أَخْضَر",  en:"Green"},
+      {emoji:"🟠",ar:"بُرْتُقَالِيّ",en:"Orange"},
+      {emoji:"🟣",ar:"بَنَفْسَجِيّ",en:"Purple"},
+      {emoji:"🟤",ar:"بُنِّيّ",   en:"Brown"},
+      {emoji:"⚫",ar:"أَسْوَد",  en:"Black"},
+      {emoji:"⚪",ar:"أَبْيَض",  en:"White"},
+      {emoji:"🩷",ar:"وَرْدِيّ",  en:"Pink"},
+    ],
+    quiz:[
+      {q:"مَا لَوْنُ التُّفَّاحَة؟ 🍎",opts:["أَزْرَق","أَحْمَر","أَصْفَر"],ans:1},
+      {q:"مَا لَوْنُ السَّمَاء؟ 🌤️",opts:["أَخْضَر","أَحْمَر","أَزْرَق"],ans:2},
+      {q:"مَا لَوْنُ العُشْب؟ 🌿",opts:["أَخْضَر","بُنِّيّ","أَبْيَض"],ans:0},
+      {q:"مَا لَوْنُ الشَّمْس؟ ☀️",opts:["أَسْوَد","أَصْفَر","وَرْدِيّ"],ans:1},
+      {q:"مَا لَوْنُ اللَّيْل؟ 🌙",opts:["أَسْوَد","أَبْيَض","بُرْتُقَالِيّ"],ans:0},
+    ]
+  },
+  {
+    id:"family", emoji:"👨‍👩‍👧‍👦", titleAr:"العَائِلَة", titleEn:"Family", color:VP.gold, bg:VP.goldL,
+    tagline:"The people we love most",
+    words:[
+      {emoji:"👨",ar:"أَب",        en:"Father",  sentence:"أَبِي يَعْمَلُ كَثِيرًا لِيَرْعَانَا."},
+      {emoji:"👩",ar:"أُمّ",       en:"Mother",  sentence:"أُمِّي تُحِبُّنِي كَثِيرًا."},
+      {emoji:"👦",ar:"أَخ",        en:"Brother", sentence:"أَخِي يَلْعَبُ مَعِي."},
+      {emoji:"👧",ar:"أُخْت",      en:"Sister",  sentence:"أُخْتِي صَدِيقَتِي المُفَضَّلَة."},
+      {emoji:"👴",ar:"جَدّ",       en:"Grandfather"},
+      {emoji:"👵",ar:"جَدَّة",     en:"Grandmother"},
+      {emoji:"👶",ar:"رَضِيع",    en:"Baby"},
+      {emoji:"👨‍👩‍👦",ar:"عَائِلَة",  en:"Family"},
+      {emoji:"👦",ar:"ابْن",       en:"Son"},
+      {emoji:"👧",ar:"بِنْت",      en:"Daughter"},
+    ],
+    quiz:[
+      {q:"مَنْ هُوَ وَالِدُكَ الذَّكَر؟",opts:["أَخ","أَب","جَدّ"],ans:1},
+      {q:"مَنْ هِيَ وَالِدَتُكَ؟",opts:["أُخْت","جَدَّة","أُمّ"],ans:2},
+      {q:"مَنْ هُوَ أَبُو أَبِيك؟",opts:["جَدّ","أَخ","ابْن"],ans:0},
+      {q:"مَنْ هِيَ أُخْتُكَ؟",opts:["بِنْت","أُخْت","جَدَّة"],ans:1},
+      {q:"مَاذَا نُسَمِّي الطِّفْلَ الصَّغِير جِدًّا؟",opts:["ابْن","أَخ","رَضِيع"],ans:2},
+    ]
+  },
+];
+
+// ── Vocabulary flashcard ─────────────────────────────────────────────────────
+function VocabFlashcard({ word, color }) {
+  const [flipped, setFlipped] = useState(false);
+  return e("div",{
+    onClick:()=>setFlipped(f=>!f),
+    style:{
+      cursor:"pointer", borderRadius:20, minHeight:140,
+      display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
+      padding:"18px 12px", textAlign:"center",
+      background: flipped ? color : "#fff",
+      border: `2px solid ${color}`,
+      boxShadow: flipped ? `0 4px 20px ${color}44` : "0 2px 10px rgba(0,0,0,.08)",
+      transition:"background .25s, box-shadow .25s",
+      animation:"pop .3s ease",
+    }},
+    e("div",{style:{fontSize:44, marginBottom:6}}, word.emoji || "🔤"),
+    flipped
+      ? e("div",null,
+          e("p",{style:{...AF, fontSize:26, fontWeight:700, color:"#fff", direction:"rtl", margin:"0 0 4px"}}, word.ar),
+          word.sentence && e("p",{style:{...AF, fontSize:13, color:"rgba(255,255,255,.85)", direction:"rtl", margin:0, lineHeight:1.5}}, word.sentence)
+        )
+      : e("div",null,
+          e("p",{style:{fontSize:15, fontWeight:800, color:"#374151", margin:"0 0 2px"}}, word.en),
+          e("p",{style:{fontSize:11, color:"#9ca3af", margin:0}}, "اضْغَطْ لِتَرَى العَرَبِيَّة")
+        )
+  );
+}
+
+// ── Vocabulary quiz game ──────────────────────────────────────────────────────
+function VocabQuizGame({ pack, onFinish }) {
+  const [qi, setQi] = useState(0);
+  const [sel, setSel] = useState(null);
+  const [correct, setCorrect] = useState(0);
+
+  const q = pack.quiz[qi];
+
+  const handleAnswer = idx => {
+    if (sel !== null) return;
+    setSel(idx);
+    if (idx === q.ans) setCorrect(c=>c+1);
+    setTimeout(()=>{
+      if (qi+1 < pack.quiz.length) { setSel(null); setQi(i=>i+1); }
+      else onFinish(((idx===q.ans?correct+1:correct)/pack.quiz.length)*100);
+    }, 900);
+  };
+
+  if (qi >= pack.quiz.length) return null;
+
+  return e("div",{style:{padding:"16px 0"}},
+    e("div",{style:{display:"flex", gap:8, marginBottom:16, justifyContent:"center"}},
+      pack.quiz.map((_,i)=>
+        e("div",{key:i,style:{
+          width:10,height:10,borderRadius:"50%",
+          background: i<qi ? pack.color : i===qi ? pack.color+"cc" : "#e5e7eb"
+        }})
+      )
+    ),
+    e("div",{style:{
+      background:`linear-gradient(135deg,${pack.bg},#fff)`,
+      borderRadius:20, padding:"24px 20px", marginBottom:18,
+      border:`1.5px solid ${pack.color}44`, textAlign:"center"
+    }},
+      e("p",{style:{...AF, fontSize:20, fontWeight:700, color:"#1f2937", direction:"rtl", margin:0, lineHeight:1.6}}, q.q)
+    ),
+    e("div",{style:{display:"flex", flexDirection:"column", gap:10}},
+      q.opts.map((opt,i)=>{
+        let bg="#fff", border=`2px solid #e5e7eb`, col="#374151";
+        if (sel!==null) {
+          if (i===q.ans) { bg="#dcfce7"; border=`2px solid #86efac`; col="#15803d"; }
+          else if (i===sel && i!==q.ans) { bg="#fee2e2"; border=`2px solid #fca5a5`; col="#dc2626"; }
+        }
+        return e("button",{key:i, onClick:()=>handleAnswer(i),
+          style:{...AF, background:bg, border, color:col, borderRadius:14, padding:"14px 18px",
+            fontSize:18, fontWeight:700, direction:"rtl", textAlign:"center", cursor:"pointer",
+            animation: sel!==null&&i===q.ans ? "correctFlash .5s ease" : sel===i&&i!==q.ans ? "wrongShake .4s ease" : "none"}},
+          opt
+        );
+      })
+    )
+  );
+}
+
+// ── Vocabulary pack view ──────────────────────────────────────────────────────
+function VocabPackView({ pack, onBack }) {
+  const [mode, setMode] = useState("cards"); // "cards" | "quiz" | "done"
+  const [score, setScore] = useState(0);
+  const [cardIdx, setCardIdx] = useState(0);
+
+  if (mode === "done") return e("div",{style:{textAlign:"center",padding:"40px 20px"}},
+    e("div",{style:{fontSize:70,marginBottom:16,animation:"starPop .4s ease"}},"🎉"),
+    e("p",{style:{...AF,fontSize:24,fontWeight:900,color:pack.color,direction:"rtl",marginBottom:8}},
+      score>=80?"مُمْتَاز! أَنْتَ نَجْم!":score>=60?"أَحْسَنْت! استمر!":"حَاوِلْ مَرَّةً أُخْرَى!"),
+    e("p",{style:{fontSize:16,color:"#6b7280",fontWeight:700,marginBottom:24}},`Score: ${Math.round(score)}%`),
+    e("button",{onClick:onBack,style:{
+      background:pack.color,color:"#fff",border:"none",borderRadius:14,
+      padding:"14px 32px",fontSize:15,fontWeight:800,cursor:"pointer"
+    }},"← الرُّجُوع")
+  );
+
+  return e("div",null,
+    // header
+    e("div",{style:{
+      background:`linear-gradient(135deg,${pack.color},${pack.color}aa)`,
+      padding:"20px 20px 24px", marginBottom:0,
+    }},
+      e("button",{onClick:onBack,style:{
+        background:"rgba(255,255,255,.2)",border:"none",color:"#fff",
+        borderRadius:10,padding:"6px 14px",fontSize:13,fontWeight:700,cursor:"pointer",marginBottom:12
+      }},"← رُجُوع"),
+      e("div",{style:{display:"flex",alignItems:"center",gap:14}},
+        e("span",{style:{fontSize:48}},pack.emoji),
+        e("div",null,
+          e("p",{style:{...AF,fontSize:22,fontWeight:900,color:"#fff",direction:"rtl",margin:"0 0 2px"}},pack.titleAr),
+          e("p",{style:{fontSize:13,color:"rgba(255,255,255,.85)",margin:0,fontWeight:700}},pack.titleEn)
+        )
+      )
+    ),
+    // mode tabs
+    e("div",{style:{display:"flex",borderBottom:"2px solid #e5e7eb",background:"#fff"}},
+      [["cards","🃏 البِطَاقَات"],["quiz","🧠 اخْتَبِر"]].map(([m,label])=>
+        e("button",{key:m,onClick:()=>setMode(m),style:{
+          flex:1,padding:"12px 0",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,
+          background:"none",color:mode===m?pack.color:"#9ca3af",
+          borderBottom:`3px solid ${mode===m?pack.color:"transparent"}`,
+        }},label)
+      )
+    ),
+    // content
+    e("div",{style:{padding:"20px 16px 80px"}},
+      mode==="cards" && e("div",null,
+        e("p",{style:{textAlign:"center",color:"#6b7280",fontSize:12,fontWeight:700,marginBottom:16}},
+          "اضْغَطْ عَلَى البِطَاقَة لِتَرَى الكَلِمَةَ بِالعَرَبِيَّة ✨"),
+        e("div",{style:{
+          display:"grid",
+          gridTemplateColumns:"repeat(auto-fill,minmax(150px,1fr))",
+          gap:12
+        }},
+          pack.words.map((w,i)=>{
+            if (w.opposite) {
+              return e("div",{key:i,style:{display:"contents"}},
+                e(VocabFlashcard,{key:i+"a",word:w,color:pack.color}),
+                e(VocabFlashcard,{key:i+"b",word:w.opposite,color:"#374151"})
+              );
+            }
+            return e(VocabFlashcard,{key:i,word:w,color:pack.color});
+          })
+        )
+      ),
+      mode==="quiz" && e(VocabQuizGame,{pack,onFinish:pct=>{setScore(pct);setMode("done");}})
+    )
+  );
+}
+
+// ── Vocabulary section home ───────────────────────────────────────────────────
+function VocabSection({ onHome }) {
+  const [sel, setSel] = useState(null);
+
+  if (sel !== null) return e(VocabPackView,{
+    pack:VOCAB_PACKS[sel],
+    onBack:()=>setSel(null)
+  });
+
+  return e("div",null,
+    // header
+    e("div",{style:{
+      background:"linear-gradient(135deg,#db2777,#7c3aed)",
+      padding:"28px 20px 32px",
+    }},
+      e("p",{style:{...AF,fontSize:26,fontWeight:900,color:"#fff",direction:"rtl",textAlign:"center",margin:"0 0 4px"}},"📚 مُفْرَدَاتِي"),
+      e("p",{style:{fontSize:13,color:"rgba(255,255,255,.85)",textAlign:"center",fontWeight:700,margin:0}},
+        "Tap a topic to learn new words and take a quiz!")
+    ),
+    // pack grid
+    e("div",{style:{padding:"20px 16px 80px"}},
+      e("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14}},
+        VOCAB_PACKS.map((pack,i)=>
+          e("button",{key:pack.id,onClick:()=>setSel(i),
+            style:{
+              background:"#fff", border:`2px solid ${pack.color}44`,
+              borderRadius:20, padding:"18px 12px", cursor:"pointer",
+              textAlign:"center", boxShadow:`0 4px 16px ${pack.color}22`,
+              borderLeft:`5px solid ${pack.color}`,
+              transition:"transform .15s, box-shadow .15s",
+            }},
+            e("div",{style:{fontSize:36,marginBottom:8}},pack.emoji),
+            e("p",{style:{...AF,fontSize:15,fontWeight:900,color:pack.color,direction:"rtl",margin:"0 0 2px"}},pack.titleAr),
+            e("p",{style:{fontSize:11,color:"#6b7280",fontWeight:700,margin:"0 0 6px"}},pack.titleEn),
+            e("p",{style:{fontSize:10,color:"#9ca3af",margin:0}},`${pack.words.length} كَلِمَة • ${pack.quiz.length} سُؤَال`)
+          )
+        )
+      )
+    )
+  );
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
 // GRAMMAR MODULE (نَحْو)
 // ══════════════════════════════════════════════════════════════════════════════
 
@@ -3244,12 +3769,20 @@ function App() {
       e("span",{style:{fontSize:26}},"📖"),
       "عَرَبِيَّة"
     ),
+    e("button",{onClick:()=>setTab("vocab"),style:{
+      flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2,
+      padding:"10px 0 14px",background:"none",border:"none",cursor:"pointer",
+      color:tab==="vocab"?VP.pink:"#9ca3af",fontWeight:800,fontSize:11
+    }},
+      e("span",{style:{fontSize:22}},"📚"),
+      "مُفْرَدَات"
+    ),
     e("button",{onClick:()=>setTab("grammar"),style:{
       flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2,
       padding:"10px 0 14px",background:"none",border:"none",cursor:"pointer",
       color:tab==="grammar"?GP.blue:"#9ca3af",fontWeight:800,fontSize:11
     }},
-      e("span",{style:{fontSize:26}},"📐"),
+      e("span",{style:{fontSize:22}},"📐"),
       "قَوَاعِد"
     ),
     e("button",{onClick:()=>setTab("islamic"),style:{
@@ -3257,7 +3790,7 @@ function App() {
       padding:"10px 0 14px",background:"none",border:"none",cursor:"pointer",
       color:tab==="islamic"?IP.green:"#9ca3af",fontWeight:800,fontSize:11
     }},
-      e("span",{style:{fontSize:26}},"🌙"),
+      e("span",{style:{fontSize:22}},"🌙"),
       "إِسْلَامِيَّات"
     )
   );
@@ -3275,6 +3808,10 @@ function App() {
     e("button",{className:isArabic&&screen==="dashboard"?"active":"",
       onClick:()=>{setTab("arabic");setScreen("dashboard");}},
       e("span",{className:"nav-icon"},"📊"), "تَقَدُّمِي"),
+    e("button",{className:tab==="vocab"?"active":"",
+      onClick:()=>setTab("vocab"),
+      style:tab==="vocab"?{background:"linear-gradient(135deg,#fce7f3,#ede9fe)",color:VP.pink,boxShadow:"0 2px 8px rgba(219,39,119,.2)"}:{}},
+      e("span",{className:"nav-icon"},"📚"), "المُفْرَدَات"),
     e("button",{className:tab==="grammar"?"active":"",
       onClick:()=>setTab("grammar"),
       style:tab==="grammar"?{background:"linear-gradient(135deg,#dbeafe,#ede9fe)",color:GP.blue,boxShadow:"0 2px 8px rgba(29,78,216,.2)"}:{}},
@@ -3286,6 +3823,14 @@ function App() {
     e("button",{onClick:()=>setScreen("print-all"),
       style:{background:"#f0fdf4",color:P.greenD,borderRadius:12}},
       e("span",{className:"nav-icon"},I.printer(18,P.greenD)), "طباعة الكُلّ")
+  );
+
+  if (tab==="vocab") return e("div",{className:"app-shell"},
+    SidebarNav,
+    e("div",{className:"content-area",style:{padding:"0 0 80px"}},
+      e(VocabSection,{onHome:()=>{setTab("arabic");setScreen("home");}})
+    ),
+    BottomNav
   );
 
   if (tab==="grammar") return e("div",{className:"app-shell"},
@@ -3316,6 +3861,7 @@ function App() {
           onPrint:id=>{setPLId(id);setScreen("print");},
           onPrintAll:()=>setScreen("print-all"),
           onGrammar:()=>setTab("grammar"),
+          onVocab:()=>setTab("vocab"),
         }),
         screen==="lesson"&&al && e("div",null,
           e(LessonFlow,{lesson:al,onComplete:completeLesson,onBack:()=>setScreen("home")}),
