@@ -351,6 +351,20 @@
     </div>
   </div>
 
+  <!-- Empty state -->
+  <div id="empty-state" style="text-align:center; padding: 40px 24px; background:#fff; border-radius:14px; border: 2px dashed #cdd5e0; margin-bottom: 28px;">
+    <div style="font-size:52px; margin-bottom:12px;">👆</div>
+    <div style="font-size:20px; font-weight:900; color:#1a3a6b; margin-bottom:8px;">Pick a week to start practicing!</div>
+    <div style="font-size:14px; color:#666; max-width:360px; margin:0 auto; line-height:1.6;">
+      You'll get 10 randomized problems, instant feedback, and hints when you're stuck. New problems every time you reload!
+    </div>
+    <div style="margin-top:20px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+      <span style="background:#e8f0fe; color:#1a3a6b; font-weight:800; font-size:12px; padding:5px 12px; border-radius:20px;">✓ Instant feedback</span>
+      <span style="background:#e8f5e9; color:#2e7d32; font-weight:800; font-size:12px; padding:5px 12px; border-radius:20px;">✓ Hints on wrong answers</span>
+      <span style="background:#fff3e0; color:#e65100; font-weight:800; font-size:12px; padding:5px 12px; border-radius:20px;">✓ Score tracker</span>
+    </div>
+  </div>
+
   <!-- Session panel -->
   <div id="session-panel">
     <div class="session-header">
@@ -1399,6 +1413,8 @@ function selectWeek(week) {
 
   document.querySelectorAll('.week-btn[data-week]').forEach(b => b.classList.toggle('active', +b.dataset.week === week));
 
+  document.getElementById('empty-state').style.display = 'none';
+
   if (week === 9) {
     document.getElementById('w9-day-picker').style.display = 'block';
     document.getElementById('session-panel').style.display = 'none';
@@ -1437,6 +1453,7 @@ function selectW9Day(day) {
 function backToMenu() {
   document.getElementById('session-panel').style.display = 'none';
   document.getElementById('w9-day-picker').style.display = 'none';
+  document.getElementById('empty-state').style.display = 'block';
   document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
   currentWeek = 0;
   window.scrollTo({top:0, behavior:'smooth'});

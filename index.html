@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Summer Math Adventure – Home</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+  font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif;
   background: #1a3a6b;
   min-height: 100vh;
   padding: 0;
@@ -81,34 +81,38 @@ body {
   margin-bottom: 16px;
 }
 .hero-badge {
-  background: #f5c842;
-  color: #1a3a6b;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
   font-weight: 700;
   font-size: 12px;
-  padding: 4px 12px;
+  padding: 5px 13px;
   border-radius: 20px;
-  border: 2px solid #e65100;
+  border: 1.5px solid rgba(255,255,255,0.35);
 }
 .print-all-btn {
   display: inline-block;
-  background: #e65100;
+  background: transparent;
   color: #fff;
-  font-family: 'Bangers', Impact, sans-serif;
-  font-size: 20px;
-  letter-spacing: 1px;
-  padding: 10px 28px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 11px 24px;
   border-radius: 10px;
-  border: 3px solid #f5c842;
+  border: 2px solid rgba(255,255,255,0.5);
   text-decoration: none;
-  margin: 6px;
-  transition: transform 0.1s;
+  margin: 5px;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
 }
-.print-all-btn:hover { transform: scale(1.04); }
-.print-all-btn.secondary {
-  background: #283593;
-  font-size: 16px;
-  padding: 8px 20px;
+.print-all-btn:hover { background: rgba(255,255,255,0.12); border-color: #fff; transform: translateY(-1px); }
+.print-all-btn.primary {
+  background: #f5c842;
+  color: #1a3a6b;
+  border-color: #f5c842;
+  font-size: 17px;
+  padding: 13px 30px;
 }
+.print-all-btn.primary:hover { background: #ffe066; border-color: #ffe066; transform: translateY(-2px); }
 
 /* ── MAIN CONTENT ── */
 .main { max-width: 1000px; margin: 0 auto; padding: 24px 16px 48px; }
@@ -239,15 +243,17 @@ body {
 
 /* ── TIP BOX ── */
 .tip-box {
-  background: #fff9c4;
-  border: 3px solid #f5c842;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(245,200,66,0.4);
+  border-left: 4px solid #f5c842;
   border-radius: 10px;
   padding: 14px 18px;
   font-size: 13px;
   line-height: 1.6;
+  color: #cce8f5;
   margin-bottom: 16px;
 }
-.tip-box strong { color: #e65100; }
+.tip-box strong { color: #f5c842; }
 
 /* ── FOOTER ── */
 .footer {
@@ -278,13 +284,12 @@ body {
 <nav class="topbar">
   <a class="topbar-logo" href="index.html">⭐ Summer Math Adventure</a>
   <div class="topbar-links">
-    <a href="arabic-app.html" style="background:#6366f1; color:#fff; border-color:#6366f1;">📖 Arabic</a>
-    <a href="app.html" style="background:#2e7d32; color:#fff; border-color:#2e7d32;">🎮 Practice App</a>
-    <a href="toddler_app.html" target="_blank" style="background:#FF6B6B; color:#fff; border-color:#FF6B6B;">🌟 Little Stars</a>
+    <a href="app.html" style="background:#2e7d32; color:#fff; border-color:#2e7d32;">🎮 Practice</a>
     <a href="#booklets">📚 Booklets</a>
     <a href="#comics">🎭 Comics</a>
     <a href="#answers">✅ Answers</a>
-    <a href="summer_math_complete_booklet.html" target="_blank">📄 Full Booklet</a>
+    <a href="arabic-app.html" style="border-color:rgba(255,255,255,0.3);">📖 Arabic</a>
+    <a href="toddler_app.html" target="_blank" style="border-color:rgba(255,255,255,0.3);">🌟 Little Stars</a>
   </div>
 </nav>
 
@@ -299,10 +304,10 @@ body {
     <span class="hero-badge">📍 Peoria, AZ</span>
     <span class="hero-badge">⏱ ~45 min/day</span>
   </div>
-  <a class="print-all-btn" href="app.html" style="background:#2e7d32; font-size:22px;">🎮 Play Practice App</a>
-  <a class="print-all-btn" href="summer_math_complete_booklet.html" target="_blank">📄 Open Full Booklet (Wks 1–5)</a>
-  <a class="print-all-btn" href="summer_booklet_weeks6_8.html" target="_blank">📄 Open Full Booklet (Wks 6–8)</a>
-  <a class="print-all-btn secondary" href="summer_booklet_answer_key.html" target="_blank">✅ Full Answer Key</a>
+  <a class="print-all-btn primary" href="app.html">🎮 Play Practice App</a>
+  <a class="print-all-btn" href="summer_math_complete_booklet.html" target="_blank">📄 Booklet Weeks 1–5</a>
+  <a class="print-all-btn" href="summer_booklet_weeks6_8.html" target="_blank">📄 Booklet Weeks 6–8</a>
+  <a class="print-all-btn" href="summer_booklet_answer_key.html" target="_blank">✅ Answer Key</a>
 </div>
 
 <div class="main">
