@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Word Problems – Week 1: Number Sense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+  h1 { font-size: 22px; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #1a3a6b; margin: 14px 0 6px; }
+  h3 { font-size: 13px; color: #1a3a6b; margin: 10px 0 4px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; background: #1a3a6b; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+  .intro-box { background: #e8eaf6; border-left: 4px solid #1a3a6b; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+  .problem-block { margin-bottom: 14px; }
+  .problem-block p { line-height: 1.7; margin-bottom: 4px; }
+  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+  .work-box { border: 1.5px dashed #aaa; min-height: 70px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .challenge-box h3 { color: #b06000; }
+  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge { float: right; background: #1a3a6b; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .hint { font-size: 10px; color: #555; font-style: italic; margin-bottom: 6px; }
+  .num-label { font-weight: 800; color: #1a3a6b; }
+  .ans-key-box { background: #f5f5f5; border: 1.5px solid #bbb; border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; font-size: 12px; }
+  .ans-key-box h3 { color: #1a3a6b; margin-bottom: 6px; }
+  .ak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 30px; font-size: 12px; }
+
+  @page { margin: 0; size: letter; }
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { margin: 0; padding: 0; background: #fff; }
+    .page { width: 8.5in; min-height: 11in; page-break-after: always; break-after: page; padding-bottom: 0.85in; }
+    .problem-block { break-inside: avoid; page-break-inside: avoid; }
+    .challenge-box { break-inside: avoid; page-break-inside: avoid; }
+    .grid-2, .grid-3 { break-inside: avoid; page-break-inside: avoid; }
+    .work-box { break-inside: avoid; page-break-inside: avoid; }
+    .intro-box { break-inside: avoid; page-break-inside: avoid; }
+    h2 { break-after: avoid; page-break-after: avoid; }
+    h3 { break-after: avoid; page-break-after: avoid; }
+    .footer { position: absolute; bottom: 0.25in; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="badge">W1<br>WP</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 1 Word Problems &nbsp;|&nbsp; Number Sense &nbsp;·&nbsp; Page 1 of 2</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">NUMBER SENSE</span>
+
+  <div class="intro-box">
+    <strong>Key Ideas:</strong> Round to the nearest 10, 100, or 1,000 by looking at the digit to the right of your rounding place.
+    Use place value to compare large numbers — line up digits from right to left.
+    Estimate by rounding first, then compute. Look for patterns by finding what changes each step.
+  </div>
+
+  <h2>Part A – Rounding in Context</h2>
+  <p class="hint">Round to the place value asked. Show your thinking in the work box.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">1.</span> The town of Maplewood has a population of 47,382. The mayor wants to report the population rounded to the nearest thousand. What number should she say?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">2.</span> A road trip from Phoenix to Denver is 1,073 miles. Round this distance to the nearest hundred miles to use on a highway sign.</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">3.</span> A school carnival sold 8,647 tickets. Round the number of tickets to the nearest hundred for the school newsletter.</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">4.</span> A sports stadium holds 34,519 fans. A sports reporter wants to say "about how many tens of thousands" attended. Round to the nearest ten thousand.</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Place Value Comparisons</h2>
+  <p class="hint">Compare the digits in each place from left to right.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">5.</span> Two cities are compared: Riverside has 325,860 people and Lakeside has 326,140 people. Which city is larger? By how many people?</p>
+      <div class="work-box"></div>
+      Larger city: <span class="ans-line"></span><br>
+      Difference: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">6.</span> A video game leaderboard shows: Alex scored 204,750 and Jordan scored 204,570. Who is winning, and by how many points?</p>
+      <div class="work-box"></div>
+      Leader: <span class="ans-line"></span><br>
+      Points ahead: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part C – Multi-Step Addition &amp; Subtraction</h2>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">7.</span> A school raised $12,450 in the fall fundraiser and $9,875 in the spring fundraiser. They need $25,000 to buy new playground equipment. How much more do they still need?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">8.</span> A library had 38,200 books. They received 4,350 new books and donated 2,175 old books. How many books does the library have now?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#11088; Challenge – Three-City Road Trip</h3>
+    <p>Mia drives from her home to City A (1,248 miles), then from City A to City B (976 miles), then back home from City B (1,534 miles). Round each leg to the nearest hundred, then estimate the total trip. Also compute the exact total. How far off is the estimate?</p>
+    <div class="work-box" style="min-height:80px;"></div>
+    Estimated total: <span class="ans-line"></span> &nbsp; Exact total: <span class="ans-line"></span> &nbsp; Difference: <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 1 Word Problems</span>
+    <span>Number Sense · Page 1 &nbsp;/10&nbsp;</span>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="badge">W1<br>WP</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 1 Word Problems &nbsp;|&nbsp; Number Sense &nbsp;·&nbsp; Page 2 of 2</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">NUMBER SENSE</span>
+
+  <h2>Part D – Estimation Strategies</h2>
+  <p class="hint">Round first, then estimate. Compare your estimate to the exact answer.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">9.</span> A zoo has 3 sections: mammals (1,238 animals), reptiles (487 animals), and birds (652 animals). Estimate the total by rounding each to the nearest hundred. Then find the exact total.</p>
+      <div class="work-box"></div>
+      Estimate: <span class="ans-line"></span> &nbsp; Exact: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">10.</span> A store sold 4,197 items in the morning and 3,814 items in the afternoon. Estimate the total items sold by rounding to the nearest thousand. Then find the exact total.</p>
+      <div class="work-box"></div>
+      Estimate: <span class="ans-line"></span> &nbsp; Exact: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part E – Number Patterns in Real Life</h2>
+  <p class="hint">Find the rule, then use it to answer the question.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">11.</span> Lila saves the same amount of money each week. After Week 1 she has $125, after Week 2 she has $250, after Week 3 she has $375. How much will she have after Week 8?</p>
+      <div class="work-box"></div>
+      Rule: +<span class="ans-line" style="width:80px;display:inline-block;"></span> each week<br>
+      After Week 8: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">12.</span> A school sells popcorn every Friday. Sales: Week 1: 320 bags, Week 2: 390 bags, Week 3: 460 bags. If the pattern continues, how many bags will be sold in Week 6?</p>
+      <div class="work-box"></div>
+      Rule: +<span class="ans-line" style="width:80px;display:inline-block;"></span> per week<br>
+      Week 6: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">13.</span> A school garden club plants seeds each month: 50, 100, 200, 400 … What is the rule? How many seeds will they plant in month 6?</p>
+      <div class="work-box"></div>
+      Rule: <span class="ans-line"></span><br>
+      Month 6: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">14.</span> A movie theater earns $4,500 on Monday, $4,500 less on Tuesday than Monday, and $1,200 more on Wednesday than Tuesday. How much does it earn on Wednesday?</p>
+      <div class="work-box"></div>
+      Tuesday: <span class="ans-line"></span><br>
+      Wednesday: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part F – Numbers in Different Forms</h2>
+  <p class="hint">Read the story carefully and write the number in each form.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">15.</span> A newspaper headline says: "City adds two hundred forty-three thousand, five hundred twelve square feet of new park land." Write this number in standard form and expanded form.</p>
+      <div class="work-box"></div>
+      Standard: <span class="ans-line-long"></span><br>
+      Expanded: <span class="ans-line-long"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">16.</span> A video has 506,030 views. Write this number in word form and expanded form. Which digit is in the ten-thousands place?</p>
+      <div class="work-box"></div>
+      Word form: <span class="ans-line-long"></span><br>
+      Expanded: <span class="ans-line-long"></span><br>
+      Ten-thousands digit: <span class="ans-line" style="width:60px;display:inline-block;"></span>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#11088; Challenge – Number Detectives</h3>
+    <p>I am a 6-digit number. My ten-thousands digit is 3 more than my ones digit. My hundreds digit is 5. My ten-thousands digit is 7. My thousands digit is double my ones digit. My hundred-thousands digit is 1. My tens digit is 0. My ones digit is 2. What number am I? Write me in expanded form too.</p>
+    <div class="work-box" style="min-height:60px;"></div>
+    Number: <span class="ans-line"></span> &nbsp; Expanded: <span class="ans-line-long"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 1 Word Problems</span>
+    <span>Number Sense · Page 2 &nbsp;/16&nbsp;</span>
+  </div>
+</div>
+
+<!-- ANSWER KEY PAGE -->
+<div class="page">
+  <div class="badge" style="background:#1a3a6b;">W1<br>KEY</div>
+  <h1>Answer Key – Week 1 Word Problems: Number Sense</h1>
+  <div class="subtitle">For teacher / parent use &nbsp;|&nbsp; All answers shown with brief explanation</div>
+  <span class="topic-tag">ANSWER KEY</span>
+
+  <div class="ans-key-box">
+    <h3>Page 1 Answers</h3>
+    <div class="ak-grid">
+      <div><strong>1.</strong> 47,000 (47,382 → thousands digit 7, next digit 3 &lt; 5, round down)</div>
+      <div><strong>2.</strong> 1,100 miles (1,073 → hundreds digit 0, next digit 7 ≥ 5, round up)</div>
+      <div><strong>3.</strong> 8,600 tickets (8,647 → hundreds digit 6, next digit 4 &lt; 5, round down)</div>
+      <div><strong>4.</strong> 30,000 fans (34,519 → ten-thousands digit 3, next digit 4 &lt; 5, round down)</div>
+      <div><strong>5.</strong> Lakeside (326,140); difference = 280 people</div>
+      <div><strong>6.</strong> Alex (204,750); ahead by 180 points</div>
+      <div><strong>7.</strong> $12,450 + $9,875 = $22,325; $25,000 − $22,325 = $2,675 still needed</div>
+      <div><strong>8.</strong> 38,200 + 4,350 − 2,175 = 40,375 books</div>
+      <div><strong>Challenge:</strong> Legs: 1,200 + 1,000 + 1,500 = 3,700 (est); 1,248 + 976 + 1,534 = 3,758 (exact); difference = 58 miles</div>
+    </div>
+  </div>
+
+  <div class="ans-key-box">
+    <h3>Page 2 Answers</h3>
+    <div class="ak-grid">
+      <div><strong>9.</strong> Estimate: 1,200 + 500 + 700 = 2,400; Exact: 2,377 animals</div>
+      <div><strong>10.</strong> Estimate: 4,000 + 4,000 = 8,000; Exact: 8,011 items</div>
+      <div><strong>11.</strong> Rule: +$125/week; Week 8 = $1,000</div>
+      <div><strong>12.</strong> Rule: +70 bags/week; Week 6 = 460 + 70 + 70 + 70 = 670 bags (Week 4=530, 5=600, 6=670)</div>
+      <div><strong>13.</strong> Rule: ×2 each month; Month 6 = 1,600 seeds (50→100→200→400→800→1,600)</div>
+      <div><strong>14.</strong> Tuesday = $0 (wait: $4,500 − $4,500 = $0); Wednesday = $0 + $1,200 = $1,200</div>
+      <div><strong>15.</strong> Standard: 243,512; Expanded: 200,000 + 40,000 + 3,000 + 500 + 10 + 2</div>
+      <div><strong>16.</strong> Word form: five hundred six thousand, thirty; Expanded: 500,000 + 6,000 + 30; Ten-thousands digit: 0</div>
+      <div><strong>Challenge:</strong> 172,502 (hundred-thousands=1, ten-thousands=7, thousands=4→wait: ones=2, thousands=2×2=4, hundreds=5, tens=0, ten-thousands=7, hundred-thousands=1) → 174,502; Expanded: 100,000 + 70,000 + 4,000 + 500 + 0 + 2</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 1 Word Problems</span>
+    <span>Answer Key</span>
+  </div>
+</div>
+
+</body>
+</html>

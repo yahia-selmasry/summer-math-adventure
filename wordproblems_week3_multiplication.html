@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Word Problems – Week 3: Multiplication &amp; Division</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+  h1 { font-size: 22px; color: #6a0080; border-bottom: 3px solid #6a0080; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #6a0080; margin: 14px 0 6px; }
+  h3 { font-size: 13px; color: #6a0080; margin: 10px 0 4px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; background: #6a0080; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+  .intro-box { background: #f3e5f5; border-left: 4px solid #6a0080; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+  .problem-block { margin-bottom: 14px; }
+  .problem-block p { line-height: 1.7; margin-bottom: 4px; }
+  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+  .work-box { border: 1.5px dashed #aaa; min-height: 70px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .challenge-box h3 { color: #b06000; }
+  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge { float: right; background: #6a0080; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .hint { font-size: 10px; color: #555; font-style: italic; margin-bottom: 6px; }
+  .num-label { font-weight: 800; color: #6a0080; }
+  .ans-key-box { background: #f5f5f5; border: 1.5px solid #bbb; border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; font-size: 12px; }
+  .ans-key-box h3 { color: #6a0080; margin-bottom: 6px; }
+  .ak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 30px; font-size: 12px; }
+
+  @page { margin: 0; size: letter; }
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { margin: 0; padding: 0; background: #fff; }
+    .page { width: 8.5in; min-height: 11in; page-break-after: always; break-after: page; padding-bottom: 0.85in; }
+    .problem-block { break-inside: avoid; page-break-inside: avoid; }
+    .challenge-box { break-inside: avoid; page-break-inside: avoid; }
+    .grid-2, .grid-3 { break-inside: avoid; page-break-inside: avoid; }
+    .work-box { break-inside: avoid; page-break-inside: avoid; }
+    .intro-box { break-inside: avoid; page-break-inside: avoid; }
+    h2 { break-after: avoid; page-break-after: avoid; }
+    h3 { break-after: avoid; page-break-after: avoid; }
+    .footer { position: absolute; bottom: 0.25in; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="badge">W3<br>WP</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 3 Word Problems &nbsp;|&nbsp; Multiplication &amp; Division &nbsp;·&nbsp; Page 1 of 2</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">MULTIPLICATION &amp; DIVISION</span>
+
+  <div class="intro-box">
+    <strong>Multiplication:</strong> Use arrays, area models, or the standard algorithm. Estimate by rounding factors first.<br>
+    <strong>Division with remainders:</strong> Divide, then check if you need to round up or use the remainder based on the story.<br>
+    <strong>Divisibility tips:</strong> A number is divisible by 2 (ends in even), 3 (digit sum ÷ 3), 5 (ends in 0 or 5), 10 (ends in 0).
+  </div>
+
+  <h2>Part A – Multi-Digit Multiplication</h2>
+  <p class="hint">Set up carefully. Show your work step-by-step in the work box.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">1.</span> A farmer plants 48 rows of corn with 125 plants in each row. How many corn plants are there in total?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> plants
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">2.</span> A school orders 36 boxes of colored pencils. Each box contains 144 pencils. How many pencils does the school have in all?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> pencils
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">3.</span> An auditorium has 24 rows of seats. Each row has 32 seats. If 15 shows sell out completely, how many total audience members see the shows?</p>
+      <div class="work-box"></div>
+      Seats per show: <span class="ans-line"></span><br>
+      Total for 15 shows: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">4.</span> Stamps cost $0.68 each. Javier buys 25 stamps. How much does he spend? (Hint: think of 68 ¢ × 25.)</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Division with Remainders</h2>
+  <p class="hint">Decide: does the remainder mean you need one more group, or is it leftover?</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">5.</span> 185 students need to be seated in vans that hold 12 students each. How many vans are needed so every student has a seat?</p>
+      <div class="work-box"></div>
+      185 ÷ 12 = <span class="ans-line"></span> R <span class="ans-line" style="width:50px;"></span><br>
+      Vans needed: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">6.</span> A baker has 247 cookies to pack into bags of 8. How many full bags can she make? How many cookies are left over?</p>
+      <div class="work-box"></div>
+      Full bags: <span class="ans-line"></span> &nbsp; Left over: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">7.</span> 310 photos are placed in albums that hold 9 photos per page. How many complete pages are filled? How many photos are on the last page?</p>
+      <div class="work-box"></div>
+      Complete pages: <span class="ans-line"></span><br>
+      Last page: <span class="ans-line"></span> photo(s)
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">8.</span> A class earns 215 reward points. They can redeem prizes worth 18 points each. How many prizes can they get? What happens to the leftover points?</p>
+      <div class="work-box"></div>
+      Prizes: <span class="ans-line"></span> &nbsp; Points remaining: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#11088; Challenge – Tile the Floor</h3>
+    <p>A rectangular room is 26 feet long and 18 feet wide. Tiles are 1 square foot each and come in boxes of 12. How many boxes must be purchased? (You cannot buy partial boxes.)</p>
+    <div class="work-box" style="min-height:70px;"></div>
+    Area of room: <span class="ans-line"></span> sq ft &nbsp; Boxes needed: <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 3 Word Problems</span>
+    <span>Multiplication &amp; Division · Page 1 &nbsp;/10&nbsp;</span>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="badge">W3<br>WP</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 3 Word Problems &nbsp;|&nbsp; Multiplication &amp; Division &nbsp;·&nbsp; Page 2 of 2</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">MULTIPLICATION &amp; DIVISION</span>
+
+  <h2>Part C – Multi-Step Problems</h2>
+  <p class="hint">Break the problem into steps. Label each step clearly.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">9.</span> A store sells 3 types of juice boxes: apple (sold 148 boxes), orange (sold 96 boxes), and grape (sold 112 boxes). Each box earns $2. What is the total earnings?</p>
+      <div class="work-box"></div>
+      Total boxes: <span class="ans-line"></span><br>
+      Total earnings: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">10.</span> A factory makes 2,400 toy cars a day. Each toy car needs 4 wheels. Wheels come in packs of 10. How many packs of wheels does the factory need each day?</p>
+      <div class="work-box"></div>
+      Wheels needed: <span class="ans-line"></span><br>
+      Packs needed: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">11.</span> Volunteers pack food into boxes. Each box holds 15 cans. They have 8 volunteers, each packing for 3 hours and packing 6 boxes per hour. How many cans do they pack in total?</p>
+      <div class="work-box"></div>
+      Boxes packed: <span class="ans-line"></span><br>
+      Cans total: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">12.</span> A summer camp has 6 cabins with 14 campers each. They divide into teams of 4 for a game. How many complete teams are there? How many campers cannot join a complete team?</p>
+      <div class="work-box"></div>
+      Total campers: <span class="ans-line"></span><br>
+      Complete teams: <span class="ans-line"></span> &nbsp; Left over: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part D – Divisibility &amp; Factors in Context</h2>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">13.</span> Can 252 students be split equally into groups of 6? What about groups of 8? Show how you know using divisibility rules or division.</p>
+      <div class="work-box"></div>
+      Groups of 6: <span class="ans-line"></span> (yes/no)<br>
+      Groups of 8: <span class="ans-line"></span> (yes/no)
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">14.</span> A teacher wants to arrange 36 desks in equal rows. List all the ways she can arrange them (all factor pairs of 36).</p>
+      <div class="work-box"></div>
+      Factor pairs: <span class="ans-line-long"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">15.</span> Kenji has 120 stickers. He wants to put the same number in each envelope. He has envelopes of size 4, 5, 6, and 7. Which sizes divide evenly with no leftover stickers?</p>
+      <div class="work-box"></div>
+      Works evenly: <span class="ans-line-long"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">16.</span> A rectangular garden has an area of 96 sq ft. What are three different rectangle dimensions (length × width) it could have? Which has the smallest perimeter?</p>
+      <div class="work-box"></div>
+      Option 1: <span class="ans-line"></span> Option 2: <span class="ans-line"></span> Option 3: <span class="ans-line"></span><br>
+      Smallest perimeter: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#11088; Challenge – Packing Expedition</h3>
+    <p>An expedition team has 875 granola bars to pack for a 25-day trip. They pack the same number each day. Each member of the 5-person team gets an equal share each day. How many granola bars does each person get per day? Are there any leftover bars for the whole trip?</p>
+    <div class="work-box" style="min-height:70px;"></div>
+    Bars per day: <span class="ans-line"></span> &nbsp; Per person per day: <span class="ans-line"></span> &nbsp; Leftover: <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 3 Word Problems</span>
+    <span>Multiplication &amp; Division · Page 2 &nbsp;/16&nbsp;</span>
+  </div>
+</div>
+
+<!-- ANSWER KEY -->
+<div class="page">
+  <div class="badge" style="background:#6a0080;">W3<br>KEY</div>
+  <h1>Answer Key – Week 3 Word Problems: Multiplication &amp; Division</h1>
+  <div class="subtitle">For teacher / parent use</div>
+  <span class="topic-tag">ANSWER KEY</span>
+
+  <div class="ans-key-box">
+    <h3>Page 1 Answers</h3>
+    <div class="ak-grid">
+      <div><strong>1.</strong> 48 × 125 = 6,000 plants</div>
+      <div><strong>2.</strong> 36 × 144 = 5,184 pencils</div>
+      <div><strong>3.</strong> 24 × 32 = 768 seats; 768 × 15 = 11,520 audience members</div>
+      <div><strong>4.</strong> 68 × 25 = 1,700 cents = $17.00</div>
+      <div><strong>5.</strong> 185 ÷ 12 = 15 R5; 16 vans needed</div>
+      <div><strong>6.</strong> 247 ÷ 8 = 30 R7; 30 full bags, 7 left over</div>
+      <div><strong>7.</strong> 310 ÷ 9 = 34 R4; 34 complete pages, 4 photos on last page</div>
+      <div><strong>8.</strong> 215 ÷ 18 = 11 R17; 11 prizes, 17 points remaining</div>
+      <div><strong>Challenge:</strong> Area = 26 × 18 = 468 sq ft; 468 ÷ 12 = 39 boxes exactly</div>
+    </div>
+  </div>
+
+  <div class="ans-key-box">
+    <h3>Page 2 Answers</h3>
+    <div class="ak-grid">
+      <div><strong>9.</strong> Total boxes = 148 + 96 + 112 = 356; Earnings = 356 × $2 = $712</div>
+      <div><strong>10.</strong> Wheels = 2,400 × 4 = 9,600; Packs = 9,600 ÷ 10 = 960 packs</div>
+      <div><strong>11.</strong> Boxes = 8 × 3 × 6 = 144 boxes; Cans = 144 × 15 = 2,160 cans</div>
+      <div><strong>12.</strong> Campers = 6 × 14 = 84; Teams = 84 ÷ 4 = 21 teams, 0 left over</div>
+      <div><strong>13.</strong> 252 ÷ 6 = 42 (yes); 252 ÷ 8 = 31.5 (no, R4)</div>
+      <div><strong>14.</strong> 1×36, 2×18, 3×12, 4×9, 6×6 (all factor pairs of 36)</div>
+      <div><strong>15.</strong> 120÷4=30 ✓, 120÷5=24 ✓, 120÷6=20 ✓, 120÷7=17 R1 ✗; sizes 4, 5, 6 work</div>
+      <div><strong>16.</strong> Possible: 8×12 (P=40), 6×16 (P=44), 4×24 (P=56); smallest P = 8×12=40 ft</div>
+      <div><strong>Challenge:</strong> 875 ÷ 25 = 35 bars/day; 35 ÷ 5 = 7 bars/person/day; 875 = 25×35 exactly, 0 leftover</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 3 Word Problems</span>
+    <span>Answer Key</span>
+  </div>
+</div>
+
+</body>
+</html>

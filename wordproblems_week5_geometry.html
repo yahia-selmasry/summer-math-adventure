@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Word Problems – Week 5: Geometry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+  h1 { font-size: 22px; color: #bf360c; border-bottom: 3px solid #bf360c; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #bf360c; margin: 14px 0 6px; }
+  h3 { font-size: 13px; color: #bf360c; margin: 10px 0 4px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; background: #bf360c; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+  .intro-box { background: #fbe9e7; border-left: 4px solid #bf360c; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+  .problem-block { margin-bottom: 14px; }
+  .problem-block p { line-height: 1.7; margin-bottom: 4px; }
+  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+  .work-box { border: 1.5px dashed #aaa; min-height: 70px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .challenge-box h3 { color: #b06000; }
+  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge { float: right; background: #bf360c; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .hint { font-size: 10px; color: #555; font-style: italic; margin-bottom: 6px; }
+  .num-label { font-weight: 800; color: #bf360c; }
+  .shape-diagram { border: 1.5px solid #bf360c; border-radius: 4px; padding: 6px; margin: 4px 0; background: #fff9f8; font-size: 11px; text-align: center; }
+  .ans-key-box { background: #f5f5f5; border: 1.5px solid #bbb; border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; font-size: 12px; }
+  .ans-key-box h3 { color: #bf360c; margin-bottom: 6px; }
+  .ak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 30px; font-size: 12px; }
+
+  @page { margin: 0; size: letter; }
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { margin: 0; padding: 0; background: #fff; }
+    .page { width: 8.5in; min-height: 11in; page-break-after: always; break-after: page; padding-bottom: 0.85in; }
+    .problem-block { break-inside: avoid; page-break-inside: avoid; }
+    .challenge-box { break-inside: avoid; page-break-inside: avoid; }
+    .grid-2, .grid-3 { break-inside: avoid; page-break-inside: avoid; }
+    .work-box { break-inside: avoid; page-break-inside: avoid; }
+    .intro-box { break-inside: avoid; page-break-inside: avoid; }
+    h2 { break-after: avoid; page-break-after: avoid; }
+    h3 { break-after: avoid; page-break-after: avoid; }
+    .footer { position: absolute; bottom: 0.25in; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="badge">W5<br>WP</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 5 Word Problems &nbsp;|&nbsp; Geometry &nbsp;·&nbsp; Page 1 of 2</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">GEOMETRY</span>
+
+  <div class="intro-box">
+    <strong>Formulas to remember:</strong><br>
+    Perimeter of rectangle = 2 × (length + width) &nbsp;|&nbsp; Area of rectangle = length × width<br>
+    Volume of rectangular prism = length × width × height<br>
+    Area of triangle = <sup>1</sup>/<sub>2</sub> × base × height
+  </div>
+
+  <h2>Part A – Perimeter Problems</h2>
+  <p class="hint">Draw a quick sketch. Label all sides. Add them all up for perimeter.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">1.</span> A school track is rectangular with a length of 120 meters and a width of 60 meters. How far does a runner travel in one lap around the track?</p>
+      <div class="work-box"></div>
+      Perimeter: <span class="ans-line"></span> meters
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">2.</span> Mrs. Garcia wants to put a fence around her rectangular yard. The yard is 35 feet long and 22 feet wide. Fencing costs $4.50 per foot. How much will the fence cost?</p>
+      <div class="work-box"></div>
+      Perimeter: <span class="ans-line"></span> ft &nbsp; Cost: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">3.</span> A square garden has a perimeter of 48 feet. What is the length of each side? What is the area of the garden?</p>
+      <div class="work-box"></div>
+      Side length: <span class="ans-line"></span> ft &nbsp; Area: <span class="ans-line"></span> sq ft
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">4.</span> A picture frame has a perimeter of 72 inches. The length is twice the width. What are the dimensions of the frame?</p>
+      <div class="work-box"></div>
+      Width: <span class="ans-line"></span> in &nbsp; Length: <span class="ans-line"></span> in
+    </div>
+  </div>
+
+  <h2>Part B – Area Problems</h2>
+  <p class="hint">Area = how many square units fit inside. For rectangles: A = l × w.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">5.</span> A living room is 18 feet long and 14 feet wide. New carpet costs $3.50 per square foot. How much will it cost to carpet the whole room?</p>
+      <div class="work-box"></div>
+      Area: <span class="ans-line"></span> sq ft &nbsp; Cost: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">6.</span> A school garden is 24 feet long and 15 feet wide. Students plant vegetables in a section that is 10 feet by 8 feet. What area of the garden is NOT planted?</p>
+      <div class="work-box"></div>
+      Total area: <span class="ans-line"></span> &nbsp; Planted: <span class="ans-line"></span> &nbsp; Not planted: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">7.</span> A rectangular wall is 12 feet wide and 9 feet tall. One can of paint covers 40 square feet. How many cans are needed to paint the wall? (You cannot buy a partial can.)</p>
+      <div class="work-box"></div>
+      Area: <span class="ans-line"></span> sq ft &nbsp; Cans: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">8.</span> A triangle-shaped garden has a base of 16 feet and a height of 9 feet. What is its area?</p>
+      <div class="work-box"></div>
+      Area: <span class="ans-line"></span> sq ft
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#11088; Challenge – L-Shaped Room</h3>
+    <p>An L-shaped room can be split into two rectangles: Rectangle A is 10 ft × 8 ft and Rectangle B is 6 ft × 5 ft. Find the total area. If flooring costs $4 per sq ft, what is the total flooring cost?</p>
+    <div class="work-box" style="min-height:70px;"></div>
+    Total area: <span class="ans-line"></span> sq ft &nbsp; Cost: <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 5 Word Problems</span>
+    <span>Geometry · Page 1 &nbsp;/10&nbsp;</span>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="badge">W5<br>WP</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 5 Word Problems &nbsp;|&nbsp; Geometry &nbsp;·&nbsp; Page 2 of 2</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">GEOMETRY</span>
+
+  <h2>Part C – Volume Problems</h2>
+  <p class="hint">Volume = l × w × h. Think of stacking layers of area.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">9.</span> A fish tank is 24 inches long, 12 inches wide, and 16 inches tall. What is the volume of the tank in cubic inches?</p>
+      <div class="work-box"></div>
+      Volume: <span class="ans-line"></span> cubic inches
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">10.</span> A storage box holds 120 cubic feet of stuff. The box is 6 feet long and 5 feet wide. How tall is the box?</p>
+      <div class="work-box"></div>
+      Height: <span class="ans-line"></span> feet
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">11.</span> A shipping company has boxes that are 2 ft × 2 ft × 3 ft. How many of these boxes fit inside a truck that is 20 ft long, 8 ft wide, and 6 ft tall?</p>
+      <div class="work-box"></div>
+      Truck volume: <span class="ans-line"></span> cu ft &nbsp; Box volume: <span class="ans-line"></span> cu ft &nbsp; Boxes: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">12.</span> A sandbox is 4 feet long, 3 feet wide, and 0.5 foot deep. Sand costs $8 per cubic foot. How much does it cost to fill the sandbox?</p>
+      <div class="work-box"></div>
+      Volume: <span class="ans-line"></span> cu ft &nbsp; Cost: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part D – Missing Dimensions</h2>
+  <p class="hint">Work backward! If you know area and one side, divide to find the other.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">13.</span> A rectangular swimming pool has an area of 312 square feet. If it is 24 feet long, how wide is it?</p>
+      <div class="work-box"></div>
+      Width: <span class="ans-line"></span> feet
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">14.</span> A garden has a perimeter of 56 meters. The width is 10 meters. What is the length?</p>
+      <div class="work-box"></div>
+      Length: <span class="ans-line"></span> meters
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">15.</span> A rectangular bulletin board has an area of 180 square inches. The length is 15 inches. What is the perimeter?</p>
+      <div class="work-box"></div>
+      Width: <span class="ans-line"></span> in &nbsp; Perimeter: <span class="ans-line"></span> in
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">16.</span> A rectangular room needs exactly 52 meters of baseboard trim (perimeter). If the room is 15 meters long, what is the width? What is the area of the room?</p>
+      <div class="work-box"></div>
+      Width: <span class="ans-line"></span> m &nbsp; Area: <span class="ans-line"></span> sq m
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#11088; Challenge – Patio Design</h3>
+    <p>A homeowner wants to build a patio. The total yard is 30 ft × 20 ft. The patio will be an L-shape: a 20 ft × 12 ft section plus a 10 ft × 8 ft section attached to it. Patio stones cost $6.50 per square foot. Edging trim costs $2.25 per linear foot of the perimeter. Find the total cost (area cost + perimeter cost).</p>
+    <div class="work-box" style="min-height:80px;"></div>
+    Patio area: <span class="ans-line"></span> sq ft &nbsp; Perimeter: <span class="ans-line"></span> ft &nbsp; Total cost: <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 5 Word Problems</span>
+    <span>Geometry · Page 2 &nbsp;/16&nbsp;</span>
+  </div>
+</div>
+
+<!-- ANSWER KEY -->
+<div class="page">
+  <div class="badge" style="background:#bf360c;">W5<br>KEY</div>
+  <h1>Answer Key – Week 5 Word Problems: Geometry</h1>
+  <div class="subtitle">For teacher / parent use</div>
+  <span class="topic-tag">ANSWER KEY</span>
+
+  <div class="ans-key-box">
+    <h3>Page 1 Answers</h3>
+    <div class="ak-grid">
+      <div><strong>1.</strong> P = 2(120+60) = 360 meters per lap</div>
+      <div><strong>2.</strong> P = 2(35+22) = 114 ft; Cost = 114 × $4.50 = $513</div>
+      <div><strong>3.</strong> Side = 48÷4 = 12 ft; Area = 12×12 = 144 sq ft</div>
+      <div><strong>4.</strong> 2w + 2(2w) = 72 → 6w = 72 → w = 12 in, l = 24 in</div>
+      <div><strong>5.</strong> Area = 18×14 = 252 sq ft; Cost = 252 × $3.50 = $882</div>
+      <div><strong>6.</strong> Total = 24×15 = 360 sq ft; Planted = 10×8 = 80 sq ft; Not planted = 280 sq ft</div>
+      <div><strong>7.</strong> Area = 12×9 = 108 sq ft; 108÷40 = 2.7 → 3 cans needed</div>
+      <div><strong>8.</strong> Area = ½ × 16 × 9 = 72 sq ft</div>
+      <div><strong>Challenge:</strong> Area = 80 + 30 = 110 sq ft; Cost = 110 × $4 = $440</div>
+    </div>
+  </div>
+
+  <div class="ans-key-box">
+    <h3>Page 2 Answers</h3>
+    <div class="ak-grid">
+      <div><strong>9.</strong> V = 24×12×16 = 4,608 cubic inches</div>
+      <div><strong>10.</strong> Height = 120 ÷ (6×5) = 120 ÷ 30 = 4 feet</div>
+      <div><strong>11.</strong> Truck = 20×8×6 = 960 cu ft; Box = 2×2×3 = 12 cu ft; 960 ÷ 12 = 80 boxes</div>
+      <div><strong>12.</strong> V = 4×3×0.5 = 6 cu ft; Cost = 6 × $8 = $48</div>
+      <div><strong>13.</strong> Width = 312 ÷ 24 = 13 feet</div>
+      <div><strong>14.</strong> 2(l+10) = 56 → l+10 = 28 → l = 18 meters</div>
+      <div><strong>15.</strong> Width = 180÷15 = 12 in; P = 2(15+12) = 54 inches</div>
+      <div><strong>16.</strong> 2(15+w) = 52 → 15+w = 26 → w = 11 m; Area = 15×11 = 165 sq m</div>
+      <div><strong>Challenge:</strong> Area = 20×12 + 10×8 = 240+80 = 320 sq ft; Perimeter of L-shape ≈ 20+12+10+8+10+4 = 64 ft (estimate depends on how L connects); Area cost = 320×$6.50 = $2,080; Perimeter cost = 64×$2.25 = $144; Total ≈ $2,224</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 5 Word Problems</span>
+    <span>Answer Key</span>
+  </div>
+</div>
+
+</body>
+</html>

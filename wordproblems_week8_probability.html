@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Word Problems – Week 8: Probability</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+  h1 { font-size: 22px; color: #00695c; border-bottom: 3px solid #00695c; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #00695c; margin: 14px 0 6px; }
+  h3 { font-size: 13px; color: #00695c; margin: 10px 0 4px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; background: #00695c; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+  .intro-box { background: #e0f2f1; border-left: 4px solid #00695c; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+  .problem-block { margin-bottom: 14px; }
+  .problem-block p { line-height: 1.7; margin-bottom: 4px; }
+  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+  .work-box { border: 1.5px dashed #aaa; min-height: 70px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .challenge-box h3 { color: #b06000; }
+  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge { float: right; background: #00695c; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .hint { font-size: 10px; color: #555; font-style: italic; margin-bottom: 6px; }
+  .num-label { font-weight: 800; color: #00695c; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 13px; line-height: 1.1; }
+  .frac .num { border-bottom: 1.5px solid #333; padding: 0 3px; }
+  .frac .den { padding: 0 3px; }
+  .prob-visual { background: #e0f2f1; border: 1px solid #00695c; border-radius: 4px; padding: 6px 10px; margin: 4px 0; font-size: 12px; }
+  .ans-key-box { background: #f5f5f5; border: 1.5px solid #bbb; border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; font-size: 12px; }
+  .ans-key-box h3 { color: #00695c; margin-bottom: 6px; }
+  .ak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 30px; font-size: 12px; }
+
+  @page { margin: 0; size: letter; }
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { margin: 0; padding: 0; background: #fff; }
+    .page { width: 8.5in; min-height: 11in; page-break-after: always; break-after: page; padding-bottom: 0.85in; }
+    .problem-block { break-inside: avoid; page-break-inside: avoid; }
+    .challenge-box { break-inside: avoid; page-break-inside: avoid; }
+    .grid-2, .grid-3 { break-inside: avoid; page-break-inside: avoid; }
+    .work-box { break-inside: avoid; page-break-inside: avoid; }
+    .intro-box { break-inside: avoid; page-break-inside: avoid; }
+    h2 { break-after: avoid; page-break-after: avoid; }
+    h3 { break-after: avoid; page-break-after: avoid; }
+    .footer { position: absolute; bottom: 0.25in; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="badge">W8<br>WP</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 8 Word Problems &nbsp;|&nbsp; Probability &nbsp;·&nbsp; Page 1 of 2</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">PROBABILITY</span>
+
+  <div class="intro-box">
+    <strong>Probability = </strong>
+    <span class="frac"><span class="num">favorable outcomes</span><span class="den">total possible outcomes</span></span>
+    &nbsp; Always between 0 (impossible) and 1 (certain).<br>
+    <strong>Complementary events:</strong> P(not A) = 1 − P(A) &nbsp;|&nbsp;
+    <strong>Expected outcomes:</strong> P(event) × number of trials<br>
+    <strong>Sample space:</strong> list ALL possible outcomes (use a tree diagram or table).
+  </div>
+
+  <h2>Part A – Simple Probability</h2>
+  <p class="hint">Count the favorable outcomes. Count the total outcomes. Write as a fraction, then simplify.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">1.</span> A bag contains 5 red marbles, 3 blue marbles, and 2 green marbles. If you pick one without looking, what is the probability of picking:</p>
+      <div class="prob-visual">Total marbles: 5 + 3 + 2 = 10</div>
+      <div class="work-box" style="min-height:50px;"></div>
+      P(red) = <span class="ans-line"></span> &nbsp; P(blue) = <span class="ans-line"></span> &nbsp; P(green) = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">2.</span> A standard number cube (die) has faces numbered 1–6. What is the probability of rolling:</p>
+      <div class="work-box" style="min-height:50px;"></div>
+      P(4) = <span class="ans-line"></span><br>
+      P(even) = <span class="ans-line"></span><br>
+      P(greater than 2) = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">3.</span> A spinner has 8 equal sections: 3 are red, 2 are blue, 2 are yellow, and 1 is green. What is the probability of landing on each color?</p>
+      <div class="work-box" style="min-height:50px;"></div>
+      P(red) = <span class="ans-line"></span> &nbsp; P(blue) = <span class="ans-line"></span><br>
+      P(yellow) = <span class="ans-line"></span> &nbsp; P(green) = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">4.</span> A deck of 20 cards is numbered 1–20. One card is drawn at random. What is the probability it is a multiple of 4? A multiple of 5?</p>
+      <div class="work-box" style="min-height:50px;"></div>
+      Multiples of 4: <span class="ans-line-long"></span><br>
+      P(mult of 4) = <span class="ans-line"></span> &nbsp; P(mult of 5) = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Complementary Probability</h2>
+  <p class="hint">P(not A) = 1 − P(A). If P(rain) = 3/5, then P(no rain) = 2/5.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">5.</span> The probability of picking a red marble from a bag is
+        <span class="frac"><span class="num">3</span><span class="den">8</span></span>.
+        What is the probability of <em>not</em> picking red?</p>
+      <div class="work-box" style="min-height:40px;"></div>
+      P(not red) = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">6.</span> A weather app says there is a 70% chance of sunshine. What is the probability it will <em>not</em> be sunny? Write as a percent and as a fraction.</p>
+      <div class="work-box" style="min-height:40px;"></div>
+      P(not sunny) = <span class="ans-line"></span>% = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">7.</span> A bowl has only grape and cherry candies. The probability of grabbing a cherry is
+        <span class="frac"><span class="num">5</span><span class="den">12</span></span>.
+        What is P(grape)? If there are 24 candies total, how many of each kind?</p>
+      <div class="work-box" style="min-height:50px;"></div>
+      P(grape) = <span class="ans-line"></span> &nbsp; Cherry count: <span class="ans-line"></span> &nbsp; Grape count: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">8.</span> In a raffle, 1 winning ticket is chosen from 25 tickets. What is the probability of winning? Of NOT winning? If you buy 3 tickets, what is your probability of winning?</p>
+      <div class="work-box" style="min-height:50px;"></div>
+      P(win 1 ticket) = <span class="ans-line"></span> &nbsp; P(not win) = <span class="ans-line"></span><br>
+      P(win with 3 tickets) = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#11088; Challenge – Game Show Spinner</h3>
+    <p>A game show spinner has 10 equal sections: 4 sections say "Win $100," 3 say "Win $50," 2 say "Try Again," and 1 says "Jackpot! $500." Find the probability of each outcome. What is P(winning any money)? What is P(NOT winning money)?</p>
+    <div class="work-box" style="min-height:70px;"></div>
+    P($100) = <span class="ans-line"></span> &nbsp; P($50) = <span class="ans-line"></span> &nbsp; P(Try Again) = <span class="ans-line"></span> &nbsp; P(Jackpot) = <span class="ans-line"></span><br>
+    P(win any $) = <span class="ans-line"></span> &nbsp; P(no win) = <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 8 Word Problems</span>
+    <span>Probability · Page 1 &nbsp;/10&nbsp;</span>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="badge">W8<br>WP</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 8 Word Problems &nbsp;|&nbsp; Probability &nbsp;·&nbsp; Page 2 of 2</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">PROBABILITY</span>
+
+  <h2>Part C – Expected Outcomes</h2>
+  <p class="hint">Expected outcomes = P(event) × number of trials. This tells you what you EXPECT on average — actual results may vary!</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">9.</span> A coin is flipped 80 times. How many times would you expect heads? How many times tails?</p>
+      <div class="work-box"></div>
+      Expected heads: <span class="ans-line"></span> &nbsp; Expected tails: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">10.</span> A number cube is rolled 60 times. How many times would you expect to roll a 3? How many times would you expect to roll an even number?</p>
+      <div class="work-box"></div>
+      Expected 3s: <span class="ans-line"></span> &nbsp; Expected evens: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">11.</span> A bag has 4 orange and 6 purple balls. You pick one, record its color, and put it back. You repeat this 50 times. How many times do you expect to pick orange? Purple?</p>
+      <div class="work-box"></div>
+      Expected orange: <span class="ans-line"></span> &nbsp; Expected purple: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">12.</span> At a carnival, the probability of winning a prize is
+        <span class="frac"><span class="num">1</span><span class="den">4</span></span>.
+        If 200 people play, about how many would you expect to win a prize? If prizes cost the carnival $3 each, about how much would they spend?</p>
+      <div class="work-box"></div>
+      Expected winners: <span class="ans-line"></span> &nbsp; Cost: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part D – Sample Space &amp; Multi-Step Probability</h2>
+  <p class="hint">List ALL outcomes systematically. Use an organized table or tree diagram.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">13.</span> You flip a coin and roll a die. List all possible outcomes in the sample space. How many are there? What is P(Heads, 3)?</p>
+      <div class="work-box" style="min-height:80px;"></div>
+      Sample space (list all): <span class="ans-line-long"></span><br>
+      <span class="ans-line-long"></span><br>
+      Total outcomes: <span class="ans-line"></span> &nbsp; P(H, 3) = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">14.</span> A lunch menu offers 3 sandwiches (turkey, tuna, veggie) and 2 drinks (water, juice). List all possible meal combinations. How many are there?</p>
+      <div class="work-box" style="min-height:80px;"></div>
+      Combinations: <span class="ans-line-long"></span><br>
+      <span class="ans-line-long"></span><br>
+      Total: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">15.</span> You pick 2 socks from a drawer with 3 red and 2 blue socks (without looking). You pull the first, then the second WITHOUT replacing. What is P(red, then red)?</p>
+      <div class="work-box" style="min-height:60px;"></div>
+      P(1st red) = <span class="ans-line"></span><br>
+      P(2nd red | 1st was red) = <span class="ans-line"></span><br>
+      P(red, red) = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">16.</span> In a class of 30 students, 18 play sports and 12 do not. If 2 class leaders are chosen at random, what is P(both play sports)? (Without replacement.)</p>
+      <div class="work-box" style="min-height:60px;"></div>
+      P(1st plays sports) = <span class="ans-line"></span><br>
+      P(2nd | 1st played) = <span class="ans-line"></span><br>
+      P(both) = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#11088; Challenge – Unfair Game?</h3>
+    <p>A game uses two spinners. Spinner A has 4 equal sections: 1, 2, 3, 4. Spinner B has 4 equal sections: 1, 2, 3, 4. You win if the SUM of both spins is 7 or more. List all 16 outcomes in a table. How many give a sum of 7 or more? What is P(win)? Is this a fair game (close to 50%)?</p>
+    <div class="work-box" style="min-height:90px;"></div>
+    Winning outcomes: <span class="ans-line"></span> &nbsp; P(win) = <span class="ans-line"></span> &nbsp; Fair? <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 8 Word Problems</span>
+    <span>Probability · Page 2 &nbsp;/16&nbsp;</span>
+  </div>
+</div>
+
+<!-- ANSWER KEY -->
+<div class="page">
+  <div class="badge" style="background:#00695c;">W8<br>KEY</div>
+  <h1>Answer Key – Week 8 Word Problems: Probability</h1>
+  <div class="subtitle">For teacher / parent use</div>
+  <span class="topic-tag">ANSWER KEY</span>
+
+  <div class="ans-key-box">
+    <h3>Page 1 Answers</h3>
+    <div class="ak-grid">
+      <div><strong>1.</strong> P(red) = 5/10 = 1/2; P(blue) = 3/10; P(green) = 2/10 = 1/5</div>
+      <div><strong>2.</strong> P(4) = 1/6; P(even) = 3/6 = 1/2; P(&gt;2) = 4/6 = 2/3</div>
+      <div><strong>3.</strong> P(red)=3/8; P(blue)=2/8=1/4; P(yellow)=2/8=1/4; P(green)=1/8</div>
+      <div><strong>4.</strong> Multiples of 4: 4,8,12,16,20 → P=5/20=1/4; Multiples of 5: 5,10,15,20 → P=4/20=1/5</div>
+      <div><strong>5.</strong> P(not red) = 1 − 3/8 = 5/8</div>
+      <div><strong>6.</strong> P(not sunny) = 30% = 3/10</div>
+      <div><strong>7.</strong> P(grape) = 7/12; Cherry = 24×5/12 = 10; Grape = 24×7/12 = 14</div>
+      <div><strong>8.</strong> P(win) = 1/25; P(not win) = 24/25; P(win 3 tickets) = 3/25</div>
+      <div><strong>Challenge:</strong> P($100)=4/10=2/5; P($50)=3/10; P(Try Again)=2/10=1/5; P(Jackpot)=1/10; P(win $)=8/10=4/5; P(no win)=2/10=1/5</div>
+    </div>
+  </div>
+
+  <div class="ans-key-box">
+    <h3>Page 2 Answers</h3>
+    <div class="ak-grid">
+      <div><strong>9.</strong> Expected heads = 1/2 × 80 = 40; Expected tails = 40</div>
+      <div><strong>10.</strong> Expected 3s = 1/6 × 60 = 10; Expected evens = 1/2 × 60 = 30</div>
+      <div><strong>11.</strong> P(orange)=4/10=2/5; Expected orange = 50×2/5 = 20; Expected purple = 30</div>
+      <div><strong>12.</strong> Expected winners = 1/4 × 200 = 50; Cost = 50 × $3 = $150</div>
+      <div><strong>13.</strong> 12 outcomes (H1,H2,H3,H4,H5,H6,T1,T2,T3,T4,T5,T6); P(H,3) = 1/12</div>
+      <div><strong>14.</strong> 6 combinations: T+W, T+J, Tu+W, Tu+J, V+W, V+J; Total = 3×2 = 6</div>
+      <div><strong>15.</strong> P(1st red) = 3/5; P(2nd red|1st red) = 2/4 = 1/2; P(R,R) = 3/5 × 1/2 = 3/10</div>
+      <div><strong>16.</strong> P(1st) = 18/30 = 3/5; P(2nd|1st) = 17/29; P(both) = 18/30 × 17/29 = 306/870 = 51/145 ≈ 0.35</div>
+      <div><strong>Challenge:</strong> Winning sums ≥ 7: (3,4),(4,3),(4,4) for exactly 7: (3,4),(4,3); ≥7: (3,4),(4,3),(4,4) = 3 ways + (2+5 n/a) → full table: sums of (A+B): only sums 7,8 possible max is 4+4=8; sums≥7: (3,4),(4,3),(4,4)=3 outcomes; P(win)=3/16 ≈ 19% — NOT a fair game, hard to win</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 8 Word Problems</span>
+    <span>Answer Key</span>
+  </div>
+</div>
+
+</body>
+</html>

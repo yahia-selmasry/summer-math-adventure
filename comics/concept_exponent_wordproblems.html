@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Comics – Exponent Word Problems</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #fdf3c0;
+  font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 16px;
+  padding: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.comic-page { background: #fdf3c0; padding: 16px; page-break-after: always; }
+.row { display: flex; gap: 8px; margin-bottom: 8px; }
+.panel {
+  border: 3px solid #1a1a1a; border-radius: 6px; padding: 14px;
+  position: relative; overflow: visible; flex: 1;
+}
+.panel.bg-sky    { background: #cce8f5; }
+.panel.bg-green  { background: #c8e6c9; }
+.panel.bg-peach  { background: #ffe0cc; }
+.panel.bg-tan    { background: #f5e6c8; }
+.panel.bg-white  { background: #ffffff; }
+.panel.bg-indigo { background: #e8eaf6; }
+.panel.bg-purple { background: #f3e5f5; }
+.panel.bg-teal   { background: #e0f2f1; }
+.panel.bg-lime   { background: #f0f4c3; }
+.panel.bg-orange { background: #fff3e0; }
+.panel.full { flex: none; width: 100%; }
+.panel.w2 { flex: 2; }
+
+.title-card {
+  display: inline-block; background: #e65100; color: #fff;
+  font-family: 'Bangers','Impact',sans-serif; font-size: 26px;
+  letter-spacing: 2px; padding: 6px 18px 4px;
+  border: 3px solid #1a1a1a; border-radius: 8px; margin-bottom: 10px;
+  line-height: 1.1; text-shadow: 2px 2px 0 #6a1e00;
+}
+.title-card .subtitle { font-size: 13px; letter-spacing: 1px; display: block; font-family: 'Nunito', sans-serif; font-weight: 700; text-shadow: none; }
+
+.bubble {
+  background: #fff; border: 2.5px solid #1a1a1a; border-radius: 18px;
+  padding: 8px 12px; font-size: 15px; line-height: 1.45;
+  position: relative; display: inline-block; max-width: 220px;
+  font-weight: 700; margin: 4px;
+}
+.bubble.left::after  { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after  { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after  { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.big { font-size: 15px; max-width: 300px; }
+.bubble.sm  { font-size: 12px; max-width: 180px; }
+
+.scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:120px; padding-top:8px; }
+
+.zara { width:70px; height:110px; position:relative; flex-shrink:0; }
+.zara .body  { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head  { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye   { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair  { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm   { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail  { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+
+.max { width:56px; height:80px; position:relative; flex-shrink:0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye  { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+
+.step-tag { display:inline-block; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; margin-right:4px; }
+
+.frac { display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 3px; font-size:1em; line-height:1.1; font-weight:700; }
+.frac .num { border-bottom:2px solid #1a1a1a; padding:0 3px; }
+.frac .den { padding:0 3px; }
+
+.think-sign {
+  background: #e65100; color: #fff; font-size: 11px; font-weight: 700; text-align: center;
+  border-radius: 12px; width: 80px; height: 80px;
+  display: flex; align-items: center; justify-content: center; line-height: 1.3;
+}
+.think-wrap { position:absolute; bottom:10px; right:10px; }
+
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  .row { flex-direction: column; }
+  .bubble { max-width: 90%; font-size: 12px; }
+  .scene { flex-wrap: wrap; justify-content: center; }
+  .title-card { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="comic-page">
+
+  <!-- ROW 1: TITLE -->
+  <div class="row">
+    <div class="panel bg-orange full" style="min-height:150px;">
+      <div class="title-card">
+        ⚡ EXPONENT WORD PROBLEMS!
+        <span class="subtitle">Identify the base &amp; power · Expand · Calculate · Apply to context · Check</span>
+      </div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble left big" style="margin-bottom:18px;">
+            2<sup>3</sup> means <strong>2 × 2 × 2</strong>,<br>NOT 2 × 3!<br>The exponent tells<br>how many times to multiply!
+          </div>
+          <div class="zara">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:10px;">
+          <div style="background:#fff;border:3px solid #e65100;border-radius:10px;padding:12px;font-size:13px;max-width:220px;">
+            <strong style="color:#e65100;">The 5-Step Plan:</strong><br>
+            <span class="step-tag" style="background:#e65100;">1</span> Find the base and exponent<br>
+            <span class="step-tag" style="background:#1565c0;">2</span> Write it out: base × base × …<br>
+            <span class="step-tag" style="background:#6a1b9a;">3</span> Multiply step by step<br>
+            <span class="step-tag" style="background:#b03a00;">4</span> Apply to the real-world context<br>
+            <span class="step-tag" style="background:#37474f;">5</span> Is the answer reasonable?
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble right" style="margin-bottom:18px;">
+            Powers of 10 are<br>easy — just count<br>the zeros! 10³ = 1,000 🔢
+          </div>
+          <div class="max">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: KEY VOCABULARY -->
+  <div class="row">
+    <div class="panel bg-indigo full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a237e;">📖 Key Vocabulary &amp; Quick Reference</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;font-size:13px;">
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:8px;">
+          <strong style="color:#e65100;">⚡ Exponents</strong><br>
+          3<sup>4</sup> = 3×3×3×3 = 81<br>
+          Base = 3; Power = 4<br>
+          "cubed" = to the 3rd power<br>
+          "squared" = to the 2nd power
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #0d47a1;border-radius:8px;padding:8px;">
+          <strong style="color:#0d47a1;">🔟 Powers of 10</strong><br>
+          10<sup>1</sup> = 10<br>
+          10<sup>2</sup> = 100<br>
+          10<sup>3</sup> = 1,000<br>
+          10<sup>6</sup> = 1,000,000
+        </div>
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:8px;">
+          <strong style="color:#2e7d32;">⬜ Perfect Squares</strong><br>
+          1² = 1, 2² = 4, 3² = 9<br>
+          4² = 16, 5² = 25, 6² = 36<br>
+          7² = 49, 8² = 64, 9² = 81<br>
+          10² = 100, 12² = 144
+        </div>
+        <div style="background:#f3e5f5;border:2px solid #6a1b9a;border-radius:8px;padding:8px;">
+          <strong style="color:#6a1b9a;">🔢 Signal Words</strong><br>
+          "squared · cubed · power of"<br>
+          "grows by a factor of"<br>
+          "doubles each round"<br>
+          "how many times larger?"
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: WORKED EXAMPLES -->
+  <div class="row">
+    <div class="panel bg-orange" style="flex:1.2;">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#bf360c;">✅ Example 1 — Powers of 10 in Context</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"A science book says bacteria can double to <strong>10<sup>6</sup></strong> in one hour. How many bacteria is that?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#e65100;">1</span> Base = 10; Exponent = 6<br>
+        <span class="step-tag" style="background:#1565c0;">2</span> Expand: 10×10×10×10×10×10<br>
+        <span class="step-tag" style="background:#6a1b9a;">3</span> Shortcut: 10<sup>6</sup> = 1 with 6 zeros<br>
+        <span class="step-tag" style="background:#b03a00;">4</span> Answer: <strong style="color:#bf360c;">1,000,000 bacteria</strong><br>
+        <span class="step-tag" style="background:#37474f;">5</span> One million bacteria — that's a LOT! ✓
+      </div>
+    </div>
+    <div class="panel bg-green">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#1b5e20;">✅ Example 2 — Perfect Squares (Area)</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"Max's square garden has sides of <strong>9 feet</strong>. What is the area? Is 81 a perfect square?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#e65100;">1</span> Side length = 9 ft<br>
+        <span class="step-tag" style="background:#6a1b9a;">3</span> Area = side² = 9²<br>
+        <span class="step-tag" style="background:#b03a00;">4</span> 9² = 9 × 9 = <strong style="color:#1b5e20;">81 ft²</strong><br>
+        &nbsp;&nbsp;&nbsp;Yes! 81 is a perfect square (9 × 9)<br>
+        <span class="step-tag" style="background:#37474f;">5</span> Perfect squares always come from<br>
+        &nbsp;&nbsp;&nbsp;a whole number × itself ✓
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 2 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: EXPONENTIAL GROWTH EXAMPLE -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:170px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#0d47a1;">✅ Example 3 — Exponential Doubling</div>
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+            <em>"A chain letter: you send it to 2 friends. Each friend sends it to 2 more. After <strong>4 rounds</strong>, how many people got the letter in that last round?"</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#e65100;">1</span> Each round = × 2<br>
+              Round 1: 2<sup>1</sup> = 2<br>
+              Round 2: 2<sup>2</sup> = 4<br>
+              Round 3: 2<sup>3</sup> = 8<br>
+              Round 4: 2<sup>4</sup> = ?
+            </div>
+            <div style="line-height:2.0;">
+              2<sup>4</sup> = 2 × 2 × 2 × 2<br>
+              = 4 × 4 = <strong style="color:#0d47a1;">16 people</strong><br>
+              <span class="step-tag" style="background:#37474f;">5</span> Makes sense: doubles<br>
+              each round: 2→4→8→16 ✓
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:10px;flex-shrink:0;">
+          <div class="bubble top-left sm" style="margin-bottom:16px;">
+            Doubling = base 2!<br>Tripling = base 3!<br>Each round = +1<br>to the exponent!
+          </div>
+          <div class="zara" style="transform:scale(0.8);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: PLACE VALUE WITH POWERS OF 10 -->
+  <div class="row">
+    <div class="panel bg-teal full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#004d40;">✅ Example 4 — Powers of 10 &amp; Place Value</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+        <em>"A computer has <strong>4 × 10<sup>4</sup></strong> files. A server has <strong>3 × 10<sup>6</sup></strong> files. How many more files does the server have?"</em>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+        <div style="line-height:2.1;">
+          <span class="step-tag" style="background:#e65100;">1</span> Computer: 4 × 10<sup>4</sup><br>
+          10<sup>4</sup> = 10,000<br>
+          4 × 10,000 = <strong>40,000 files</strong><br><br>
+          <span class="step-tag" style="background:#1565c0;">2</span> Server: 3 × 10<sup>6</sup><br>
+          10<sup>6</sup> = 1,000,000<br>
+          3 × 1,000,000 = <strong>3,000,000 files</strong>
+        </div>
+        <div style="line-height:2.1;">
+          <span class="step-tag" style="background:#b03a00;">4</span> Difference:<br>
+          3,000,000 − 40,000<br>
+          = <strong style="color:#004d40;">2,960,000 more files</strong><br>
+          <span class="step-tag" style="background:#37474f;">5</span> Server has about 75× more ✓
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: MISTAKES + TIPS -->
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;">⚠️ CLASSIC MISTAKES</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ❌ Multiplying the base by the exponent: 2³ ≠ 6 (it's 8!)<br>
+        ❌ Thinking 10⁵ = 50 (count the ZEROS: 10⁵ = 100,000)<br>
+        ❌ Forgetting to write the units (ft², not just the number)<br>
+        ❌ Confusing "squared" (×2) with "to the power of 2" (×itself)<br>
+        ❌ Not expanding step by step for larger exponents<br>
+        ❌ Thinking any square number is a perfect square (technically all are!)
+      </div>
+    </div>
+    <div class="panel bg-lime">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#558b2f;">💡 PRO TIPS</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ✓ Exponent = HOW MANY TIMES to multiply the base by itself<br>
+        ✓ Powers of 10: count the zeros = the exponent<br>
+        ✓ Perfect squares: memorize 1–12 squared<br>
+        ✓ For doubling problems: each step = exponent increases by 1<br>
+        ✓ Scientific notation: number × 10^n means move decimal n places right<br>
+        ✓ Any number to the 0th power = 1 (bonus fact!)
+      </div>
+      <div class="think-wrap">
+        <div class="think-sign">TRY<br>IT!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a1a1a;">📝 Your Turn — Try These!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:10px;">
+          <strong>1.</strong> A lily pad doubles each day. It starts at 1 pad. How many lily pads are there after <strong>5 days</strong>?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:10px;">
+          <strong>2.</strong> A square tile has a side of <strong>7 cm</strong>. What is the area? Is 49 a perfect square?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Area: ________ Perfect square: ____
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong>3.</strong> A city has <strong>5 × 10<sup>5</sup></strong> people. Write this as a standard number.<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+        <div style="background:#f3e5f5;border:2px solid #6a1b9a;border-radius:8px;padding:10px;">
+          <strong>4.</strong> A pizza chain triples its locations each year. It starts with <strong>3</strong> locations. How many after <strong>4 years</strong>?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 2 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 3 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: MULTI-STEP CHALLENGE -->
+  <div class="row">
+    <div class="panel bg-purple full" style="min-height:160px;">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#4a148c;">🏆 Level Up — Multi-Step Exponent Problems</div>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;">
+          <div class="bubble left sm" style="margin-bottom:14px;">
+            Calculate the power<br>first, THEN do the<br>rest of the problem!
+          </div>
+          <div class="max" style="transform:scale(0.85);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+        <div style="flex:1;">
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;margin-bottom:10px;">
+            <strong>Example:</strong> <em>"Zara builds a cube-shaped storage bin. Each side is 4 ft. What is the volume? If she builds 3 of them, what is the total storage space?"</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#4a148c;">Volume of one cube</span><br>
+              V = side³ = 4³<br>
+              = 4 × 4 × 4<br>
+              = 16 × 4 = <strong>64 ft³</strong>
+            </div>
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#1565c0;">Three cubes</span><br>
+              64 × 3 = <strong style="color:#4a148c;">192 ft³</strong><br><br>
+              Volume of a cube = s³<br>
+              That's why it's called "cubed"!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: CHALLENGE PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:12px;color:#b03a00;">⭐ Challenge Problems — Show ALL your work!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#f3e5f5;border:2px solid #6a1b9a;border-radius:8px;padding:10px;">
+          <strong style="color:#6a1b9a;">5.</strong> A bacteria colony starts with 1 cell and triples every hour. How many bacteria after 5 hours? Write using exponents AND calculate the number.<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Expression: ________ Value: ________
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:10px;">
+          <strong style="color:#e65100;">6.</strong> Light travels about 3 × 10<sup>8</sup> meters per second. How far does light travel in 60 seconds? Write the answer in standard form.<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Answer: ________ meters
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong style="color:#283593;">7.</strong> Find the side length of a square room with area = <strong>144 ft²</strong>. Then find its perimeter. (Hint: what perfect square = 144?)<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Side: ________ ft &nbsp; Perimeter: ________ ft
+        </div>
+        <div style="background:#e0f2f1;border:2px solid #00695c;border-radius:8px;padding:10px;">
+          <strong style="color:#00695c;">8. (Super Challenge!)</strong> Zara's computer stores photos: each photo is 2<sup>4</sup> MB. She has 5 × 10<sup>2</sup> photos. How many total MB? Is this more or less than 10,000 MB?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Total MB: ________ More/less than 10,000? ________
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: ANSWER KEY -->
+  <div class="row">
+    <div class="panel bg-tan full">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#5d4037;">🔑 Answer Key (Try first! Peek only if stuck.)</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:12px;">
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>1.</strong> 2<sup>5</sup> = 2×2×2×2×2 = <strong style="color:#e65100;">32 lily pads</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>2.</strong> 7²=49 cm²; Yes, 49 is a <strong style="color:#2e7d32;">perfect square</strong> (7×7)
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>3.</strong> 5 × 10<sup>5</sup> = 5 × 100,000 = <strong style="color:#283593;">500,000</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>4.</strong> Start: 3; Year 4: 3 × 3<sup>4</sup> = 3 × 81 = <strong style="color:#6a1b9a;">243 locations</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>5.</strong> 3<sup>5</sup> = 3×3×3×3×3 = <strong style="color:#6a1b9a;">243 bacteria</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>6.</strong> 3×10<sup>8</sup> × 60 = 180×10<sup>8</sup> = <strong style="color:#e65100;">18,000,000,000 m</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>7.</strong> √144 = 12 ft; P=4×12=<strong style="color:#283593;">48 ft</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>8.</strong> 2<sup>4</sup>=16 MB; 5×10<sup>2</sup>=500 photos; 16×500=<strong style="color:#00695c;">8,000 MB</strong>; Less than 10,000
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 3 -->
+
+</body>
+</html>

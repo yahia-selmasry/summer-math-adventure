@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Comics – Decimal Word Problems</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #fdf3c0;
+  font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 16px;
+  padding: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.comic-page { background: #fdf3c0; padding: 16px; page-break-after: always; }
+.row { display: flex; gap: 8px; margin-bottom: 8px; }
+.panel {
+  border: 3px solid #1a1a1a; border-radius: 6px; padding: 14px;
+  position: relative; overflow: visible; flex: 1;
+}
+.panel.bg-sky    { background: #cce8f5; }
+.panel.bg-green  { background: #c8e6c9; }
+.panel.bg-peach  { background: #ffe0cc; }
+.panel.bg-tan    { background: #f5e6c8; }
+.panel.bg-white  { background: #ffffff; }
+.panel.bg-indigo { background: #e8eaf6; }
+.panel.bg-purple { background: #f3e5f5; }
+.panel.bg-teal   { background: #e0f2f1; }
+.panel.bg-lime   { background: #f0f4c3; }
+.panel.bg-aqua   { background: #e0f7f4; }
+.panel.full { flex: none; width: 100%; }
+.panel.w2 { flex: 2; }
+
+.title-card {
+  display: inline-block; background: #00695c; color: #fff;
+  font-family: 'Bangers','Impact',sans-serif; font-size: 26px;
+  letter-spacing: 2px; padding: 6px 18px 4px;
+  border: 3px solid #1a1a1a; border-radius: 8px; margin-bottom: 10px;
+  line-height: 1.1; text-shadow: 2px 2px 0 #002018;
+}
+.title-card .subtitle { font-size: 13px; letter-spacing: 1px; display: block; font-family: 'Nunito', sans-serif; font-weight: 700; text-shadow: none; }
+
+.bubble {
+  background: #fff; border: 2.5px solid #1a1a1a; border-radius: 18px;
+  padding: 8px 12px; font-size: 15px; line-height: 1.45;
+  position: relative; display: inline-block; max-width: 220px;
+  font-weight: 700; margin: 4px;
+}
+.bubble.left::after  { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after  { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after  { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.big { font-size: 15px; max-width: 300px; }
+.bubble.sm  { font-size: 12px; max-width: 180px; }
+
+.scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:120px; padding-top:8px; }
+
+.zara { width:70px; height:110px; position:relative; flex-shrink:0; }
+.zara .body  { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head  { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye   { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair  { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm   { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail  { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+
+.max { width:56px; height:80px; position:relative; flex-shrink:0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye  { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+
+.math-box { background:#fff; border:3px solid #1a1a1a; border-radius:8px; padding:10px 16px; font-size:16px; font-weight:700; display:inline-block; margin:6px 4px; text-align:center; }
+.math-box.teal   { background:#e0f7f4; border-color:#00695c; }
+.math-box.orange { background:#fff3e0; border-color:#e65100; }
+
+.step-tag { display:inline-block; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; margin-right:4px; }
+
+.frac { display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 3px; font-size:1em; line-height:1.1; font-weight:700; }
+.frac .num { border-bottom:2px solid #1a1a1a; padding:0 3px; }
+.frac .den { padding:0 3px; }
+
+.think-sign {
+  background: #00695c; color: #fff; font-size: 11px; font-weight: 700; text-align: center;
+  border-radius: 12px; width: 80px; height: 80px;
+  display: flex; align-items: center; justify-content: center; line-height: 1.3;
+}
+.think-wrap { position:absolute; bottom:10px; right:10px; }
+
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  .row { flex-direction: column; }
+  .bubble { max-width: 90%; font-size: 12px; }
+  .scene { flex-wrap: wrap; justify-content: center; }
+  .title-card { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="comic-page">
+
+  <!-- ROW 1: TITLE -->
+  <div class="row">
+    <div class="panel bg-aqua full" style="min-height:150px;">
+      <div class="title-card">
+        💰 DECIMAL WORD PROBLEMS!
+        <span class="subtitle">Line up decimals · Add or subtract · Multiply by whole · Compare · Check</span>
+      </div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble left big" style="margin-bottom:18px;">
+            Decimals show up<br>everywhere — <strong>money,<br>measurements, scores</strong>!<br>Line up the decimal point!
+          </div>
+          <div class="zara">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:10px;">
+          <div style="background:#fff;border:3px solid #00695c;border-radius:10px;padding:12px;font-size:13px;max-width:220px;">
+            <strong style="color:#00695c;">The 5-Step Plan:</strong><br>
+            <span class="step-tag" style="background:#00695c;">1</span> Read &amp; underline the decimals<br>
+            <span class="step-tag" style="background:#1565c0;">2</span> Line up decimal points in a column<br>
+            <span class="step-tag" style="background:#6a1b9a;">3</span> Choose +, −, or ×<br>
+            <span class="step-tag" style="background:#b03a00;">4</span> Calculate; place decimal in answer<br>
+            <span class="step-tag" style="background:#37474f;">5</span> Estimate to double-check
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble right" style="margin-bottom:18px;">
+            $3.75 + $1.25 = ?<br>Think in coins!<br>75¢ + 25¢ = $1.00<br>So total = <strong>$5.00</strong> 🪙
+          </div>
+          <div class="max">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: SIGNAL WORDS -->
+  <div class="row">
+    <div class="panel bg-indigo full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a237e;">🔍 Key Signal Words &amp; Real-World Decimals</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;font-size:13px;">
+        <div style="background:#e0f7f4;border:2px solid #00695c;border-radius:8px;padding:8px;">
+          <strong style="color:#00695c;">➕ ADD when...</strong><br>
+          "total cost · combined"<br>
+          "how much altogether?"<br>
+          "spent + saved"
+        </div>
+        <div style="background:#fce4ec;border:2px solid #c62828;border-radius:8px;padding:8px;">
+          <strong style="color:#c62828;">➖ SUBTRACT when...</strong><br>
+          "change · how much left?"<br>
+          "difference in price"<br>
+          "paid − cost"
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:8px;">
+          <strong style="color:#e65100;">✖️ MULTIPLY when...</strong><br>
+          "price per unit × quantity"<br>
+          "$2.49 each, bought 6"<br>
+          "rate × time"
+        </div>
+        <div style="background:#e8eaf6;border:2px solid #1a237e;border-radius:8px;padding:8px;">
+          <strong style="color:#1a237e;">📏 Real Contexts</strong><br>
+          Money ($) · Weight (kg/lb)<br>
+          Length (m/cm/ft)<br>
+          Temperature (°F/°C)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: WORKED EXAMPLES -->
+  <div class="row">
+    <div class="panel bg-teal" style="flex:1.2;">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#004d40;">✅ Example 1 — Adding Decimals (Money)</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"Zara buys a book for <strong>$8.75</strong> and a pencil case for <strong>$3.49</strong>. How much does she spend in total?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#00695c;">1</span> Underline: $8.75 and $3.49<br>
+        <span class="step-tag" style="background:#1565c0;">2</span> Line up decimal points:<br>
+        <div style="font-family:monospace;background:#f0faf8;border-radius:4px;padding:4px 8px;margin:2px 0;">
+          &nbsp; 8.75<br>
+          +3.49<br>
+          ————<br>
+          12.24
+        </div>
+        <span class="step-tag" style="background:#b03a00;">4</span> Answer: <strong style="color:#004d40;">$12.24</strong><br>
+        <span class="step-tag" style="background:#37474f;">5</span> Estimate: $9 + $3 = $12 ✓
+      </div>
+    </div>
+    <div class="panel bg-peach">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#bf360c;">✅ Example 2 — Multiplying Decimals</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"Juice boxes cost <strong>$1.35 each</strong>. Max buys <strong>8</strong> of them. What is the total cost?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#00695c;">1</span> Price: $1.35; Quantity: 8<br>
+        <span class="step-tag" style="background:#6a1b9a;">3</span> Operation: <strong>MULTIPLY</strong><br>
+        <span class="step-tag" style="background:#b03a00;">4</span> Ignore decimal: 135 × 8 = 1,080<br>
+        &nbsp;&nbsp;&nbsp;Count 2 decimal places → <strong style="color:#bf360c;">$10.80</strong><br>
+        <span class="step-tag" style="background:#37474f;">5</span> Estimate: $1 × 8 = $8, close ✓<br>
+        &nbsp;&nbsp;&nbsp;(real is a bit more since 1.35 > 1)
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 2 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: SUBTRACTION + COMPARING -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:170px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#0d47a1;">✅ Example 3 — Subtracting Decimals (Making Change)</div>
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+            <em>"Max pays <strong>$20.00</strong> for lunch that costs <strong>$13.47</strong>. How much change does he get?"</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#00695c;">1</span> Paid: $20.00; Cost: $13.47<br>
+              <span class="step-tag" style="background:#6a1b9a;">3</span> Operation: <strong>SUBTRACT</strong><br>
+              <div style="font-family:monospace;background:#e3f2fd;border-radius:4px;padding:4px 8px;margin:4px 0;">
+                20.00<br>
+                −13.47<br>
+                ——————<br>
+                &nbsp;6.53
+              </div>
+            </div>
+            <div style="line-height:2.0;">
+              Change = <strong style="color:#0d47a1;">$6.53</strong><br><br>
+              <span class="step-tag" style="background:#37474f;">5</span> Check: $13.47 + $6.53<br>
+              = $20.00 ✓<br>
+              Always add back to verify!
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:10px;flex-shrink:0;">
+          <div class="bubble top-left sm" style="margin-bottom:16px;">
+            Add back to check<br>your subtraction!<br>Cost + Change<br>= Amount paid
+          </div>
+          <div class="zara" style="transform:scale(0.8);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: COMPARING DECIMALS -->
+  <div class="row">
+    <div class="panel bg-teal full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#004d40;">✅ Example 4 — Comparing Decimals (Measurement)</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+        <em>"Three swimmers' times: Zara: <strong>1.47 min</strong>, Max: <strong>1.39 min</strong>, Leo: <strong>1.4 min</strong>. Order from fastest to slowest."</em>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+        <div style="line-height:2.1;">
+          <span class="step-tag" style="background:#1a3a6b;">Trick</span> Pad with zeros so all have same decimal places:<br>
+          Zara: <strong>1.47</strong><br>
+          Max: <strong>1.39</strong><br>
+          Leo: <strong>1.40</strong>
+        </div>
+        <div style="line-height:2.1;">
+          Compare hundredths: 39 &lt; 40 &lt; 47<br>
+          <strong>Fastest → Slowest:</strong><br>
+          <strong style="color:#004d40;">Max (1.39) · Leo (1.40) · Zara (1.47)</strong><br>
+          Lower time = faster swimmer!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: MISTAKES + TIPS -->
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;">⚠️ CLASSIC MISTAKES</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ❌ NOT lining up decimal points before adding/subtracting<br>
+        ❌ Thinking 1.9 &lt; 1.39 (it doesn't have more digits so it must be smaller — WRONG!)<br>
+        ❌ Forgetting to count decimal places when multiplying<br>
+        ❌ Writing $7.5 instead of $7.50 (always 2 places for money)<br>
+        ❌ Dropping the decimal point in the final answer<br>
+        ❌ Not including units ($, m, kg, etc.)
+      </div>
+    </div>
+    <div class="panel bg-lime">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#558b2f;">💡 PRO TIPS</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ✓ LINE UP decimal points, then add zeros to fill empty spots<br>
+        ✓ Compare decimals: pad with zeros → compare like whole numbers<br>
+        ✓ Multiply: ignore decimal → multiply → count places<br>
+        ✓ Money always has 2 decimal places: $4.70 not $4.7<br>
+        ✓ Estimate first: round to nearest dollar or whole number<br>
+        ✓ Check subtraction by adding: sum = original total
+      </div>
+      <div class="think-wrap">
+        <div class="think-sign">TRY<br>IT!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a1a1a;">📝 Your Turn — Try These!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#e0f7f4;border:2px solid #00695c;border-radius:8px;padding:10px;">
+          <strong>1.</strong> Zara runs <strong>3.75 km</strong> on Monday and <strong>4.08 km</strong> on Wednesday. How far does she run in all?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________ km
+        </div>
+        <div style="background:#fce4ec;border:2px solid #c62828;border-radius:8px;padding:10px;">
+          <strong>2.</strong> Max has <strong>$15.00</strong>. He buys a sandwich for <strong>$6.85</strong>. How much does he have left?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:10px;">
+          <strong>3.</strong> Apples cost <strong>$0.89 each</strong>. Zara buys <strong>7</strong>. What is the total?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong>4.</strong> Order from least to greatest: <strong>2.3, 2.03, 2.30, 2.033</strong><br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 2 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 3 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: MULTI-STEP -->
+  <div class="row">
+    <div class="panel bg-purple full" style="min-height:160px;">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#4a148c;">🏆 Level Up — Multi-Step Decimal Problems</div>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;">
+          <div class="bubble left sm" style="margin-bottom:14px;">
+            Solve step by step!<br>Each answer feeds<br>the next calculation.
+          </div>
+          <div class="max" style="transform:scale(0.85);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+        <div style="flex:1;">
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;margin-bottom:10px;">
+            <strong>Example:</strong> <em>"Zara shops: 3 notebooks at $2.49 each, 1 backpack at $18.75, and 2 pens at $0.99 each. She has $30. Does she have enough? How much is left or short?"</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#4a148c;">Notebooks</span><br>
+              $2.49 × 3 = $7.47<br><br>
+              <span class="step-tag" style="background:#1565c0;">Pens</span><br>
+              $0.99 × 2 = $1.98<br><br>
+              <span class="step-tag" style="background:#1b5e20;">Backpack</span><br>
+              $18.75
+            </div>
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#b03a00;">Total</span><br>
+              $7.47 + $1.98 + $18.75<br>
+              = <strong>$28.20</strong><br><br>
+              $30.00 − $28.20 = <strong style="color:#4a148c;">$1.80 left!</strong><br>
+              Yes, she has enough! ✓
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: CHALLENGE PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:12px;color:#b03a00;">⭐ Challenge Problems — Show ALL your work!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#f3e5f5;border:2px solid #6a1b9a;border-radius:8px;padding:10px;">
+          <strong style="color:#6a1b9a;">5.</strong> A recipe needs <strong>0.75 L</strong> of milk and <strong>0.4 L</strong> of cream. Max has <strong>1.5 L</strong> total dairy. Does he have enough? How much is left over?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Enough? _____ Leftover: ________
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:10px;">
+          <strong style="color:#e65100;">6.</strong> Gasoline costs <strong>$3.79 per gallon</strong>. Zara's car holds <strong>12 gallons</strong>. If the tank is empty, how much does it cost to fill? She pays with $50 — how much change?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Cost: ________ Change: ________
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong style="color:#283593;">7.</strong> Three packages weigh <strong>4.7 kg</strong>, <strong>3.85 kg</strong>, and <strong>2.09 kg</strong>. The scale limit is <strong>11 kg</strong>. Can all three go together? What is the combined weight?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Total: ________ Safe? ________
+        </div>
+        <div style="background:#e0f2f1;border:2px solid #00695c;border-radius:8px;padding:10px;">
+          <strong style="color:#00695c;">8. (Super Challenge!)</strong> Max earns $8.50/hour. He works 6.5 hours on Saturday and 4 hours on Sunday. After buying a $22.75 game, how much money does he have?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Total earned: ________ After game: ________
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: ANSWER KEY -->
+  <div class="row">
+    <div class="panel bg-tan full">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#5d4037;">🔑 Answer Key (Try first! Peek only if stuck.)</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:12px;">
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>1.</strong> 3.75 + 4.08 = <strong style="color:#00695c;">7.83 km</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>2.</strong> $15.00 − $6.85 = <strong style="color:#c62828;">$8.15</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>3.</strong> $0.89 × 7 = <strong style="color:#e65100;">$6.23</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>4.</strong> <strong style="color:#283593;">2.03, 2.033, 2.3, 2.30</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>5.</strong> 0.75+0.4=1.15 L; 1.5−1.15=<strong style="color:#6a1b9a;">0.35 L left</strong>; Yes, enough
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>6.</strong> $3.79×12=$45.48; $50−$45.48=<strong style="color:#e65100;">$4.52 change</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>7.</strong> 4.7+3.85+2.09=<strong style="color:#283593;">10.64 kg</strong>; Yes, under 11 kg ✓
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>8.</strong> 6.5×$8.50=$55.25; 4×$8.50=$34; Total=$89.25; −$22.75=<strong style="color:#00695c;">$66.50</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 3 -->
+
+</body>
+</html>

@@ -11,7 +11,7 @@
   :root {
     --w1: #1a3a6b; --w2: #2e7d32; --w3: #6a0080; --w4: #00695c;
     --w5: #bf360c; --w6: #e65100; --w7: #283593; --w8: #00695c;
-    --w9: #4a148c;
+    --w9: #4a148c; --w10: #006064;
     --accent: #1a3a6b;
   }
 
@@ -326,6 +326,10 @@
       <span class="wlabel">WEEK 9</span>
       <span class="wtopic">BASIS Prep</span>
     </button>
+    <button class="week-btn" style="background:var(--w10)" data-week="10" onclick="selectWeek(10)">
+      <span class="wlabel">BONUS</span>
+      <span class="wtopic">Measurements</span>
+    </button>
   </div>
 
   <!-- Week 9 day picker -->
@@ -411,8 +415,8 @@
 // ─────────────────────────────────────────────────────────────
 //  UTILITIES
 // ─────────────────────────────────────────────────────────────
-const WEEK_COLORS = ['','#1a3a6b','#2e7d32','#6a0080','#00695c','#bf360c','#e65100','#283593','#00695c','#4a148c'];
-const WEEK_NAMES  = ['','Number Sense','Fractions','Multiplication & Division','Decimals','Geometry','Exponents','Expressions & Equations','Probability','BASIS Prep'];
+const WEEK_COLORS = ['','#1a3a6b','#2e7d32','#6a0080','#00695c','#bf360c','#e65100','#283593','#00695c','#4a148c','#006064'];
+const WEEK_NAMES  = ['','Number Sense','Fractions','Multiplication & Division','Decimals','Geometry','Exponents','Expressions & Equations','Probability','BASIS Prep','Measurements'];
 
 // Week 9 sub-day generators map
 const WEEK9_DAYS = {
@@ -1898,6 +1902,276 @@ const week9_d4Generators = [
   ...week9_d3Generators.slice(0, 4),
 ];
 
+// ── BONUS: Measurements ──────────────────────────────────────
+const week10Generators = [
+  // US Customary: inches ↔ feet
+  () => {
+    const feet = rand(2, 12);
+    const inches = feet * 12;
+    const dir = pick(['toIn', 'toFt']);
+    if (dir === 'toIn') return {
+      q: `Convert: <strong>${feet} feet</strong> = ___ inches`,
+      a: [String(inches), `${inches} inches`, `${inches} in`],
+      hint: `1 foot = 12 inches. ${feet} × 12 = ${inches} inches.`
+    };
+    const extraIn = rand(1, 11);
+    const totalIn = feet * 12 + extraIn;
+    return {
+      q: `Convert: <strong>${totalIn} inches</strong> = ___ feet ___ inches`,
+      a: [`${feet} feet ${extraIn} inches`, `${feet} ft ${extraIn} in`, `${feet} ${extraIn}`],
+      hint: `${totalIn} ÷ 12 = ${feet} remainder ${extraIn}. So ${feet} feet ${extraIn} inches.`
+    };
+  },
+  // US Customary: feet ↔ yards
+  () => {
+    const yards = rand(2, 20);
+    const feet = yards * 3;
+    const dir = pick(['toFt', 'toYd']);
+    if (dir === 'toFt') return {
+      q: `Convert: <strong>${yards} yards</strong> = ___ feet`,
+      a: [String(feet), `${feet} feet`, `${feet} ft`],
+      hint: `1 yard = 3 feet. ${yards} × 3 = ${feet} feet.`
+    };
+    const totalFt = rand(6, 60);
+    const yd = Math.floor(totalFt / 3), rem = totalFt % 3;
+    if (rem === 0) return {
+      q: `Convert: <strong>${totalFt} feet</strong> = ___ yards`,
+      a: [String(yd), `${yd} yards`, `${yd} yd`],
+      hint: `${totalFt} ÷ 3 = ${yd} yards.`
+    };
+    return {
+      q: `Convert: <strong>${totalFt} feet</strong> = ___ yards and ___ feet`,
+      a: [`${yd} yards ${rem} feet`, `${yd} yd ${rem} ft`, `${yd} ${rem}`],
+      hint: `${totalFt} ÷ 3 = ${yd} remainder ${rem}. So ${yd} yards and ${rem} feet.`
+    };
+  },
+  // US Customary: ounces ↔ pounds
+  () => {
+    const lbs = rand(2, 15);
+    const oz = lbs * 16;
+    const dir = pick(['toOz', 'toLb']);
+    if (dir === 'toOz') return {
+      q: `Convert: <strong>${lbs} pounds</strong> = ___ ounces`,
+      a: [String(oz), `${oz} oz`, `${oz} ounces`],
+      hint: `1 pound = 16 ounces. ${lbs} × 16 = ${oz} ounces.`
+    };
+    const totalOz = pick([16, 32, 48, 64, 80, 96, 112, 128, 160, 192, 240]);
+    const p = totalOz / 16;
+    return {
+      q: `Convert: <strong>${totalOz} ounces</strong> = ___ pounds`,
+      a: [String(p), `${p} lb`, `${p} lbs`, `${p} pounds`],
+      hint: `${totalOz} ÷ 16 = ${p} pounds.`
+    };
+  },
+  // US Customary: cups / pints / quarts / gallons
+  () => {
+    const conversions = [
+      { from: 'cups', to: 'pints', factor: 2, dir: 'down',
+        q: (n) => `Convert: <strong>${n} cups</strong> = ___ pints`,
+        hint: (n, r) => `2 cups = 1 pint. ${n} ÷ 2 = ${r} pints.` },
+      { from: 'pints', to: 'quarts', factor: 2, dir: 'down',
+        q: (n) => `Convert: <strong>${n} pints</strong> = ___ quarts`,
+        hint: (n, r) => `2 pints = 1 quart. ${n} ÷ 2 = ${r} quarts.` },
+      { from: 'quarts', to: 'gallons', factor: 4, dir: 'down',
+        q: (n) => `Convert: <strong>${n} quarts</strong> = ___ gallons`,
+        hint: (n, r) => `4 quarts = 1 gallon. ${n} ÷ 4 = ${r} gallons.` },
+      { from: 'gallons', to: 'quarts', factor: 4, dir: 'up',
+        q: (n) => `Convert: <strong>${n} gallons</strong> = ___ quarts`,
+        hint: (n, r) => `1 gallon = 4 quarts. ${n} × 4 = ${r} quarts.` },
+      { from: 'gallons', to: 'cups', factor: 16, dir: 'up',
+        q: (n) => `Convert: <strong>${n} gallons</strong> = ___ cups`,
+        hint: (n, r) => `1 gallon = 16 cups. ${n} × 16 = ${r} cups.` },
+    ];
+    const c = pick(conversions);
+    const base = pick([2,4,6,8,10,12,16,20]);
+    const result = c.dir === 'up' ? base * c.factor : base / c.factor;
+    if (!Number.isInteger(result)) {
+      const b2 = pick([4,8,12,16,20]);
+      const r2 = c.dir === 'up' ? b2 * c.factor : b2 / c.factor;
+      return { q: c.q(b2), a: [String(r2), `${r2} ${c.to}`], hint: c.hint(b2, r2) };
+    }
+    return { q: c.q(base), a: [String(result), `${result} ${c.to}`], hint: c.hint(base, result) };
+  },
+  // Metric: cm ↔ mm / m ↔ cm / km ↔ m
+  () => {
+    const types = [
+      { q: (n) => `Convert: <strong>${n} cm</strong> = ___ mm`, ans: (n) => n*10, hint: (n) => `1 cm = 10 mm. ${n} × 10 = ${n*10} mm.` },
+      { q: (n) => `Convert: <strong>${n} mm</strong> = ___ cm`, ans: (n) => n/10, hint: (n) => `10 mm = 1 cm. ${n} ÷ 10 = ${n/10} cm.` },
+      { q: (n) => `Convert: <strong>${n} m</strong> = ___ cm`, ans: (n) => n*100, hint: (n) => `1 m = 100 cm. ${n} × 100 = ${n*100} cm.` },
+      { q: (n) => `Convert: <strong>${n} cm</strong> = ___ m`, ans: (n) => n/100, hint: (n) => `100 cm = 1 m. ${n} ÷ 100 = ${n/100} m.` },
+      { q: (n) => `Convert: <strong>${n} km</strong> = ___ m`, ans: (n) => n*1000, hint: (n) => `1 km = 1000 m. ${n} × 1000 = ${(n*1000).toLocaleString()} m.` },
+    ];
+    const t = pick(types);
+    const nums = { cm2mm: [3,5,7,12,25,50], mm2cm: [20,30,50,70,100,150], m2cm: [2,3,5,8,12], cm2m: [200,300,500,800], km2m: [2,3,5,10] };
+    const key = Object.keys(nums)[types.indexOf(t)];
+    const n = pick(Object.values(nums)[types.indexOf(t)] || [5,10,20]);
+    const ans = t.ans(n);
+    return { q: t.q(n), a: [String(ans), ans.toLocaleString()], hint: t.hint(n) };
+  },
+  // Metric: g ↔ kg / mL ↔ L
+  () => {
+    const types = [
+      { q: (n) => `Convert: <strong>${n} g</strong> = ___ kg`, ans: (n) => n/1000, hint: (n) => `1000 g = 1 kg. ${n} ÷ 1000 = ${n/1000} kg.` },
+      { q: (n) => `Convert: <strong>${n} kg</strong> = ___ g`, ans: (n) => n*1000, hint: (n) => `1 kg = 1000 g. ${n} × 1000 = ${n*1000} g.` },
+      { q: (n) => `Convert: <strong>${n} mL</strong> = ___ L`, ans: (n) => n/1000, hint: (n) => `1000 mL = 1 L. ${n} ÷ 1000 = ${n/1000} L.` },
+      { q: (n) => `Convert: <strong>${n} L</strong> = ___ mL`, ans: (n) => n*1000, hint: (n) => `1 L = 1000 mL. ${n} × 1000 = ${n*1000} mL.` },
+    ];
+    const t = pick(types);
+    const allNums = [[1000,2000,3500,5000,7500],[1,2,3,5,10],[500,1000,2500,3000],[1,2,3,5,10]];
+    const n = pick(allNums[types.indexOf(t)]);
+    const ans = t.ans(n);
+    return { q: t.q(n), a: [String(ans), ans.toLocaleString()], hint: t.hint(n) };
+  },
+  // Elapsed time
+  () => {
+    const startH = rand(7, 14);
+    const startM = pick([0, 15, 30, 45]);
+    const durH = rand(1, 4);
+    const durM = pick([0, 15, 30, 45]);
+    let endM = startM + durM;
+    let endH = startH + durH + Math.floor(endM / 60);
+    endM = endM % 60;
+    const fmt = (h, m) => {
+      const ampm = h < 12 ? 'AM' : 'PM';
+      const h12 = h % 12 === 0 ? 12 : h % 12;
+      return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+    };
+    const durStr = durM === 0 ? `${durH} hour${durH>1?'s':''}` : `${durH} hour${durH>1?'s':''} ${durM} minutes`;
+    return {
+      q: `A movie starts at <strong>${fmt(startH, startM)}</strong> and lasts <strong>${durStr}</strong>. What time does it end?`,
+      a: [fmt(endH, endM)],
+      hint: `Start: ${fmt(startH, startM)} + ${durStr} = ${fmt(endH, endM)}`
+    };
+  },
+  // Word problem: unit conversion in context
+  () => {
+    const problems = [
+      () => {
+        const yards = rand(3, 15);
+        const feet = yards * 3;
+        return {
+          q: `A football field goal post is <strong>${yards} yards</strong> away. How many <strong>feet</strong> is that?`,
+          a: [String(feet), `${feet} feet`, `${feet} ft`],
+          hint: `1 yard = 3 feet. ${yards} × 3 = ${feet} feet.`
+        };
+      },
+      () => {
+        const lbs = rand(3, 10);
+        const oz = lbs * 16;
+        return {
+          q: `A watermelon weighs <strong>${lbs} pounds</strong>. How many <strong>ounces</strong> is that?`,
+          a: [String(oz), `${oz} oz`, `${oz} ounces`],
+          hint: `1 pound = 16 ounces. ${lbs} × 16 = ${oz} oz.`
+        };
+      },
+      () => {
+        const gallons = rand(2, 8);
+        const cups = gallons * 16;
+        return {
+          q: `A fish tank holds <strong>${gallons} gallons</strong> of water. How many <strong>cups</strong> is that?`,
+          a: [String(cups), `${cups} cups`],
+          hint: `1 gallon = 16 cups. ${gallons} × 16 = ${cups} cups.`
+        };
+      },
+      () => {
+        const km = rand(2, 12);
+        const m = km * 1000;
+        return {
+          q: `A road race is <strong>${km} km</strong> long. How many <strong>meters</strong> is that?`,
+          a: [String(m), m.toLocaleString(), `${m} m`, `${m} meters`],
+          hint: `1 km = 1000 m. ${km} × 1000 = ${m.toLocaleString()} m.`
+        };
+      },
+      () => {
+        const kg = rand(2, 10);
+        const g = kg * 1000;
+        return {
+          q: `A bag of flour weighs <strong>${kg} kg</strong>. How many <strong>grams</strong> is that?`,
+          a: [String(g), g.toLocaleString(), `${g} g`, `${g} grams`],
+          hint: `1 kg = 1000 g. ${kg} × 1000 = ${g.toLocaleString()} g.`
+        };
+      },
+    ];
+    return pick(problems)();
+  },
+  // Multi-step measurement word problem
+  () => {
+    const problems = [
+      () => {
+        const totalFt = rand(6, 30) * 3;
+        const pieces = rand(2, 6);
+        const eachFt = totalFt / pieces;
+        return {
+          q: `A rope is <strong>${totalFt} feet</strong> long. It is cut into <strong>${pieces} equal pieces</strong>. How many <strong>yards</strong> is each piece?`,
+          a: [String(eachFt / 3), `${eachFt/3} yards`, `${eachFt/3} yd`],
+          hint: `Each piece: ${totalFt} ÷ ${pieces} = ${eachFt} feet. Convert: ${eachFt} ÷ 3 = ${eachFt/3} yards.`
+        };
+      },
+      () => {
+        const liters = rand(2, 6);
+        const ml = liters * 1000;
+        const cups = rand(2, 5);
+        const mlPerCup = 250;
+        const totalMl = cups * mlPerCup;
+        const remaining = ml - totalMl;
+        return {
+          q: `Zara has <strong>${liters} L</strong> of lemonade. She pours <strong>${cups} cups</strong> of 250 mL each. How many <strong>mL</strong> is left?`,
+          a: [String(remaining), `${remaining} mL`, `${remaining} ml`],
+          hint: `${liters} L = ${ml} mL. Used: ${cups} × 250 = ${totalMl} mL. Left: ${ml} − ${totalMl} = ${remaining} mL.`
+        };
+      },
+      () => {
+        const inches = pick([24, 36, 48, 60, 72, 84, 96]);
+        const feet = inches / 12;
+        const yards = feet / 3;
+        return {
+          q: `A banner is <strong>${inches} inches</strong> long. What is that in <strong>yards</strong>?`,
+          a: [String(yards), `${yards} yards`, `${yards} yd`],
+          hint: `${inches} in ÷ 12 = ${feet} ft. ${feet} ft ÷ 3 = ${yards} yards.`
+        };
+      },
+    ];
+    return pick(problems)();
+  },
+  // Comparing measurements
+  () => {
+    const problems = [
+      () => {
+        const a = rand(2, 5), b = rand(20, 40);
+        const aFt = a * 3, bFt = b;
+        const ans = aFt > bFt ? '>' : aFt < bFt ? '<' : '=';
+        const sym = ans === '>' ? 'greater' : ans === '<' ? 'less' : 'equal';
+        return {
+          q: `Compare: <strong>${a} yards</strong> ___ <strong>${b} feet</strong><br><em>Type >, &lt;, or =</em>`,
+          a: [ans],
+          hint: `${a} yards = ${aFt} feet. ${aFt} ${ans} ${b}. So ${a} yards is ${sym} than ${b} feet.`
+        };
+      },
+      () => {
+        const a = rand(2, 5), b = rand(20, 60);
+        const aOz = a * 16;
+        const ans = aOz > b ? '>' : aOz < b ? '<' : '=';
+        return {
+          q: `Compare: <strong>${a} pounds</strong> ___ <strong>${b} ounces</strong><br><em>Type >, &lt;, or =</em>`,
+          a: [ans],
+          hint: `${a} pounds = ${aOz} ounces. ${aOz} ${ans} ${b}.`
+        };
+      },
+      () => {
+        const a = rand(2, 4), b = rand(100, 350) * 10;
+        const aML = a * 1000;
+        const ans = aML > b ? '>' : aML < b ? '<' : '=';
+        return {
+          q: `Compare: <strong>${a} L</strong> ___ <strong>${b} mL</strong><br><em>Type >, &lt;, or =</em>`,
+          a: [ans],
+          hint: `${a} L = ${aML} mL. ${aML} ${ans} ${b}.`
+        };
+      },
+    ];
+    return pick(problems)();
+  },
+];
+
 const GENERATORS = {
   1: week1Generators,
   2: week2Generators,
@@ -1908,6 +2182,7 @@ const GENERATORS = {
   7: week7Generators,
   8: week8Generators,
   9: week9_d4Generators,
+  10: week10Generators,
 };
 
 // ─────────────────────────────────────────────────────────────

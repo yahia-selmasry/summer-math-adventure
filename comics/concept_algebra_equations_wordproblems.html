@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Comics – Algebra Equations Word Problems</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #fdf3c0;
+  font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 16px;
+  padding: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.comic-page { background: #fdf3c0; padding: 16px; page-break-after: always; }
+.row { display: flex; gap: 8px; margin-bottom: 8px; }
+.panel {
+  border: 3px solid #1a1a1a; border-radius: 6px; padding: 14px;
+  position: relative; overflow: visible; flex: 1;
+}
+.panel.bg-sky    { background: #cce8f5; }
+.panel.bg-green  { background: #c8e6c9; }
+.panel.bg-peach  { background: #ffe0cc; }
+.panel.bg-tan    { background: #f5e6c8; }
+.panel.bg-white  { background: #ffffff; }
+.panel.bg-indigo { background: #e8eaf6; }
+.panel.bg-purple { background: #f3e5f5; }
+.panel.bg-teal   { background: #e0f2f1; }
+.panel.bg-lime   { background: #f0f4c3; }
+.panel.bg-blue   { background: #e8edf8; }
+.panel.full { flex: none; width: 100%; }
+.panel.w2 { flex: 2; }
+
+.title-card {
+  display: inline-block; background: #283593; color: #fff;
+  font-family: 'Bangers','Impact',sans-serif; font-size: 26px;
+  letter-spacing: 2px; padding: 6px 18px 4px;
+  border: 3px solid #1a1a1a; border-radius: 8px; margin-bottom: 10px;
+  line-height: 1.1; text-shadow: 2px 2px 0 #0a0f3a;
+}
+.title-card .subtitle { font-size: 13px; letter-spacing: 1px; display: block; font-family: 'Nunito', sans-serif; font-weight: 700; text-shadow: none; }
+
+.bubble {
+  background: #fff; border: 2.5px solid #1a1a1a; border-radius: 18px;
+  padding: 8px 12px; font-size: 15px; line-height: 1.45;
+  position: relative; display: inline-block; max-width: 220px;
+  font-weight: 700; margin: 4px;
+}
+.bubble.left::after  { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after  { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after  { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.big { font-size: 15px; max-width: 300px; }
+.bubble.sm  { font-size: 12px; max-width: 180px; }
+
+.scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:120px; padding-top:8px; }
+
+.zara { width:70px; height:110px; position:relative; flex-shrink:0; }
+.zara .body  { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head  { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye   { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair  { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm   { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail  { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+
+.max { width:56px; height:80px; position:relative; flex-shrink:0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye  { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+
+.step-tag { display:inline-block; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; margin-right:4px; }
+
+.frac { display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 3px; font-size:1em; line-height:1.1; font-weight:700; }
+.frac .num { border-bottom:2px solid #1a1a1a; padding:0 3px; }
+.frac .den { padding:0 3px; }
+
+.think-sign {
+  background: #283593; color: #fff; font-size: 11px; font-weight: 700; text-align: center;
+  border-radius: 12px; width: 80px; height: 80px;
+  display: flex; align-items: center; justify-content: center; line-height: 1.3;
+}
+.think-wrap { position:absolute; bottom:10px; right:10px; }
+
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  .row { flex-direction: column; }
+  .bubble { max-width: 90%; font-size: 12px; }
+  .scene { flex-wrap: wrap; justify-content: center; }
+  .title-card { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="comic-page">
+
+  <!-- ROW 1: TITLE -->
+  <div class="row">
+    <div class="panel bg-blue full" style="min-height:150px;">
+      <div class="title-card">
+        🔢 ALGEBRA EQUATIONS WORD PROBLEMS!
+        <span class="subtitle">Define variable · Write equation · Solve · Check · Answer with units</span>
+      </div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble left big" style="margin-bottom:18px;">
+            A variable is just a<br><strong>mystery number</strong>!<br>Let n = the unknown,<br>then write an equation.
+          </div>
+          <div class="zara">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:10px;">
+          <div style="background:#fff;border:3px solid #283593;border-radius:10px;padding:12px;font-size:13px;max-width:220px;">
+            <strong style="color:#283593;">The 5-Step Plan:</strong><br>
+            <span class="step-tag" style="background:#283593;">1</span> Read &amp; find the unknown<br>
+            <span class="step-tag" style="background:#1565c0;">2</span> Let n = (what you're finding)<br>
+            <span class="step-tag" style="background:#6a1b9a;">3</span> Write the equation<br>
+            <span class="step-tag" style="background:#b03a00;">4</span> Solve for n<br>
+            <span class="step-tag" style="background:#37474f;">5</span> Check by substituting back
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble right" style="margin-bottom:18px;">
+            An inequality uses<br>&lt;, &gt;, ≤, or ≥<br>instead of = !<br>Many answers work! 📊
+          </div>
+          <div class="max">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: SIGNAL WORDS -->
+  <div class="row">
+    <div class="panel bg-indigo full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a237e;">🔍 Key Vocabulary &amp; Signal Words</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;font-size:13px;">
+        <div style="background:#e8edf8;border:2px solid #283593;border-radius:8px;padding:8px;">
+          <strong style="color:#283593;">➕ Addition</strong><br>
+          "more than · increased by"<br>
+          "sum · total · combined"<br>
+          "plus · added to"<br>
+          → n + a = b
+        </div>
+        <div style="background:#fce4ec;border:2px solid #c62828;border-radius:8px;padding:8px;">
+          <strong style="color:#c62828;">➖ Subtraction</strong><br>
+          "less than · decreased by"<br>
+          "difference · fewer"<br>
+          "minus · taken away"<br>
+          → n − a = b
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:8px;">
+          <strong style="color:#e65100;">✖️ Multiplication</strong><br>
+          "times · product · double"<br>
+          "triple · per · each"<br>
+          "groups of · rate"<br>
+          → a × n = b
+        </div>
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:8px;">
+          <strong style="color:#2e7d32;">⚖️ Inequalities</strong><br>
+          "at least · minimum"→ ≥<br>
+          "at most · maximum"→ ≤<br>
+          "more than"→ &gt;<br>
+          "fewer than"→ &lt;
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: WORKED EXAMPLES -->
+  <div class="row">
+    <div class="panel bg-blue" style="flex:1.2;">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#283593;">✅ Example 1 — Write &amp; Solve an Equation</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"Zara has some trading cards. She gives away <strong>17</strong> and has <strong>43</strong> left. How many did she start with?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#283593;">1</span> Unknown: starting cards<br>
+        <span class="step-tag" style="background:#1565c0;">2</span> Let <strong>n</strong> = starting cards<br>
+        <span class="step-tag" style="background:#6a1b9a;">3</span> Equation: <strong>n − 17 = 43</strong><br>
+        <span class="step-tag" style="background:#b03a00;">4</span> Add 17 to both sides:<br>
+        &nbsp;&nbsp;&nbsp;n = 43 + 17 = <strong style="color:#283593;">60 cards</strong><br>
+        <span class="step-tag" style="background:#37474f;">5</span> Check: 60 − 17 = 43 ✓
+      </div>
+    </div>
+    <div class="panel bg-green">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#1b5e20;">✅ Example 2 — Multiplication Equation</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"Max packs books into boxes of equal size. He fills <strong>8 boxes</strong> and has <strong>136 books</strong>. How many per box?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#283593;">1</span> Unknown: books per box<br>
+        <span class="step-tag" style="background:#1565c0;">2</span> Let <strong>n</strong> = books per box<br>
+        <span class="step-tag" style="background:#6a1b9a;">3</span> Equation: <strong>8n = 136</strong><br>
+        <span class="step-tag" style="background:#b03a00;">4</span> Divide both sides by 8:<br>
+        &nbsp;&nbsp;&nbsp;n = 136 ÷ 8 = <strong style="color:#1b5e20;">17 books</strong><br>
+        <span class="step-tag" style="background:#37474f;">5</span> Check: 8 × 17 = 136 ✓
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 2 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: INEQUALITY EXAMPLE -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:170px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#0d47a1;">✅ Example 3 — Writing an Inequality</div>
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+            <em>"A roller coaster requires riders to be <strong>at least 48 inches</strong> tall. Zara is 46 inches. Does she qualify? Write an inequality."</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#283593;">1</span> Requirement: h ≥ 48 in<br>
+              <span class="step-tag" style="background:#1565c0;">2</span> Zara's height: h = 46<br>
+              <span class="step-tag" style="background:#6a1b9a;">3</span> Inequality: <strong>h ≥ 48</strong><br>
+              <span class="step-tag" style="background:#b03a00;">4</span> Is 46 ≥ 48? NO
+            </div>
+            <div style="line-height:2.0;">
+              <strong style="color:#c62828;">Zara does NOT qualify.</strong><br><br>
+              She needs to grow at least:<br>
+              48 − 46 = <strong>2 more inches</strong><br>
+              <span class="step-tag" style="background:#37474f;">5</span> 46 &lt; 48 confirms she's too short ✓
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:10px;flex-shrink:0;">
+          <div class="bubble top-left sm" style="margin-bottom:16px;">
+            "At least" means<br>that number OR<br>bigger → use ≥ !
+          </div>
+          <div class="zara" style="transform:scale(0.8);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: EXPRESSION EXAMPLE -->
+  <div class="row">
+    <div class="panel bg-teal full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#004d40;">✅ Example 4 — Evaluating an Expression</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+        <em>"A pizza shop charges $8 plus $1.50 per topping. Write an expression for the total cost. How much for 5 toppings?"</em>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+        <div style="line-height:2.1;">
+          <span class="step-tag" style="background:#283593;">2</span> Let <strong>t</strong> = number of toppings<br>
+          <span class="step-tag" style="background:#6a1b9a;">3</span> Expression: <strong>8 + 1.50t</strong><br>
+          <span class="step-tag" style="background:#b03a00;">4</span> Plug in t = 5:
+        </div>
+        <div style="line-height:2.1;">
+          Cost = 8 + 1.50(5)<br>
+          = 8 + 7.50<br>
+          = <strong style="color:#004d40;">$15.50</strong><br>
+          <span class="step-tag" style="background:#37474f;">5</span> Makes sense: $8 base + $7.50 for toppings ✓
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: MISTAKES + TIPS -->
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;">⚠️ CLASSIC MISTAKES</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ❌ "Less than" means the number goes FIRST: "5 less than n" = n − 5, not 5 − n<br>
+        ❌ Not performing the same operation to BOTH sides<br>
+        ❌ Confusing ≥ (at least) with &gt; (more than)<br>
+        ❌ Forgetting to check your answer by substituting back<br>
+        ❌ Not defining your variable clearly (let n = ?)<br>
+        ❌ Writing an expression instead of an equation (missing the = sign)
+      </div>
+    </div>
+    <div class="panel bg-lime">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#558b2f;">💡 PRO TIPS</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ✓ Always start: "Let n = ___" to define your variable<br>
+        ✓ Key moves: add/subtract/multiply/divide BOTH sides equally<br>
+        ✓ Expressions have no = sign; equations do<br>
+        ✓ "At least" → ≥ · "At most" → ≤ · "More than" → &gt; · "Less than" → &lt;<br>
+        ✓ Always check: plug your answer back into the original equation<br>
+        ✓ Label your answer with proper units!
+      </div>
+      <div class="think-wrap">
+        <div class="think-sign">TRY<br>IT!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a1a1a;">📝 Your Turn — Try These!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#e8edf8;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong>1.</strong> Zara scored <strong>12 more points</strong> than Max. Zara scored <strong>47 points</strong>. How many did Max score? Write and solve an equation.<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Equation: ________ &nbsp; Answer: ________
+        </div>
+        <div style="background:#fce4ec;border:2px solid #c62828;border-radius:8px;padding:10px;">
+          <strong>2.</strong> A bag of apples costs <strong>$2.49</strong>. Max has <strong>$15</strong>. Write an inequality to show how many bags he can buy. What is the maximum?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Inequality: ________ &nbsp; Max bags: ____
+        </div>
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:10px;">
+          <strong>3.</strong> A number tripled is <strong>93</strong>. Write and solve an equation to find the number.<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Equation: ________ &nbsp; Answer: ________
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:10px;">
+          <strong>4.</strong> A gym charges $25 to join plus $10 per month. Write an expression for the total cost after m months. How much after 6 months?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Expression: ________ &nbsp; 6 months: ____
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 2 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 3 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: MULTI-STEP ALGEBRA -->
+  <div class="row">
+    <div class="panel bg-purple full" style="min-height:160px;">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#4a148c;">🏆 Level Up — Multi-Step Algebra Word Problems</div>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;">
+          <div class="bubble left sm" style="margin-bottom:14px;">
+            Write the equation,<br>then solve step<br>by step!
+          </div>
+          <div class="max" style="transform:scale(0.85);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+        <div style="flex:1;">
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;margin-bottom:10px;">
+            <strong>Example:</strong> <em>"Max and Zara together have 84 stickers. Max has 3 times as many as Zara. How many does each have?"</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#4a148c;">Let</span><br>
+              Let <strong>z</strong> = Zara's stickers<br>
+              Max = <strong>3z</strong><br><br>
+              <span class="step-tag" style="background:#1565c0;">Equation</span><br>
+              z + 3z = 84<br>
+              4z = 84
+            </div>
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#b03a00;">Solve</span><br>
+              z = 84 ÷ 4 = <strong>21</strong><br>
+              Zara has <strong style="color:#4a148c;">21 stickers</strong><br>
+              Max has 3 × 21 = <strong style="color:#4a148c;">63 stickers</strong><br>
+              <span class="step-tag" style="background:#37474f;">Check</span>: 21 + 63 = 84 ✓
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: CHALLENGE PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:12px;color:#b03a00;">⭐ Challenge Problems — Show ALL your work!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#f3e5f5;border:2px solid #6a1b9a;border-radius:8px;padding:10px;">
+          <strong style="color:#6a1b9a;">5.</strong> A movie ticket costs $9. Popcorn costs $4.50. Zara has $28. Write an equation to find how many people can go (each person needs a ticket and popcorn). Solve it.<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Equation: ________ &nbsp; Answer: ________
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:10px;">
+          <strong style="color:#e65100;">6.</strong> Max and his sister have $120 total. Max has $18 more than his sister. How much does each have? Write equations and solve.<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Max: ________ Sister: ________
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong style="color:#283593;">7.</strong> A school needs at least 200 canned goods for a food drive. Each class donates 24 cans. Write an inequality for the number of classes (c) needed. What is the minimum number of classes?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Inequality: ________ &nbsp; Min classes: ____
+        </div>
+        <div style="background:#e0f2f1;border:2px solid #00695c;border-radius:8px;padding:10px;">
+          <strong style="color:#00695c;">8. (Super Challenge!)</strong> Zara's age is 4 less than twice Max's age. Together their ages add to 26. How old is each? (Set up a system of 2 equations.)<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Zara: ________ Max: ________
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: ANSWER KEY -->
+  <div class="row">
+    <div class="panel bg-tan full">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#5d4037;">🔑 Answer Key (Try first! Peek only if stuck.)</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:12px;">
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>1.</strong> m+12=47; m=47−12=<strong style="color:#283593;">35 points</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>2.</strong> 2.49b ≤ 15; b ≤ 6.02 → max = <strong style="color:#c62828;">6 bags</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>3.</strong> 3n=93; n=93÷3=<strong style="color:#2e7d32;">31</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>4.</strong> 25+10m; 6 months: 25+60=<strong style="color:#e65100;">$85</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>5.</strong> 13.5p=28; p=28÷13.5≈2; <strong style="color:#6a1b9a;">2 people</strong> (w/ $1 left)
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>6.</strong> s+(s+18)=120; 2s=102; s=$51; Max=<strong style="color:#e65100;">$69</strong>, Sister=<strong style="color:#e65100;">$51</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>7.</strong> 24c ≥ 200; c ≥ 8.33 → <strong style="color:#283593;">at least 9 classes</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>8.</strong> z=2m−4; z+m=26; 3m−4=26; m=10; z=<strong style="color:#00695c;">Zara=16, Max=10</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 3 -->
+
+</body>
+</html>

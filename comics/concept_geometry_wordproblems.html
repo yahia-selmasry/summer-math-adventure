@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Comics – Geometry Word Problems</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #fdf3c0;
+  font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 16px;
+  padding: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.comic-page { background: #fdf3c0; padding: 16px; page-break-after: always; }
+.row { display: flex; gap: 8px; margin-bottom: 8px; }
+.panel {
+  border: 3px solid #1a1a1a; border-radius: 6px; padding: 14px;
+  position: relative; overflow: visible; flex: 1;
+}
+.panel.bg-sky    { background: #cce8f5; }
+.panel.bg-green  { background: #c8e6c9; }
+.panel.bg-peach  { background: #ffe0cc; }
+.panel.bg-tan    { background: #f5e6c8; }
+.panel.bg-white  { background: #ffffff; }
+.panel.bg-indigo { background: #e8eaf6; }
+.panel.bg-purple { background: #f3e5f5; }
+.panel.bg-teal   { background: #e0f2f1; }
+.panel.bg-lime   { background: #f0f4c3; }
+.panel.bg-red    { background: #fce4ec; }
+.panel.bg-coral  { background: #fff3ee; }
+.panel.full { flex: none; width: 100%; }
+.panel.w2 { flex: 2; }
+
+.title-card {
+  display: inline-block; background: #bf360c; color: #fff;
+  font-family: 'Bangers','Impact',sans-serif; font-size: 26px;
+  letter-spacing: 2px; padding: 6px 18px 4px;
+  border: 3px solid #1a1a1a; border-radius: 8px; margin-bottom: 10px;
+  line-height: 1.1; text-shadow: 2px 2px 0 #5a1a00;
+}
+.title-card .subtitle { font-size: 13px; letter-spacing: 1px; display: block; font-family: 'Nunito', sans-serif; font-weight: 700; text-shadow: none; }
+
+.bubble {
+  background: #fff; border: 2.5px solid #1a1a1a; border-radius: 18px;
+  padding: 8px 12px; font-size: 15px; line-height: 1.45;
+  position: relative; display: inline-block; max-width: 220px;
+  font-weight: 700; margin: 4px;
+}
+.bubble.left::after  { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after  { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after  { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.big { font-size: 15px; max-width: 300px; }
+.bubble.sm  { font-size: 12px; max-width: 180px; }
+
+.scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:120px; padding-top:8px; }
+
+.zara { width:70px; height:110px; position:relative; flex-shrink:0; }
+.zara .body  { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head  { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye   { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair  { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm   { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail  { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+
+.max { width:56px; height:80px; position:relative; flex-shrink:0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye  { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+
+.step-tag { display:inline-block; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; margin-right:4px; }
+
+.frac { display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 3px; font-size:1em; line-height:1.1; font-weight:700; }
+.frac .num { border-bottom:2px solid #1a1a1a; padding:0 3px; }
+.frac .den { padding:0 3px; }
+
+.think-sign {
+  background: #bf360c; color: #fff; font-size: 11px; font-weight: 700; text-align: center;
+  border-radius: 12px; width: 80px; height: 80px;
+  display: flex; align-items: center; justify-content: center; line-height: 1.3;
+}
+.think-wrap { position:absolute; bottom:10px; right:10px; }
+
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  .row { flex-direction: column; }
+  .bubble { max-width: 90%; font-size: 12px; }
+  .scene { flex-wrap: wrap; justify-content: center; }
+  .title-card { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="comic-page">
+
+  <!-- ROW 1: TITLE -->
+  <div class="row">
+    <div class="panel bg-coral full" style="min-height:150px;">
+      <div class="title-card">
+        📐 GEOMETRY WORD PROBLEMS!
+        <span class="subtitle">Draw it · Label sides · Pick the formula · Calculate · Label units²/³</span>
+      </div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble left big" style="margin-bottom:18px;">
+            <strong>Area</strong> fills the inside —<br>measure in square units!<br><strong>Perimeter</strong> goes around<br>the outside edge!
+          </div>
+          <div class="zara">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:10px;">
+          <div style="background:#fff;border:3px solid #bf360c;border-radius:10px;padding:12px;font-size:13px;max-width:220px;">
+            <strong style="color:#bf360c;">The 5-Step Plan:</strong><br>
+            <span class="step-tag" style="background:#bf360c;">1</span> Read &amp; draw the shape<br>
+            <span class="step-tag" style="background:#1565c0;">2</span> Label all measurements<br>
+            <span class="step-tag" style="background:#6a1b9a;">3</span> Choose the right formula<br>
+            <span class="step-tag" style="background:#b03a00;">4</span> Calculate (watch your units!)<br>
+            <span class="step-tag" style="background:#37474f;">5</span> Label² for area, ³ for volume
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble right" style="margin-bottom:18px;">
+            Volume fills 3D space!<br>Think: how many unit<br>cubes fit inside? 📦
+          </div>
+          <div class="max">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: FORMULA REFERENCE -->
+  <div class="row">
+    <div class="panel bg-indigo full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a237e;">📋 Geometry Formulas &amp; Signal Words</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;font-size:13px;">
+        <div style="background:#fce4ec;border:2px solid #bf360c;border-radius:8px;padding:8px;">
+          <strong style="color:#bf360c;">📏 Perimeter</strong><br>
+          P = add ALL sides<br>
+          Rectangle: P = 2(l + w)<br>
+          <em>Signal: "fencing · border · around · outline"</em>
+        </div>
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:8px;">
+          <strong style="color:#2e7d32;">⬛ Area (Rectangle)</strong><br>
+          A = length × width<br>
+          Units: ft², m², in²<br>
+          <em>Signal: "carpet · floor · tile · field"</em>
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #0d47a1;border-radius:8px;padding:8px;">
+          <strong style="color:#0d47a1;">🔷 Area (Triangle)</strong><br>
+          A = <span class="frac"><span class="num">1</span><span class="den">2</span></span> × base × height<br>
+          Units: ft², m², in²<br>
+          <em>Signal: "triangular garden"</em>
+        </div>
+        <div style="background:#f3e5f5;border:2px solid #6a1b9a;border-radius:8px;padding:8px;">
+          <strong style="color:#6a1b9a;">📦 Volume (Prism)</strong><br>
+          V = l × w × h<br>
+          Units: ft³, m³, in³<br>
+          <em>Signal: "box · tank · room"</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: WORKED EXAMPLES -->
+  <div class="row">
+    <div class="panel bg-red" style="flex:1.2;">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#b71c1c;">✅ Example 1 — Perimeter (Fencing)</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"Zara wants to fence her rectangular garden. It is <strong>15 ft long</strong> and <strong>9 ft wide</strong>. How many feet of fencing does she need?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#bf360c;">1</span> Draw a rectangle: 15 ft × 9 ft<br>
+        <span class="step-tag" style="background:#1565c0;">2</span> Label sides: 15, 9, 15, 9<br>
+        <span class="step-tag" style="background:#6a1b9a;">3</span> Formula: P = 2(l + w)<br>
+        <span class="step-tag" style="background:#b03a00;">4</span> P = 2(15 + 9) = 2(24) = <strong style="color:#b71c1c;">48 ft</strong><br>
+        <span class="step-tag" style="background:#37474f;">5</span> No units² — perimeter is just feet ✓
+      </div>
+    </div>
+    <div class="panel bg-green">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#1b5e20;">✅ Example 2 — Area (Carpet)</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"A classroom is <strong>28 ft long</strong> and <strong>22 ft wide</strong>. Carpet costs <strong>$3 per sq ft</strong>. What is the total cost?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#bf360c;">1</span> Draw: 28 ft × 22 ft room<br>
+        <span class="step-tag" style="background:#6a1b9a;">3</span> Formula: A = l × w<br>
+        <span class="step-tag" style="background:#b03a00;">4</span> A = 28 × 22 = <strong>616 ft²</strong><br>
+        &nbsp;&nbsp;&nbsp;Cost = 616 × $3 = <strong style="color:#1b5e20;">$1,848</strong><br>
+        <span class="step-tag" style="background:#37474f;">5</span> Area needs ft² label ✓<br>
+        &nbsp;&nbsp;&nbsp;Estimate: 30×20=600 ft², close!
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 2 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: VOLUME EXAMPLE -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:170px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#0d47a1;">✅ Example 3 — Volume of a Rectangular Prism</div>
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+            <em>"A fish tank is <strong>3 ft long</strong>, <strong>2 ft wide</strong>, and <strong>1.5 ft tall</strong>. How many cubic feet of water does it hold?"</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#bf360c;">1</span> Draw a 3D box: 3 × 2 × 1.5<br>
+              <span class="step-tag" style="background:#6a1b9a;">3</span> Formula: V = l × w × h<br>
+              <span class="step-tag" style="background:#b03a00;">4</span> V = 3 × 2 × 1.5
+            </div>
+            <div style="line-height:2.0;">
+              = 3 × 2 = 6<br>
+              6 × 1.5 = <strong style="color:#0d47a1;">9 ft³</strong><br>
+              <span class="step-tag" style="background:#37474f;">5</span> Units = ft³ (cubic) ✓<br>
+              Estimate: 3×2×1 = 6, close!
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:10px;flex-shrink:0;">
+          <div class="bubble top-left sm" style="margin-bottom:16px;">
+            Volume uses 3 measurements:<br>length × width × height!
+          </div>
+          <div class="zara" style="transform:scale(0.8);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: COMBINED AREA EXAMPLE -->
+  <div class="row">
+    <div class="panel bg-teal full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#004d40;">✅ Example 4 — Combined / Irregular Area</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+        <em>"Max's bedroom is an L-shape: one section is <strong>10 ft × 8 ft</strong> and the other is <strong>6 ft × 4 ft</strong>. What is the total area?"</em>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+        <div style="line-height:2.1;">
+          <span class="step-tag" style="background:#1a3a6b;">Trick</span> Split the L into 2 rectangles<br>
+          Rectangle 1: 10 × 8 = <strong>80 ft²</strong><br>
+          Rectangle 2: 6 × 4 = <strong>24 ft²</strong>
+        </div>
+        <div style="line-height:2.1;">
+          Total Area = 80 + 24 = <strong style="color:#004d40;">104 ft²</strong><br>
+          <span class="step-tag" style="background:#37474f;">5</span> Always label area in ft² ✓<br>
+          Could also subtract a missing piece method!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: MISTAKES + TIPS -->
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;">⚠️ CLASSIC MISTAKES</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ❌ Using area formula for perimeter problems (and vice versa!)<br>
+        ❌ Forgetting to label units: ft² for area, ft³ for volume<br>
+        ❌ Only multiplying two sides for volume (forgetting height!)<br>
+        ❌ Not drawing the shape before calculating<br>
+        ❌ Adding all sides wrong when one side isn't labeled<br>
+        ❌ Forgetting to double (×2) sides in the perimeter formula
+      </div>
+    </div>
+    <div class="panel bg-lime">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#558b2f;">💡 PRO TIPS</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ✓ DRAW the shape FIRST — label every side you know<br>
+        ✓ Perimeter = going AROUND (add all sides)<br>
+        ✓ Area = FILLING inside (multiply l × w)<br>
+        ✓ Volume = 3D box (l × w × h)<br>
+        ✓ For L-shapes: break into 2 rectangles, then add areas<br>
+        ✓ Always label: ft for P, ft² for A, ft³ for V
+      </div>
+      <div class="think-wrap">
+        <div class="think-sign">TRY<br>IT!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a1a1a;">📝 Your Turn — Try These!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#fce4ec;border:2px solid #bf360c;border-radius:8px;padding:10px;">
+          <strong>1.</strong> A soccer field is <strong>100 m long</strong> and <strong>64 m wide</strong>. What is the perimeter of the field?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________ m
+        </div>
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:10px;">
+          <strong>2.</strong> A kitchen floor is <strong>12 ft × 9 ft</strong>. Tiles cost <strong>$2.50 per sq ft</strong>. How much to tile the floor?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+        <div style="background:#f3e5f5;border:2px solid #6a1b9a;border-radius:8px;padding:10px;">
+          <strong>3.</strong> A gift box is <strong>8 in long</strong>, <strong>5 in wide</strong>, <strong>4 in tall</strong>. What is its volume?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________ in³
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong>4.</strong> A triangle has a base of <strong>14 cm</strong> and height of <strong>10 cm</strong>. What is its area?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________ cm²
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 2 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 3 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: MULTI-STEP -->
+  <div class="row">
+    <div class="panel bg-purple full" style="min-height:160px;">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#4a148c;">🏆 Level Up — Multi-Step Geometry Problems</div>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;">
+          <div class="bubble left sm" style="margin-bottom:14px;">
+            Sometimes you need<br>area AND perimeter<br>in the same problem!
+          </div>
+          <div class="max" style="transform:scale(0.85);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+        <div style="flex:1;">
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;margin-bottom:10px;">
+            <strong>Example:</strong> <em>"Zara has a pool that is 8 m long and 5 m wide. She wants to put a fence around it and fill it with water to a depth of 2 m. Find: (a) perimeter for fencing, (b) volume of water needed."</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#4a148c;">Perimeter</span><br>
+              P = 2(8 + 5) = 2(13)<br>
+              = <strong style="color:#4a148c;">26 m of fencing</strong>
+            </div>
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#1565c0;">Volume</span><br>
+              V = 8 × 5 × 2<br>
+              = <strong style="color:#1565c0;">80 m³ of water</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: CHALLENGE PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:12px;color:#b03a00;">⭐ Challenge Problems — Show ALL your work!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#f3e5f5;border:2px solid #6a1b9a;border-radius:8px;padding:10px;">
+          <strong style="color:#6a1b9a;">5.</strong> A rectangular room is <strong>16 ft × 12 ft</strong>. Max puts a square rug that is <strong>8 ft × 8 ft</strong> in the center. What is the area of the floor NOT covered by the rug?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Answer: ________ ft²
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:10px;">
+          <strong style="color:#e65100;">6.</strong> A swimming pool is 25 m long, 12 m wide, and 2 m deep. It is filled to the top. Water weighs about 1 kg per liter, and 1 m³ = 1,000 liters. How heavy is the water in kg?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Volume: ________ m³ &nbsp; Weight: ________ kg
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong style="color:#283593;">7.</strong> A school hallway is an L-shape. One section: 40 ft × 8 ft. Other section: 20 ft × 8 ft. What is the total area? If floor tiles are 2 ft × 2 ft, how many tiles are needed?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Area: ________ Tiles: ________
+        </div>
+        <div style="background:#e0f2f1;border:2px solid #00695c;border-radius:8px;padding:10px;">
+          <strong style="color:#00695c;">8. (Super Challenge!)</strong> A cardboard box (open top) is 30 cm × 20 cm × 15 cm. Find: (a) volume of the box, (b) area of cardboard needed to build it (5 faces — no top).<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Volume: ________ cm³ &nbsp; Card: ________ cm²
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: ANSWER KEY -->
+  <div class="row">
+    <div class="panel bg-tan full">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#5d4037;">🔑 Answer Key (Try first! Peek only if stuck.)</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:12px;">
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>1.</strong> P=2(100+64)=2(164)=<strong style="color:#bf360c;">328 m</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>2.</strong> A=12×9=108 ft²; 108×$2.50=<strong style="color:#2e7d32;">$270</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>3.</strong> V=8×5×4=<strong style="color:#6a1b9a;">160 in³</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>4.</strong> A=½×14×10=<strong style="color:#283593;">70 cm²</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>5.</strong> Room=192 ft²; Rug=64 ft²; 192−64=<strong style="color:#6a1b9a;">128 ft²</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>6.</strong> V=25×12×2=600 m³; 600×1000=<strong style="color:#e65100;">600,000 kg</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>7.</strong> 40×8+20×8=320+160=480 ft²; 480÷4=<strong style="color:#283593;">120 tiles</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>8.</strong> V=30×20×15=9,000 cm³; 5 faces: bottom(600)+2 sides(900)+2 ends(600)=<strong style="color:#00695c;">2,700 cm²</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 3 -->
+
+</body>
+</html>

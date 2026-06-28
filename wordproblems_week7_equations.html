@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Word Problems – Week 7: Expressions &amp; Equations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+  h1 { font-size: 22px; color: #283593; border-bottom: 3px solid #283593; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #283593; margin: 14px 0 6px; }
+  h3 { font-size: 13px; color: #283593; margin: 10px 0 4px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; background: #283593; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+  .intro-box { background: #e8eaf6; border-left: 4px solid #283593; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+  .problem-block { margin-bottom: 14px; }
+  .problem-block p { line-height: 1.7; margin-bottom: 4px; }
+  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+  .work-box { border: 1.5px dashed #aaa; min-height: 70px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .challenge-box h3 { color: #b06000; }
+  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge { float: right; background: #283593; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .hint { font-size: 10px; color: #555; font-style: italic; margin-bottom: 6px; }
+  .num-label { font-weight: 800; color: #283593; }
+  .eq-step { background: #e8eaf6; border-radius: 4px; padding: 3px 8px; font-family: monospace; font-size: 12px; display: inline-block; margin: 2px 0; }
+  .ans-key-box { background: #f5f5f5; border: 1.5px solid #bbb; border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; font-size: 12px; }
+  .ans-key-box h3 { color: #283593; margin-bottom: 6px; }
+  .ak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 30px; font-size: 12px; }
+
+  @page { margin: 0; size: letter; }
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { margin: 0; padding: 0; background: #fff; }
+    .page { width: 8.5in; min-height: 11in; page-break-after: always; break-after: page; padding-bottom: 0.85in; }
+    .problem-block { break-inside: avoid; page-break-inside: avoid; }
+    .challenge-box { break-inside: avoid; page-break-inside: avoid; }
+    .grid-2, .grid-3 { break-inside: avoid; page-break-inside: avoid; }
+    .work-box { break-inside: avoid; page-break-inside: avoid; }
+    .intro-box { break-inside: avoid; page-break-inside: avoid; }
+    h2 { break-after: avoid; page-break-after: avoid; }
+    h3 { break-after: avoid; page-break-after: avoid; }
+    .footer { position: absolute; bottom: 0.25in; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="badge">W7<br>WP</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 7 Word Problems &nbsp;|&nbsp; Expressions &amp; Equations &nbsp;·&nbsp; Page 1 of 2</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">EXPRESSIONS &amp; EQUATIONS</span>
+
+  <div class="intro-box">
+    <strong>Key vocabulary:</strong> A <em>variable</em> is a letter standing for an unknown number.
+    An <em>expression</em> (like 3x + 5) has no equals sign. An <em>equation</em> (like 3x + 5 = 20) has an equals sign — solve it!<br>
+    <strong>One-step:</strong> x + 7 = 15 → x = 8 &nbsp;|&nbsp; <strong>Two-step:</strong> 2x + 3 = 11 → 2x = 8 → x = 4<br>
+    <strong>Inequality words:</strong> "at least" = ≥, "at most" / "no more than" = ≤, "more than" = &gt;, "fewer than" = &lt;
+  </div>
+
+  <h2>Part A – Write &amp; Solve One-Step Equations</h2>
+  <p class="hint">Read carefully. Name the unknown with a variable. Write the equation, then solve.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">1.</span> A bag of apples plus 6 loose apples equals 22 apples total. Let <em>b</em> = apples in the bag. Write and solve an equation.</p>
+      <div class="work-box"></div>
+      Equation: <span class="ans-line"></span> &nbsp; b = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">2.</span> Marcus has some trading cards. After giving away 15, he has 48 left. Let <em>c</em> = cards he started with. Write and solve an equation.</p>
+      <div class="work-box"></div>
+      Equation: <span class="ans-line"></span> &nbsp; c = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">3.</span> A bookshelf has 5 equal shelves. It holds 120 books total. Let <em>n</em> = books per shelf. Write and solve an equation.</p>
+      <div class="work-box"></div>
+      Equation: <span class="ans-line"></span> &nbsp; n = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">4.</span> A number divided by 9 equals 7. Write and solve an equation for the unknown number <em>x</em>.</p>
+      <div class="work-box"></div>
+      Equation: <span class="ans-line"></span> &nbsp; x = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Two-Step Equation Word Problems</h2>
+  <p class="hint">Undo operations in reverse order: undo + or − first, then × or ÷.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">5.</span> A store charges $5 for delivery plus $8 per book. If Zara's total bill is $53, how many books did she buy? Let <em>b</em> = books.</p>
+      <div class="work-box"></div>
+      Equation: <span class="ans-line"></span> &nbsp; b = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">6.</span> Lena earns $12 per hour babysitting. She also earned a $10 tip. She made $58 total. How many hours did she work?</p>
+      <div class="work-box"></div>
+      Equation: <span class="ans-line"></span> &nbsp; Hours = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">7.</span> A farmer harvests the same number of apples from each of 6 trees. He already had 24 apples. Now he has 114 total. How many apples per tree?</p>
+      <div class="work-box"></div>
+      Equation: <span class="ans-line"></span> &nbsp; Per tree = <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">8.</span> Two more than three times a number is 29. Write an equation and find the number.</p>
+      <div class="work-box"></div>
+      Equation: <span class="ans-line"></span> &nbsp; Number = <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#11088; Challenge – Mystery Number</h3>
+    <p>I think of a number. I multiply it by 4, subtract 6, and then divide by 2. The result is 11. What is my number? Write the equation and show all steps.</p>
+    <div class="work-box" style="min-height:70px;"></div>
+    Equation: <span class="ans-line-long"></span> &nbsp; Number = <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 7 Word Problems</span>
+    <span>Expressions &amp; Equations · Page 1 &nbsp;/10&nbsp;</span>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="badge">W7<br>WP</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 7 Word Problems &nbsp;|&nbsp; Expressions &amp; Equations &nbsp;·&nbsp; Page 2 of 2</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">EXPRESSIONS &amp; EQUATIONS</span>
+
+  <h2>Part C – Inequality Word Problems</h2>
+  <p class="hint">Write an inequality, then find values that make it true. Describe the solution in words.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">9.</span> A roller coaster requires riders to be at least 48 inches tall. Let <em>h</em> = a rider's height. Write an inequality and name three heights that qualify.</p>
+      <div class="work-box"></div>
+      Inequality: <span class="ans-line"></span><br>
+      Three qualifying heights: <span class="ans-line-long"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">10.</span> A backpack can hold no more than 25 pounds. Jax already packed 18 pounds of gear. Let <em>w</em> = additional weight he can add. Write and solve an inequality.</p>
+      <div class="work-box"></div>
+      Inequality: <span class="ans-line"></span> &nbsp; w ≤ <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">11.</span> To earn a free pizza, a class must read more than 200 books. They already read 147. Let <em>b</em> = more books they need. Write an inequality. What is the least whole number of books they still need?</p>
+      <div class="work-box"></div>
+      Inequality: <span class="ans-line"></span> &nbsp; Minimum books: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">12.</span> Tickets cost $7 each. Maya has $50. She wants to keep at least $8 for snacks. What is the maximum number of tickets she can buy?</p>
+      <div class="work-box"></div>
+      Inequality: <span class="ans-line"></span> &nbsp; Max tickets: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part D – Expression Evaluation &amp; Multi-Variable</h2>
+  <p class="hint">Substitute the given value. Follow order of operations: parentheses → × ÷ → + −.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">13.</span> The expression 4n + 3 gives the total cost in dollars for renting n bikes, where 3 is a one-time helmet fee. Evaluate for n = 5 and n = 12.</p>
+      <div class="work-box"></div>
+      n=5: <span class="ans-line"></span> &nbsp; n=12: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">14.</span> A babysitter earns 8h + 5t dollars, where h = hours worked and t = number of bonus tasks. Find the earnings when h = 4, t = 3 and when h = 6, t = 2.</p>
+      <div class="work-box"></div>
+      h=4, t=3: <span class="ans-line"></span> &nbsp; h=6, t=2: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">15.</span> A rectangle's perimeter is 2(l + w). If l = 14 and w = 9, what is the perimeter? If the perimeter is 48 and l = 15, find w.</p>
+      <div class="work-box"></div>
+      P when l=14, w=9: <span class="ans-line"></span><br>
+      w when P=48, l=15: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">16.</span> The expression 5s − 2f represents a game score (s = stars earned, f = fouls). Find the score when s = 8, f = 3, and when s = 12, f = 5.</p>
+      <div class="work-box"></div>
+      s=8, f=3: <span class="ans-line"></span> &nbsp; s=12, f=5: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#11088; Challenge – Planning a Party</h3>
+    <p>A party costs a flat fee of $40 for the venue plus $6 per guest. Write an expression for the total cost with <em>g</em> guests. If the budget is at most $100, write and solve an inequality. What is the maximum number of guests? If there are exactly 9 guests, how much does each person owe if they split the cost equally?</p>
+    <div class="work-box" style="min-height:80px;"></div>
+    Expression: <span class="ans-line"></span> &nbsp; Inequality: <span class="ans-line"></span> &nbsp; Max guests: <span class="ans-line"></span> &nbsp; Cost per person (9 guests): <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 7 Word Problems</span>
+    <span>Expressions &amp; Equations · Page 2 &nbsp;/16&nbsp;</span>
+  </div>
+</div>
+
+<!-- ANSWER KEY -->
+<div class="page">
+  <div class="badge" style="background:#283593;">W7<br>KEY</div>
+  <h1>Answer Key – Week 7 Word Problems: Expressions &amp; Equations</h1>
+  <div class="subtitle">For teacher / parent use</div>
+  <span class="topic-tag">ANSWER KEY</span>
+
+  <div class="ans-key-box">
+    <h3>Page 1 Answers</h3>
+    <div class="ak-grid">
+      <div><strong>1.</strong> b + 6 = 22; b = 16 apples in bag</div>
+      <div><strong>2.</strong> c − 15 = 48; c = 63 cards to start</div>
+      <div><strong>3.</strong> 5n = 120; n = 24 books per shelf</div>
+      <div><strong>4.</strong> x ÷ 9 = 7; x = 63</div>
+      <div><strong>5.</strong> 8b + 5 = 53; 8b = 48; b = 6 books</div>
+      <div><strong>6.</strong> 12h + 10 = 58; 12h = 48; h = 4 hours</div>
+      <div><strong>7.</strong> 6a + 24 = 114; 6a = 90; a = 15 apples per tree</div>
+      <div><strong>8.</strong> 3n + 2 = 29; 3n = 27; n = 9</div>
+      <div><strong>Challenge:</strong> (4n − 6) ÷ 2 = 11 → 4n − 6 = 22 → 4n = 28 → n = 7</div>
+    </div>
+  </div>
+
+  <div class="ans-key-box">
+    <h3>Page 2 Answers</h3>
+    <div class="ak-grid">
+      <div><strong>9.</strong> h ≥ 48 inches; e.g., 48, 52, 60 inches all qualify</div>
+      <div><strong>10.</strong> 18 + w ≤ 25; w ≤ 7 pounds</div>
+      <div><strong>11.</strong> 147 + b &gt; 200; b &gt; 53; minimum 54 more books</div>
+      <div><strong>12.</strong> 7t ≤ 50 − 8 = 42; t ≤ 6; maximum 6 tickets</div>
+      <div><strong>13.</strong> n=5: 4(5)+3 = 23; n=12: 4(12)+3 = 51</div>
+      <div><strong>14.</strong> h=4,t=3: 8(4)+5(3) = 32+15 = $47; h=6,t=2: 8(6)+5(2) = 48+10 = $58</div>
+      <div><strong>15.</strong> P = 2(14+9) = 46; w = 48/2 − 15 = 24 − 15 = 9</div>
+      <div><strong>16.</strong> s=8,f=3: 5(8)−2(3) = 40−6 = 34; s=12,f=5: 5(12)−2(5) = 60−10 = 50</div>
+      <div><strong>Challenge:</strong> Expression: 40 + 6g; Inequality: 40+6g ≤ 100; 6g ≤ 60; g ≤ 10 (max 10 guests); 9 guests: 40+54=$94; per person = $94÷10 = $9.40</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 7 Word Problems</span>
+    <span>Answer Key</span>
+  </div>
+</div>
+
+</body>
+</html>

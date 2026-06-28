@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Comics – Statistics Word Problems</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #fdf3c0;
+  font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 16px;
+  padding: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.comic-page { background: #fdf3c0; padding: 16px; page-break-after: always; }
+.row { display: flex; gap: 8px; margin-bottom: 8px; }
+.panel {
+  border: 3px solid #1a1a1a; border-radius: 6px; padding: 14px;
+  position: relative; overflow: visible; flex: 1;
+}
+.panel.bg-sky    { background: #cce8f5; }
+.panel.bg-green  { background: #c8e6c9; }
+.panel.bg-peach  { background: #ffe0cc; }
+.panel.bg-tan    { background: #f5e6c8; }
+.panel.bg-white  { background: #ffffff; }
+.panel.bg-indigo { background: #e8eaf6; }
+.panel.bg-purple { background: #f3e5f5; }
+.panel.bg-teal   { background: #e0f2f1; }
+.panel.bg-lime   { background: #f0f4c3; }
+.panel.bg-stat   { background: #e8f4fd; }
+.panel.full { flex: none; width: 100%; }
+.panel.w2 { flex: 2; }
+
+.title-card {
+  display: inline-block; background: #1565c0; color: #fff;
+  font-family: 'Bangers','Impact',sans-serif; font-size: 26px;
+  letter-spacing: 2px; padding: 6px 18px 4px;
+  border: 3px solid #1a1a1a; border-radius: 8px; margin-bottom: 10px;
+  line-height: 1.1; text-shadow: 2px 2px 0 #05244a;
+}
+.title-card .subtitle { font-size: 13px; letter-spacing: 1px; display: block; font-family: 'Nunito', sans-serif; font-weight: 700; text-shadow: none; }
+
+.bubble {
+  background: #fff; border: 2.5px solid #1a1a1a; border-radius: 18px;
+  padding: 8px 12px; font-size: 15px; line-height: 1.45;
+  position: relative; display: inline-block; max-width: 220px;
+  font-weight: 700; margin: 4px;
+}
+.bubble.left::after  { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after  { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after  { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.big { font-size: 15px; max-width: 300px; }
+.bubble.sm  { font-size: 12px; max-width: 180px; }
+
+.scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:120px; padding-top:8px; }
+
+.zara { width:70px; height:110px; position:relative; flex-shrink:0; }
+.zara .body  { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head  { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye   { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair  { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm   { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail  { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+
+.max { width:56px; height:80px; position:relative; flex-shrink:0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye  { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+
+.step-tag { display:inline-block; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; margin-right:4px; }
+
+.frac { display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 3px; font-size:1em; line-height:1.1; font-weight:700; }
+.frac .num { border-bottom:2px solid #1a1a1a; padding:0 3px; }
+.frac .den { padding:0 3px; }
+
+.think-sign {
+  background: #1565c0; color: #fff; font-size: 11px; font-weight: 700; text-align: center;
+  border-radius: 12px; width: 80px; height: 80px;
+  display: flex; align-items: center; justify-content: center; line-height: 1.3;
+}
+.think-wrap { position:absolute; bottom:10px; right:10px; }
+
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  .row { flex-direction: column; }
+  .bubble { max-width: 90%; font-size: 12px; }
+  .scene { flex-wrap: wrap; justify-content: center; }
+  .title-card { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="comic-page">
+
+  <!-- ROW 1: TITLE -->
+  <div class="row">
+    <div class="panel bg-stat full" style="min-height:150px;">
+      <div class="title-card">
+        📊 STATISTICS WORD PROBLEMS!
+        <span class="subtitle">Sort data · Find mean, median, mode, range · Interpret · Compare</span>
+      </div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble left big" style="margin-bottom:18px;">
+            <strong>Mean</strong> = fair share average<br><strong>Median</strong> = middle number<br><strong>Mode</strong> = most frequent<br><strong>Range</strong> = spread (max−min)
+          </div>
+          <div class="zara">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:10px;">
+          <div style="background:#fff;border:3px solid #1565c0;border-radius:10px;padding:12px;font-size:13px;max-width:220px;">
+            <strong style="color:#1565c0;">The 5-Step Plan:</strong><br>
+            <span class="step-tag" style="background:#1565c0;">1</span> Write the data in ORDER (low to high)<br>
+            <span class="step-tag" style="background:#2e7d32;">2</span> Find what's asked: mean/median/mode/range<br>
+            <span class="step-tag" style="background:#6a1b9a;">3</span> Apply the correct formula<br>
+            <span class="step-tag" style="background:#b03a00;">4</span> Calculate carefully<br>
+            <span class="step-tag" style="background:#37474f;">5</span> Interpret: what does it tell us?
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble right" style="margin-bottom:18px;">
+            ALWAYS sort first!<br>It makes finding<br>median and mode<br>SO much easier! 📈
+          </div>
+          <div class="max">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: FORMULA REFERENCE -->
+  <div class="row">
+    <div class="panel bg-indigo full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a237e;">📋 Formulas &amp; Memory Tricks</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;font-size:13px;">
+        <div style="background:#e3f2fd;border:2px solid #1565c0;border-radius:8px;padding:8px;">
+          <strong style="color:#1565c0;">📊 MEAN (Average)</strong><br>
+          Mean = Sum ÷ Count<br>
+          Add ALL values, then<br>divide by HOW MANY<br>
+          <em>"fair share"</em>
+        </div>
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:8px;">
+          <strong style="color:#2e7d32;">🏅 MEDIAN</strong><br>
+          Sort → find MIDDLE<br>Odd count: middle value<br>Even count: average of<br>the 2 middle values
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:8px;">
+          <strong style="color:#e65100;">🔁 MODE</strong><br>
+          Most FREQUENT value<br>Can have 0, 1, or<br>more than 1 mode<br>
+          <em>"MOde = MOst"</em>
+        </div>
+        <div style="background:#fce4ec;border:2px solid #c62828;border-radius:8px;padding:8px;">
+          <strong style="color:#c62828;">📏 RANGE</strong><br>
+          Range = Max − Min<br>Shows how SPREAD OUT<br>the data is<br>
+          <em>large range = varied data</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: WORKED EXAMPLES -->
+  <div class="row">
+    <div class="panel bg-sky" style="flex:1.3;">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#0d47a1;">✅ Example 1 — All Four Measures</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"Zara's quiz scores: <strong>85, 92, 78, 92, 88, 75, 90</strong>. Find the mean, median, mode, and range."</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#1565c0;">1</span> Sort: <strong>75, 78, 85, 88, 90, 92, 92</strong><br>
+        <span class="step-tag" style="background:#2e7d32;">Mean</span> Sum = 75+78+85+88+90+92+92 = 600<br>
+        &nbsp;&nbsp;&nbsp;600 ÷ 7 = <strong style="color:#1565c0;">85.7 (≈ 86)</strong><br>
+        <span class="step-tag" style="background:#6a1b9a;">Median</span> Middle (4th value) = <strong style="color:#6a1b9a;">88</strong><br>
+        <span class="step-tag" style="background:#e65100;">Mode</span> 92 appears twice → <strong style="color:#e65100;">92</strong><br>
+        <span class="step-tag" style="background:#c62828;">Range</span> 92 − 75 = <strong style="color:#c62828;">17</strong>
+      </div>
+    </div>
+    <div class="panel bg-green">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#1b5e20;">✅ Example 2 — Even Number of Values</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"Max recorded daily steps: <strong>8,200 · 9,500 · 7,800 · 10,100 · 8,600 · 9,200</strong>. Find the mean and median."</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#1565c0;">1</span> Sort: 7800, 8200, 8600, 9200, 9500, 10100<br>
+        <span class="step-tag" style="background:#2e7d32;">Mean</span> Sum = 53,400<br>
+        &nbsp;&nbsp;&nbsp;53,400 ÷ 6 = <strong style="color:#1b5e20;">8,900 steps</strong><br>
+        <span class="step-tag" style="background:#6a1b9a;">Median</span> Two middle values: <strong>8600 &amp; 9200</strong><br>
+        &nbsp;&nbsp;&nbsp;(8600 + 9200) ÷ 2 = 17800 ÷ 2 = <strong style="color:#6a1b9a;">8,900</strong>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 2 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: INTERPRETING STATISTICS -->
+  <div class="row">
+    <div class="panel bg-peach full" style="min-height:170px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#bf360c;">✅ Example 3 — Interpreting &amp; Comparing Data Sets</div>
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+            <em>"Team A points: <strong>12, 18, 14, 20, 11</strong>. Team B points: <strong>15, 16, 14, 15, 15</strong>. Which team is more consistent? Which scored higher on average?"</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:1.9;">
+              <strong>Team A:</strong><br>
+              Sort: 11, 12, 14, 18, 20<br>
+              Mean = 75 ÷ 5 = <strong>15</strong><br>
+              Range = 20 − 11 = <strong>9</strong><br>
+              Median = <strong>14</strong>
+            </div>
+            <div style="line-height:1.9;">
+              <strong>Team B:</strong><br>
+              Sort: 14, 15, 15, 15, 16<br>
+              Mean = 75 ÷ 5 = <strong>15</strong><br>
+              Range = 16 − 14 = <strong>2</strong><br>
+              Median = Mode = <strong>15</strong><br>
+              <strong style="color:#bf360c;">Team B is more consistent (smaller range)!</strong>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:10px;flex-shrink:0;">
+          <div class="bubble top-left sm" style="margin-bottom:16px;">
+            Same mean but<br>different range means<br>one team is more<br>consistent!
+          </div>
+          <div class="zara" style="transform:scale(0.8);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: OUTLIERS + EFFECT ON MEAN -->
+  <div class="row">
+    <div class="panel bg-teal full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#004d40;">✅ Example 4 — Effect of an Outlier on the Mean</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+        <em>"Students' book counts: <strong>8, 7, 9, 6, 8, 50</strong>. Find the mean with and without the outlier (50). Which better represents the data?"</em>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+        <div style="line-height:2.1;">
+          <span class="step-tag" style="background:#1565c0;">With outlier</span><br>
+          Sum = 8+7+9+6+8+50 = 88<br>
+          Mean = 88 ÷ 6 = <strong>14.67</strong><br>
+          <em>Pulled way up by the 50!</em>
+        </div>
+        <div style="line-height:2.1;">
+          <span class="step-tag" style="background:#2e7d32;">Without outlier</span><br>
+          Sum = 8+7+9+6+8 = 38<br>
+          Mean = 38 ÷ 5 = <strong style="color:#004d40;">7.6 books</strong><br>
+          <strong>This better represents most students!</strong><br>
+          → Use median when outliers exist ✓
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: MISTAKES + TIPS -->
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;">⚠️ CLASSIC MISTAKES</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ❌ Forgetting to SORT before finding median<br>
+        ❌ Confusing mean and median (they're different!)<br>
+        ❌ Finding the wrong middle value for even-count data sets<br>
+        ❌ Saying "no mode" when all values appear once (say "no mode")<br>
+        ❌ Subtracting mean − min for range (it's max − min!)<br>
+        ❌ Not including units in the final answer
+      </div>
+    </div>
+    <div class="panel bg-lime">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#558b2f;">💡 PRO TIPS</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ✓ ALWAYS sort data first — it unlocks median and mode instantly<br>
+        ✓ Mean: add everything, then divide by the COUNT (not the sum!)<br>
+        ✓ Even count → average the two middle values for median<br>
+        ✓ Outliers pull the MEAN but don't affect the median much<br>
+        ✓ When comparing data sets, use RANGE to measure spread<br>
+        ✓ Mode is great for finding the "most popular" item
+      </div>
+      <div class="think-wrap">
+        <div class="think-sign">TRY<br>IT!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a1a1a;">📝 Your Turn — Try These!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#e3f2fd;border:2px solid #1565c0;border-radius:8px;padding:10px;">
+          <strong>1.</strong> Max's test scores: <strong>84, 91, 76, 88, 91, 80</strong>. Find the mean, median, mode, and range.<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Mean: ___ Median: ___ Mode: ___ Range: ___
+        </div>
+        <div style="background:#fce4ec;border:2px solid #c62828;border-radius:8px;padding:10px;">
+          <strong>2.</strong> Animals at the zoo: lions: 4, tigers: 7, bears: 7, wolves: 3, foxes: 4. Find the mode and range.<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Mode: ________ Range: ________
+        </div>
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:10px;">
+          <strong>3.</strong> A store's daily sales: <strong>$245, $312, $198, $275, $245</strong>. What is the mean daily sales? What is the median?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Mean: ________ Median: ________
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:10px;">
+          <strong>4.</strong> Temperatures this week (°F): <strong>98, 102, 97, 101, 99, 100, 98</strong>. Find all four measures of central tendency.<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Mean: ___ Median: ___ Mode: ___ Range: ___
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 2 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 3 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: MULTI-STEP CHALLENGE -->
+  <div class="row">
+    <div class="panel bg-purple full" style="min-height:160px;">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#4a148c;">🏆 Level Up — Multi-Step Statistics Problems</div>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;">
+          <div class="bubble left sm" style="margin-bottom:14px;">
+            Use the mean to<br>find a missing value<br>in a data set!
+          </div>
+          <div class="max" style="transform:scale(0.85);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+        <div style="flex:1;">
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;margin-bottom:10px;">
+            <strong>Example:</strong> <em>"Zara took 5 math tests. Her scores were 88, 92, 79, and 95. She doesn't know her 5th score yet. If her goal is an average of 90, what does she need on the 5th test?"</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#4a148c;">Target mean</span><br>
+              Goal: mean = 90<br>
+              5 tests total<br>
+              Needed total sum = 90 × 5 = <strong>450</strong>
+            </div>
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#1565c0;">Find missing score</span><br>
+              Current sum = 88+92+79+95 = 354<br>
+              5th score needed:<br>
+              450 − 354 = <strong style="color:#4a148c;">96</strong><br>
+              She needs a 96 on the 5th test!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: CHALLENGE PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:12px;color:#b03a00;">⭐ Challenge Problems — Show ALL your work!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#f3e5f5;border:2px solid #6a1b9a;border-radius:8px;padding:10px;">
+          <strong style="color:#6a1b9a;">5.</strong> A basketball player's points in 6 games: 22, 18, 25, 30, 18, 27. Find mean, median, mode, and range. If an outlier of 2 points is added for game 7, how does the mean change?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Mean before: ___ Mean after: ___
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:10px;">
+          <strong style="color:#e65100;">6.</strong> 4 students' reading minutes per day: Zara: 45, Max: 60, Leo: ?, Mia: 55. The mean is 50 minutes. How many minutes does Leo read?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Leo reads: ________ minutes/day
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong style="color:#283593;">7.</strong> Daily high temperatures for a week: 94, 98, 101, 96, 103, 99, 97. A weather reporter says the "typical" temp is 97°F. Is she using the mean, median, or mode? Is she correct?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          She used: ________ Correct? ___
+        </div>
+        <div style="background:#e0f2f1;border:2px solid #00695c;border-radius:8px;padding:10px;">
+          <strong style="color:#00695c;">8. (Super Challenge!)</strong> Class A (5 students) mean score = 82. Class B (8 students) mean score = 90. What is the overall mean for all 13 students combined?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Overall mean: ________
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: ANSWER KEY -->
+  <div class="row">
+    <div class="panel bg-tan full">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#5d4037;">🔑 Answer Key (Try first! Peek only if stuck.)</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:12px;">
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>1.</strong> Sort:76,80,84,88,91,91; Sum=510; Mean=<strong style="color:#1565c0;">85</strong>; Med=(84+88)÷2=<strong>86</strong>; Mode=<strong>91</strong>; Range=<strong>15</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>2.</strong> Sort:3,4,4,7,7; Mode=<strong style="color:#c62828;">4 and 7</strong> (bimodal); Range=7−3=<strong>4</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>3.</strong> Sum=1275; Mean=<strong style="color:#2e7d32;">$255</strong>; Sorted:198,245,245,275,312; Median=<strong>$245</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>4.</strong> Sort:97,98,98,99,100,101,102; Mean=695÷7≈<strong style="color:#e65100;">99.3</strong>; Med=<strong>99</strong>; Mode=<strong>98</strong>; Range=<strong>5</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>5.</strong> Mean=140÷6≈<strong style="color:#6a1b9a;">23.3</strong>; After outlier: 142÷7≈<strong>20.3</strong>; mean drops by ≈3
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>6.</strong> Need total=50×4=200; 45+60+?+55=200; ?=<strong style="color:#e65100;">40 minutes</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>7.</strong> Sort:94,96,97,98,99,101,103; Median=<strong style="color:#283593;">98</strong>; She used median; 98≠97, not quite
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>8.</strong> A total=82×5=410; B total=90×8=720; Combined=1130÷13≈<strong style="color:#00695c;">86.9</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 3 -->
+
+</body>
+</html>

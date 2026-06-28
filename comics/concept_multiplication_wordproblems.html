@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Comics – Multiplication &amp; Division Word Problems</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #fdf3c0;
+  font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 16px;
+  padding: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.comic-page { background: #fdf3c0; padding: 16px; page-break-after: always; }
+.row { display: flex; gap: 8px; margin-bottom: 8px; }
+.panel {
+  border: 3px solid #1a1a1a; border-radius: 6px; padding: 14px;
+  position: relative; overflow: visible; flex: 1;
+}
+.panel.bg-sky    { background: #cce8f5; }
+.panel.bg-green  { background: #c8e6c9; }
+.panel.bg-peach  { background: #ffe0cc; }
+.panel.bg-tan    { background: #f5e6c8; }
+.panel.bg-white  { background: #ffffff; }
+.panel.bg-indigo { background: #e8eaf6; }
+.panel.bg-purple { background: #f3e5f5; }
+.panel.bg-teal   { background: #e0f2f1; }
+.panel.bg-lime   { background: #f0f4c3; }
+.panel.bg-grape  { background: #f0e6ff; }
+.panel.full { flex: none; width: 100%; }
+.panel.w2 { flex: 2; }
+
+.title-card {
+  display: inline-block; background: #6a0080; color: #fff;
+  font-family: 'Bangers','Impact',sans-serif; font-size: 26px;
+  letter-spacing: 2px; padding: 6px 18px 4px;
+  border: 3px solid #1a1a1a; border-radius: 8px; margin-bottom: 10px;
+  line-height: 1.1; text-shadow: 2px 2px 0 #2a0030;
+}
+.title-card .subtitle { font-size: 13px; letter-spacing: 1px; display: block; font-family: 'Nunito', sans-serif; font-weight: 700; text-shadow: none; }
+
+.bubble {
+  background: #fff; border: 2.5px solid #1a1a1a; border-radius: 18px;
+  padding: 8px 12px; font-size: 15px; line-height: 1.45;
+  position: relative; display: inline-block; max-width: 220px;
+  font-weight: 700; margin: 4px;
+}
+.bubble.left::after  { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after  { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after  { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.big { font-size: 15px; max-width: 300px; }
+.bubble.sm  { font-size: 12px; max-width: 180px; }
+
+.scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:120px; padding-top:8px; }
+
+.zara { width:70px; height:110px; position:relative; flex-shrink:0; }
+.zara .body  { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head  { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye   { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair  { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm   { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail  { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+
+.max { width:56px; height:80px; position:relative; flex-shrink:0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye  { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+
+.math-box { background:#fff; border:3px solid #1a1a1a; border-radius:8px; padding:10px 16px; font-size:16px; font-weight:700; display:inline-block; margin:6px 4px; text-align:center; }
+.math-box.purple { background:#f0e6ff; border-color:#6a0080; }
+.math-box.orange { background:#fff3e0; border-color:#e65100; }
+
+.step-tag { display:inline-block; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; margin-right:4px; }
+
+.frac { display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 3px; font-size:1em; line-height:1.1; font-weight:700; }
+.frac .num { border-bottom:2px solid #1a1a1a; padding:0 3px; }
+.frac .den { padding:0 3px; }
+
+.think-sign {
+  background: #6a0080; color: #fff; font-size: 11px; font-weight: 700; text-align: center;
+  border-radius: 12px; width: 80px; height: 80px;
+  display: flex; align-items: center; justify-content: center; line-height: 1.3;
+}
+.think-wrap { position:absolute; bottom:10px; right:10px; }
+
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  .row { flex-direction: column; }
+  .panel.w2 { flex: unset; }
+  .bubble { max-width: 90%; font-size: 12px; }
+  .scene { flex-wrap: wrap; justify-content: center; }
+  .math-box { font-size: 13px !important; }
+  .title-card { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="comic-page">
+
+  <!-- ROW 1: TITLE -->
+  <div class="row">
+    <div class="panel bg-grape full" style="min-height:150px;">
+      <div class="title-card">
+        🏆 MULTIPLICATION &amp; DIVISION WORD PROBLEMS!
+        <span class="subtitle">Read it · Find groups &amp; size · Choose × or ÷ · Solve · Handle remainders</span>
+      </div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble left big" style="margin-bottom:18px;">
+            Multiplication = <strong>equal groups</strong>!<br>Groups × size = total.<br>Division = splitting<br>into <strong>equal shares</strong>!
+          </div>
+          <div class="zara">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:10px;">
+          <div style="background:#fff;border:3px solid #6a0080;border-radius:10px;padding:12px;font-size:13px;max-width:220px;">
+            <strong style="color:#6a0080;">The 5-Step Plan:</strong><br>
+            <span class="step-tag" style="background:#6a0080;">1</span> Read &amp; find groups &amp; size<br>
+            <span class="step-tag" style="background:#1565c0;">2</span> Draw an array or groups<br>
+            <span class="step-tag" style="background:#2e7d32;">3</span> Choose × or ÷<br>
+            <span class="step-tag" style="background:#b03a00;">4</span> Calculate; find remainder<br>
+            <span class="step-tag" style="background:#37474f;">5</span> Does the remainder make sense?
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble right" style="margin-bottom:18px;">
+            Remainder = what's<br>left over after<br>dividing equally! 🍕
+          </div>
+          <div class="max">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: SIGNAL WORDS -->
+  <div class="row">
+    <div class="panel bg-indigo full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a237e;">🔍 Which Operation? Key Signal Words</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;font-size:13px;">
+        <div style="background:#f0e6ff;border:2px solid #6a0080;border-radius:8px;padding:8px;">
+          <strong style="color:#6a0080;">✖️ MULTIPLY when...</strong><br>
+          "each · per · every"<br>
+          "3 rows of 24 seats"<br>
+          "12 boxes with 8 each"<br>
+          "repeated groups"
+        </div>
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:8px;">
+          <strong style="color:#2e7d32;">➗ DIVIDE when...</strong><br>
+          "share equally · split"<br>
+          "how many groups?"<br>
+          "how many in each?"<br>
+          "cut into equal pieces"
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:8px;">
+          <strong style="color:#e65100;">🔢 DIVISIBILITY</strong><br>
+          Divisible by 2? → even<br>
+          Divisible by 3? → digit sum ÷ 3<br>
+          Divisible by 5? → ends in 0/5<br>
+          Divisible by 10? → ends in 0
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: WORKED EXAMPLES -->
+  <div class="row">
+    <div class="panel bg-grape" style="flex:1.2;">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#6a0080;">✅ Example 1 — Multi-digit Multiplication</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"A movie theater has <strong>24 rows</strong> of seats with <strong>36 seats</strong> per row. How many seats total?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#6a0080;">1</span> Groups: 24 rows; Size: 36 seats<br>
+        <span class="step-tag" style="background:#1565c0;">2</span> Draw: 24 rows × 36 columns array<br>
+        <span class="step-tag" style="background:#2e7d32;">3</span> Operation: <strong>MULTIPLY</strong><br>
+        <span class="step-tag" style="background:#b03a00;">4</span> 24 × 36:<br>
+        &nbsp;&nbsp;&nbsp;24 × 30 = 720<br>
+        &nbsp;&nbsp;&nbsp;24 × 6 = 144<br>
+        &nbsp;&nbsp;&nbsp;720 + 144 = <strong style="color:#6a0080;">864 seats</strong><br>
+        <span class="step-tag" style="background:#37474f;">5</span> Estimate: 25×36 = 900, close! ✓
+      </div>
+    </div>
+    <div class="panel bg-peach">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#bf360c;">✅ Example 2 — Division with Remainder</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"Max has <strong>157 stickers</strong> to share equally among <strong>6 friends</strong>. How many does each get? Any left over?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#6a0080;">1</span> Total: 157; Groups: 6<br>
+        <span class="step-tag" style="background:#2e7d32;">3</span> Operation: <strong>DIVIDE</strong><br>
+        <span class="step-tag" style="background:#b03a00;">4</span> 157 ÷ 6:<br>
+        &nbsp;&nbsp;&nbsp;6 × 26 = 156<br>
+        &nbsp;&nbsp;&nbsp;157 − 156 = 1 remainder<br>
+        &nbsp;&nbsp;&nbsp;Each friend gets <strong style="color:#bf360c;">26 stickers</strong><br>
+        &nbsp;&nbsp;&nbsp;Remainder: <strong style="color:#bf360c;">1 sticker left</strong><br>
+        <span class="step-tag" style="background:#37474f;">5</span> Check: 6 × 26 + 1 = 157 ✓
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 2 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: REMAINDER INTERPRETATION -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:170px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#0d47a1;">✅ Example 3 — What do you DO with the remainder?</div>
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+            <em>"Zara needs to pack <strong>85 cupcakes</strong> into boxes of <strong>12</strong>. How many full boxes? Does she need one more box?"</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#6a0080;">1</span> Total: 85; Per box: 12<br>
+              <span class="step-tag" style="background:#2e7d32;">3</span> DIVIDE: 85 ÷ 12<br>
+              <span class="step-tag" style="background:#b03a00;">4</span> 12 × 7 = 84<br>
+              &nbsp;&nbsp;&nbsp;85 − 84 = <strong>1 leftover</strong>
+            </div>
+            <div style="line-height:2.0;">
+              7 full boxes + 1 extra cupcake<br>
+              → She needs <strong style="color:#0d47a1;">8 boxes</strong> total!<br>
+              <span class="step-tag" style="background:#37474f;">5</span> ROUND UP the remainder<br>
+              when you can't leave<br>cupcakes out! ✓
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:10px;flex-shrink:0;">
+          <div class="bubble top-left sm" style="margin-bottom:16px;">
+            Remainder rules:<br>Drop it · Round up ·<br>Use it AS the answer!
+          </div>
+          <div class="zara" style="transform:scale(0.8);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: DIVISIBILITY -->
+  <div class="row">
+    <div class="panel bg-teal full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#004d40;">✅ Example 4 — Divisibility in Context</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+        <em>"A coach has <strong>144 players</strong>. Can they be split into equal teams of 6? Of 8? Of 7?"</em>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:13px;">
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:6px;padding:8px;line-height:1.8;">
+          <strong>Teams of 6?</strong><br>
+          144 ÷ 6 = 24<br>
+          No remainder! ✓<br>
+          <strong style="color:#2e7d32;">YES — 24 teams</strong>
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #0d47a1;border-radius:6px;padding:8px;line-height:1.8;">
+          <strong>Teams of 8?</strong><br>
+          144 ÷ 8 = 18<br>
+          No remainder! ✓<br>
+          <strong style="color:#0d47a1;">YES — 18 teams</strong>
+        </div>
+        <div style="background:#fce4ec;border:2px solid #c62828;border-radius:6px;padding:8px;line-height:1.8;">
+          <strong>Teams of 7?</strong><br>
+          144 ÷ 7 = 20 R4<br>
+          Remainder 4 ✗<br>
+          <strong style="color:#c62828;">NO — doesn't work!</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: MISTAKES + PRO TIPS -->
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;">⚠️ CLASSIC MISTAKES</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ❌ Adding when you should multiply ("3 boxes, 8 each" → should be ×)<br>
+        ❌ Forgetting to write the remainder in division<br>
+        ❌ Always dropping the remainder (sometimes you round UP!)<br>
+        ❌ Not checking divisibility before dividing<br>
+        ❌ Multiplying the wrong two numbers in a word problem<br>
+        ❌ Forgetting units in the answer
+      </div>
+    </div>
+    <div class="panel bg-lime">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#558b2f;">💡 PRO TIPS</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ✓ "Each / per / every" → look for the rate → MULTIPLY<br>
+        ✓ "Share equally / split / how many groups?" → DIVIDE<br>
+        ✓ Always check: does the remainder make sense for this problem?<br>
+        ✓ Use partial products: break big numbers into tens + ones<br>
+        ✓ Check division with multiplication: quotient × divisor + R = dividend<br>
+        ✓ Estimate first: round to nearest 10s, then multiply
+      </div>
+      <div class="think-wrap">
+        <div class="think-sign">TRY<br>IT!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a1a1a;">📝 Your Turn — Try These!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#f0e6ff;border:2px solid #6a0080;border-radius:8px;padding:10px;">
+          <strong>1.</strong> A bakery makes <strong>28 trays</strong> of cookies with <strong>48 cookies</strong> per tray. How many cookies total?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+        <div style="background:#fce4ec;border:2px solid #c62828;border-radius:8px;padding:10px;">
+          <strong>2.</strong> A school has <strong>275 students</strong> going on field trips in buses that hold <strong>45 each</strong>. How many buses are needed?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+        <div style="background:#e8f5e9;border:2px solid #2e7d32;border-radius:8px;padding:10px;">
+          <strong>3.</strong> Is <strong>252</strong> divisible by 3? By 4? Show how you know.<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong>4.</strong> A farmer packs <strong>196 apples</strong> into bags of <strong>8</strong>. How many full bags? How many apples are left over?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Bags: _____ &nbsp; Leftover: _____
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 2 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 3 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: MULTI-STEP CHALLENGE -->
+  <div class="row">
+    <div class="panel bg-purple full" style="min-height:160px;">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#4a148c;">🏆 Level Up — Multi-Step Problems</div>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;">
+          <div class="bubble left sm" style="margin-bottom:14px;">
+            Multiply → then<br>use that answer<br>in the next step!
+          </div>
+          <div class="max" style="transform:scale(0.85);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+        <div style="flex:1;">
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;margin-bottom:10px;">
+            <strong>Example:</strong> <em>"Max earns $14 per hour. He works 32 hours this month and 27 hours next month. How much does he earn in total? If he spends $375 on equipment, how much is left?"</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#4a148c;">Month 1</span><br>
+              $14 × 32 = $448<br><br>
+              <span class="step-tag" style="background:#1565c0;">Month 2</span><br>
+              $14 × 27 = $378
+            </div>
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#1b5e20;">Total</span><br>
+              $448 + $378 = $826<br><br>
+              <span class="step-tag" style="background:#b03a00;">After spending</span><br>
+              $826 − $375 = <strong style="color:#4a148c;">$451</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: CHALLENGE PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:12px;color:#b03a00;">⭐ Challenge Problems — Show ALL your work!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#f3e5f5;border:2px solid #6a1b9a;border-radius:8px;padding:10px;">
+          <strong style="color:#6a1b9a;">5.</strong> A music store sells <strong>136 songs</strong> at $0.99 each and <strong>48 albums</strong> at $12.99 each. Round to estimate total sales. Then find the exact amount.<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Estimate: ________ Exact: ________
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:10px;">
+          <strong style="color:#e65100;">6.</strong> Zara's class collects <strong>1,248 cans</strong> for a food drive over 4 weeks. Each week they collect the same amount. If each box holds 24 cans, how many boxes per week?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Answer: ________ boxes/week
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong style="color:#283593;">7.</strong> Is 4,536 divisible by 3? By 6? By 9? Show your work using digit sums.<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          By 3: ___ By 6: ___ By 9: ___
+        </div>
+        <div style="background:#e0f2f1;border:2px solid #00695c;border-radius:8px;padding:10px;">
+          <strong style="color:#00695c;">8. (Super Challenge!)</strong> A stadium has <strong>52 sections</strong>, each with <strong>348 seats</strong>. If 13,456 fans attend a game, how many seats are EMPTY?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Total seats: ________ Empty: ________
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: ANSWER KEY -->
+  <div class="row">
+    <div class="panel bg-tan full">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#5d4037;">🔑 Answer Key (Try first! Peek only if stuck.)</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:12px;">
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>1.</strong> 28 × 48 = <strong style="color:#6a0080;">1,344 cookies</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>2.</strong> 275 ÷ 45 = 6 R5 → round up → <strong style="color:#c62828;">7 buses</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>3.</strong> Digit sum=9 (÷3 ✓); 252÷4=63 (÷4 ✓); <strong style="color:#2e7d32;">Yes to both</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>4.</strong> 196÷8=24 R4 → <strong style="color:#283593;">24 bags, 4 left</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>5.</strong> Songs: ≈$136; Albums: ≈$624; Total ≈ $760<br>Exact: $134.64 + $623.52 = <strong style="color:#6a1b9a;">$758.16</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>6.</strong> 1248÷4=312/wk; 312÷24 = <strong style="color:#e65100;">13 boxes/week</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>7.</strong> Digit sum=18; by 3 ✓; by 6 ✓ (even); by 9 ✓<br><strong style="color:#283593;">All three YES</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>8.</strong> 52×348=18,096; 18,096−13,456=<strong style="color:#00695c;">4,640 empty</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 3 -->
+
+</body>
+</html>

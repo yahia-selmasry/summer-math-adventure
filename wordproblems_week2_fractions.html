@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Word Problems – Week 2: Fractions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+  h1 { font-size: 22px; color: #2e7d32; border-bottom: 3px solid #2e7d32; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #2e7d32; margin: 14px 0 6px; }
+  h3 { font-size: 13px; color: #2e7d32; margin: 10px 0 4px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; background: #2e7d32; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+  .intro-box { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+  .problem-block { margin-bottom: 14px; }
+  .problem-block p { line-height: 1.7; margin-bottom: 4px; }
+  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+  .work-box { border: 1.5px dashed #aaa; min-height: 70px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .challenge-box h3 { color: #b06000; }
+  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge { float: right; background: #2e7d32; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .hint { font-size: 10px; color: #555; font-style: italic; margin-bottom: 6px; }
+  .num-label { font-weight: 800; color: #2e7d32; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; font-size: 13px; line-height: 1.1; }
+  .frac .num { border-bottom: 1.5px solid #333; padding: 0 3px; }
+  .frac .den { padding: 0 3px; }
+  .ans-key-box { background: #f5f5f5; border: 1.5px solid #bbb; border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; font-size: 12px; }
+  .ans-key-box h3 { color: #2e7d32; margin-bottom: 6px; }
+  .ak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 30px; font-size: 12px; }
+
+  @page { margin: 0; size: letter; }
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { margin: 0; padding: 0; background: #fff; }
+    .page { width: 8.5in; min-height: 11in; page-break-after: always; break-after: page; padding-bottom: 0.85in; }
+    .problem-block { break-inside: avoid; page-break-inside: avoid; }
+    .challenge-box { break-inside: avoid; page-break-inside: avoid; }
+    .grid-2, .grid-3 { break-inside: avoid; page-break-inside: avoid; }
+    .work-box { break-inside: avoid; page-break-inside: avoid; }
+    .intro-box { break-inside: avoid; page-break-inside: avoid; }
+    h2 { break-after: avoid; page-break-after: avoid; }
+    h3 { break-after: avoid; page-break-after: avoid; }
+    .footer { position: absolute; bottom: 0.25in; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="badge">W2<br>WP</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 2 Word Problems &nbsp;|&nbsp; Fractions &nbsp;·&nbsp; Page 1 of 2</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">FRACTIONS</span>
+
+  <div class="intro-box">
+    <strong>Adding/Subtracting fractions:</strong> Get a common denominator, then add/subtract the numerators.<br>
+    <strong>Multiplying fractions:</strong> Multiply numerators together, multiply denominators together. Simplify.<br>
+    <strong>Mixed numbers:</strong> Convert to improper fractions first, or work with whole parts and fraction parts separately.
+  </div>
+
+  <h2>Part A – Adding Fractions in Real Life</h2>
+  <p class="hint">Find a common denominator before adding. Simplify your answer if possible.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">1.</span> A banana bread recipe calls for
+        <span class="frac"><span class="num">2</span><span class="den">3</span></span> cup of sugar and
+        <span class="frac"><span class="num">1</span><span class="den">4</span></span> cup of brown sugar. How much sugar is needed in all?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> cup(s)
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">2.</span> Maya walked
+        <span class="frac"><span class="num">3</span><span class="den">8</span></span> mile to the park and then
+        <span class="frac"><span class="num">5</span><span class="den">8</span></span> mile to the library. How far did she walk in total?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> mile(s)
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">3.</span> Carlos spent
+        <span class="frac"><span class="num">1</span><span class="den">2</span></span> hour reading and
+        <span class="frac"><span class="num">2</span><span class="den">5</span></span> hour on math homework. How long did he spend studying altogether?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> hour(s)
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">4.</span> A pizza is cut into 12 equal slices. Ty ate
+        <span class="frac"><span class="num">3</span><span class="den">12</span></span> and his sister ate
+        <span class="frac"><span class="num">4</span><span class="den">12</span></span>. What fraction of the pizza did they eat together? Simplify.</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> of the pizza
+    </div>
+  </div>
+
+  <h2>Part B – Subtracting Fractions</h2>
+  <p class="hint">Remember: borrow 1 whole as a fraction when subtracting mixed numbers if needed.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">5.</span> Dani had
+        <span class="frac"><span class="num">7</span><span class="den">8</span></span> of a carton of orange juice. She drank
+        <span class="frac"><span class="num">3</span><span class="den">8</span></span>. How much is left?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> of the carton
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">6.</span> A rope is
+        <span class="frac"><span class="num">5</span><span class="den">6</span></span> meter long. Kenji cuts off
+        <span class="frac"><span class="num">1</span><span class="den">3</span></span> meter. How much rope remains?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> meter
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">7.</span> A pitcher holds 3
+        <span class="frac"><span class="num">1</span><span class="den">2</span></span> cups of lemonade. After pouring out 1
+        <span class="frac"><span class="num">3</span><span class="den">4</span></span> cups, how much is left?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> cup(s)
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">8.</span> A trail is 4
+        <span class="frac"><span class="num">2</span><span class="den">3</span></span> miles long. After hiking 2
+        <span class="frac"><span class="num">5</span><span class="den">6</span></span> miles, how far is left to go?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> mile(s)
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#11088; Challenge – Recipe Math</h3>
+    <p>A cookie recipe uses
+      <span class="frac"><span class="num">3</span><span class="den">4</span></span> cup flour,
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span> cup sugar, and
+      <span class="frac"><span class="num">1</span><span class="den">6</span></span> cup butter. How much total dry/wet ingredient is there? If you double the recipe, how much flour will you need?</p>
+    <div class="work-box" style="min-height:70px;"></div>
+    Total all ingredients: <span class="ans-line"></span> &nbsp; Doubled flour: <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 2 Word Problems</span>
+    <span>Fractions · Page 1 &nbsp;/10&nbsp;</span>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="badge">W2<br>WP</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Week 2 Word Problems &nbsp;|&nbsp; Fractions &nbsp;·&nbsp; Page 2 of 2</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">FRACTIONS</span>
+
+  <h2>Part C – Multiplying Fractions</h2>
+  <p class="hint">Multiply across: numerator × numerator, denominator × denominator. Always simplify!</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">9.</span> A garden is
+        <span class="frac"><span class="num">3</span><span class="den">4</span></span> acre. A farmer plants vegetables on
+        <span class="frac"><span class="num">2</span><span class="den">3</span></span> of that section. What fraction of an acre is planted with vegetables?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> acre
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">10.</span> There are 24 students in class. If
+        <span class="frac"><span class="num">3</span><span class="den">8</span></span> of them play soccer, how many students play soccer?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> students
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">11.</span> A sandwich is cut into 8 equal pieces. Leo eats
+        <span class="frac"><span class="num">1</span><span class="den">2</span></span> of the sandwich. His dog eats
+        <span class="frac"><span class="num">1</span><span class="den">4</span></span> of what Leo left. What fraction of the whole sandwich did the dog eat?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> of the whole
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">12.</span> A recipe needs 2
+        <span class="frac"><span class="num">1</span><span class="den">2</span></span> cups of flour. If you want to make
+        <span class="frac"><span class="num">1</span><span class="den">2</span></span> of the recipe, how much flour is needed?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> cup(s)
+    </div>
+  </div>
+
+  <h2>Part D – Mixed Numbers in Real Life</h2>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">13.</span> Marcus ran 1
+        <span class="frac"><span class="num">3</span><span class="den">4</span></span> miles on Monday, 2
+        <span class="frac"><span class="num">1</span><span class="den">2</span></span> miles on Wednesday, and 1
+        <span class="frac"><span class="num">1</span><span class="den">4</span></span> miles on Friday. How far did he run in total?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> mile(s)
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">14.</span> A board is 6
+        <span class="frac"><span class="num">3</span><span class="den">4</span></span> feet long. A carpenter cuts off 2
+        <span class="frac"><span class="num">1</span><span class="den">2</span></span> feet. How long is the board now?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> feet
+    </div>
+  </div>
+
+  <h2>Part E – Multi-Step Fraction Problems</h2>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">15.</span> A class of 30 students:
+        <span class="frac"><span class="num">2</span><span class="den">5</span></span> bring lunch from home,
+        <span class="frac"><span class="num">1</span><span class="den">3</span></span> buy from the cafeteria, and the rest pack a snack only. How many students pack a snack only?</p>
+      <div class="work-box"></div>
+      Lunch: <span class="ans-line"></span> &nbsp; Cafeteria: <span class="ans-line"></span> &nbsp; Snack only: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">16.</span> A bag of trail mix weighs 4
+        <span class="frac"><span class="num">1</span><span class="den">2</span></span> pounds. Nina pours out
+        <span class="frac"><span class="num">3</span><span class="den">4</span></span> pound to share with friends. She then pours out
+        <span class="frac"><span class="num">1</span><span class="den">2</span></span> pound for herself. How much trail mix remains in the bag?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> pound(s)
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">17.</span> Theo baked 3 pans of brownies. He gave
+        <span class="frac"><span class="num">1</span><span class="den">3</span></span> of the total to neighbors and ate
+        <span class="frac"><span class="num">1</span><span class="den">6</span></span> himself. What fraction of all brownies remains?</p>
+      <div class="work-box"></div>
+      Given away + eaten: <span class="ans-line"></span> &nbsp; Remaining: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">18.</span> A water tank is
+        <span class="frac"><span class="num">5</span><span class="den">6</span></span> full. After watering the garden,
+        <span class="frac"><span class="num">1</span><span class="den">4</span></span> of the tank's total capacity was used. What fraction is left in the tank?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span> of the tank
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>&#11088; Challenge – Fraction Relay Race</h3>
+    <p>Four runners share a 10-mile relay race. Runner 1 runs 3
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span> miles, Runner 2 runs 2
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span> miles, Runner 3 runs 1
+      <span class="frac"><span class="num">3</span><span class="den">4</span></span> miles. How far must Runner 4 run to finish the race?</p>
+    <div class="work-box" style="min-height:70px;"></div>
+    Runners 1–3 total: <span class="ans-line"></span> &nbsp; Runner 4 must run: <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 2 Word Problems</span>
+    <span>Fractions · Page 2 &nbsp;/18&nbsp;</span>
+  </div>
+</div>
+
+<!-- ANSWER KEY PAGE -->
+<div class="page">
+  <div class="badge" style="background:#2e7d32;">W2<br>KEY</div>
+  <h1>Answer Key – Week 2 Word Problems: Fractions</h1>
+  <div class="subtitle">For teacher / parent use &nbsp;|&nbsp; All answers shown with brief explanation</div>
+  <span class="topic-tag">ANSWER KEY</span>
+
+  <div class="ans-key-box">
+    <h3>Page 1 Answers</h3>
+    <div class="ak-grid">
+      <div><strong>1.</strong> 2/3 + 1/4 = 8/12 + 3/12 = 11/12 cup</div>
+      <div><strong>2.</strong> 3/8 + 5/8 = 8/8 = 1 mile</div>
+      <div><strong>3.</strong> 1/2 + 2/5 = 5/10 + 4/10 = 9/10 hour</div>
+      <div><strong>4.</strong> 3/12 + 4/12 = 7/12 of the pizza</div>
+      <div><strong>5.</strong> 7/8 − 3/8 = 4/8 = 1/2 of the carton</div>
+      <div><strong>6.</strong> 5/6 − 1/3 = 5/6 − 2/6 = 3/6 = 1/2 meter</div>
+      <div><strong>7.</strong> 3½ − 1¾ = 3 2/4 − 1 3/4 = 2 6/4 − 1 3/4 = 1 3/4 cups</div>
+      <div><strong>8.</strong> 4 2/3 − 2 5/6 = 4 4/6 − 2 5/6 = 3 10/6 − 2 5/6 = 1 5/6 miles</div>
+      <div><strong>Challenge:</strong> Total = 3/4 + 1/3 + 1/6 = 9/12 + 4/12 + 2/12 = 15/12 = 1 3/12 = 1 1/4 cups; Doubled flour = 3/2 = 1 1/2 cups</div>
+    </div>
+  </div>
+
+  <div class="ans-key-box">
+    <h3>Page 2 Answers</h3>
+    <div class="ak-grid">
+      <div><strong>9.</strong> 3/4 × 2/3 = 6/12 = 1/2 acre</div>
+      <div><strong>10.</strong> 24 × 3/8 = 72/8 = 9 students</div>
+      <div><strong>11.</strong> Dog ate 1/4 of 1/2 = 1/8 of the whole sandwich</div>
+      <div><strong>12.</strong> 2 1/2 × 1/2 = 5/2 × 1/2 = 5/4 = 1 1/4 cups</div>
+      <div><strong>13.</strong> 1 3/4 + 2 1/2 + 1 1/4 = 1 3/4 + 2 2/4 + 1 1/4 = 4 6/4 = 5 1/2 miles</div>
+      <div><strong>14.</strong> 6 3/4 − 2 1/2 = 6 3/4 − 2 2/4 = 4 1/4 feet</div>
+      <div><strong>15.</strong> Lunch: 12; Cafeteria: 10; Snack only: 8 students</div>
+      <div><strong>16.</strong> 4 1/2 − 3/4 − 1/2 = 4 1/2 − 1 1/4 = 3 1/4 pounds</div>
+      <div><strong>17.</strong> 1/3 + 1/6 = 2/6 + 1/6 = 3/6 = 1/2; Remaining = 1/2</div>
+      <div><strong>18.</strong> 5/6 − 1/4 = 10/12 − 3/12 = 7/12 of tank left</div>
+      <div><strong>Challenge:</strong> R1+R2+R3 = 3 1/4 + 2 1/2 + 1 3/4 = 7 1/2 miles; Runner 4 = 10 − 7 1/2 = 2 1/2 miles</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Booklet · Grade 4→5 · Week 2 Word Problems</span>
+    <span>Answer Key</span>
+  </div>
+</div>
+
+</body>
+</html>

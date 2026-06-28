@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Comics – Number Sense Word Problems</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #fdf3c0;
+  font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 16px;
+  padding: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.comic-page { background: #fdf3c0; padding: 16px; page-break-after: always; }
+.row { display: flex; gap: 8px; margin-bottom: 8px; }
+.panel {
+  border: 3px solid #1a1a1a; border-radius: 6px; padding: 14px;
+  position: relative; overflow: visible; flex: 1;
+}
+.panel.bg-sky    { background: #cce8f5; }
+.panel.bg-green  { background: #c8e6c9; }
+.panel.bg-peach  { background: #ffe0cc; }
+.panel.bg-tan    { background: #f5e6c8; }
+.panel.bg-white  { background: #ffffff; }
+.panel.bg-indigo { background: #e8eaf6; }
+.panel.bg-purple { background: #f3e5f5; }
+.panel.bg-teal   { background: #e0f2f1; }
+.panel.bg-lime   { background: #f0f4c3; }
+.panel.bg-navy   { background: #e8edf5; }
+.panel.full { flex: none; width: 100%; }
+.panel.w2 { flex: 2; }
+
+.title-card {
+  display: inline-block; background: #1a3a6b; color: #fff;
+  font-family: 'Bangers','Impact',sans-serif; font-size: 26px;
+  letter-spacing: 2px; padding: 6px 18px 4px;
+  border: 3px solid #1a1a1a; border-radius: 8px; margin-bottom: 10px;
+  line-height: 1.1; text-shadow: 2px 2px 0 #080f20;
+}
+.title-card .subtitle { font-size: 13px; letter-spacing: 1px; display: block; font-family: 'Nunito', sans-serif; font-weight: 700; text-shadow: none; }
+
+.bubble {
+  background: #fff; border: 2.5px solid #1a1a1a; border-radius: 18px;
+  padding: 8px 12px; font-size: 15px; line-height: 1.45;
+  position: relative; display: inline-block; max-width: 220px;
+  font-weight: 700; margin: 4px;
+}
+.bubble.left::after  { content:''; position:absolute; bottom:-14px; left:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.left::before { content:''; position:absolute; bottom:-10px; left:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.right::after  { content:''; position:absolute; bottom:-14px; right:20px; border:7px solid transparent; border-top-color:#1a1a1a; }
+.bubble.right::before { content:''; position:absolute; bottom:-10px; right:21px; border:6px solid transparent; border-top-color:#fff; z-index:1; }
+.bubble.top-left::after  { content:''; position:absolute; top:-14px; left:20px; border:7px solid transparent; border-bottom-color:#1a1a1a; }
+.bubble.top-left::before { content:''; position:absolute; top:-10px; left:21px; border:6px solid transparent; border-bottom-color:#fff; z-index:1; }
+.bubble.big { font-size: 15px; max-width: 300px; }
+.bubble.sm  { font-size: 12px; max-width: 180px; }
+
+.scene { display:flex; align-items:flex-end; justify-content:space-around; min-height:120px; padding-top:8px; }
+
+.zara { width:70px; height:110px; position:relative; flex-shrink:0; }
+.zara .body  { width:44px; height:68px; background:#e07a30; border:2.5px solid #7a3800; border-radius:14px 14px 10px 10px; position:absolute; bottom:0; left:13px; }
+.zara .head  { width:38px; height:34px; background:#e07a30; border:2.5px solid #7a3800; border-radius:50% 50% 40% 40%; position:absolute; bottom:60px; left:16px; }
+.zara .snout { width:22px; height:14px; background:#c96020; border:2px solid #7a3800; border-radius:4px 10px 10px 4px; position:absolute; bottom:66px; left:40px; }
+.zara .eye   { width:7px; height:8px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:78px; left:28px; }
+.zara .eye::after { content:''; width:3px; height:3px; background:#1a1a1a; border-radius:50%; position:absolute; top:1px; left:1px; }
+.zara .hair  { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:18px solid #2255aa; position:absolute; bottom:90px; left:21px; transform:rotate(-10deg); }
+.zara .arm   { width:12px; height:30px; background:#e07a30; border:2px solid #7a3800; border-radius:6px; position:absolute; bottom:28px; left:4px; transform:rotate(15deg); }
+.zara .tail  { width:28px; height:12px; background:#e07a30; border:2px solid #7a3800; border-radius:0 6px 6px 0; position:absolute; bottom:8px; right:-8px; transform:rotate(-20deg); }
+
+.max { width:56px; height:80px; position:relative; flex-shrink:0; }
+.max .body { width:40px; height:48px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:12px; position:absolute; bottom:0; left:8px; }
+.max .head { width:44px; height:38px; background:#3d72b8; border:2.5px solid #1a2a6a; border-radius:50%; position:absolute; bottom:40px; left:6px; }
+.max .eye  { width:9px; height:10px; background:#fff; border:2px solid #1a1a1a; border-radius:50%; position:absolute; bottom:56px; left:14px; }
+.max .eye.r { left:30px; }
+.max .eye::after { content:''; width:4px; height:4px; background:#1a1a1a; border-radius:50%; position:absolute; top:2px; left:2px; }
+.max .horn { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:14px solid #2255aa; position:absolute; bottom:74px; left:24px; }
+.max .fang { width:5px; height:7px; background:#fff; border:1.5px solid #888; border-radius:0 0 3px 3px; position:absolute; bottom:41px; left:22px; }
+
+.math-box { background:#fff; border:3px solid #1a1a1a; border-radius:8px; padding:10px 16px; font-size:16px; font-weight:700; display:inline-block; margin:6px 4px; text-align:center; }
+.math-box.navy   { background:#e8edf5; border-color:#1a3a6b; }
+.math-box.orange { background:#fff3e0; border-color:#e65100; }
+.math-box.blue   { background:#e3f2fd; border-color:#283593; }
+
+.step-tag { display:inline-block; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; margin-right:4px; }
+
+.frac { display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 3px; font-size:1em; line-height:1.1; font-weight:700; }
+.frac .num { border-bottom:2px solid #1a1a1a; padding:0 3px; }
+.frac .den { padding:0 3px; }
+
+.think-sign {
+  background: #1a3a6b; color: #fff; font-size: 11px; font-weight: 700; text-align: center;
+  border-radius: 12px; width: 80px; height: 80px;
+  display: flex; align-items: center; justify-content: center; line-height: 1.3;
+}
+.think-wrap { position:absolute; bottom:10px; right:10px; }
+
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  .row { flex-direction: column; }
+  .panel.w2 { flex: unset; }
+  .bubble { max-width: 90%; font-size: 12px; }
+  .scene { flex-wrap: wrap; justify-content: center; }
+  .math-box { font-size: 13px !important; }
+  .title-card { font-size: 20px; }
+}
+@media (max-width: 820px) and (min-width: 601px) {
+  body { padding: 14px; }
+  .row { flex-wrap: wrap; }
+  .panel { min-width: 280px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="comic-page">
+
+  <!-- ROW 1: TITLE -->
+  <div class="row">
+    <div class="panel bg-navy full" style="min-height:150px;">
+      <div class="title-card">
+        🏙️ NUMBER SENSE WORD PROBLEMS!
+        <span class="subtitle">Read it · Find the place value · Round or compare · Solve · Check</span>
+      </div>
+      <div class="scene">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble left big" style="margin-bottom:18px;">
+            Big numbers are just<br>digits in place-value<br>seats! <strong>Millions · Thousands<br>· Hundreds · Tens · Ones</strong>
+          </div>
+          <div class="zara">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:10px;">
+          <div style="background:#fff;border:3px solid #1a3a6b;border-radius:10px;padding:12px;font-size:13px;max-width:220px;">
+            <strong style="color:#1a3a6b;">The 5-Step Plan:</strong><br>
+            <span class="step-tag" style="background:#1a3a6b;">1</span> Read &amp; underline the big number<br>
+            <span class="step-tag" style="background:#1565c0;">2</span> Write it in a place-value chart<br>
+            <span class="step-tag" style="background:#6a1b9a;">3</span> Find the correct digit/place<br>
+            <span class="step-tag" style="background:#b03a00;">4</span> Round, compare, or add<br>
+            <span class="step-tag" style="background:#37474f;">5</span> Check: does it make sense?
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div class="bubble right" style="margin-bottom:18px;">
+            Millions, thousands,<br>hundreds… each seat<br>is 10× bigger than<br>the one to its right! 🏛️
+          </div>
+          <div class="max">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: SIGNAL WORDS -->
+  <div class="row">
+    <div class="panel bg-indigo full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a237e;">🔍 Key Vocabulary &amp; Signal Words</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;font-size:13px;">
+        <div style="background:#e8edf5;border:2px solid #1a3a6b;border-radius:8px;padding:8px;">
+          <strong style="color:#1a3a6b;">📍 Place Value</strong><br>
+          "digit in the thousands place"<br>
+          "value of the 4 in 348,927"<br>
+          "what does the 3 represent?"
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #0d47a1;border-radius:8px;padding:8px;">
+          <strong style="color:#0d47a1;">🔄 Rounding</strong><br>
+          "round to nearest thousand"<br>
+          "about how many?"<br>
+          "estimate the population"
+        </div>
+        <div style="background:#f3e5f5;border:2px solid #6a1b9a;border-radius:8px;padding:8px;">
+          <strong style="color:#6a1b9a;">⚖️ Comparing</strong><br>
+          "which city has more?"<br>
+          "order from least to greatest"<br>
+          "how many more people?"
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:8px;">
+          <strong style="color:#e65100;">🏙️ Real Contexts</strong><br>
+          Population · Attendance<br>
+          Distance in feet/miles<br>
+          Money · Scores · Altitude
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: WORKED EXAMPLES -->
+  <div class="row">
+    <div class="panel bg-navy" style="flex:1.2;">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#1a3a6b;">✅ Example 1 — Rounding to Nearest Thousand</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"A city has <strong>348,927</strong> people. Round to the nearest thousand."</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#1a3a6b;">1</span> Underline: <strong>348,927</strong><br>
+        <span class="step-tag" style="background:#1565c0;">2</span> Place value chart:<br>
+        &nbsp;&nbsp;&nbsp;3–4–8 | <strong>9</strong>–2–7 → thousands digit = <strong>8</strong><br>
+        <span class="step-tag" style="background:#6a1b9a;">3</span> Look one place RIGHT of thousands: <strong>9</strong><br>
+        <span class="step-tag" style="background:#b03a00;">4</span> 9 ≥ 5 → round <strong>UP</strong><br>
+        &nbsp;&nbsp;&nbsp;348,927 → <strong style="color:#1a3a6b;">349,000</strong><br>
+        <span class="step-tag" style="background:#37474f;">5</span> Sense check: 349,000 is close to 348,927 ✓
+      </div>
+    </div>
+    <div class="panel bg-peach">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#bf360c;">✅ Example 2 — Place Value</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:8px;">
+        <em>"A stadium holds <strong>2,457,830</strong> hot dogs a season. What is the value of the digit 4?"</em>
+      </div>
+      <div style="font-size:13px;line-height:2.0;">
+        <span class="step-tag" style="background:#1a3a6b;">1</span> Underline: <strong>2,457,830</strong><br>
+        <span class="step-tag" style="background:#1565c0;">2</span> Write out places:<br>
+        &nbsp;&nbsp;&nbsp;2 = millions<br>
+        &nbsp;&nbsp;&nbsp;<strong>4</strong> = hundred-thousands<br>
+        &nbsp;&nbsp;&nbsp;5 = ten-thousands…<br>
+        <span class="step-tag" style="background:#b03a00;">4</span> Value of 4 = <strong style="color:#bf360c;">400,000</strong><br>
+        <span class="step-tag" style="background:#37474f;">5</span> 4 is in the 100,000s seat → 4 × 100,000 ✓
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 2 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: COMPARING EXAMPLE -->
+  <div class="row">
+    <div class="panel bg-sky full" style="min-height:170px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#0d47a1;">✅ Example 3 — Comparing Large Numbers</div>
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+            <em>"Phoenix has <strong>1,608,139</strong> people. Tucson has <strong>542,629</strong>. How many MORE people does Phoenix have?"</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#1a3a6b;">1</span> "How many MORE" = SUBTRACT<br>
+              <span class="step-tag" style="background:#1565c0;">2</span> Line up digits by place value:<br>
+              &nbsp;&nbsp;&nbsp;1,608,139<br>
+              &nbsp;&nbsp;&nbsp;−  542,629<br>
+              <span class="step-tag" style="background:#b03a00;">4</span> Subtract carefully
+            </div>
+            <div style="line-height:2.0;">
+              &nbsp;&nbsp;&nbsp;1,608,139<br>
+              &nbsp;&nbsp;&nbsp;−  542,629<br>
+              &nbsp;&nbsp;&nbsp;= <strong style="color:#0d47a1;">1,065,510</strong><br>
+              <span class="step-tag" style="background:#37474f;">5</span> Estimate: 1.6M − 0.5M ≈ 1.1M ✓
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:10px;flex-shrink:0;">
+          <div class="bubble top-left sm" style="margin-bottom:16px;">
+            "How many more?"<br>always means<br>SUBTRACT!
+          </div>
+          <div class="zara" style="transform:scale(0.8);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="snout"></div>
+            <div class="eye"></div><div class="hair"></div><div class="arm"></div><div class="tail"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: ORDERING NUMBERS -->
+  <div class="row">
+    <div class="panel bg-teal full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#004d40;">✅ Example 4 — Ordering &amp; Estimating</div>
+      <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:8px;font-size:13px;margin-bottom:10px;">
+        <em>"Four schools raised money: Lincoln: $24,350 · Oak: $19,875 · Pine: $24,099 · River: $31,200. Order from greatest to least. About how much did the top two schools raise combined?"</em>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+        <div style="line-height:2.1;">
+          <span class="step-tag" style="background:#1a3a6b;">1</span> Compare leading digits first:<br>
+          River: <strong>31,200</strong> (biggest)<br>
+          Lincoln: <strong>24,350</strong><br>
+          Pine: <strong>24,099</strong><br>
+          Oak: <strong>19,875</strong> (smallest)
+        </div>
+        <div style="line-height:2.1;">
+          <span class="step-tag" style="background:#b03a00;">4</span> Top two: River + Lincoln<br>
+          Round: $31,000 + $24,000<br>
+          ≈ <strong style="color:#004d40;">$55,000</strong><br>
+          Exact: $31,200 + $24,350 = $55,550 ✓
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: MISTAKES + PRO TIPS -->
+  <div class="row">
+    <div class="panel bg-peach">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;">⚠️ CLASSIC MISTAKES</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ❌ Rounding the wrong digit (looking left instead of right)<br>
+        ❌ Forgetting to zero out digits after rounding<br>
+        ❌ Mixing up place value seats (thousands vs. ten-thousands)<br>
+        ❌ Not lining up digits when subtracting large numbers<br>
+        ❌ Forgetting commas make big numbers easier to read<br>
+        ❌ Skipping the estimate/sense-check step
+      </div>
+    </div>
+    <div class="panel bg-lime">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#558b2f;">💡 PRO TIPS</div>
+      <div style="font-size:13px;line-height:2.0;">
+        ✓ Rounding rule: look at the digit ONE place to the RIGHT<br>
+        ✓ 0–4 → round DOWN, 5–9 → round UP<br>
+        ✓ "How many more?" → SUBTRACT the smaller from larger<br>
+        ✓ "About how many?" → round first, then add/subtract<br>
+        ✓ Use commas every 3 digits from the right<br>
+        ✓ Always label your answer with units!
+      </div>
+      <div class="think-wrap">
+        <div class="think-sign">TRY<br>IT!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: PRACTICE PROBLEMS -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#1a1a1a;">📝 Your Turn — Try These!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#e8edf5;border:2px solid #1a3a6b;border-radius:8px;padding:10px;">
+          <strong>1.</strong> A baseball stadium sold <strong>478,362</strong> tickets last season. Round to the nearest ten-thousand.<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+        <div style="background:#fce4ec;border:2px solid #c62828;border-radius:8px;padding:10px;">
+          <strong>2.</strong> The number <strong>3,725,041</strong> — what is the value of the digit 7?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:10px;">
+          <strong>3.</strong> Two mountains: Mt. Humphreys is <strong>12,633</strong> feet. Mt. Baldy is <strong>11,499</strong> feet. How much taller is Humphreys?<br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________ feet
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong>4.</strong> Order these from least to greatest: <strong>56,200 · 56,020 · 65,002 · 56,200</strong><br>
+          <div style="border-bottom:1.5px solid #555;width:90%;margin:8px 0;height:18px;"></div>
+          Answer: ________
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 2 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 3 -->
+<div class="comic-page" style="margin-top:32px;">
+
+  <!-- ROW 1: CHALLENGE MULTI-STEP -->
+  <div class="row">
+    <div class="panel bg-purple full" style="min-height:160px;">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px;color:#4a148c;">🏆 Level Up — Multi-Step Number Sense Problems</div>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;">
+          <div class="bubble left sm" style="margin-bottom:14px;">
+            Big numbers, small<br>steps — one piece<br>at a time!
+          </div>
+          <div class="max" style="transform:scale(0.85);transform-origin:bottom center;">
+            <div class="body"></div><div class="head"></div><div class="eye"></div>
+            <div class="eye r"></div><div class="horn"></div><div class="fang"></div>
+          </div>
+        </div>
+        <div style="flex:1;">
+          <div style="background:#fff;border:2px solid #1a1a1a;border-radius:8px;padding:10px;font-size:13px;margin-bottom:10px;">
+            <strong>Example:</strong> <em>"A concert venue has seats: Floor: 12,450 · Balcony: 8,375 · VIP: 1,200. About how many seats total (round each to nearest thousand)? Then find the exact total."</em>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#4a148c;">Round each</span><br>
+              12,450 → <strong>12,000</strong><br>
+              8,375 → <strong>8,000</strong><br>
+              1,200 → <strong>1,000</strong><br>
+              Estimate: <strong style="color:#4a148c;">21,000 seats</strong>
+            </div>
+            <div style="line-height:2.0;">
+              <span class="step-tag" style="background:#1565c0;">Exact total</span><br>
+              12,450 + 8,375 = 20,825<br>
+              20,825 + 1,200 = <strong style="color:#1565c0;">22,025</strong><br>
+              <span class="step-tag" style="background:#1b5e20;">Check</span><br>
+              21,000 ≈ 22,025 ✓ Close!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: CHALLENGE PRACTICE -->
+  <div class="row">
+    <div class="panel bg-white full">
+      <div style="font-weight:800;font-size:15px;margin-bottom:12px;color:#b03a00;">⭐ Challenge Problems — Show ALL your work!</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+        <div style="background:#f3e5f5;border:2px solid #6a1b9a;border-radius:8px;padding:10px;">
+          <strong style="color:#6a1b9a;">5.</strong> A city library has <strong>1,234,567</strong> books. A school district has <strong>98,432</strong> books. Rounded to the nearest ten-thousand, how many books do they have altogether?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Answer: ________
+        </div>
+        <div style="background:#fff3e0;border:2px solid #e65100;border-radius:8px;padding:10px;">
+          <strong style="color:#e65100;">6.</strong> Four friends' savings: Zara: $3,475 · Max: $2,890 · Leo: $3,099 · Mia: $4,210. Order from greatest to least. How much more does the richest have than the poorest?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Order: ________ Difference: ________
+        </div>
+        <div style="background:#e3f2fd;border:2px solid #283593;border-radius:8px;padding:10px;">
+          <strong style="color:#283593;">7.</strong> A roller coaster has had <strong>4,628,900</strong> riders. What digit is in the ten-thousands place? What is its VALUE?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Digit: _____ &nbsp; Value: ________
+        </div>
+        <div style="background:#e0f2f1;border:2px solid #00695c;border-radius:8px;padding:10px;">
+          <strong style="color:#00695c;">8. (Super Challenge!)</strong> A school raised $47,839 in Year 1 and $52,115 in Year 2. Round both to the nearest thousand. Is the total rounded amount more or less than the exact total? By how much?<br>
+          <div style="border:1.5px dashed #aaa;border-radius:4px;min-height:50px;margin:6px 0;padding:4px;font-size:11px;color:#aaa;">work here</div>
+          Rounded total: ________ Exact: ________ Diff: ________
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: ANSWER KEY -->
+  <div class="row">
+    <div class="panel bg-tan full">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#5d4037;">🔑 Answer Key (Try first! Peek only if stuck.)</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:12px;">
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>1.</strong> 478,362 → ten-thousands digit = 7; digit to right = 8 ≥ 5 → round up<br><strong style="color:#1a3a6b;">480,000</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>2.</strong> 7 is in the hundred-thousands place<br><strong style="color:#c62828;">700,000</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>3.</strong> 12,633 − 11,499 = <strong style="color:#e65100;">1,134 feet</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>4.</strong> <strong style="color:#283593;">56,020 · 56,200 · 56,200 · 65,002</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>5.</strong> 1,234,567 ≈ 1,230,000; 98,432 ≈ 100,000<br><strong style="color:#6a1b9a;">≈ 1,330,000</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>6.</strong> Mia·Zara·Leo·Max; $4,210−$2,890=<strong style="color:#e65100;">$1,320</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>7.</strong> Digit = <strong>2</strong> (ten-thousands place); Value = <strong style="color:#283593;">20,000</strong>
+        </div>
+        <div style="background:#fff;border:2px solid #a1887f;border-radius:6px;padding:6px;text-align:center;">
+          <strong>8.</strong> $48,000+$52,000=$100,000; Exact=$99,954; Rounded is <strong style="color:#00695c;">$46 MORE</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 3 -->
+
+</body>
+</html>
