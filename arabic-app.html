@@ -856,8 +856,11 @@ function useContent() {
       .then(r => r.ok ? r.json() : null)
       .then(data => {
         if (data && data.lessons && data.lessons.length > 0) {
-          setLessons(data.lessons);
-          // merge banks: external has items array; add titleAr if missing
+          // merge: keep fallback lessons (which have level-4 stories), add external ones that aren't already present
+          const fallbackIds = new Set(FALLBACK_LESSONS.map(l => l.id));
+          const newExternal = data.lessons.filter(l => !fallbackIds.has(l.id));
+          setLessons([...FALLBACK_LESSONS, ...newExternal]);
+          // merge banks
           const ext = data.topicBanks || {};
           const merged = { ...FALLBACK_BANKS };
           ["noun-verb","singular-plural","word-meaning","grammar"].forEach(k => {
