@@ -1559,7 +1559,7 @@ const STORY_THEMES = [
   {key:"season",   label:"فُصُول",    emoji:"🌸", color:"#ec4899"},
 ];
 
-function HomeScreen({ lessons, banks, progress, contentLoaded, onLesson, onDrill, onDashboard, onPrint, onPrintAll }) {
+function HomeScreen({ lessons, banks, progress, contentLoaded, onLesson, onDrill, onDashboard, onPrint, onPrintAll, onGrammar }) {
   const [activeWeek, setActiveWeek] = useState("all");
   const [activeFilter, setActiveFilter] = useState("all");
   const [activeStoryTheme, setActiveStoryTheme] = useState("all");
@@ -1731,23 +1731,31 @@ function HomeScreen({ lessons, banks, progress, contentLoaded, onLesson, onDrill
           })
         ),
 
-    // drill + dashboard row
-    e("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14,marginBottom:24}},
+    // drill + dashboard + grammar row
+    e("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12,marginBottom:24}},
       e("button",{onClick:onDrill,
         style:{background:"linear-gradient(135deg,#fdf4ff,#ede9fe)",border:"2px solid #e9d5ff",
-          borderRadius:20,padding:20,cursor:"pointer",textAlign:"center",
+          borderRadius:20,padding:"16px 10px",cursor:"pointer",textAlign:"center",
           boxShadow:"0 4px 16px rgba(168,85,247,.15)"}},
-        e("div",{style:{fontSize:38,marginBottom:8}},"⚡"),
-        e("p",{style:{...AF,fontSize:17,fontWeight:900,color:"#7c3aed",direction:"rtl",margin:"0 0 3px"}},"التَّدْرِيب"),
-        e("p",{style:{fontSize:12,color:P.gray,margin:0,fontWeight:700}},`${totalItems} كلمة`)
+        e("div",{style:{fontSize:32,marginBottom:6}},"⚡"),
+        e("p",{style:{...AF,fontSize:15,fontWeight:900,color:"#7c3aed",direction:"rtl",margin:"0 0 2px"}},"التَّدْرِيب"),
+        e("p",{style:{fontSize:11,color:P.gray,margin:0,fontWeight:700}},`${totalItems} كلمة`)
+      ),
+      e("button",{onClick:onGrammar,
+        style:{background:"linear-gradient(135deg,#dbeafe,#e0e7ff)",border:"2px solid #bfdbfe",
+          borderRadius:20,padding:"16px 10px",cursor:"pointer",textAlign:"center",
+          boxShadow:"0 4px 16px rgba(29,78,216,.12)"}},
+        e("div",{style:{fontSize:32,marginBottom:6}},"📐"),
+        e("p",{style:{...AF,fontSize:15,fontWeight:900,color:GP.blue,direction:"rtl",margin:"0 0 2px"}},"القَوَاعِد"),
+        e("p",{style:{fontSize:11,color:P.gray,margin:0,fontWeight:700}},`${GRAMMAR_TOPICS.length} موضوع`)
       ),
       e("button",{onClick:onDashboard,
         style:{background:"linear-gradient(135deg,#fffbeb,#fef3c7)",border:"2px solid #fde68a",
-          borderRadius:20,padding:20,cursor:"pointer",textAlign:"center",
+          borderRadius:20,padding:"16px 10px",cursor:"pointer",textAlign:"center",
           boxShadow:"0 4px 16px rgba(234,179,8,.15)"}},
-        e("div",{style:{fontSize:38,marginBottom:8}},"📊"),
-        e("p",{style:{...AF,fontSize:17,fontWeight:900,color:"#92400e",direction:"rtl",margin:"0 0 3px"}},"تَقَدُّمِي"),
-        e("p",{style:{fontSize:12,color:P.gray,margin:0,fontWeight:700}},`${Object.keys(lessonScores).length}/${lessons.length} درس`)
+        e("div",{style:{fontSize:32,marginBottom:6}},"📊"),
+        e("p",{style:{...AF,fontSize:15,fontWeight:900,color:"#92400e",direction:"rtl",margin:"0 0 2px"}},"تَقَدُّمِي"),
+        e("p",{style:{fontSize:11,color:P.gray,margin:0,fontWeight:700}},`${Object.keys(lessonScores).length}/${lessons.length} درس`)
       )
     ),
 
@@ -2705,6 +2713,472 @@ function IslamicStudies({ onHome }) {
   );
 }
 
+// ══════════════════════════════════════════════════════════════════════════════
+// GRAMMAR MODULE (نَحْو)
+// ══════════════════════════════════════════════════════════════════════════════
+
+const GP = {
+  blue:"#1d4ed8", blueL:"#dbeafe", blueD:"#1e3a8a",
+  sky:"#0369a1",  skyL:"#e0f2fe",
+  violet:"#7c3aed", violetL:"#ede9fe",
+  rose:"#be123c",   roseL:"#ffe4e6",
+  teal:"#0f766e",   tealL:"#ccfbf1",
+  amber:"#b45309",  amberL:"#fef3c7",
+  green:"#15803d",  greenL:"#dcfce7",
+};
+
+// ── Grammar topics data ───────────────────────────────────────────────────────
+const GRAMMAR_TOPICS = [
+  {
+    id:"parts-of-speech",
+    emoji:"🏷️",
+    title:"أَقْسَامُ الكَلَام",
+    titleEn:"Parts of Speech",
+    color:GP.blue, bg:GP.blueL,
+    tagline:"Every Arabic word is one of three things!",
+    explanation:"اَلكَلِمَةُ العَرَبِيَّةُ ثَلَاثَةُ أَنْوَاع:\n١. الاسْمُ — يَدُلُّ عَلَى إِنْسَانٍ أَوْ حَيَوَانٍ أَوْ شَيْء (مِثَال: كِتَابٌ، مُحَمَّدٌ، شَجَرَةٌ)\n٢. الفِعْلُ — يَدُلُّ عَلَى حَدَثٍ أَوْ عَمَل (مِثَال: كَتَبَ، يَأْكُلُ، اقْرَأْ)\n٣. الحَرْفُ — يَرْبِطُ الكَلِمَاتِ بَعْضَهَا بِبَعْض (مِثَال: فِي، عَلَى، وَ، لِ)",
+    explanationEn:"In Arabic, every word belongs to one of three groups:\n① NOUN (اسم) — a person, animal, or thing: كِتَاب (book), مُحَمَّد (Muhammad)\n② VERB (فعل) — an action or event: كَتَبَ (he wrote), يَأْكُلُ (he eats)\n③ PARTICLE (حرف) — a linking word: فِي (in), عَلَى (on), وَ (and)",
+    tip:"🌟 Secret tip: If you can say 'THE ___' in front of it in Arabic (add اَلـ), it's a NOUN!",
+    examples:[
+      {arabic:"اَلْكِتَابُ جَمِيلٌ", type:"اسم + اسم", english:"The book is beautiful"},
+      {arabic:"ذَهَبَ الوَلَدُ", type:"فعل + اسم", english:"The boy went"},
+      {arabic:"الكِتَابُ فِي الحَقِيبَة", type:"اسم + حرف + اسم", english:"The book is in the bag"},
+    ],
+    quiz:[
+      {word:"كِتَابٌ", options:["اسم","فعل","حرف"], answer:0, hint:"It's a thing you read 📚"},
+      {word:"يَلْعَبُ", options:["اسم","فعل","حرف"], answer:1, hint:"It's an action — playing! ⚽"},
+      {word:"فِي", options:["اسم","فعل","حرف"], answer:2, hint:"It means 'in' — a linking word"},
+      {word:"مَسْجِدٌ", options:["اسم","فعل","حرف"], answer:0, hint:"It's a place — a mosque 🕌"},
+      {word:"كَتَبَ", options:["اسم","فعل","حرف"], answer:1, hint:"He wrote — that's an action ✏️"},
+      {word:"عَلَى", options:["اسم","فعل","حرف"], answer:2, hint:"It means 'on' — a linking word"},
+      {word:"أُمٌّ", options:["اسم","فعل","حرف"], answer:0, hint:"Mother — a person! 👩"},
+      {word:"أَكَلَ", options:["اسم","فعل","حرف"], answer:1, hint:"He ate — eating is an action 🍎"},
+    ],
+  },
+  {
+    id:"pronouns",
+    emoji:"👤",
+    title:"الضَّمَائِر",
+    titleEn:"Pronouns",
+    color:GP.violet, bg:GP.violetL,
+    tagline:"Who are we talking about? I, you, he, she...",
+    explanation:"الضَّمَائِرُ كَلِمَاتٌ تَحُلُّ مَحَلَّ الاسْم:\n• أَنَا = I\n• أَنْتَ = you (boy)\n• أَنْتِ = you (girl)\n• هُوَ = he\n• هِيَ = she\n• نَحْنُ = we\n• أَنْتُمْ = you all\n• هُمْ = they (boys)\n• هُنَّ = they (girls)",
+    explanationEn:"Pronouns replace a noun so you don't repeat it. Arabic has separate pronouns for male/female and singular/plural!",
+    tip:"🌟 Important! Arabic tells you if it's a boy or girl — هُوَ (he) vs هِيَ (she). Always notice!",
+    examples:[
+      {arabic:"أَنَا أُحِبُّ القُرْآن", type:"أنا = I", english:"I love the Quran"},
+      {arabic:"هُوَ يَدْرُسُ كَثِيرًا", type:"هو = he", english:"He studies a lot"},
+      {arabic:"هِيَ طَالِبَةٌ مُجْتَهِدَة", type:"هي = she", english:"She is a hardworking student"},
+      {arabic:"نَحْنُ نُصَلِّي مَعًا", type:"نحن = we", english:"We pray together"},
+    ],
+    quiz:[
+      {question:"'I' in Arabic is...?", options:["أَنْتَ","أَنَا","هُوَ"], answer:1, hint:"Think of yourself! أَنَا = I"},
+      {question:"'She' in Arabic is...?", options:["هُوَ","هِيَ","أَنْتِ"], answer:1, hint:"هِيَ is always for a girl/woman"},
+      {question:"'We' in Arabic is...?", options:["هُمْ","أَنْتُمْ","نَحْنُ"], answer:2, hint:"نَحْنُ — a group including yourself"},
+      {question:"'You (boy)' in Arabic is...?", options:["أَنْتَ","أَنْتِ","هُوَ"], answer:0, hint:"أَنْتَ with a fatha on the ت"},
+      {question:"'They (boys/mixed)' in Arabic is...?", options:["هُنَّ","هُمْ","أَنْتُمْ"], answer:1, hint:"هُمْ for a group of males"},
+      {question:"'He' in Arabic is...?", options:["هِيَ","أَنَا","هُوَ"], answer:2, hint:"هُوَ — always for a male"},
+    ],
+  },
+  {
+    id:"demonstratives",
+    emoji:"👉",
+    title:"أَسْمَاءُ الإِشَارَة",
+    titleEn:"Demonstrative Nouns",
+    color:GP.teal, bg:GP.tealL,
+    tagline:"This, that, these, those — in Arabic!",
+    explanation:"أَسْمَاءُ الإِشَارَةِ تُشِيرُ إِلَى شَيْءٍ مَعِين:\n• هَذَا = This (for one boy/thing)\n• هَذِهِ = This (for one girl/thing)\n• ذَلِكَ = That (far, for boy/thing)\n• تِلْكَ = That (far, for girl/thing)\n• هَؤُلَاء = These (people, close)\n• أُولَئِكَ = Those (people, far)",
+    explanationEn:"Demonstratives point to things. Arabic has different words depending on whether the noun is masculine or feminine, and near or far!",
+    tip:"🌟 Easy rule: هَذَا / هَذِهِ = close to you. ذَلِكَ / تِلْكَ = far from you. Think near vs far!",
+    examples:[
+      {arabic:"هَذَا كِتَابٌ", type:"هذا = this (masc)", english:"This is a book"},
+      {arabic:"هَذِهِ مَدْرَسَةٌ", type:"هذه = this (fem)", english:"This is a school"},
+      {arabic:"ذَلِكَ مَسْجِدٌ كَبِير", type:"ذلك = that (masc)", english:"That is a big mosque"},
+      {arabic:"هَؤُلَاءِ طُلَّابٌ مُجْتَهِدُون", type:"هؤلاء = these (people)", english:"These are hardworking students"},
+    ],
+    quiz:[
+      {sentence:"___ كِتَابٌ (this book — close)", options:["هَذَا","هَذِهِ","ذَلِكَ"], answer:0, hint:"كِتَاب is masculine → هَذَا"},
+      {sentence:"___ مَدْرَسَةٌ (this school — close)", options:["هَذَا","هَذِهِ","تِلْكَ"], answer:1, hint:"مَدْرَسَة is feminine → هَذِهِ"},
+      {sentence:"___ مَسْجِدٌ (that mosque — far)", options:["هَذَا","ذَلِكَ","هَذِهِ"], answer:1, hint:"Far + masculine → ذَلِكَ"},
+      {sentence:"___ شَجَرَةٌ (that tree — far)", options:["تِلْكَ","ذَلِكَ","هَذَا"], answer:0, hint:"Far + feminine → تِلْكَ"},
+      {sentence:"___ طُلَّاب (these students — close)", options:["أُولَئِكَ","هَؤُلَاء","ذَلِكَ"], answer:1, hint:"Close + people → هَؤُلَاء"},
+    ],
+  },
+  {
+    id:"mudaf",
+    emoji:"🔗",
+    title:"الإِضَافَة",
+    titleEn:"Possessive Construction",
+    color:GP.amber, bg:GP.amberL,
+    tagline:"Joining two nouns: 'book of the student' = the student's book",
+    explanation:"الإِضَافَةُ: جَمْعُ اسْمَيْنِ مَعًا لِلتَّعْبِيرِ عَنِ المِلْكِيَّة أَوِ الانْتِمَاء:\n• المُضَافُ: الاسمُ الأَوَّل (لَا يَدْخُلُ عَلَيْهِ اَلـ)\n• المُضَافُ إِلَيْهِ: الاسمُ الثَّانِي (مَجْرُور — كَسْرَة)\nمِثَال: كِتَابُ الطَّالِبِ = The student's book\nمِثَال: بَيْتُ مُحَمَّدٍ = Muhammad's house",
+    explanationEn:"To say 'someone's something' in Arabic, you put the two nouns next to each other WITHOUT using 'of'. The FIRST noun loses its ال and the SECOND noun gets a kasrah!",
+    tip:"🌟 No 'of' needed! Just put them together: كِتَابُ الطَّالِبِ = book-of-the-student = the student's book!",
+    examples:[
+      {arabic:"كِتَابُ الطَّالِبِ", type:"book + student", english:"The student's book"},
+      {arabic:"بَابُ المَسْجِدِ", type:"door + mosque", english:"The door of the mosque"},
+      {arabic:"رَسُولُ اللهِ", type:"messenger + Allah", english:"The Messenger of Allah"},
+      {arabic:"بَيْتُ العَائِلَةِ", type:"house + family", english:"The family's house"},
+    ],
+    quiz:[
+      {question:"كِتَابُ الطَّالِبِ means...?", options:["The big book","The student's book","A book and a student"], answer:1, hint:"First noun + second noun = possession!"},
+      {question:"Which is correct for 'door of the mosque'?", options:["بَابُ المَسْجِدِ","اَلْبَابُ المَسْجِدُ","بَابٌ وَمَسْجِدٌ"], answer:0, hint:"First noun (بَاب) loses its اَلـ!"},
+      {question:"رَسُولُ اللهِ means...?", options:["A messenger","The Messenger of Allah","Messenger and Allah"], answer:1, hint:"Famous phrase — Messenger of Allah ﷺ"},
+      {question:"In إِضَافَة, the FIRST noun...", options:["Gets كسرة","Loses its اَلـ","Gets ضمة only"], answer:1, hint:"The first noun (مضاف) NEVER has اَلـ"},
+      {question:"In إِضَافَة, the SECOND noun...", options:["Gets ضمة","Loses اَلـ","Gets كسرة (genitive)"], answer:2, hint:"The second noun (مضاف إليه) always gets كسرة"},
+    ],
+  },
+  {
+    id:"mafool",
+    emoji:"🎯",
+    title:"المَفْعُولُ بِه",
+    titleEn:"Direct Object",
+    color:GP.rose, bg:GP.roseL,
+    tagline:"Who or what receives the action?",
+    explanation:"المَفْعُولُ بِهِ هُوَ الاسمُ الَّذِي يَقَعُ عَلَيْهِ الفِعْل:\n• الفَاعِل: مَنْ فَعَلَ الفِعْل (Subject — مَرْفُوع ضَمَّة)\n• الفِعْل: العَمَل (Verb)\n• المَفْعُول بِه: مَنْ وَقَعَ عَلَيْهِ الفِعْل (Object — مَنْصُوب فَتْحَة)\nمِثَال: أَكَلَ الوَلَدُ التُّفَّاحَةَ\n← الوَلَدُ = الفَاعِل (boy did it) / التُّفَّاحَةَ = المَفْعُول (apple received it)",
+    explanationEn:"The direct object is the noun that RECEIVES the action. In Arabic it gets a fathah (ـَ) at the end — this is called mansub!\nExample: أَكَلَ الوَلَدُ التُّفَّاحَةَ = The boy ate THE APPLE (apple is the object!)",
+    tip:"🌟 Find the verb, ask 'WHAT?' or 'WHO?' after it — that's your direct object! He ate WHAT? → the apple 🍎",
+    examples:[
+      {arabic:"أَكَلَ الوَلَدُ التُّفَّاحَةَ", type:"فعل + فاعل + مفعول", english:"The boy ate the apple"},
+      {arabic:"قَرَأَ مُحَمَّدٌ الكِتَابَ", type:"فعل + فاعل + مفعول", english:"Muhammad read the book"},
+      {arabic:"أَحَبَّ اللهُ الصَّابِرِينَ", type:"فعل + فاعل + مفعول", english:"Allah loves the patient ones"},
+      {arabic:"عَلَّمَ المُعَلِّمُ الطُّلَّابَ", type:"فعل + فاعل + مفعول", english:"The teacher taught the students"},
+    ],
+    quiz:[
+      {sentence:"أَكَلَ الوَلَدُ التُّفَّاحَةَ — what is the مفعول به?", options:["أَكَلَ (ate)","الوَلَدُ (boy)","التُّفَّاحَةَ (apple)"], answer:2, hint:"He ate WHAT? → the apple gets the action"},
+      {sentence:"قَرَأَ مُحَمَّدٌ الكِتَابَ — what is the مفعول به?", options:["قَرَأَ (read)","مُحَمَّدٌ","الكِتَابَ (book)"], answer:2, hint:"He read WHAT? → the book!"},
+      {sentence:"The مفعول به in Arabic gets...", options:["ضَمَّة (up)","فَتْحَة (open)","سُكُون (no vowel)"], answer:1, hint:"منصوب = فَتْحَة at the end — ـَ"},
+      {sentence:"عَلَّمَ المُعَلِّمُ الطُّلَّابَ — who is the فَاعِل?", options:["عَلَّمَ","المُعَلِّمُ (teacher)","الطُّلَّابَ (students)"], answer:1, hint:"WHO taught? → the teacher is the subject"},
+    ],
+  },
+  {
+    id:"adverbs",
+    emoji:"📍",
+    title:"ظَرْفُ الزَّمَانِ وَالمَكَان",
+    titleEn:"Adverbs of Time & Place",
+    color:GP.green, bg:GP.greenL,
+    tagline:"WHERE and WHEN — location words in Arabic",
+    explanation:"ظَرْفُ الزَّمَان = يَدُلُّ عَلَى الوَقْت:\nاليَوْمَ (today) · غَدًا (tomorrow) · أَمْسِ (yesterday) · الآن (now) · دَائِمًا (always)\n\nظَرْفُ المَكَان = يَدُلُّ عَلَى المَكَان:\nهُنَا (here) · هُنَاكَ (there) · أَمَامَ (in front of) · خَلْفَ (behind) · فَوْقَ (above) · تَحْتَ (under) · بَيْنَ (between) · بِجَانِب (beside)",
+    explanationEn:"Time adverbs answer WHEN? Place adverbs answer WHERE?\nThey usually come AFTER the verb in Arabic sentences.",
+    tip:"🌟 Remember: أَمَامَ = in FRONT (think: 'A-mama is IN FRONT of you!') · خَلْفَ = BEHIND · فَوْقَ = ABOVE · تَحْتَ = UNDER",
+    examples:[
+      {arabic:"ذَهَبْتُ إِلَى المَسْجِدِ اليَوْمَ", type:"ظرف زمان", english:"I went to the mosque TODAY"},
+      {arabic:"الكِتَابُ فَوْقَ الطَّاوِلَة", type:"ظرف مكان", english:"The book is ON TOP OF the table"},
+      {arabic:"سَأَدْرُسُ غَدًا", type:"ظرف زمان", english:"I will study TOMORROW"},
+      {arabic:"الحَقِيبَةُ بَيْنَ الكُرْسِيَّيْن", type:"ظرف مكان", english:"The bag is BETWEEN the two chairs"},
+    ],
+    quiz:[
+      {word:"اليَوْمَ", question:"What type of adverb is اليَوْمَ (today)?", options:["ظرف زمان (time)","ظرف مكان (place)","اسم"], answer:0, hint:"Today answers WHEN? → time adverb!"},
+      {word:"فَوْقَ", question:"What type of adverb is فَوْقَ (above)?", options:["ظرف زمان (time)","ظرف مكان (place)","فعل"], answer:1, hint:"Above answers WHERE? → place adverb!"},
+      {word:"هُنَا", question:"What does هُنَا mean?", options:["Tomorrow","Here","Yesterday"], answer:1, hint:"هُنَا = here (close to you)"},
+      {word:"أَمَامَ", question:"What does أَمَامَ mean?", options:["Behind","Under","In front of"], answer:2, hint:"أَمَامَ = in front of"},
+      {word:"غَدًا", question:"What does غَدًا mean?", options:["Yesterday","Today","Tomorrow"], answer:2, hint:"غَدًا is the day coming after today"},
+      {word:"تَحْتَ", question:"What does تَحْتَ mean?", options:["Above","Under/Below","Beside"], answer:1, hint:"تَحْتَ is the OPPOSITE of فَوْقَ (above)"},
+    ],
+  },
+  {
+    id:"nahy",
+    emoji:"🚫",
+    title:"أُسْلُوبُ النَّهْي",
+    titleEn:"Prohibition (Don't...!)",
+    color:GP.sky, bg:GP.skyL,
+    tagline:"How to say 'Don't do that!' in Arabic",
+    explanation:"أُسْلُوبُ النَّهْيِ: لِقَوْلِ «لَا تَفْعَلْ» نَسْتَخْدِمُ:\nلَا النَّاهِيَة + المُضَارِع المَجْزُوم\nمِثَال:\n• لَا تَكْذِبْ! = Don't lie!\n• لَا تَتْرُكِ الصَّلَاة! = Don't leave the prayer!\n• لَا تَحْزَنْ! = Don't be sad!\n• لَا تَيْأَسْ! = Don't despair!\n• لَا تَأْكُلْ كَثِيرًا! = Don't eat too much!",
+    explanationEn:"To say 'Don't...' in Arabic, use:\n▶ لَا (the prohibiting لا) + the verb in the jussive (مجزوم) form.\nThe verb loses its ن or vowel at the end — this is the مجزوم form!",
+    tip:"🌟 Easy: Just say لَا then the verb! لَا + تَكْذِبْ = Don't lie! لَا + تَحْزَنْ = Don't be sad! The Quran uses this all the time!",
+    examples:[
+      {arabic:"لَا تَكْذِبْ!", type:"لا + فعل مجزوم", english:"Don't lie!"},
+      {arabic:"لَا تَحْزَنْ إِنَّ اللهَ مَعَنَا", type:"قرآن كريم", english:"Don't be sad, Allah is with us (Quran 9:40)"},
+      {arabic:"لَا تَيْأَسُوا مِنْ رَوْحِ الله", type:"قرآن كريم", english:"Don't despair of Allah's mercy (Quran 12:87)"},
+      {arabic:"لَا تَتْرُكِ الصَّلَاة", type:"لا + فعل مجزوم", english:"Don't leave/miss the prayer"},
+    ],
+    quiz:[
+      {sentence:"لَا تَكْذِبْ means...?", options:["Don't lie!","You are lying","He lied"], answer:0, hint:"لَا + تَكْذِب = don't + lie"},
+      {sentence:"لَا تَحْزَنْ means...?", options:["Be happy!","Don't be sad!","He is sad"], answer:1, hint:"Famous Quran phrase — don't be sad!"},
+      {sentence:"To say 'Don't eat!', you say...", options:["أَكَلَ!","لَا تَأْكُلْ!","يَأْكُلُ!"], answer:1, hint:"لَا + تَأْكُلْ = Don't eat!"},
+      {sentence:"لَا تَيْأَسْ means...?", options:["Don't despair!","Work hard!","Don't eat!"], answer:0, hint:"يَأَسَ = despair → لَا تَيْأَسْ = don't despair"},
+      {sentence:"Which is a نهي sentence?", options:["ذَهَبَ الوَلَدُ","لَا تَتْرُكِ الصَّلَاة!","الكِتَابُ كَبِير"], answer:1, hint:"Prohibition always starts with لَا النَّاهِيَة"},
+    ],
+  },
+];
+
+// ── Grammar topic quiz game ───────────────────────────────────────────────────
+function GrammarTopicGame({ topic, onFinish }) {
+  const [idx,setIdx]     = useState(0);
+  const [chosen,setChosen]= useState(null);
+  const [score,setScore] = useState(0);
+  const [done,setDone]   = useState(false);
+  const qs = topic.quiz;
+  const q  = qs[idx];
+
+  function pick(i) {
+    if (chosen !== null) return;
+    setChosen(i);
+    if (i === q.answer) setScore(s => s+1);
+  }
+
+  function next() {
+    if (idx+1 < qs.length) { setIdx(i=>i+1); setChosen(null); }
+    else setDone(true);
+  }
+
+  if (done) {
+    const pct = Math.round(score/qs.length*100);
+    return e("div",{className:"pop",style:{textAlign:"center",padding:"28px 0"}},
+      e("div",{className:"star-pop",style:{fontSize:80,marginBottom:10}},
+        pct>=80?"🏆":pct>=50?"⭐":"💪"),
+      e("h3",{style:{...AF,fontSize:26,fontWeight:900,color:topic.color,direction:"rtl",marginBottom:8}},
+        pct>=80?"مَمْتَاز! أَنْتَ نَجْم! 🌟":pct>=50?"جَيِّدٌ جِدًّا! 👍":"اِسْتَمِرَّ فِي التَّدْرِيب! 💪"),
+      e("p",{style:{fontSize:16,color:P.gray,marginBottom:28}},`${score} من ${qs.length} صحيح (${pct}%)`),
+      e("button",{onClick:()=>onFinish(pct),
+        style:{background:`linear-gradient(135deg,${topic.color},#1e40af)`,color:"#fff",border:"none",
+          borderRadius:16,padding:"16px 36px",fontSize:17,fontWeight:900,
+          boxShadow:`0 6px 24px ${topic.color}60`}},
+        "التَّالِي ✨")
+    );
+  }
+
+  const questionText = q.question || q.sentence || q.word || "";
+  const hint = q.hint || "";
+
+  return e("div",{className:"slide"},
+    // progress
+    e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}},
+      e("span",{style:{fontSize:13,color:P.gray,fontWeight:700}},`${idx+1} / ${qs.length}`),
+      e("div",{style:{display:"flex",gap:5}},
+        ...qs.map((_,i)=>e("div",{key:i,style:{width:9,height:9,borderRadius:"50%",
+          background:i<idx?topic.color:i===idx?"#f97316":"#e5e7eb"}}))
+      ),
+      e("span",{style:{fontSize:13,color:topic.color,fontWeight:700}},`⭐ ${score}`)
+    ),
+    // question card
+    e("div",{style:{background:`linear-gradient(135deg,${topic.bg},#fff)`,borderRadius:20,
+      padding:24,marginBottom:20,border:`2px solid ${topic.color}30`,
+      boxShadow:`0 4px 16px ${topic.color}18`}},
+      e("p",{style:{...AF,fontSize:22,fontWeight:800,color:"#1c1917",direction:"rtl",
+        lineHeight:1.9,margin:0,textAlign:"center"}},questionText)
+    ),
+    // feedback hint (shown after answering)
+    chosen !== null && e("div",{className:"pop",style:{
+      background:chosen===q.answer?"#dcfce7":"#fee2e2",
+      border:`2px solid ${chosen===q.answer?"#22c55e":"#ef4444"}`,
+      borderRadius:14,padding:"10px 18px",marginBottom:14,
+      display:"flex",alignItems:"center",gap:10,direction:"rtl"}},
+      e("span",{style:{fontSize:24}},chosen===q.answer?"🎉":"💡"),
+      e("span",{style:{...AF,fontSize:16,fontWeight:800,
+        color:chosen===q.answer?"#15803d":"#991b1b"}},
+        chosen===q.answer?"صَحّ! أَحْسَنْت!":hint)
+    ),
+    // options
+    e("div",{style:{display:"flex",flexDirection:"column",gap:12}},
+      ...q.options.map((opt,i)=>{
+        let bg="#fff",border="2px solid #e5e7eb",color="#1c1917",shadow="0 2px 8px rgba(0,0,0,.06)";
+        if (chosen !== null) {
+          if (i===q.answer){bg="#dcfce7";border=`2px solid #22c55e`;color="#15803d";shadow="0 4px 12px rgba(34,197,94,.2)";}
+          else if (i===chosen){bg="#fee2e2";border="2px solid #ef4444";color="#991b1b";shadow="none";}
+        }
+        return e("button",{key:i,onClick:()=>pick(i),
+          style:{...AF,background:bg,border,borderRadius:16,padding:"16px 20px",fontSize:20,
+            direction:"rtl",textAlign:"right",cursor:chosen===null?"pointer":"default",
+            color,fontWeight:700,display:"flex",alignItems:"center",gap:12,
+            boxShadow:shadow,transition:"background .2s, border .2s"}},
+          chosen!==null&&i===q.answer&&e("span",{style:{fontSize:20}},"✅"),
+          chosen!==null&&i===chosen&&i!==q.answer&&e("span",{style:{fontSize:20}},"❌"),
+          opt
+        );
+      })
+    ),
+    chosen!==null && e("button",{onClick:next,
+      style:{width:"100%",marginTop:18,background:`linear-gradient(135deg,${topic.color},#1e40af)`,
+        color:"#fff",border:"none",borderRadius:16,padding:"16px 0",fontSize:17,fontWeight:900,
+        boxShadow:`0 6px 24px ${topic.color}50`}},
+      idx+1<qs.length?"السُّؤَالُ التَّالِي ←":"اعْرِضِ النَّتِيجَة 🎯")
+  );
+}
+
+// ── Grammar topic lesson (explanation + examples + quiz) ─────────────────────
+function GrammarTopicView({ topic, onBack }) {
+  const [step, setStep] = useState("learn"); // learn | examples | quiz | done
+  const [quizScore, setQuizScore] = useState(0);
+
+  if (step === "quiz") return e("div",null,
+    e("div",{style:{display:"flex",alignItems:"center",gap:12,marginBottom:20}},
+      e("button",{onClick:()=>setStep("examples"),
+        style:{background:topic.bg,border:`1.5px solid ${topic.color}30`,borderRadius:12,padding:10}},
+        I.back(20,topic.color)),
+      e("h2",{style:{...AF,fontSize:20,fontWeight:900,color:topic.color,direction:"rtl",margin:0}},
+        "🧠 التَّدْرِيب — "+topic.title)
+    ),
+    e(GrammarTopicGame,{topic,onFinish:pct=>{setQuizScore(pct);setStep("done");}})
+  );
+
+  if (step === "done") return e("div",{className:"pop",style:{textAlign:"center",padding:"32px 16px"}},
+    e("div",{style:{fontSize:72,marginBottom:12}},"🎓"),
+    e("h2",{style:{...AF,fontSize:26,fontWeight:900,color:topic.color,direction:"rtl",marginBottom:8}},
+      "انْتَهَيْتَ مِنَ الدَّرْس! 🌟"),
+    e("p",{style:{...AF,fontSize:18,color:"#374151",direction:"rtl",marginBottom:8}},topic.title),
+    e("p",{style:{fontSize:15,color:P.gray,marginBottom:28}},`نَتِيجَتُكَ: ${quizScore}%`),
+    e("button",{onClick:onBack,
+      style:{background:`linear-gradient(135deg,${topic.color},#1e40af)`,color:"#fff",border:"none",
+        borderRadius:16,padding:"16px 36px",fontSize:17,fontWeight:900,
+        boxShadow:`0 6px 24px ${topic.color}50`}},
+      "العَوْدَةُ لِلقَوَاعِد 📐")
+  );
+
+  return e("div",{className:"slide"},
+    // topic header
+    e("div",{style:{background:`linear-gradient(135deg,${topic.color},#1e40af)`,
+      borderRadius:20,padding:"20px 18px",marginBottom:20,
+      boxShadow:`0 6px 24px ${topic.color}40`}},
+      e("div",{style:{display:"flex",alignItems:"center",gap:12,marginBottom:8}},
+        e("button",{onClick:onBack,style:{background:"rgba(255,255,255,.2)",border:"none",
+          borderRadius:10,padding:8}},I.back(18,"#fff")),
+        e("span",{style:{fontSize:36}},topic.emoji),
+        e("div",null,
+          e("h2",{style:{...AF,fontSize:20,fontWeight:900,color:"#fff",direction:"rtl",margin:0}},
+            topic.title),
+          e("p",{style:{fontSize:12,color:"rgba(255,255,255,.8)",margin:0}},topic.titleEn)
+        )
+      ),
+      e("p",{style:{fontSize:14,color:"rgba(255,255,255,.9)",fontWeight:700,margin:0}},
+        topic.tagline)
+    ),
+
+    // step tabs
+    e("div",{style:{display:"flex",gap:6,marginBottom:20}},
+      ...[["learn","📖 تَعَلَّم"],["examples","✨ أَمْثِلَة"],["quiz","🧠 اخْتَبِر"]].map(([s,l])=>
+        e("button",{key:s,onClick:()=>setStep(s),
+          style:{flex:1,...AF,padding:"10px 4px",fontSize:13,fontWeight:800,
+            background:step===s?topic.color:"#fff",
+            color:step===s?"#fff":topic.color,
+            border:`2px solid ${topic.color}`,borderRadius:12,direction:"rtl"}},l)
+      )
+    ),
+
+    // LEARN step
+    step==="learn" && e("div",null,
+      // Arabic explanation box
+      e("div",{style:{background:topic.bg,borderRadius:18,padding:20,marginBottom:16,
+        border:`2px solid ${topic.color}20`}},
+        e("p",{style:{...AF,fontSize:19,lineHeight:2.2,direction:"rtl",color:"#1c1917",
+          whiteSpace:"pre-line",margin:0}},topic.explanation)
+      ),
+      // English explanation
+      e("div",{style:{background:"#f8fafc",borderRadius:14,padding:16,marginBottom:16,
+        border:"1.5px solid #e2e8f0"}},
+        e("p",{style:{fontSize:14,color:"#374151",lineHeight:1.8,whiteSpace:"pre-line",
+          margin:0,direction:"ltr"}},topic.explanationEn)
+      ),
+      // tip box
+      e("div",{style:{background:"#fffbeb",borderRadius:14,padding:16,
+        border:"2px solid #fbbf24",direction:"rtl"}},
+        e("p",{style:{...AF,fontSize:16,color:"#92400e",lineHeight:1.9,margin:0}},topic.tip)
+      ),
+      e("button",{onClick:()=>setStep("examples"),
+        style:{width:"100%",marginTop:20,background:`linear-gradient(135deg,${topic.color},#1e40af)`,
+          color:"#fff",border:"none",borderRadius:16,padding:"16px 0",fontSize:17,fontWeight:900,
+          boxShadow:`0 6px 24px ${topic.color}50`}},
+        "اُنْظُرِ الأَمْثِلَة ✨")
+    ),
+
+    // EXAMPLES step
+    step==="examples" && e("div",null,
+      e("h3",{style:{...AF,fontSize:19,fontWeight:900,color:topic.color,direction:"rtl",marginBottom:14}},
+        "✨ أَمْثِلَة حَيَّة"),
+      e("div",{style:{display:"flex",flexDirection:"column",gap:14,marginBottom:20}},
+        ...topic.examples.map((ex,i)=>
+          e("div",{key:i,style:{background:"#fff",borderRadius:18,padding:18,
+            border:`2px solid ${topic.color}20`,
+            boxShadow:`0 3px 12px ${topic.color}12`}},
+            e("p",{style:{...AF,fontSize:26,fontWeight:900,color:topic.color,
+              direction:"rtl",margin:"0 0 6px",lineHeight:1.8}},ex.arabic),
+            e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:4}},
+              e("span",{style:{fontSize:12,background:topic.bg,color:topic.color,
+                borderRadius:20,padding:"3px 10px",fontWeight:800}},ex.type),
+              e("span",{style:{fontSize:14,color:"#6b7280",fontStyle:"italic"}},ex.english)
+            )
+          )
+        )
+      ),
+      e("button",{onClick:()=>setStep("quiz"),
+        style:{width:"100%",background:`linear-gradient(135deg,${topic.color},#1e40af)`,
+          color:"#fff",border:"none",borderRadius:16,padding:"16px 0",fontSize:17,fontWeight:900,
+          boxShadow:`0 6px 24px ${topic.color}50`}},
+        "ابْدَأِ التَّدْرِيب 🧠")
+    )
+  );
+}
+
+// ── Grammar home screen ───────────────────────────────────────────────────────
+function GrammarSection({ onHome }) {
+  const [sel, setSel] = useState(null);
+  const [doneMap, setDoneMap] = useState({});
+
+  if (sel !== null) {
+    const topic = GRAMMAR_TOPICS[sel];
+    return e(GrammarTopicView,{
+      topic,
+      onBack:()=>setSel(null),
+    });
+  }
+
+  return e("div",{style:{minHeight:"100vh",background:"#eff6ff"}},
+    // Header
+    e("div",{style:{background:`linear-gradient(135deg,${GP.blue},${GP.blueD})`,
+      padding:"20px 16px 18px",position:"sticky",top:0,zIndex:10,
+      boxShadow:"0 4px 16px rgba(29,78,216,.3)"}},
+      e("div",{style:{display:"flex",alignItems:"center",marginBottom:6}},
+        onHome && e("button",{onClick:onHome,
+          style:{background:"rgba(255,255,255,.2)",border:"none",borderRadius:10,padding:"6px 10px",
+            display:"flex",alignItems:"center",gap:4,color:"#fff",fontSize:12,fontWeight:700,
+            cursor:"pointer",flexShrink:0}},
+          I.home(15,"#fff")," الرَّئِيسِيَّة")
+      ),
+      e("p",{style:{...AF,fontSize:24,color:"#fff",textAlign:"center",margin:0,direction:"rtl",
+        fontWeight:900}},"📐 قَوَاعِدُ اللُّغَةِ العَرَبِيَّة"),
+      e("p",{style:{fontSize:12,color:"rgba(255,255,255,.8)",textAlign:"center",margin:"3px 0 0"}},
+        "Arabic Grammar — Made Easy for Kids!")
+    ),
+    // Intro banner
+    e("div",{style:{background:"linear-gradient(135deg,#dbeafe,#ede9fe)",
+      margin:"16px 14px 0",borderRadius:16,padding:16,border:"2px solid #bfdbfe"}},
+      e("p",{style:{...AF,fontSize:16,color:GP.blueD,direction:"rtl",fontWeight:700,
+        margin:"0 0 4px"}},"🌟 كَيْفَ تَسْتَخْدِمُ هَذَا القِسْم؟"),
+      e("p",{style:{fontSize:13,color:"#374151",lineHeight:1.7,margin:0}},
+        "Pick a grammar topic below → Read the explanation → See examples → Take the quiz! Each topic has a fun mini-game to test what you learned.")
+    ),
+    // Topic cards
+    e("div",{style:{padding:"14px 14px 100px",display:"flex",flexDirection:"column",gap:14}},
+      ...GRAMMAR_TOPICS.map((topic,i)=>
+        e("button",{key:topic.id,onClick:()=>setSel(i),
+          style:{background:"#fff",borderRadius:22,padding:"18px 18px 16px",cursor:"pointer",
+            textAlign:"right",display:"flex",alignItems:"center",gap:14,
+            border:`2px solid ${topic.color}20`,
+            borderLeft:`6px solid ${topic.color}`,
+            boxShadow:`0 4px 18px ${topic.color}15`,
+            transition:"transform .12s, box-shadow .12s"}},
+          e("div",{style:{width:64,height:64,borderRadius:18,background:topic.bg,
+            display:"flex",alignItems:"center",justifyContent:"center",fontSize:32,
+            flexShrink:0,boxShadow:`0 4px 12px ${topic.color}25`,
+            border:`2px solid ${topic.color}20`}},topic.emoji),
+          e("div",{style:{flex:1,minWidth:0}},
+            e("p",{style:{...AF,fontSize:20,fontWeight:900,color:topic.color,
+              direction:"rtl",margin:"0 0 4px"}},topic.title),
+            e("p",{style:{fontSize:12,color:"#6b7280",margin:"0 0 6px",fontWeight:700}},
+              topic.titleEn),
+            e("p",{style:{...AF,fontSize:13,color:"#78350f",direction:"rtl",margin:0,
+              lineHeight:1.5}},topic.tagline)
+          ),
+          e("div",{style:{display:"flex",flexDirection:"column",alignItems:"center",gap:4,flexShrink:0}},
+            e("span",{style:{fontSize:22,color:topic.color}},"›"),
+            e("span",{style:{fontSize:10,color:P.gray,fontWeight:700}},`${topic.quiz.length} سؤال`)
+          )
+        )
+      )
+    )
+  );
+}
+
 // ── ROOT APP ──────────────────────────────────────────────────────────────────
 function App() {
   const { lessons, banks, loaded } = useContent();
@@ -2770,6 +3244,14 @@ function App() {
       e("span",{style:{fontSize:26}},"📖"),
       "عَرَبِيَّة"
     ),
+    e("button",{onClick:()=>setTab("grammar"),style:{
+      flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2,
+      padding:"10px 0 14px",background:"none",border:"none",cursor:"pointer",
+      color:tab==="grammar"?GP.blue:"#9ca3af",fontWeight:800,fontSize:11
+    }},
+      e("span",{style:{fontSize:26}},"📐"),
+      "قَوَاعِد"
+    ),
     e("button",{onClick:()=>setTab("islamic"),style:{
       flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2,
       padding:"10px 0 14px",background:"none",border:"none",cursor:"pointer",
@@ -2793,6 +3275,10 @@ function App() {
     e("button",{className:isArabic&&screen==="dashboard"?"active":"",
       onClick:()=>{setTab("arabic");setScreen("dashboard");}},
       e("span",{className:"nav-icon"},"📊"), "تَقَدُّمِي"),
+    e("button",{className:tab==="grammar"?"active":"",
+      onClick:()=>setTab("grammar"),
+      style:tab==="grammar"?{background:"linear-gradient(135deg,#dbeafe,#ede9fe)",color:GP.blue,boxShadow:"0 2px 8px rgba(29,78,216,.2)"}:{}},
+      e("span",{className:"nav-icon"},"📐"), "القَوَاعِد"),
     e("button",{className:tab==="islamic"?"active":"",
       onClick:()=>setTab("islamic")},
       e("span",{className:"nav-icon"},"🌙"), "الإِسْلَامِيَّات"),
@@ -2800,6 +3286,14 @@ function App() {
     e("button",{onClick:()=>setScreen("print-all"),
       style:{background:"#f0fdf4",color:P.greenD,borderRadius:12}},
       e("span",{className:"nav-icon"},I.printer(18,P.greenD)), "طباعة الكُلّ")
+  );
+
+  if (tab==="grammar") return e("div",{className:"app-shell"},
+    SidebarNav,
+    e("div",{className:"content-area",style:{padding:"0 0 80px"}},
+      e(GrammarSection,{onHome:()=>{setTab("arabic");setScreen("home");}})
+    ),
+    BottomNav
   );
 
   if (tab==="islamic") return e("div",{className:"app-shell"},
@@ -2821,6 +3315,7 @@ function App() {
           onDashboard:()=>setScreen("dashboard"),
           onPrint:id=>{setPLId(id);setScreen("print");},
           onPrintAll:()=>setScreen("print-all"),
+          onGrammar:()=>setTab("grammar"),
         }),
         screen==="lesson"&&al && e("div",null,
           e(LessonFlow,{lesson:al,onComplete:completeLesson,onBack:()=>setScreen("home")}),
