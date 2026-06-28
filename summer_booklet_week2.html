@@ -50,6 +50,25 @@
   td, th { border: 1px solid #888; padding: 5px 8px; text-align: center; }
   th { background: #2e7d32; color: #fff; }
   .circle-frac { display: inline-block; width: 48px; height: 48px; border-radius: 50%; border: 2px solid #333; margin: 4px; vertical-align: middle; position: relative; overflow: hidden; }
+
+  /* ── PRINT ── */
+  @page { margin: 0; size: letter; }
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { margin: 0; padding: 0; background: #fff; }
+    .page {
+      width: 8.5in; min-height: 11in;
+      page-break-after: always; break-after: page;
+      page-break-inside: avoid;
+    }
+    .problem-block { break-inside: avoid; page-break-inside: avoid; }
+    .challenge-box { break-inside: avoid; page-break-inside: avoid; }
+    .grid-2, .grid-3, .grid-4 { break-inside: avoid; page-break-inside: avoid; }
+    .work-box { break-inside: avoid; page-break-inside: avoid; }
+    .intro-box { break-inside: avoid; page-break-inside: avoid; }
+    h2 { break-after: avoid; page-break-after: avoid; }
+    h3 { break-after: avoid; page-break-after: avoid; }
+  }
 </style>
 </head>
 <body>

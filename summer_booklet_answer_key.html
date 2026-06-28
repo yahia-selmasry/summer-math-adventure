@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <title>Summer Math Booklet – ANSWER KEY</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Georgia', serif; font-size: 12px; color: #1a1a1a; background: #fff; }
+  body { font-family: 'Nunito', 'Arial Rounded MT Bold', sans-serif; font-size: 12px; color: #1a1a1a; background: #fff; }
   .page { width: 8.5in; min-height: 11in; padding: 0.5in 0.65in; page-break-after: always; position: relative; }
   h1 { font-size: 20px; color: #1a3a6b; border-bottom: 3px solid #1a3a6b; padding-bottom: 4px; margin-bottom: 6px; }
   h2 { font-size: 14px; color: #b03a00; margin: 12px 0 4px; border-left: 4px solid #b03a00; padding-left: 8px; }
@@ -26,6 +27,23 @@
   .warning { background: #fff3e0; border: 1px solid #f57c00; border-radius: 4px; padding: 6px 10px; font-size: 11px; margin-bottom: 10px; }
   .badge-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
   .week-badge { background: #1a3a6b; color: #fff; padding: 3px 10px; border-radius: 12px; font-size: 10px; font-weight: bold; }
+
+  /* ── PRINT ── */
+  @page { margin: 0; size: letter; }
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { margin: 0; padding: 0; background: #fff; }
+    .page {
+      width: 8.5in; min-height: 11in;
+      page-break-after: always; break-after: page;
+      page-break-inside: avoid;
+    }
+    .step-box { break-inside: avoid; page-break-inside: avoid; }
+    .grid-2, .grid-3 { break-inside: avoid; page-break-inside: avoid; }
+    .warning { break-inside: avoid; page-break-inside: avoid; }
+    h2 { break-after: avoid; page-break-after: avoid; }
+    h3 { break-after: avoid; page-break-after: avoid; }
+  }
 </style>
 </head>
 <body>

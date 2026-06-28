@@ -71,8 +71,24 @@ sup { font-size: 0.75em; vertical-align: super; }
 .step-box { background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; padding: 8px 12px; margin: 6px 0; font-size: 11px; line-height: 1.8; }
 .step { color: #1a3a6b; font-weight: bold; }
 
-@media print { .page { page-break-after: always; } body { margin: 0; padding: 0; } }
 @page { margin: 0; size: letter; }
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  body { margin: 0; padding: 0; background: #fff; }
+  .page {
+    width: 8.5in; min-height: 11in;
+    page-break-after: always; break-after: page;
+    page-break-inside: avoid;
+  }
+  .problem-block { break-inside: avoid; page-break-inside: avoid; }
+  .challenge-box { break-inside: avoid; page-break-inside: avoid; }
+  .step-box { break-inside: avoid; page-break-inside: avoid; }
+  .grid-2, .grid-3, .grid-4 { break-inside: avoid; page-break-inside: avoid; }
+  .work-box, .work-box-sm { break-inside: avoid; page-break-inside: avoid; }
+  .intro-box { break-inside: avoid; page-break-inside: avoid; }
+  h2 { break-after: avoid; page-break-after: avoid; }
+  h3 { break-after: avoid; page-break-after: avoid; }
+}
 </style>
 </head>
 <body>

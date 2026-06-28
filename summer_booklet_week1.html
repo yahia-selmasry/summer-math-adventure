@@ -94,6 +94,25 @@
   .fraction .num { display: block; border-bottom: 1px solid #333; }
   .fraction .den { display: block; }
   .hint { font-size: 10px; color: #555; font-style: italic; }
+
+  /* ── PRINT ── */
+  @page { margin: 0; size: letter; }
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { margin: 0; padding: 0; background: #fff; }
+    .page {
+      width: 8.5in; min-height: 11in;
+      page-break-after: always; break-after: page;
+      page-break-inside: avoid;
+    }
+    .problem-block { break-inside: avoid; page-break-inside: avoid; }
+    .challenge-box { break-inside: avoid; page-break-inside: avoid; }
+    .grid-2, .grid-3 { break-inside: avoid; page-break-inside: avoid; }
+    .work-box { break-inside: avoid; page-break-inside: avoid; }
+    .intro-box { break-inside: avoid; page-break-inside: avoid; }
+    h2 { break-after: avoid; page-break-after: avoid; }
+    h3 { break-after: avoid; page-break-after: avoid; }
+  }
 </style>
 </head>
 <body>
