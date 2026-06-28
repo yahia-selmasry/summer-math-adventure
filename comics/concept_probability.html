@@ -50,7 +50,7 @@ sup { font-size:0.65em; vertical-align:super; }
 .marble { display:inline-block; width:22px; height:22px; border-radius:50%; border:2px solid #555; margin:2px; vertical-align:middle; }
 .think-sign { background:#c62828; color:#fff; font-size:11px; font-weight:700; text-align:center; padding:12px 14px; border-radius:8px; display:inline-block; line-height:1.4; flex-shrink:0; max-width:140px; }
 /* probability scale */
-.prob-scale { position:relative; height:36px; margin:12px 8px 8px; }
+.prob-scale { position:relative; height:64px; margin:12px 8px 8px; }
 .ps-line { position:absolute; top:16px; left:0; right:0; height:4px; background:linear-gradient(to right,#c62828,#f0a500,#2e7d32); border-radius:2px; }
 .ps-label { position:absolute; top:22px; font-size:10px; font-weight:700; transform:translateX(-50%); }
 .ps-mark { position:absolute; top:10px; width:3px; height:14px; background:#1a1a1a; transform:translateX(-50%); }
@@ -119,11 +119,11 @@ sup { font-size:0.65em; vertical-align:super; }
         <div class="ps-mark" style="left:0;"></div>
         <div class="ps-mark" style="left:50%;"></div>
         <div class="ps-mark" style="left:100%;"></div>
-        <div class="ps-label" style="left:0;top:26px;color:#c62828;">0<br>Impossible</div>
+        <div class="ps-label" style="left:0;top:26px;color:#c62828;transform:none;">0<br>Impossible</div>
         <div class="ps-label" style="left:50%;color:#555;">½<br>Even</div>
-        <div class="ps-label" style="left:100%;color:#2e7d32;">1<br>Certain</div>
+        <div class="ps-label" style="left:100%;color:#2e7d32;transform:translateX(-100%);">1<br>Certain</div>
       </div>
-      <div style="margin-top:28px;font-size:12px;display:flex;flex-direction:column;gap:4px;">
+      <div style="margin-top:8px;font-size:12px;display:flex;flex-direction:column;gap:4px;">
         <div>🚫 P = 0 → <strong>impossible</strong> (rolling a 7 on a 6-sided die)</div>
         <div>🟡 P = ½ → <strong>equally likely</strong> (flipping heads)</div>
         <div>✅ P = 1 → <strong>certain</strong> (sun rises tomorrow)</div>
