@@ -4053,6 +4053,468 @@ function GrammarSection({ onHome }) {
 }
 
 // ── ROOT APP ──────────────────────────────────────────────────────────────────
+// ─── Games palette ────────────────────────────────────────────────────────
+const GMP = {
+  purple:"#7c3aed", purpleL:"#ede9fe",
+  pink:"#db2777",   pinkL:"#fce7f3",
+  teal:"#0f766e",   tealL:"#ccfbf1",
+  orange:"#ea580c", orangeL:"#ffedd5",
+  green:"#15803d",  greenL:"#dcfce7",
+  red:"#dc2626",    redL:"#fee2e2",
+  gold:"#b45309",   goldL:"#fef9c3",
+  blue:"#1d4ed8",   blueL:"#dbeafe",
+};
+
+// ─── collect all vocab words from lessons + vocab packs ───────────────────
+function getAllGameWords(lessons) {
+  const seen = new Set();
+  const words = [];
+  lessons.forEach(l => {
+    (l.vocab||[]).forEach(v => {
+      if (v.ar && v.en && !seen.has(v.ar)) {
+        seen.add(v.ar);
+        words.push({ ar: v.ar, en: v.en });
+      }
+    });
+  });
+  VOCAB_PACKS.forEach(pack => {
+    pack.words.forEach(w => {
+      if (w.ar && w.en && !seen.has(w.ar)) {
+        seen.add(w.ar);
+        words.push({ ar: w.ar, en: w.en });
+      }
+    });
+  });
+  return words;
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+// ─── GAME 1: Word Match ───────────────────────────────────────────────────
+function WordMatchGame({ words, onFinish }) {
+  const pool = useMemo(()=>shuffle(words).slice(0,6),[]);
+  const leftItems  = pool;
+  const rightItems = useMemo(()=>shuffle(pool),[pool]);
+
+  const [selL, setSelL] = useState(null);
+  const [selR, setSelR] = useState(null);
+  const [matched, setMatched] = useState(new Set());
+  const [wrong, setWrong]     = useState(null);
+  const [score, setScore]     = useState(0);
+  const [timeLeft, setTimeLeft] = useState(60);
+  const [done, setDone]         = useState(false);
+
+  useEffect(()=>{
+    if (done) return;
+    const t = setInterval(()=>setTimeLeft(p=>{
+      if (p<=1){ setDone(true); return 0; }
+      return p-1;
+    }),1000);
+    return ()=>clearInterval(t);
+  },[done]);
+
+  useEffect(()=>{
+    if (matched.size===pool.length) setDone(true);
+  },[matched,pool]);
+
+  function pickLeft(i) {
+    if (matched.has(leftItems[i].ar)) return;
+    setSelL(i);
+    if (selR!==null) check(i, selR);
+  }
+  function pickRight(i) {
+    if (matched.has(rightItems[i].ar)) return;
+    setSelR(i);
+    if (selL!==null) check(selL, i);
+  }
+  function check(li, ri) {
+    if (leftItems[li].ar === rightItems[ri].ar) {
+      setMatched(prev=>new Set([...prev, leftItems[li].ar]));
+      setScore(s=>s+10);
+      setSelL(null); setSelR(null);
+    } else {
+      setWrong(`${li}-${ri}`);
+      setTimeout(()=>{ setWrong(null); setSelL(null); setSelR(null); }, 700);
+    }
+  }
+
+  const pct = Math.round((matched.size/pool.length)*100);
+
+  if (done) return e("div",{style:{textAlign:"center",padding:32,animation:"pop .4s cubic-bezier(.34,1.56,.64,1)"}},
+    e("div",{style:{fontSize:64,marginBottom:8}}, matched.size===pool.length?"🏆":"⏰"),
+    e("div",{style:{fontSize:26,fontWeight:900,color:GMP.purple,...AF,marginBottom:4}},
+      matched.size===pool.length ? "أَحْسَنْتَ! مُمْتَاز!" : "انْتَهَى الوَقْت!"),
+    e("div",{style:{fontSize:18,color:GMP.gold,fontWeight:800,marginBottom:24}},
+      `${score} نُقْطَة • ${matched.size} / ${pool.length} كَلِمَات`),
+    e("button",{onClick:onFinish,style:{
+      background:`linear-gradient(135deg,${GMP.purple},${GMP.pink})`,
+      color:"#fff",border:"none",borderRadius:16,padding:"14px 36px",
+      fontSize:16,fontWeight:800,cursor:"pointer",...AF
+    }},"العَبْ مَرَّة أُخْرَى 🔄")
+  );
+
+  return e("div",{style:{padding:"16px 0"}},
+    e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}},
+      e("div",{style:{background:GMP.purpleL,borderRadius:12,padding:"6px 14px",fontWeight:800,color:GMP.purple,fontSize:14}},
+        `⏱ ${timeLeft}s`),
+      e("div",{style:{fontWeight:900,color:GMP.gold,fontSize:15,...AF}}, `${score} نُقْطَة`),
+      e("div",{style:{background:GMP.greenL,borderRadius:12,padding:"6px 14px",fontWeight:800,color:GMP.green,fontSize:13}},
+        `${matched.size}/${pool.length} ✓`)
+    ),
+    e("div",{style:{height:8,background:"#e5e7eb",borderRadius:8,marginBottom:20,overflow:"hidden"}},
+      e("div",{style:{height:"100%",width:`${pct}%`,background:`linear-gradient(90deg,${GMP.purple},${GMP.pink})`,borderRadius:8,transition:"width .4s"}})
+    ),
+    e("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}},
+      e("div",{style:{display:"flex",flexDirection:"column",gap:8}},
+        e("div",{style:{textAlign:"center",fontSize:11,fontWeight:700,color:GMP.purple,marginBottom:4,...AF}},"العَرَبِيَّة"),
+        ...leftItems.map((w,i)=>{
+          const isMatched = matched.has(w.ar);
+          const isSel = selL===i;
+          const isWrong = wrong && wrong.startsWith(`${i}-`);
+          return e("button",{key:i,
+            onClick:()=>pickLeft(i),
+            className: isWrong?"wrong-shake":isSel?"correct-flash":"",
+            style:{
+              padding:"14px 10px",borderRadius:14,fontWeight:800,fontSize:18,
+              border: isMatched?"2.5px solid "+GMP.green:isSel?"2.5px solid "+GMP.purple:"2px solid #e5e7eb",
+              background: isMatched?GMP.greenL:isSel?GMP.purpleL:"#fff",
+              color: isMatched?GMP.green:isSel?GMP.purple:"#1f2937",
+              cursor: isMatched?"default":"pointer",
+              opacity: isMatched?0.5:1,
+              transition:"all .15s",
+              ...AF
+            }},
+            isMatched?"✓":w.ar
+          );
+        })
+      ),
+      e("div",{style:{display:"flex",flexDirection:"column",gap:8}},
+        e("div",{style:{textAlign:"center",fontSize:11,fontWeight:700,color:GMP.teal,marginBottom:4}},"English"),
+        ...rightItems.map((w,i)=>{
+          const isMatched = matched.has(w.ar);
+          const isSel = selR===i;
+          const isWrong = wrong && wrong.endsWith(`-${i}`);
+          return e("button",{key:i,
+            onClick:()=>pickRight(i),
+            className: isWrong?"wrong-shake":isSel?"correct-flash":"",
+            style:{
+              padding:"14px 10px",borderRadius:14,fontWeight:700,fontSize:13,
+              border: isMatched?"2.5px solid "+GMP.green:isSel?"2.5px solid "+GMP.teal:"2px solid #e5e7eb",
+              background: isMatched?GMP.greenL:isSel?GMP.tealL:"#fff",
+              color: isMatched?GMP.green:isSel?GMP.teal:"#1f2937",
+              cursor: isMatched?"default":"pointer",
+              opacity: isMatched?0.5:1,
+              transition:"all .15s",
+            }},
+            isMatched?"✓":w.en
+          );
+        })
+      )
+    )
+  );
+}
+
+// ─── GAME 2: Spelling Bee ─────────────────────────────────────────────────
+function SpellingBeeGame({ words, onFinish }) {
+  const ARABIC_LETTERS = "ابتثجحخدذرزسشصضطظعغفقكلمنهوي".split("");
+  const pool = useMemo(()=>shuffle(words).filter(w=>w.ar.length>=2&&w.ar.length<=6).slice(0,8),[]);
+  const [qIdx, setQIdx] = useState(0);
+  const [typed, setTyped]   = useState([]);
+  const [shake, setShake]   = useState(false);
+  const [flash, setFlash]   = useState(false);
+  const [score, setScore]   = useState(0);
+  const [lives, setLives]   = useState(3);
+  const [done, setDone]     = useState(false);
+
+  const current = pool[qIdx];
+
+  const letterOptions = useMemo(()=>{
+    if (!current) return [];
+    const correct = current.ar.split("");
+    const pool2 = shuffle(ARABIC_LETTERS.filter(l=>!correct.includes(l))).slice(0,8);
+    return shuffle([...correct, ...pool2]);
+  },[qIdx, pool]);
+
+  function pickLetter(l) {
+    const next = [...typed, l];
+    setTyped(next);
+    if (next.length === current.ar.length) {
+      if (next.join("")===current.ar) {
+        setFlash(true);
+        setScore(s=>s+15);
+        setTimeout(()=>{
+          setFlash(false);
+          setTyped([]);
+          if (qIdx+1 >= pool.length) setDone(true);
+          else setQIdx(q=>q+1);
+        },900);
+      } else {
+        setShake(true);
+        setLives(lv=>{
+          if (lv-1<=0){ setTimeout(()=>setDone(true),800); return 0; }
+          return lv-1;
+        });
+        setTimeout(()=>{ setShake(false); setTyped([]); },700);
+      }
+    }
+  }
+
+  function deleteLast() { setTyped(t=>t.slice(0,-1)); }
+
+  if (done||!current) return e("div",{style:{textAlign:"center",padding:32,animation:"pop .4s cubic-bezier(.34,1.56,.64,1)"}},
+    e("div",{style:{fontSize:64,marginBottom:8}}, lives>0?"🐝":"💔"),
+    e("div",{style:{fontSize:24,fontWeight:900,color:GMP.gold,...AF,marginBottom:4}},
+      lives>0 ? "نَحْلَة النُّجُوم! 🌟" : "حَاوِل مَرَّة أُخْرَى!"),
+    e("div",{style:{fontSize:18,fontWeight:800,color:GMP.orange,marginBottom:24}}, `${score} نُقْطَة`),
+    e("button",{onClick:onFinish,style:{
+      background:`linear-gradient(135deg,${GMP.gold},${GMP.orange})`,
+      color:"#fff",border:"none",borderRadius:16,padding:"14px 36px",
+      fontSize:16,fontWeight:800,cursor:"pointer",...AF
+    }},"العَبْ مَرَّة أُخْرَى 🔄")
+  );
+
+  const progress = qIdx/pool.length;
+
+  return e("div",{style:{padding:"16px 0"}},
+    e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}},
+      e("div",{style:{display:"flex",gap:4}}, ...Array(3).fill(0).map((_,i)=>
+        e("span",{key:i,style:{fontSize:22}}, i<lives?"❤️":"🖤")
+      )),
+      e("div",{style:{fontWeight:900,color:GMP.gold,fontSize:15,...AF}}, `${score} نُقْطَة`),
+      e("div",{style:{fontSize:13,fontWeight:700,color:GMP.purple}}, `${qIdx+1} / ${pool.length}`)
+    ),
+    e("div",{style:{height:7,background:"#e5e7eb",borderRadius:8,marginBottom:20,overflow:"hidden"}},
+      e("div",{style:{height:"100%",width:`${progress*100}%`,background:`linear-gradient(90deg,${GMP.gold},${GMP.orange})`,borderRadius:8,transition:"width .4s"}})
+    ),
+    e("div",{style:{textAlign:"center",background:GMP.goldL,borderRadius:18,padding:"18px 24px",marginBottom:20}},
+      e("div",{style:{fontSize:12,fontWeight:700,color:GMP.gold,marginBottom:4}},"اكْتُبْ بِالعَرَبِيَّة:"),
+      e("div",{style:{fontSize:28,fontWeight:900,color:"#1f2937"}}, current.en)
+    ),
+    e("div",{className:flash?"correct-flash":shake?"wrong-shake":"",
+      style:{display:"flex",justifyContent:"center",gap:8,marginBottom:20,direction:"rtl",flexWrap:"wrap"}},
+      ...Array(current.ar.length).fill(0).map((_,i)=>
+        e("div",{key:i,style:{
+          width:48,height:52,border:`2.5px solid ${typed[i]?GMP.purple:"#d1d5db"}`,
+          borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",
+          fontSize:22,fontWeight:800,color:GMP.purple,
+          background:typed[i]?GMP.purpleL:"#f9fafb",
+          transition:"all .15s",...AF
+        }}, typed[i]||"")
+      )
+    ),
+    typed.length>0 && e("div",{style:{textAlign:"center",marginBottom:10}},
+      e("button",{onClick:deleteLast,style:{
+        background:"#fee2e2",color:"#dc2626",border:"none",borderRadius:10,
+        padding:"6px 18px",fontWeight:700,fontSize:13,cursor:"pointer"
+      }},"← حذف")
+    ),
+    e("div",{style:{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",direction:"rtl"}},
+      ...letterOptions.map((l,i)=>
+        e("button",{key:i,onClick:()=>pickLetter(l),style:{
+          width:44,height:44,borderRadius:12,border:"2px solid #e5e7eb",
+          background:"#fff",fontSize:20,fontWeight:800,cursor:"pointer",
+          color:"#1f2937",transition:"transform .1s",flexShrink:0,...AF
+        }},l)
+      )
+    )
+  );
+}
+
+// ─── GAME 3: Story Scramble ───────────────────────────────────────────────
+function StoryScrambleGame({ lessons, onFinish }) {
+  const eligible = useMemo(()=>lessons.filter(l=>l.passage&&l.passage.split("،").length>=3),[]);
+  const lesson   = useMemo(()=>eligible[Math.floor(Math.random()*eligible.length)],[eligible]);
+
+  const sentences = useMemo(()=>{
+    if (!lesson) return [];
+    return lesson.passage
+      .replace(/([.!؟،])\s*/g,"$1\n")
+      .split("\n")
+      .map(s=>s.trim())
+      .filter(s=>s.length>4)
+      .slice(0,5);
+  },[lesson]);
+
+  const shuffled = useMemo(()=>shuffle(sentences),[sentences]);
+  const [order, setOrder]     = useState([]);
+  const [wrong, setWrong]     = useState(null);
+  const [score, setScore]     = useState(0);
+  const [done, setDone]       = useState(false);
+
+  function pickSentence(i) {
+    if (order.includes(i)) return;
+    const next = [...order, i];
+    const pos  = next.length-1;
+    const correctIdx = sentences.indexOf(shuffled[i]);
+    if (correctIdx === pos) {
+      setOrder(next);
+      setScore(s=>s+20);
+      if (next.length===sentences.length) setTimeout(()=>setDone(true),600);
+    } else {
+      setWrong(i);
+      setTimeout(()=>setWrong(null),700);
+    }
+  }
+
+  if (!lesson||sentences.length<3) return e("div",{style:{padding:32,textAlign:"center",color:GMP.purple,...AF}},
+    "لا تُوجَد قِصَص مُتَاحَة للعَبَة!");
+
+  if (done) return e("div",{style:{textAlign:"center",padding:32,animation:"pop .4s cubic-bezier(.34,1.56,.64,1)"}},
+    e("div",{style:{fontSize:64,marginBottom:8}},"📖"),
+    e("div",{style:{fontSize:24,fontWeight:900,color:GMP.teal,...AF,marginBottom:4}},"رَتَّبْتَ القِصَّة! أَحْسَنْت!"),
+    e("div",{style:{fontSize:18,fontWeight:800,color:GMP.purple,marginBottom:8}}, `${score} نُقْطَة`),
+    e("div",{style:{background:GMP.tealL,borderRadius:16,padding:"14px 18px",textAlign:"right",marginBottom:24,...AF,lineHeight:2.2,fontSize:16,color:"#1f2937"}},
+      sentences.join(" ")
+    ),
+    e("button",{onClick:onFinish,style:{
+      background:`linear-gradient(135deg,${GMP.teal},${GMP.blue})`,
+      color:"#fff",border:"none",borderRadius:16,padding:"14px 36px",
+      fontSize:16,fontWeight:800,cursor:"pointer",...AF
+    }},"العَبْ مَرَّة أُخْرَى 🔄")
+  );
+
+  return e("div",{style:{padding:"16px 0"}},
+    e("div",{style:{textAlign:"center",marginBottom:14}},
+      e("span",{style:{fontSize:22}}," ✏️ "),
+      e("span",{style:{fontSize:16,fontWeight:900,color:GMP.teal,...AF}},lesson.titleAr||lesson.titleEn)
+    ),
+    e("div",{style:{height:7,background:"#e5e7eb",borderRadius:8,marginBottom:16,overflow:"hidden"}},
+      e("div",{style:{height:"100%",width:`${(order.length/sentences.length)*100}%`,
+        background:`linear-gradient(90deg,${GMP.teal},${GMP.blue})`,borderRadius:8,transition:"width .4s"}})
+    ),
+    e("div",{style:{fontWeight:700,color:GMP.gold,fontSize:14,textAlign:"left",marginBottom:16}},
+      `${score} نُقْطَة`),
+    order.length>0 && e("div",{style:{background:GMP.tealL,borderRadius:16,padding:"14px 18px",marginBottom:14,direction:"rtl"}},
+      e("div",{style:{fontSize:11,fontWeight:700,color:GMP.teal,marginBottom:6,...AF}},"القِصَّة حَتَّى الآن:"),
+      e("div",{style:{fontSize:15,lineHeight:2,...AF,color:"#1f2937"}},
+        order.map(i=>shuffled[i]).join(" ")
+      )
+    ),
+    e("div",{style:{fontSize:13,fontWeight:700,color:GMP.purple,textAlign:"center",marginBottom:12,...AF}},
+      `اضْغَطْ عَلَى الجُمْلَة رَقْم ${order.length+1}:`),
+    e("div",{style:{display:"flex",flexDirection:"column",gap:10}},
+      ...shuffled.map((s,i)=>{
+        const used = order.includes(i);
+        const isWrong = wrong===i;
+        return e("button",{key:i,
+          onClick:()=>pickSentence(i),
+          className: isWrong?"wrong-shake":used?"correct-flash":"",
+          style:{
+            textAlign:"right",direction:"rtl",padding:"14px 16px",borderRadius:14,
+            border: used?"2.5px solid "+GMP.green:isWrong?"2.5px solid "+GMP.red:"2px solid #e5e7eb",
+            background: used?GMP.greenL:isWrong?GMP.redL:"#fff",
+            color: used?GMP.green:"#1f2937",
+            cursor: used?"default":"pointer",
+            fontSize:15,lineHeight:1.9,fontWeight:used?700:500,
+            opacity: used?0.6:1,...AF,
+            transition:"all .15s"
+          }},
+          used?"✓ "+s:s
+        );
+      })
+    )
+  );
+}
+
+// ─── GAMES HUB ────────────────────────────────────────────────────────────
+function GamesSection({ lessons, onHome }) {
+  const allWords = useMemo(()=>getAllGameWords(lessons),[lessons]);
+  const [activeGame, setActiveGame] = useState(null);
+  const [key, setKey] = useState(0);
+
+  const games = [
+    {
+      id:"match",
+      emoji:"🎯",
+      titleAr:"طَابِق الكَلِمَات",
+      titleEn:"Word Match",
+      desc:"وَصِّل الكَلِمَة العَرَبِيَّة بِمَعْنَاهَا الإِنْجْلِيزِي قَبْل انْتِهَاء الوَقْت!",
+      color:GMP.purple, bg:GMP.purpleL,
+    },
+    {
+      id:"bee",
+      emoji:"🐝",
+      titleAr:"نَحْلَة التَّهْجِئَة",
+      titleEn:"Spelling Bee",
+      desc:"شُوف الكَلِمَة الإِنْجْلِيزِيَّة وَاكْتُبْهَا بِالحُرُوف العَرَبِيَّة!",
+      color:GMP.gold, bg:GMP.goldL,
+    },
+    {
+      id:"scramble",
+      emoji:"📖",
+      titleAr:"رَتِّب القِصَّة",
+      titleEn:"Story Scramble",
+      desc:"الجُمَل اخْتَلَطَت! رَتِّبْهَا بِالتَّرْتِيب الصَّحِيح.",
+      color:GMP.teal, bg:GMP.tealL,
+    },
+  ];
+
+  function restart() { setKey(k=>k+1); setActiveGame(null); }
+
+  if (activeGame) {
+    const g = games.find(g=>g.id===activeGame);
+    return e("div",{style:{padding:"16px 14px 80px"}},
+      e("div",{style:{display:"flex",alignItems:"center",gap:12,marginBottom:20}},
+        e("button",{onClick:restart,style:{
+          background:"#f3f4f6",border:"none",borderRadius:12,padding:"8px 14px",
+          fontWeight:700,fontSize:13,cursor:"pointer",color:"#374151"
+        }},"← العَاب"),
+        e("div",{style:{fontSize:22}},g.emoji),
+        e("div",{style:{fontWeight:900,fontSize:17,color:g.color,...AF}},g.titleAr)
+      ),
+      activeGame==="match"   && e(WordMatchGame,  {key,words:allWords,    onFinish:restart}),
+      activeGame==="bee"     && e(SpellingBeeGame,{key,words:allWords,    onFinish:restart}),
+      activeGame==="scramble"&& e(StoryScrambleGame,{key,lessons,         onFinish:restart}),
+    );
+  }
+
+  return e("div",{style:{padding:"16px 14px 80px"}},
+    e("div",{style:{textAlign:"center",marginBottom:28}},
+      e("div",{style:{fontSize:48,marginBottom:8}},"🎮"),
+      e("div",{style:{fontSize:24,fontWeight:900,...AF,
+        background:`linear-gradient(135deg,${GMP.purple},${GMP.pink})`,
+        WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}},
+        "أَلْعَاب التَّعَلُّم"),
+      e("div",{style:{fontSize:13,color:"#6b7280",marginTop:4,...AF}},"اخْتَر لُعْبَة وَابْدَأ!")
+    ),
+    e("div",{style:{display:"flex",flexDirection:"column",gap:16}},
+      ...games.map(g=>
+        e("button",{key:g.id,onClick:()=>setActiveGame(g.id),style:{
+          background:`linear-gradient(135deg,${g.bg},#fff)`,
+          border:`2.5px solid ${g.color}30`,
+          borderRadius:20,padding:"22px 20px",cursor:"pointer",
+          display:"flex",alignItems:"center",gap:16,textAlign:"right",
+          boxShadow:`0 4px 16px ${g.color}18`,transition:"transform .15s, box-shadow .15s"
+        }},
+          e("div",{style:{
+            width:60,height:60,borderRadius:16,
+            background:`linear-gradient(135deg,${g.color},${g.color}cc)`,
+            display:"flex",alignItems:"center",justifyContent:"center",
+            fontSize:30,flexShrink:0,boxShadow:`0 4px 12px ${g.color}40`
+          }},g.emoji),
+          e("div",{style:{flex:1}},
+            e("div",{style:{fontSize:18,fontWeight:900,color:g.color,...AF,marginBottom:4}},g.titleAr),
+            e("div",{style:{fontSize:12,fontWeight:700,color:"#6b7280",marginBottom:6}},"[ "+g.titleEn+" ]"),
+            e("div",{style:{fontSize:13,color:"#374151",...AF,lineHeight:1.7}},g.desc)
+          ),
+          e("div",{style:{fontSize:22,color:g.color,opacity:.6}},"←")
+        )
+      )
+    ),
+    e("div",{style:{marginTop:24,background:"#f8fafc",borderRadius:16,padding:"14px 18px",textAlign:"center"}},
+      e("div",{style:{fontSize:12,color:"#9ca3af",fontWeight:700,...AF}},
+        `${allWords.length} كَلِمَة مُتَاحَة لِلتَّدْرِيب • ٣ أَلْعَاب`)
+    )
+  );
+}
+
 function App() {
   const { lessons, banks, loaded } = useContent();
   const [progress, setProgress]    = useState(loadP);
@@ -4060,7 +4522,7 @@ function App() {
   const [activeLessonId, setALId]  = useState(null);
   const [activeDrillKey, setADKey] = useState(null);
   const [printLessonId, setPLId]   = useState(null);
-  const [tab, setTab]              = useState("arabic"); // "arabic" | "islamic"
+  const [tab, setTab]              = useState("arabic"); // "arabic" | "vocab" | "grammar" | "islamic" | "games"
   const lastDate = useRef(progress?.lastActiveDate||null);
 
   useEffect(()=>{
@@ -4140,6 +4602,14 @@ function App() {
     }},
       e("span",{style:{fontSize:22}},"🌙"),
       "إِسْلَامِيَّات"
+    ),
+    e("button",{onClick:()=>setTab("games"),style:{
+      flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2,
+      padding:"10px 0 14px",background:"none",border:"none",cursor:"pointer",
+      color:tab==="games"?GMP.purple:"#9ca3af",fontWeight:800,fontSize:11
+    }},
+      e("span",{style:{fontSize:22}},"🎮"),
+      "أَلْعَاب"
     )
   );
 
@@ -4167,6 +4637,10 @@ function App() {
     e("button",{className:tab==="islamic"?"active":"",
       onClick:()=>setTab("islamic")},
       e("span",{className:"nav-icon"},"🌙"), "الإِسْلَامِيَّات"),
+    e("button",{className:tab==="games"?"active":"",
+      onClick:()=>setTab("games"),
+      style:tab==="games"?{background:`linear-gradient(135deg,${GMP.purpleL},${GMP.goldL})`,color:GMP.purple,boxShadow:`0 2px 8px ${GMP.purple}33`}:{}},
+      e("span",{className:"nav-icon"},"🎮"), "أَلْعَاب"),
     e("div",{style:{flex:1}}),
     e("button",{onClick:()=>setScreen("print-all"),
       style:{background:"#f0fdf4",color:P.greenD,borderRadius:12}},
@@ -4193,6 +4667,14 @@ function App() {
     SidebarNav,
     e("div",{className:"content-area",style:{padding:"16px 14px 80px"}},
       e(IslamicStudies,{onHome:()=>{setTab("arabic");setScreen("home");}})
+    ),
+    BottomNav
+  );
+
+  if (tab==="games") return e("div",{className:"app-shell"},
+    SidebarNav,
+    e("div",{className:"content-area",style:{padding:"0 0 80px"}},
+      e(GamesSection,{lessons,onHome:()=>{setTab("arabic");setScreen("home");}})
     ),
     BottomNav
   );
