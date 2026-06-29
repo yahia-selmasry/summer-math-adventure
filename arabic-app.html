@@ -1888,7 +1888,7 @@ const STORY_THEMES = [
   {key:"season",   label:"فُصُول",    emoji:"🌸", color:"#ec4899"},
 ];
 
-function HomeScreen({ lessons, banks, progress, contentLoaded, onLesson, onDrill, onDashboard, onPrint, onPrintAll, onGrammar, onVocab }) {
+function HomeScreen({ lessons, banks, progress, contentLoaded, onLesson, onDrill, onDashboard, onPrint, onPrintAll, onGrammar, onVocab, onGames }) {
   const [activeWeek, setActiveWeek] = useState("all");
   const [activeFilter, setActiveFilter] = useState("all");
   const [activeStoryTheme, setActiveStoryTheme] = useState("all");
@@ -2113,6 +2113,25 @@ function HomeScreen({ lessons, banks, progress, contentLoaded, onLesson, onDrill
         e("p",{style:{...AF,fontSize:15,fontWeight:900,color:"#92400e",direction:"rtl",margin:"0 0 2px"}},"تَقَدُّمِي"),
         e("p",{style:{fontSize:11,color:P.gray,margin:0,fontWeight:700}},`${Object.keys(lessonScores).length}/${lessons.length} درس`)
       )
+    ),
+
+    // Games banner
+    e("button",{onClick:onGames,
+      style:{width:"100%",marginBottom:16,
+        background:"linear-gradient(135deg,#ede9fe,#fce7f3)",
+        border:"2.5px solid #c4b5fd",borderRadius:20,padding:"18px 20px",
+        cursor:"pointer",display:"flex",alignItems:"center",gap:16,
+        boxShadow:"0 4px 20px rgba(124,58,237,.18)",textAlign:"right"}},
+      e("div",{style:{
+        width:56,height:56,borderRadius:16,flexShrink:0,
+        background:"linear-gradient(135deg,#7c3aed,#db2777)",
+        display:"flex",alignItems:"center",justifyContent:"center",fontSize:28,
+        boxShadow:"0 4px 12px rgba(124,58,237,.35)"}}, "🎮"),
+      e("div",{style:{flex:1}},
+        e("div",{style:{...AF,fontSize:17,fontWeight:900,color:"#7c3aed",marginBottom:3}}, "أَلْعَاب التَّعَلُّم"),
+        e("div",{style:{fontSize:12,color:"#6b7280",fontWeight:700}}, "Word Match · Spelling Bee · Story Scramble")
+      ),
+      e("div",{style:{fontSize:20,color:"#7c3aed",opacity:.7}},"←")
     ),
 
     // print all button
@@ -4052,8 +4071,10 @@ function GrammarSection({ onHome }) {
   );
 }
 
-// ── ROOT APP ──────────────────────────────────────────────────────────────────
-// ─── Games palette ────────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════════════════
+// GAMES MODULE (أَلْعَاب)
+// ══════════════════════════════════════════════════════════════════════════════
+
 const GMP = {
   purple:"#7c3aed", purpleL:"#ede9fe",
   pink:"#db2777",   pinkL:"#fce7f3",
@@ -4088,25 +4109,18 @@ function getAllGameWords(lessons) {
   return words;
 }
 
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length-1; i > 0; i--) {
-    const j = Math.floor(Math.random()*(i+1));
-    [a[i],a[j]] = [a[j],a[i]];
-  }
-  return a;
-}
 
-// ─── GAME 1: Word Match ───────────────────────────────────────────────────
+// ─── GAME 1: Word Match ────────────────────────────────────────────────────
+// Pick 6 words, show Arabic column + English column shuffled, tap to match
 function WordMatchGame({ words, onFinish }) {
   const pool = useMemo(()=>shuffle(words).slice(0,6),[]);
   const leftItems  = pool;
   const rightItems = useMemo(()=>shuffle(pool),[pool]);
 
-  const [selL, setSelL] = useState(null);
-  const [selR, setSelR] = useState(null);
-  const [matched, setMatched] = useState(new Set());
-  const [wrong, setWrong]     = useState(null);
+  const [selL, setSelL] = useState(null); // index in leftItems
+  const [selR, setSelR] = useState(null); // index in rightItems
+  const [matched, setMatched] = useState(new Set()); // matched ar strings
+  const [wrong, setWrong]     = useState(null);      // "L-i" or "R-i"
   const [score, setScore]     = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
   const [done, setDone]         = useState(false);
@@ -4161,6 +4175,7 @@ function WordMatchGame({ words, onFinish }) {
   );
 
   return e("div",{style:{padding:"16px 0"}},
+    // header
     e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}},
       e("div",{style:{background:GMP.purpleL,borderRadius:12,padding:"6px 14px",fontWeight:800,color:GMP.purple,fontSize:14}},
         `⏱ ${timeLeft}s`),
@@ -4168,10 +4183,13 @@ function WordMatchGame({ words, onFinish }) {
       e("div",{style:{background:GMP.greenL,borderRadius:12,padding:"6px 14px",fontWeight:800,color:GMP.green,fontSize:13}},
         `${matched.size}/${pool.length} ✓`)
     ),
+    // progress bar
     e("div",{style:{height:8,background:"#e5e7eb",borderRadius:8,marginBottom:20,overflow:"hidden"}},
       e("div",{style:{height:"100%",width:`${pct}%`,background:`linear-gradient(90deg,${GMP.purple},${GMP.pink})`,borderRadius:8,transition:"width .4s"}})
     ),
+    // columns
     e("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}},
+      // Arabic column (right to left — appears on left visually for RTL)
       e("div",{style:{display:"flex",flexDirection:"column",gap:8}},
         e("div",{style:{textAlign:"center",fontSize:11,fontWeight:700,color:GMP.purple,marginBottom:4,...AF}},"العَرَبِيَّة"),
         ...leftItems.map((w,i)=>{
@@ -4195,6 +4213,7 @@ function WordMatchGame({ words, onFinish }) {
           );
         })
       ),
+      // English column
       e("div",{style:{display:"flex",flexDirection:"column",gap:8}},
         e("div",{style:{textAlign:"center",fontSize:11,fontWeight:700,color:GMP.teal,marginBottom:4}},"English"),
         ...rightItems.map((w,i)=>{
@@ -4221,7 +4240,8 @@ function WordMatchGame({ words, onFinish }) {
   );
 }
 
-// ─── GAME 2: Spelling Bee ─────────────────────────────────────────────────
+// ─── GAME 2: Spelling Bee ──────────────────────────────────────────────────
+// See English, pick Arabic letters to build the word
 function SpellingBeeGame({ words, onFinish }) {
   const ARABIC_LETTERS = "ابتثجحخدذرزسشصضطظعغفقكلمنهوي".split("");
   const pool = useMemo(()=>shuffle(words).filter(w=>w.ar.length>=2&&w.ar.length<=6).slice(0,8),[]);
@@ -4235,6 +4255,7 @@ function SpellingBeeGame({ words, onFinish }) {
 
   const current = pool[qIdx];
 
+  // build a set of letter buttons: correct letters + distractors
   const letterOptions = useMemo(()=>{
     if (!current) return [];
     const correct = current.ar.split("");
@@ -4283,6 +4304,7 @@ function SpellingBeeGame({ words, onFinish }) {
   const progress = qIdx/pool.length;
 
   return e("div",{style:{padding:"16px 0"}},
+    // header row
     e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}},
       e("div",{style:{display:"flex",gap:4}}, ...Array(3).fill(0).map((_,i)=>
         e("span",{key:i,style:{fontSize:22}}, i<lives?"❤️":"🖤")
@@ -4290,13 +4312,16 @@ function SpellingBeeGame({ words, onFinish }) {
       e("div",{style:{fontWeight:900,color:GMP.gold,fontSize:15,...AF}}, `${score} نُقْطَة`),
       e("div",{style:{fontSize:13,fontWeight:700,color:GMP.purple}}, `${qIdx+1} / ${pool.length}`)
     ),
+    // progress bar
     e("div",{style:{height:7,background:"#e5e7eb",borderRadius:8,marginBottom:20,overflow:"hidden"}},
       e("div",{style:{height:"100%",width:`${progress*100}%`,background:`linear-gradient(90deg,${GMP.gold},${GMP.orange})`,borderRadius:8,transition:"width .4s"}})
     ),
+    // English prompt
     e("div",{style:{textAlign:"center",background:GMP.goldL,borderRadius:18,padding:"18px 24px",marginBottom:20}},
       e("div",{style:{fontSize:12,fontWeight:700,color:GMP.gold,marginBottom:4}},"اكْتُبْ بِالعَرَبِيَّة:"),
       e("div",{style:{fontSize:28,fontWeight:900,color:"#1f2937"}}, current.en)
     ),
+    // Answer boxes
     e("div",{className:flash?"correct-flash":shake?"wrong-shake":"",
       style:{display:"flex",justifyContent:"center",gap:8,marginBottom:20,direction:"rtl",flexWrap:"wrap"}},
       ...Array(current.ar.length).fill(0).map((_,i)=>
@@ -4309,12 +4334,14 @@ function SpellingBeeGame({ words, onFinish }) {
         }}, typed[i]||"")
       )
     ),
+    // Delete button
     typed.length>0 && e("div",{style:{textAlign:"center",marginBottom:10}},
       e("button",{onClick:deleteLast,style:{
         background:"#fee2e2",color:"#dc2626",border:"none",borderRadius:10,
         padding:"6px 18px",fontWeight:700,fontSize:13,cursor:"pointer"
       }},"← حذف")
     ),
+    // Letter buttons
     e("div",{style:{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",direction:"rtl"}},
       ...letterOptions.map((l,i)=>
         e("button",{key:i,onClick:()=>pickLetter(l),style:{
@@ -4327,13 +4354,16 @@ function SpellingBeeGame({ words, onFinish }) {
   );
 }
 
-// ─── GAME 3: Story Scramble ───────────────────────────────────────────────
+// ─── GAME 3: Story Scramble ────────────────────────────────────────────────
+// Show shuffled sentences from a story, player taps them in order
 function StoryScrambleGame({ lessons, onFinish }) {
+  // pick a lesson with enough passage sentences
   const eligible = useMemo(()=>lessons.filter(l=>l.passage&&l.passage.split("،").length>=3),[]);
   const lesson   = useMemo(()=>eligible[Math.floor(Math.random()*eligible.length)],[eligible]);
 
   const sentences = useMemo(()=>{
     if (!lesson) return [];
+    // split on sentence-ending punctuation keeping delimiters
     return lesson.passage
       .replace(/([.!؟،])\s*/g,"$1\n")
       .split("\n")
@@ -4343,7 +4373,7 @@ function StoryScrambleGame({ lessons, onFinish }) {
   },[lesson]);
 
   const shuffled = useMemo(()=>shuffle(sentences),[sentences]);
-  const [order, setOrder]     = useState([]);
+  const [order, setOrder]     = useState([]);  // indices into shuffled
   const [wrong, setWrong]     = useState(null);
   const [score, setScore]     = useState(0);
   const [done, setDone]       = useState(false);
@@ -4381,24 +4411,29 @@ function StoryScrambleGame({ lessons, onFinish }) {
   );
 
   return e("div",{style:{padding:"16px 0"}},
+    // story title
     e("div",{style:{textAlign:"center",marginBottom:14}},
       e("span",{style:{fontSize:22}}," ✏️ "),
       e("span",{style:{fontSize:16,fontWeight:900,color:GMP.teal,...AF}},lesson.titleAr||lesson.titleEn)
     ),
+    // progress
     e("div",{style:{height:7,background:"#e5e7eb",borderRadius:8,marginBottom:16,overflow:"hidden"}},
       e("div",{style:{height:"100%",width:`${(order.length/sentences.length)*100}%`,
         background:`linear-gradient(90deg,${GMP.teal},${GMP.blue})`,borderRadius:8,transition:"width .4s"}})
     ),
     e("div",{style:{fontWeight:700,color:GMP.gold,fontSize:14,textAlign:"left",marginBottom:16}},
       `${score} نُقْطَة`),
+    // placed sentences (in order)
     order.length>0 && e("div",{style:{background:GMP.tealL,borderRadius:16,padding:"14px 18px",marginBottom:14,direction:"rtl"}},
       e("div",{style:{fontSize:11,fontWeight:700,color:GMP.teal,marginBottom:6,...AF}},"القِصَّة حَتَّى الآن:"),
       e("div",{style:{fontSize:15,lineHeight:2,...AF,color:"#1f2937"}},
         order.map(i=>shuffled[i]).join(" ")
       )
     ),
+    // instruction
     e("div",{style:{fontSize:13,fontWeight:700,color:GMP.purple,textAlign:"center",marginBottom:12,...AF}},
       `اضْغَطْ عَلَى الجُمْلَة رَقْم ${order.length+1}:`),
+    // shuffled sentence buttons
     e("div",{style:{display:"flex",flexDirection:"column",gap:10}},
       ...shuffled.map((s,i)=>{
         const used = order.includes(i);
@@ -4426,8 +4461,8 @@ function StoryScrambleGame({ lessons, onFinish }) {
 // ─── GAMES HUB ────────────────────────────────────────────────────────────
 function GamesSection({ lessons, onHome }) {
   const allWords = useMemo(()=>getAllGameWords(lessons),[lessons]);
-  const [activeGame, setActiveGame] = useState(null);
-  const [key, setKey] = useState(0);
+  const [activeGame, setActiveGame] = useState(null); // null | "match" | "bee" | "scramble"
+  const [key, setKey] = useState(0); // remount key to restart
 
   const games = [
     {
@@ -4461,6 +4496,7 @@ function GamesSection({ lessons, onHome }) {
   if (activeGame) {
     const g = games.find(g=>g.id===activeGame);
     return e("div",{style:{padding:"16px 14px 80px"}},
+      // game header
       e("div",{style:{display:"flex",alignItems:"center",gap:12,marginBottom:20}},
         e("button",{onClick:restart,style:{
           background:"#f3f4f6",border:"none",borderRadius:12,padding:"8px 14px",
@@ -4476,6 +4512,7 @@ function GamesSection({ lessons, onHome }) {
   }
 
   return e("div",{style:{padding:"16px 14px 80px"}},
+    // header
     e("div",{style:{textAlign:"center",marginBottom:28}},
       e("div",{style:{fontSize:48,marginBottom:8}},"🎮"),
       e("div",{style:{fontSize:24,fontWeight:900,...AF,
@@ -4484,6 +4521,7 @@ function GamesSection({ lessons, onHome }) {
         "أَلْعَاب التَّعَلُّم"),
       e("div",{style:{fontSize:13,color:"#6b7280",marginTop:4,...AF}},"اخْتَر لُعْبَة وَابْدَأ!")
     ),
+    // game cards
     e("div",{style:{display:"flex",flexDirection:"column",gap:16}},
       ...games.map(g=>
         e("button",{key:g.id,onClick:()=>setActiveGame(g.id),style:{
@@ -4508,6 +4546,7 @@ function GamesSection({ lessons, onHome }) {
         )
       )
     ),
+    // stats teaser
     e("div",{style:{marginTop:24,background:"#f8fafc",borderRadius:16,padding:"14px 18px",textAlign:"center"}},
       e("div",{style:{fontSize:12,color:"#9ca3af",fontWeight:700,...AF}},
         `${allWords.length} كَلِمَة مُتَاحَة لِلتَّدْرِيب • ٣ أَلْعَاب`)
@@ -4515,6 +4554,7 @@ function GamesSection({ lessons, onHome }) {
   );
 }
 
+// ── ROOT APP ──────────────────────────────────────────────────────────────────
 function App() {
   const { lessons, banks, loaded } = useContent();
   const [progress, setProgress]    = useState(loadP);
@@ -4602,14 +4642,6 @@ function App() {
     }},
       e("span",{style:{fontSize:22}},"🌙"),
       "إِسْلَامِيَّات"
-    ),
-    e("button",{onClick:()=>setTab("games"),style:{
-      flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2,
-      padding:"10px 0 14px",background:"none",border:"none",cursor:"pointer",
-      color:tab==="games"?GMP.purple:"#9ca3af",fontWeight:800,fontSize:11
-    }},
-      e("span",{style:{fontSize:22}},"🎮"),
-      "أَلْعَاب"
     )
   );
 
@@ -4637,10 +4669,6 @@ function App() {
     e("button",{className:tab==="islamic"?"active":"",
       onClick:()=>setTab("islamic")},
       e("span",{className:"nav-icon"},"🌙"), "الإِسْلَامِيَّات"),
-    e("button",{className:tab==="games"?"active":"",
-      onClick:()=>setTab("games"),
-      style:tab==="games"?{background:`linear-gradient(135deg,${GMP.purpleL},${GMP.goldL})`,color:GMP.purple,boxShadow:`0 2px 8px ${GMP.purple}33`}:{}},
-      e("span",{className:"nav-icon"},"🎮"), "أَلْعَاب"),
     e("div",{style:{flex:1}}),
     e("button",{onClick:()=>setScreen("print-all"),
       style:{background:"#f0fdf4",color:P.greenD,borderRadius:12}},
@@ -4671,14 +4699,6 @@ function App() {
     BottomNav
   );
 
-  if (tab==="games") return e("div",{className:"app-shell"},
-    SidebarNav,
-    e("div",{className:"content-area",style:{padding:"0 0 80px"}},
-      e(GamesSection,{lessons,onHome:()=>{setTab("arabic");setScreen("home");}})
-    ),
-    BottomNav
-  );
-
   return e("div",{className:"app-shell",style:{background:"#fff8f0"}},
     SidebarNav,
     e("div",{className:"content-area"},
@@ -4692,7 +4712,9 @@ function App() {
           onPrintAll:()=>setScreen("print-all"),
           onGrammar:()=>setTab("grammar"),
           onVocab:()=>setTab("vocab"),
+          onGames:()=>setScreen("games"),
         }),
+        screen==="games" && e(GamesSection,{lessons,onHome:()=>setScreen("home")}),
         screen==="lesson"&&al && e("div",null,
           e(LessonFlow,{lesson:al,onComplete:completeLesson,onBack:()=>setScreen("home")}),
           e("button",{onClick:()=>{setPLId(activeLessonId);setScreen("print");},
