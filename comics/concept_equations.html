@@ -70,6 +70,38 @@ sup { font-size:0.65em; vertical-align:super; }
   .row { flex-wrap: wrap; }
   .panel { min-width: 280px; }
 }
+
+
+/* ── PRINT ── */
+@page { size: letter; margin: 0.45in 0.5in; }
+@media print {
+  body {
+    background: #fff !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    font-size: 14px;
+  }
+  .comic-page {
+    background: #fff !important;
+    padding: 4px 0 !important;
+    page-break-after: always;
+    break-after: page;
+  }
+  .panel {
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .panel.bg-sky   { background: #cce8f5 !important; }
+  .panel.bg-green { background: #c8e6c9 !important; }
+  .panel.bg-peach { background: #ffe0cc !important; }
+  .panel.bg-tan   { background: #f5e6c8 !important; }
+  .panel.bg-white { background: #ffffff !important; }
+  .bubble { page-break-inside: avoid; }
+  .think-sign { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .math-box   { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .title-card { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
 </style>
 </head>
 <body>
