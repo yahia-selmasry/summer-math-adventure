@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Word Problems – Bonus: Measurements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; font-size: 13px; color: #1a1a1a; background: #fff; }
+  .page { width: 8.5in; min-height: 11in; padding: 0.6in 0.7in; page-break-after: always; position: relative; }
+  h1 { font-size: 22px; color: #006064; border-bottom: 3px solid #006064; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { font-size: 16px; color: #006064; margin: 14px 0 6px; }
+  h3 { font-size: 13px; color: #006064; margin: 10px 0 4px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .topic-tag { display: inline-block; background: #006064; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; }
+  .intro-box { background: #e0f2f1; border-left: 4px solid #006064; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+  .problem-block { margin-bottom: 14px; }
+  .problem-block p { line-height: 1.7; margin-bottom: 4px; }
+  .ans-line { display: block; border-bottom: 1px solid #333; width: 160px; height: 18px; margin: 6px 0 2px; }
+  .ans-line-long { display: block; border-bottom: 1px solid #333; width: 300px; height: 18px; margin: 6px 0 2px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+  .work-box { border: 1.5px dashed #aaa; min-height: 70px; width: 100%; margin: 6px 0; border-radius: 4px; padding: 4px; }
+  .challenge-box { background: #fff8e1; border: 2px solid #f0a500; border-radius: 6px; padding: 10px 14px; margin-top: 14px; }
+  .challenge-box h3 { color: #b06000; }
+  .footer { position: absolute; bottom: 0.4in; left: 0.7in; right: 0.7in; font-size: 10px; color: #888; border-top: 1px solid #ddd; padding-top: 4px; display: flex; justify-content: space-between; }
+  .name-date { display: flex; gap: 40px; margin-bottom: 14px; font-size: 12px; }
+  .name-date span { border-bottom: 1px solid #333; min-width: 160px; display: inline-block; }
+  .badge { float: right; background: #006064; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; line-height: 1.2; margin-top: -10px; }
+  .hint { font-size: 10px; color: #555; font-style: italic; margin-bottom: 6px; }
+  .num-label { font-weight: 800; color: #006064; }
+  .ref-box { background: #e0f7fa; border: 1.5px solid #006064; border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; font-size: 11px; line-height: 1.7; }
+  .ref-box strong { color: #004d40; }
+  .ans-key-box { background: #f5f5f5; border: 1.5px solid #bbb; border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; font-size: 12px; }
+  .ans-key-box h3 { color: #006064; margin-bottom: 6px; }
+  .ak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 30px; font-size: 12px; }
+
+  @page { margin: 0; size: letter; }
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { margin: 0; padding: 0; background: #fff; }
+    .page { width: 8.5in; min-height: 11in; page-break-after: always; break-after: page; padding-bottom: 0.85in; }
+    .problem-block { break-inside: avoid; page-break-inside: avoid; }
+    .challenge-box { break-inside: avoid; page-break-inside: avoid; }
+    .grid-2, .grid-3 { break-inside: avoid; page-break-inside: avoid; }
+    .work-box { break-inside: avoid; page-break-inside: avoid; }
+    .intro-box { break-inside: avoid; page-break-inside: avoid; }
+    h2 { break-after: avoid; page-break-after: avoid; }
+    h3 { break-after: avoid; page-break-after: avoid; }
+    .footer { position: absolute; bottom: 0.25in; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="badge">BON<br>WP</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Bonus Word Problems &nbsp;|&nbsp; Measurements &nbsp;·&nbsp; Page 1 of 2</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">MEASUREMENTS</span>
+
+  <div class="ref-box">
+    <strong>Quick Conversion Reference:</strong><br>
+    <strong>Length:</strong> 12 in = 1 ft &nbsp;|&nbsp; 3 ft = 1 yd &nbsp;|&nbsp; 5,280 ft = 1 mi<br>
+    <strong>Weight:</strong> 16 oz = 1 lb &nbsp;|&nbsp; 2,000 lb = 1 ton<br>
+    <strong>Capacity:</strong> 2 cups = 1 pt &nbsp;|&nbsp; 2 pt = 1 qt &nbsp;|&nbsp; 4 qt = 1 gal<br>
+    <strong>Metric:</strong> 10 mm = 1 cm &nbsp;|&nbsp; 100 cm = 1 m &nbsp;|&nbsp; 1,000 m = 1 km &nbsp;|&nbsp; 1,000 g = 1 kg &nbsp;|&nbsp; 1,000 mL = 1 L
+  </div>
+
+  <h2>Part A – US Customary Length</h2>
+  <p class="hint">Convert between inches, feet, yards, and miles. Show your work!</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">1.</span> The school hallway is 48 feet long. How many yards is that?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">2.</span> Maya's bedroom is 9 feet wide. Her little brother's room is 102 inches wide. Whose room is wider, and by how many inches?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line-long"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">3.</span> A hiking trail is 2 miles long. Jordan ran the whole trail twice. How many total feet did he run?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">4.</span> A fence has posts every 3 feet. If the fence is 7 yards long, how many spaces are between posts?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part B – Weight & Capacity</h2>
+  <p class="hint">Remember: 16 oz = 1 lb; 4 quarts = 1 gallon.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">5.</span> A recipe needs 3 pounds of apples. The store sells apples by the ounce. How many ounces does Layla need to buy?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">6.</span> A punch bowl holds 2 gallons. If each cup holds 1 cup of punch, how many servings can the bowl hold? (Hint: 1 gallon = 16 cups)</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">7.</span> A baby weighs 112 ounces. How many pounds and ounces is that?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">8.</span> The soccer team has 6 quarts of sports drink. They pour it into pint-sized bottles. How many bottles can they fill?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Adventure – Measurements Word Problems</span>
+    <span>Page 1 / ___</span>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="badge">BON<br>WP</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Bonus Word Problems &nbsp;|&nbsp; Measurements &nbsp;·&nbsp; Page 2 of 2</div>
+  <div class="name-date">Name: <span></span> &nbsp; Date: <span></span></div>
+  <span class="topic-tag">MEASUREMENTS</span>
+
+  <h2>Part C – Metric Units</h2>
+  <p class="hint">Move the decimal: ×10 to go smaller (m→cm), ÷10 to go bigger (cm→m).</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">9.</span> A pencil is 19 cm long. How many millimeters long is it?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">10.</span> The school is 1.4 km from the park. How many meters is that?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">11.</span> A bag of rice has a mass of 2,500 g. How many kilograms is that?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">12.</span> A water bottle holds 750 mL. How many full bottles are needed to fill a 3-liter jug?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+  </div>
+
+  <h2>Part D – Elapsed Time & Multi-Step</h2>
+  <p class="hint">For elapsed time, count up from the start time to the end time.</p>
+
+  <div class="grid-2">
+    <div class="problem-block">
+      <p><span class="num-label">13.</span> School starts at 8:15 a.m. and ends at 3:45 p.m. How long is the school day?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">14.</span> A movie starts at 6:40 p.m. and lasts 1 hour 55 minutes. What time does it end?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">15.</span> Sam has a 5-meter roll of ribbon. She cuts off three pieces that are each 85 cm. How many centimeters of ribbon are left?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line"></span>
+    </div>
+    <div class="problem-block">
+      <p><span class="num-label">16.</span> A dog weighs 36 pounds 4 ounces. A cat weighs 488 ounces. Which animal weighs more? By how many ounces?</p>
+      <div class="work-box"></div>
+      Answer: <span class="ans-line-long"></span>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3>⭐ Challenge: Multi-Step Measurement</h3>
+    <p><span class="num-label">17.</span> A juice stand starts the day with 3 gallons of lemonade. By noon they sell 7 quarts. In the afternoon they sell another 9 pints. How many cups of lemonade are left at the end of the day?</p>
+    <div class="work-box" style="min-height:80px;"></div>
+    Answer: <span class="ans-line"></span>
+    <p style="margin-top:8px;"><span class="num-label">18.</span> A carpenter has a board that is 4 yards long. She cuts it into pieces: two pieces of 2 feet 6 inches each, and three pieces of 18 inches each. How many inches of board are left over?</p>
+    <div class="work-box" style="min-height:80px;"></div>
+    Answer: <span class="ans-line"></span>
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Adventure – Measurements Word Problems</span>
+    <span>Page 2 / ___</span>
+  </div>
+</div>
+
+<!-- PAGE 3 – ANSWER KEY -->
+<div class="page">
+  <div class="badge">BON<br>KEY</div>
+  <h1>Summer Math Adventure</h1>
+  <div class="subtitle">Bonus Word Problems &nbsp;|&nbsp; Measurements &nbsp;·&nbsp; Answer Key</div>
+  <span class="topic-tag">ANSWER KEY</span>
+
+  <div class="ans-key-box">
+    <h3>Page 1 – US Customary Length</h3>
+    <div class="ak-grid">
+      <div><strong>1.</strong> 16 yards (48 ÷ 3 = 16)</div>
+      <div><strong>2.</strong> Maya's room is wider by 6 inches (9 ft = 108 in; 108 − 102 = 6)</div>
+      <div><strong>3.</strong> 21,120 feet (2 mi × 5,280 ft × 2 runs)</div>
+      <div><strong>4.</strong> 7 spaces (7 yd = 21 ft; 21 ÷ 3 = 7 sections)</div>
+    </div>
+  </div>
+
+  <div class="ans-key-box">
+    <h3>Page 1 – Weight &amp; Capacity</h3>
+    <div class="ak-grid">
+      <div><strong>5.</strong> 48 ounces (3 × 16)</div>
+      <div><strong>6.</strong> 32 servings (2 gal × 16 cups)</div>
+      <div><strong>7.</strong> 7 pounds 0 ounces (112 ÷ 16 = 7)</div>
+      <div><strong>8.</strong> 12 bottles (6 qt × 2 pt = 12 pt)</div>
+    </div>
+  </div>
+
+  <div class="ans-key-box">
+    <h3>Page 2 – Metric Units</h3>
+    <div class="ak-grid">
+      <div><strong>9.</strong> 190 mm (19 × 10)</div>
+      <div><strong>10.</strong> 1,400 meters (1.4 × 1,000)</div>
+      <div><strong>11.</strong> 2.5 kg (2,500 ÷ 1,000)</div>
+      <div><strong>12.</strong> 4 bottles (3,000 mL ÷ 750 mL)</div>
+    </div>
+  </div>
+
+  <div class="ans-key-box">
+    <h3>Page 2 – Elapsed Time &amp; Multi-Step</h3>
+    <div class="ak-grid">
+      <div><strong>13.</strong> 7 hours 30 minutes</div>
+      <div><strong>14.</strong> 8:35 p.m.</div>
+      <div><strong>15.</strong> 245 cm (500 cm − 3 × 85 cm)</div>
+      <div><strong>16.</strong> Dog weighs more by 100 oz (dog = 36×16+4 = 580 oz; cat = 488 oz; 580−488 = 92 oz) <em>Note: dog wins by 92 oz</em></div>
+    </div>
+  </div>
+
+  <div class="ans-key-box">
+    <h3>Challenge Problems</h3>
+    <p><strong>17.</strong> Start: 3 gal = 48 cups. Sold noon: 7 qt = 14 pt = 28 cups. Sold afternoon: 9 pt = 18 cups. Total sold: 28 + 18 = 46 cups. Left: 48 − 46 = <strong>2 cups</strong>.</p>
+    <p style="margin-top:8px;"><strong>18.</strong> Board = 4 yd = 144 in. Two pieces of 2 ft 6 in = 30 in each → 2 × 30 = 60 in. Three pieces of 18 in → 3 × 18 = 54 in. Total cut: 60 + 54 = 114 in. Left: 144 − 114 = <strong>30 inches</strong>.</p>
+  </div>
+
+  <div class="intro-box" style="margin-top:14px;">
+    <strong>Conversion Cheat Sheet:</strong><br>
+    12 in = 1 ft &nbsp;·&nbsp; 3 ft = 1 yd &nbsp;·&nbsp; 5,280 ft = 1 mi &nbsp;·&nbsp; 16 oz = 1 lb &nbsp;·&nbsp; 2 cups = 1 pt &nbsp;·&nbsp; 2 pt = 1 qt &nbsp;·&nbsp; 4 qt = 1 gal<br>
+    10 mm = 1 cm &nbsp;·&nbsp; 100 cm = 1 m &nbsp;·&nbsp; 1,000 m = 1 km &nbsp;·&nbsp; 1,000 g = 1 kg &nbsp;·&nbsp; 1,000 mL = 1 L
+  </div>
+
+  <div class="footer">
+    <span>Summer Math Adventure – Measurements Word Problems</span>
+    <span>Answer Key</span>
+  </div>
+</div>
+
+</body>
+</html>
