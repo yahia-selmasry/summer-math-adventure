@@ -4606,43 +4606,24 @@ function App() {
     return e(PrintAllView,{lessons,onClose:()=>setScreen("home")});
 
   // Bottom nav (mobile only — hidden on desktop via CSS)
+  const navBtn = (onClick, active, color, icon, label) =>
+    e("button",{onClick,style:{
+      flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:1,
+      padding:"8px 0 12px",background:"none",border:"none",cursor:"pointer",
+      color:active?color:"#9ca3af",fontWeight:800,fontSize:10
+    }},
+      e("span",{style:{fontSize:20}},icon), label
+    );
   const BottomNav = e("div",{className:"bottom-nav-bar",style:{
     position:"fixed",bottom:0,left:0,right:0,zIndex:50,
     display:"flex",borderTop:"2px solid #fed7aa",
     background:"#fff",boxShadow:"0 -4px 16px rgba(249,115,22,.12)"
   }},
-    e("button",{onClick:()=>{setTab("arabic");setScreen("home");},style:{
-      flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2,
-      padding:"10px 0 14px",background:"none",border:"none",cursor:"pointer",
-      color:tab==="arabic"?"#f97316":"#9ca3af",fontWeight:800,fontSize:11
-    }},
-      e("span",{style:{fontSize:26}},"📖"),
-      "عَرَبِيَّة"
-    ),
-    e("button",{onClick:()=>setTab("vocab"),style:{
-      flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2,
-      padding:"10px 0 14px",background:"none",border:"none",cursor:"pointer",
-      color:tab==="vocab"?VP.pink:"#9ca3af",fontWeight:800,fontSize:11
-    }},
-      e("span",{style:{fontSize:22}},"📚"),
-      "مُفْرَدَات"
-    ),
-    e("button",{onClick:()=>setTab("grammar"),style:{
-      flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2,
-      padding:"10px 0 14px",background:"none",border:"none",cursor:"pointer",
-      color:tab==="grammar"?GP.blue:"#9ca3af",fontWeight:800,fontSize:11
-    }},
-      e("span",{style:{fontSize:22}},"📐"),
-      "قَوَاعِد"
-    ),
-    e("button",{onClick:()=>setTab("islamic"),style:{
-      flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2,
-      padding:"10px 0 14px",background:"none",border:"none",cursor:"pointer",
-      color:tab==="islamic"?IP.green:"#9ca3af",fontWeight:800,fontSize:11
-    }},
-      e("span",{style:{fontSize:22}},"🌙"),
-      "إِسْلَامِيَّات"
-    )
+    navBtn(()=>{setTab("arabic");setScreen("home");}, tab==="arabic"&&screen!=="games", "#f97316", "📖", "عَرَبِيَّة"),
+    navBtn(()=>setTab("vocab"),       tab==="vocab",    VP.pink,   "📚", "مُفْرَدَات"),
+    navBtn(()=>{setTab("arabic");setScreen("games");}, tab==="arabic"&&screen==="games", "#7c3aed", "🎮", "أَلْعَاب"),
+    navBtn(()=>setTab("grammar"),     tab==="grammar",  GP.blue,   "📐", "قَوَاعِد"),
+    navBtn(()=>setTab("islamic"),     tab==="islamic",  IP.green,  "🌙", "إِسْلَام")
   );
 
   // Sidebar nav (desktop only — shown via CSS)
@@ -4658,6 +4639,10 @@ function App() {
     e("button",{className:isArabic&&screen==="dashboard"?"active":"",
       onClick:()=>{setTab("arabic");setScreen("dashboard");}},
       e("span",{className:"nav-icon"},"📊"), "تَقَدُّمِي"),
+    e("button",{className:isArabic&&screen==="games"?"active":"",
+      onClick:()=>{setTab("arabic");setScreen("games");},
+      style:isArabic&&screen==="games"?{background:"linear-gradient(135deg,#ede9fe,#fce7f3)",color:"#7c3aed",boxShadow:"0 2px 8px rgba(124,58,237,.2)"}:{}},
+      e("span",{className:"nav-icon"},"🎮"), "أَلْعَاب"),
     e("button",{className:tab==="vocab"?"active":"",
       onClick:()=>setTab("vocab"),
       style:tab==="vocab"?{background:"linear-gradient(135deg,#fce7f3,#ede9fe)",color:VP.pink,boxShadow:"0 2px 8px rgba(219,39,119,.2)"}:{}},
