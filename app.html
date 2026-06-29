@@ -282,7 +282,7 @@
   <div class="star-badge">★</div>
   <div>
     <h1>Summer Math Adventure</h1>
-    <div class="sub">Grade 4 → 5 · Interactive Practice · All 10 Weeks</div>
+    <div class="sub">Grade 4 → 5 · Interactive Practice · All 9 Weeks + Bonus</div>
   </div>
 </header>
 
@@ -327,7 +327,7 @@
       <span class="wtopic">BASIS Prep</span>
     </button>
     <button class="week-btn" style="background:var(--w10)" data-week="10" onclick="selectWeek(10)">
-      <span class="wlabel">WEEK 10</span>
+      <span class="wlabel">BONUS</span>
       <span class="wtopic">Measurements</span>
     </button>
   </div>
@@ -2379,10 +2379,11 @@ function newSession() {
   updateScoreBar();
   document.getElementById('complete-banner').style.display = 'none';
 
-  if (wordProblemMode && WORD_PROBLEMS[currentWeek]) {
-    // Shuffle the curated word problems and take up to 8
-    const bank = shuffle([...WORD_PROBLEMS[currentWeek]]);
-    problems = bank.slice(0, Math.min(8, bank.length));
+  if (wordProblemMode) {
+    // Mix word problems from ALL weeks
+    const allProblems = Object.values(WORD_PROBLEMS).flat();
+    const bank = shuffle([...allProblems]);
+    problems = bank.slice(0, 10);
   } else {
     // Shuffle which generator runs first each time
     const gens = GENERATORS[currentWeek];
