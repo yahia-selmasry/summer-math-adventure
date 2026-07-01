@@ -1303,7 +1303,9 @@ function ComprehensionQuiz({ lesson, onFinish }) {
   const [score,setScore]       = useState(0);
   const [done,setDone]         = useState(false);
   const [feedback,setFeedback] = useState(null);
-  const [finalData,setFinalData] = useState(null); // {pct, answers} set when done
+  const [finalData,setFinalData] = useState(null);
+  const [waPhone,setWaPhone]   = useState("");
+  const [showWaInput,setShowWaInput] = useState(false);
   const answersRef             = useRef([]);
   const q = lesson.comprehension[idx];
 
@@ -1340,8 +1342,10 @@ function ComprehensionQuiz({ lesson, onFinish }) {
     return `📚 نتيجة يحيى — ${lesson.title}\n📅 ${date}\n⭐ النتيجة: ${ans.filter(a=>a.chosen===a.correct).length} من ${ans.length} (${pct}%)\n\n${lines}\n\n🌟 Arabic Learning App`;
   };
 
-  const shareViaWhatsApp = (text) => {
-    window.open("https://wa.me/?text="+encodeURIComponent(text),"_blank");
+  const sendToWhatsApp = (phone, text) => {
+    const digits = phone.replace(/\D/g,"");
+    if(!digits){ alert("أدخل رقم الهاتف أولاً"); return; }
+    window.open("https://wa.me/"+digits+"?text="+encodeURIComponent(text),"_blank");
   };
   const shareViaEmail = (text) => {
     window.location.href = "mailto:?subject="+encodeURIComponent("نتيجة يحيى — "+lesson.title)+"&body="+encodeURIComponent(text);
@@ -1363,9 +1367,9 @@ function ComprehensionQuiz({ lesson, onFinish }) {
       e("div",{className:"star-pop",style:{fontSize:80,marginBottom:10}},big),
       e("h3",{style:{...AF,fontSize:26,fontWeight:900,color:"#c2410c",direction:"rtl",marginBottom:8}},msg),
       e("p",{style:{fontSize:16,color:P.gray,marginBottom:20}},`${correctCount} من ${ans.length} صحيح (${pct}%)`),
-      e("p",{style:{...AF,fontSize:14,color:P.gray,marginBottom:10,direction:"rtl"},"dir":"rtl"},"📤 شارك النتيجة:"),
-      e("div",{style:{display:"flex",gap:10,justifyContent:"center",marginBottom:20}},
-        e("button",{onClick:()=>shareViaWhatsApp(text),
+      e("p",{style:{...AF,fontSize:14,color:P.gray,marginBottom:10,direction:"rtl"}},"📤 شارك النتيجة:"),
+      e("div",{style:{display:"flex",gap:10,justifyContent:"center",marginBottom:showWaInput?10:20}},
+        e("button",{onClick:()=>setShowWaInput(v=>!v),
           style:{flex:1,background:"#25d366",color:"#fff",border:"none",borderRadius:14,
             padding:"13px 0",fontSize:15,fontWeight:900,cursor:"pointer",
             boxShadow:"0 4px 16px rgba(37,211,102,.4)"}},
@@ -1380,6 +1384,22 @@ function ComprehensionQuiz({ lesson, onFinish }) {
             padding:"13px 0",fontSize:15,fontWeight:900,cursor:"pointer",
             boxShadow:"0 4px 16px rgba(139,92,246,.4)"}},
           "📱 مشاركة")
+      ),
+      showWaInput && e("div",{style:{marginBottom:20,padding:"14px 16px",background:"#f0fdf4",
+        borderRadius:14,border:"1.5px solid #86efac"}},
+        e("p",{style:{...AF,fontSize:13,color:"#15803d",marginBottom:8,direction:"rtl"}},
+          "أدخل رقم الهاتف مع كود الدولة (مثال: 201012345678)"),
+        e("div",{style:{display:"flex",gap:8}},
+          e("input",{type:"tel",value:waPhone,
+            onChange:ev=>setWaPhone(ev.target.value),
+            placeholder:"201012345678",
+            style:{flex:1,border:"1.5px solid #86efac",borderRadius:10,padding:"10px 12px",
+              fontSize:15,outline:"none",direction:"ltr"}}),
+          e("button",{onClick:()=>sendToWhatsApp(waPhone,text),
+            style:{background:"#25d366",color:"#fff",border:"none",borderRadius:10,
+              padding:"10px 18px",fontSize:15,fontWeight:900,cursor:"pointer",whiteSpace:"nowrap"}},
+            "إرسال ✓")
+        )
       ),
       e("button",{onClick:()=>onFinish(pct),
         style:{background:"linear-gradient(135deg,#fbbf24,#f97316)",color:"#fff",border:"none",
