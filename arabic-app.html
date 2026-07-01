@@ -1304,8 +1304,6 @@ function ComprehensionQuiz({ lesson, onFinish }) {
   const [done,setDone]         = useState(false);
   const [feedback,setFeedback] = useState(null);
   const [finalData,setFinalData] = useState(null);
-  const [waPhone,setWaPhone]   = useState("");
-  const [showWaInput,setShowWaInput] = useState(false);
   const answersRef             = useRef([]);
   const q = lesson.comprehension[idx];
 
@@ -1331,76 +1329,103 @@ function ComprehensionQuiz({ lesson, onFinish }) {
     }
   };
 
-  const buildText = (pct, ans) => {
+  const openLessonPDF = (pct, ans) => {
     const date = new Date().toLocaleDateString("ar-EG");
-    const lines = ans.map((a,i)=>{
-      const mark = a.chosen===a.correct ? "✅" : "❌";
-      const chosenText = a.options[a.chosen] ?? "—";
-      const correctText = a.options[a.correct];
-      return `${i+1}. ${mark} ${a.question}\n   إجابتي: ${chosenText}${a.chosen!==a.correct?" (الصحيح: "+correctText+")":""}`;
-    }).join("\n\n");
-    return `📚 نتيجة يحيى — ${lesson.title}\n📅 ${date}\n⭐ النتيجة: ${ans.filter(a=>a.chosen===a.correct).length} من ${ans.length} (${pct}%)\n\n${lines}\n\n🌟 Arabic Learning App`;
-  };
+    const correctCount = ans.filter(a=>a.chosen===a.correct).length;
+    const vocabRows = lesson.vocabulary.map(v=>`
+      <tr>
+        <td style="font-size:18px;font-weight:700">${v.word}</td>
+        <td>${v.meaningAr||""}</td>
+        <td style="font-size:13px;color:#555">${v.meaningEn||""}</td>
+        <td style="font-size:13px;color:#888">${v.dialectEgy||""}</td>
+      </tr>`).join("");
+    const qRows = ans.map((a,i)=>{
+      const ok = a.chosen===a.correct;
+      const chosen = a.options[a.chosen]??"—";
+      const correct = a.options[a.correct];
+      return `<div style="margin-bottom:18px;padding:14px;border-radius:10px;background:${ok?"#f0fdf4":"#fff5f5"};border:1.5px solid ${ok?"#86efac":"#fca5a5"}">
+        <div style="font-size:16px;font-weight:700;margin-bottom:8px;color:#1c1917">${i+1}. ${a.question}</div>
+        <div style="font-size:15px">${ok?"✅":"❌"} إجابة يحيى: <strong>${chosen}</strong>${!ok?` <span style="color:#15803d"> | الصحيح: ${correct}</span>`:""}</div>
+      </div>`;
+    }).join("");
+    const gramRows = lesson.grammar.map(g=>`
+      <tr>
+        <td style="font-size:17px;font-weight:700">${g.word}</td>
+        <td>${g.type||""}</td>
+        <td>${g.number||""}</td>
+      </tr>`).join("");
+    const html = `<!DOCTYPE html><html dir="rtl" lang="ar">
+<head><meta charset="utf-8"><title>تقرير الدرس — ${lesson.title}</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Noto Naskh Arabic',serif;direction:rtl;color:#1c1917;background:#fff;padding:32px;max-width:800px;margin:auto}
+  h1{font-size:26px;font-weight:900;color:#c2410c;margin-bottom:4px}
+  h2{font-size:18px;font-weight:900;color:#92400e;margin:24px 0 10px;padding-bottom:6px;border-bottom:2px solid #fed7aa}
+  .meta{font-size:13px;color:#78716c;margin-bottom:20px;direction:ltr;text-align:right}
+  .score-badge{display:inline-block;background:${pct>=75?"#dcfce7":pct>=50?"#fef9c3":"#fee2e2"};color:${pct>=75?"#15803d":pct>=50?"#854d0e":"#991b1b"};border-radius:20px;padding:6px 20px;font-size:18px;font-weight:900;margin-bottom:20px}
+  .passage{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:12px;padding:20px;font-size:20px;line-height:2.4;margin-bottom:4px}
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th{background:#fff7ed;padding:8px 10px;font-weight:700;border:1px solid #fde8c8;font-size:14px}
+  td{padding:8px 10px;border:1px solid #fde8c8;vertical-align:top}
+  tr:nth-child(even) td{background:#fffbf5}
+  .islamic-box{background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:18px;margin-top:8px}
+  .islamic-box .theme{font-size:17px;font-weight:900;color:#15803d;margin-bottom:8px}
+  .islamic-box .note{font-size:15px;line-height:1.9;color:#1c4a2b}
+  .islamic-box .ref{font-size:13px;color:#6b7280;margin-top:8px}
+  .footer{margin-top:32px;padding-top:16px;border-top:1px solid #e5e7eb;font-size:12px;color:#9ca3af;text-align:center;direction:ltr}
+  @media print{body{padding:16px}@page{margin:1cm}}
+</style></head>
+<body>
+<h1>${lesson.emoji||"📖"} ${lesson.title}</h1>
+<div class="meta">الأسبوع ${lesson.week} · المستوى ${lesson.level} · ${date}</div>
+<div class="score-badge">⭐ نتيجة الفهم: ${correctCount} من ${ans.length} (${pct}%)</div>
 
-  const sendToWhatsApp = (phone, text) => {
-    const digits = phone.replace(/\D/g,"");
-    if(!digits){ alert("أدخل رقم الهاتف أولاً"); return; }
-    window.open("https://wa.me/"+digits+"?text="+encodeURIComponent(text),"_blank");
-  };
-  const shareViaEmail = (text) => {
-    window.location.href = "mailto:?subject="+encodeURIComponent("نتيجة يحيى — "+lesson.title)+"&body="+encodeURIComponent(text);
-  };
-  const shareViaNative = async (text) => {
-    if(navigator.share){
-      try{ await navigator.share({title:"نتيجة يحيى",text}); return true; }
-      catch(_){ return false; }
-    }
-    return false;
+<h2>📖 النص</h2>
+<div class="passage">${lesson.passage}</div>
+
+<h2>📚 المفردات</h2>
+<table><thead><tr><th>الكلمة</th><th>المعنى بالعربية</th><th>المعنى بالإنجليزية</th><th>العامية المصرية</th></tr></thead>
+<tbody>${vocabRows}</tbody></table>
+
+<h2>❓ أسئلة الفهم — إجابات يحيى</h2>
+${qRows}
+
+<h2>📝 القواعد</h2>
+<table><thead><tr><th>الكلمة</th><th>النوع</th><th>العدد</th></tr></thead>
+<tbody>${gramRows}</tbody></table>
+
+<h2>🌿 الدرس الإسلامي</h2>
+<div class="islamic-box">
+  <div class="theme">${lesson.islamicLink.theme}</div>
+  <div class="note">${lesson.islamicLink.note}</div>
+  <div class="ref">📌 ${lesson.islamicLink.quranRef}</div>
+</div>
+
+<div class="footer">Arabic Learning App · تقرير درس يحيى · ${date}</div>
+<script>window.onload=()=>window.print()<\/script>
+</body></html>`;
+    const w = window.open("","_blank");
+    w.document.write(html);
+    w.document.close();
   };
 
   if(done && finalData){
     const {pct, answers:ans} = finalData;
     const correctCount = ans.filter(a=>a.chosen===a.correct).length;
     const [msg,big] = pct>=75?["أَحْسَنْتَ! أَنْتَ نَجْم! ⭐","🏆"]:pct>=50?["جَيِّدٌ جِدًّا! 👍","🌟"]:["حَاوِلْ مَرَّةً أُخْرَى! 💪","💪"];
-    const text = buildText(pct,ans);
     return e("div",{className:"pop",style:{textAlign:"center",padding:"28px 0"}},
       e("div",{className:"star-pop",style:{fontSize:80,marginBottom:10}},big),
       e("h3",{style:{...AF,fontSize:26,fontWeight:900,color:"#c2410c",direction:"rtl",marginBottom:8}},msg),
       e("p",{style:{fontSize:16,color:P.gray,marginBottom:20}},`${correctCount} من ${ans.length} صحيح (${pct}%)`),
-      e("p",{style:{...AF,fontSize:14,color:P.gray,marginBottom:10,direction:"rtl"}},"📤 شارك النتيجة:"),
-      e("div",{style:{display:"flex",gap:10,justifyContent:"center",marginBottom:showWaInput?10:20}},
-        e("button",{onClick:()=>setShowWaInput(v=>!v),
-          style:{flex:1,background:"#25d366",color:"#fff",border:"none",borderRadius:14,
-            padding:"13px 0",fontSize:15,fontWeight:900,cursor:"pointer",
-            boxShadow:"0 4px 16px rgba(37,211,102,.4)"}},
-          "💬 واتساب"),
-        e("button",{onClick:()=>shareViaEmail(text),
-          style:{flex:1,background:"#3b82f6",color:"#fff",border:"none",borderRadius:14,
-            padding:"13px 0",fontSize:15,fontWeight:900,cursor:"pointer",
-            boxShadow:"0 4px 16px rgba(59,130,246,.4)"}},
-          "✉️ إيميل"),
-        navigator.share && e("button",{onClick:()=>shareViaNative(text),
-          style:{flex:1,background:"#8b5cf6",color:"#fff",border:"none",borderRadius:14,
-            padding:"13px 0",fontSize:15,fontWeight:900,cursor:"pointer",
-            boxShadow:"0 4px 16px rgba(139,92,246,.4)"}},
-          "📱 مشاركة")
-      ),
-      showWaInput && e("div",{style:{marginBottom:20,padding:"14px 16px",background:"#f0fdf4",
-        borderRadius:14,border:"1.5px solid #86efac"}},
-        e("p",{style:{...AF,fontSize:13,color:"#15803d",marginBottom:8,direction:"rtl"}},
-          "أدخل رقم الهاتف مع كود الدولة (مثال: 201012345678)"),
-        e("div",{style:{display:"flex",gap:8}},
-          e("input",{type:"tel",value:waPhone,
-            onChange:ev=>setWaPhone(ev.target.value),
-            placeholder:"201012345678",
-            style:{flex:1,border:"1.5px solid #86efac",borderRadius:10,padding:"10px 12px",
-              fontSize:15,outline:"none",direction:"ltr"}}),
-          e("button",{onClick:()=>sendToWhatsApp(waPhone,text),
-            style:{background:"#25d366",color:"#fff",border:"none",borderRadius:10,
-              padding:"10px 18px",fontSize:15,fontWeight:900,cursor:"pointer",whiteSpace:"nowrap"}},
-            "إرسال ✓")
-        )
-      ),
+      e("button",{onClick:()=>openLessonPDF(pct,ans),
+        style:{display:"block",width:"100%",marginBottom:14,
+          background:"linear-gradient(135deg,#f97316,#c2410c)",color:"#fff",border:"none",
+          borderRadius:16,padding:"15px 0",fontSize:16,fontWeight:900,cursor:"pointer",
+          boxShadow:"0 6px 24px rgba(194,65,12,.4)"}},
+        "📄 تحميل PDF الدرس كاملاً"),
+      e("p",{style:{fontSize:12,color:P.gray,marginBottom:16,direction:"rtl"}},
+        "بعد فتح الصفحة → اضغط طباعة → احفظ كـ PDF → شارك على واتساب"),
       e("button",{onClick:()=>onFinish(pct),
         style:{background:"linear-gradient(135deg,#fbbf24,#f97316)",color:"#fff",border:"none",
           borderRadius:16,padding:"16px 36px",fontSize:17,fontWeight:900,
