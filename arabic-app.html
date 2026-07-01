@@ -1345,7 +1345,7 @@ function ComprehensionQuiz({ lesson, onFinish }) {
       const correct = a.options[a.correct];
       return `<div style="margin-bottom:18px;padding:14px;border-radius:10px;background:${ok?"#f0fdf4":"#fff5f5"};border:1.5px solid ${ok?"#86efac":"#fca5a5"}">
         <div style="font-size:16px;font-weight:700;margin-bottom:8px;color:#1c1917">${i+1}. ${a.question}</div>
-        <div style="font-size:15px">${ok?"✅":"❌"} إجابة يحيى: <strong>${chosen}</strong>${!ok?` <span style="color:#15803d"> | الصحيح: ${correct}</span>`:""}</div>
+        <div style="font-size:15px">${ok?"✅":"❌"} إجابة مَالِك: <strong>${chosen}</strong>${!ok?` <span style="color:#15803d"> | الصحيح: ${correct}</span>`:""}</div>
       </div>`;
     }).join("");
     const gramRows = lesson.grammar.map(g=>`
@@ -1388,7 +1388,7 @@ function ComprehensionQuiz({ lesson, onFinish }) {
 <table><thead><tr><th>الكلمة</th><th>المعنى بالعربية</th><th>المعنى بالإنجليزية</th><th>العامية المصرية</th></tr></thead>
 <tbody>${vocabRows}</tbody></table>
 
-<h2>❓ أسئلة الفهم — إجابات يحيى</h2>
+<h2>❓ أسئلة الفهم — إجابات مَالِك</h2>
 ${qRows}
 
 <h2>📝 القواعد</h2>
@@ -1402,7 +1402,7 @@ ${qRows}
   <div class="ref">📌 ${lesson.islamicLink.quranRef}</div>
 </div>
 
-<div class="footer">Arabic Learning App · تقرير درس يحيى · ${date}</div>
+<div class="footer">Arabic Learning App · تقرير درس مَالِك · ${date}</div>
 <script>window.onload=()=>window.print()<\/script>
 </body></html>`;
     const w = window.open("","_blank");
