@@ -1303,6 +1303,8 @@ function ComprehensionQuiz({ lesson, onFinish }) {
   const [score,setScore]       = useState(0);
   const [done,setDone]         = useState(false);
   const [feedback,setFeedback] = useState(null); // "correct" | "wrong"
+  const [answers,setAnswers]   = useState([]); // {q, chosen, correct} per question
+  const [sharing,setSharing]   = useState(false);
   const q = lesson.comprehension[idx];
 
   const choose = i => {
@@ -1313,9 +1315,30 @@ function ComprehensionQuiz({ lesson, onFinish }) {
     setFeedback(isRight?"correct":"wrong");
   };
   const next = () => {
+    setAnswers(a=>[...a,{question:q.question,chosen:selected,correct:q.answer,options:q.options}]);
     setFeedback(null);
     if(idx+1<lesson.comprehension.length){setIdx(i=>i+1);setSelected(null);}
     else setDone(true);
+  };
+
+  const shareResults = async (pct, ans) => {
+    const date = new Date().toLocaleDateString("ar-EG");
+    const lines = ans.map((a,i)=>{
+      const mark = a.chosen===a.correct ? "✅" : "❌";
+      const chosenText = a.options[a.chosen] ?? "—";
+      const correctText = a.options[a.correct];
+      return `${i+1}. ${mark} ${a.question}\n   إجابتي: ${chosenText}${a.chosen!==a.correct?" (الصحيح: "+correctText+")" : ""}`;
+    }).join("\n\n");
+    const text = `📚 نتيجة يحيى — ${lesson.title}\n📅 ${date}\n⭐ النتيجة: ${ans.filter(a=>a.chosen===a.correct).length} من ${ans.length} (${pct}%)\n\n${lines}\n\n🌟 CyberProtect Arabic App`;
+    if(navigator.share){
+      try{ setSharing(true); await navigator.share({title:`نتيجة: ${lesson.title}`,text}); }
+      catch(_){}
+      finally{ setSharing(false); }
+    } else {
+      // fallback: copy to clipboard
+      try{ await navigator.clipboard.writeText(text); alert("تم النسخ! يمكنك لصقه في واتساب أو الإيميل 📋"); }
+      catch(_){ alert(text); }
+    }
   };
 
   if(done){
@@ -1324,7 +1347,13 @@ function ComprehensionQuiz({ lesson, onFinish }) {
     return e("div",{className:"pop",style:{textAlign:"center",padding:"28px 0"}},
       e("div",{className:"star-pop",style:{fontSize:80,marginBottom:10}},big),
       e("h3",{style:{...AF,fontSize:26,fontWeight:900,color:"#c2410c",direction:"rtl",marginBottom:8}},msg),
-      e("p",{style:{fontSize:16,color:P.gray,marginBottom:28}},`${score} من ${lesson.comprehension.length} صحيح (${pct}%)`),
+      e("p",{style:{fontSize:16,color:P.gray,marginBottom:16}},`${score} من ${lesson.comprehension.length} صحيح (${pct}%)`),
+      e("button",{onClick:()=>shareResults(pct,answers),disabled:sharing,
+        style:{display:"block",width:"100%",marginBottom:14,
+          background:"linear-gradient(135deg,#22c55e,#16a34a)",color:"#fff",border:"none",
+          borderRadius:16,padding:"14px 0",fontSize:16,fontWeight:900,
+          boxShadow:"0 6px 24px rgba(34,197,94,.4)",opacity:sharing?0.7:1,cursor:sharing?"wait":"pointer"}},
+        sharing?"جَارٍ الإِرْسَال...":"📤 شَارِك النَّتِيجَة (واتساب / إيميل)"),
       e("button",{onClick:()=>onFinish(pct),
         style:{background:"linear-gradient(135deg,#fbbf24,#f97316)",color:"#fff",border:"none",
           borderRadius:16,padding:"16px 36px",fontSize:17,fontWeight:900,
