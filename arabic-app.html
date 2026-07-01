@@ -1329,87 +1329,6 @@ function ComprehensionQuiz({ lesson, onFinish }) {
     }
   };
 
-  const openLessonPDF = (pct, ans) => {
-    const date = new Date().toLocaleDateString("ar-EG");
-    const correctCount = ans.filter(a=>a.chosen===a.correct).length;
-    const vocabRows = lesson.vocabulary.map(v=>`
-      <tr>
-        <td style="font-size:14px;font-weight:700;width:25%">${v.word}</td>
-        <td style="width:35%">${v.meaningAr||""}</td>
-        <td style="font-size:13px;color:#555;width:25%">${v.meaningEn||""}</td>
-        <td style="font-size:13px;color:#888;width:15%">${v.dialectEgy||""}</td>
-      </tr>`).join("");
-    const qRows = ans.map((a,i)=>{
-      const ok = a.chosen===a.correct;
-      const chosen = a.options[a.chosen]??"—";
-      const correct = a.options[a.correct];
-      return `<div style="margin-bottom:18px;padding:14px;border-radius:10px;background:${ok?"#f0fdf4":"#fff5f5"};border:1.5px solid ${ok?"#86efac":"#fca5a5"};page-break-inside:avoid;overflow-wrap:break-word;word-break:break-word">
-        <div style="font-size:16px;font-weight:700;margin-bottom:8px;color:#1c1917;overflow-wrap:break-word">${i+1}. ${a.question}</div>
-        <div style="font-size:15px;overflow-wrap:break-word">${ok?"✅":"❌"} إجابة مَالِك: <strong>${chosen}</strong>${!ok?` <span style="color:#15803d"> | الصحيح: ${correct}</span>`:""}</div>
-      </div>`;
-    }).join("");
-    const gramRows = lesson.grammar.map(g=>`
-      <tr>
-        <td style="font-size:14px;font-weight:700;width:35%">${g.word}</td>
-        <td style="width:35%">${g.type||""}</td>
-        <td style="width:30%">${g.number||""}</td>
-      </tr>`).join("");
-    const html = `<!DOCTYPE html><html dir="rtl" lang="ar">
-<head><meta charset="utf-8"><title>تقرير الدرس — ${lesson.title}</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700;900&display=swap" rel="stylesheet">
-<style>
-  @page{size:A4;margin:1.5cm}
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{direction:rtl}
-  body{font-family:'Noto Naskh Arabic',serif;direction:rtl;color:#1c1917;background:#fff;padding:20px 24px;font-size:15px;width:100%}
-  h1{font-size:22px;font-weight:900;color:#c2410c;margin-bottom:4px;word-wrap:break-word;overflow-wrap:break-word}
-  h2{font-size:18px;font-weight:900;color:#92400e;margin:24px 0 10px;padding-bottom:6px;border-bottom:2px solid #fed7aa}
-  .meta{font-size:13px;color:#78716c;margin-bottom:20px;direction:ltr;text-align:right}
-  .score-badge{display:block;text-align:center;background:${pct>=75?"#dcfce7":pct>=50?"#fef9c3":"#fee2e2"};color:${pct>=75?"#15803d":pct>=50?"#854d0e":"#991b1b"};border-radius:20px;padding:6px 20px;font-size:18px;font-weight:900;margin-bottom:20px}
-  .passage{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:12px;padding:20px;font-size:18px;line-height:2.2;margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
-  table{width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed}
-  th{background:#fff7ed;padding:8px 10px;font-weight:700;border:1px solid #fde8c8;font-size:14px;overflow-wrap:break-word}
-  td{padding:8px 10px;border:1px solid #fde8c8;vertical-align:top;overflow-wrap:break-word;word-break:break-word}
-  tr:nth-child(even) td{background:#fffbf5}
-  .islamic-box{background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:18px;margin-top:8px}
-  .islamic-box .theme{font-size:17px;font-weight:900;color:#15803d;margin-bottom:8px}
-  .islamic-box .note{font-size:15px;line-height:1.9;color:#1c4a2b}
-  .islamic-box .ref{font-size:13px;color:#6b7280;margin-top:8px}
-  .footer{margin-top:32px;padding-top:16px;border-top:1px solid #e5e7eb;font-size:12px;color:#9ca3af;text-align:center;direction:ltr}
-</style></head>
-<body>
-<h1>${lesson.emoji||"📖"} ${lesson.title}</h1>
-<div class="meta">الأسبوع ${lesson.week} · المستوى ${lesson.level} · ${date}</div>
-<div class="score-badge">⭐ نتيجة الفهم: ${correctCount} من ${ans.length} (${pct}%)</div>
-
-<h2>📖 النص</h2>
-<div class="passage">${lesson.passage}</div>
-
-<h2>📚 المفردات</h2>
-<table style="table-layout:fixed;width:100%"><colgroup><col style="width:25%"><col style="width:35%"><col style="width:25%"><col style="width:15%"></colgroup><thead><tr><th>الكلمة</th><th>المعنى بالعربية</th><th>المعنى بالإنجليزية</th><th>العامية المصرية</th></tr></thead>
-<tbody>${vocabRows}</tbody></table>
-
-<h2>❓ أسئلة الفهم — إجابات مَالِك</h2>
-${qRows}
-
-<h2>📝 القواعد</h2>
-<table style="table-layout:fixed;width:100%"><colgroup><col style="width:35%"><col style="width:35%"><col style="width:30%"></colgroup><thead><tr><th>الكلمة</th><th>النوع</th><th>العدد</th></tr></thead>
-<tbody>${gramRows}</tbody></table>
-
-<h2>🌿 الدرس الإسلامي</h2>
-<div class="islamic-box">
-  <div class="theme">${lesson.islamicLink.theme}</div>
-  <div class="note">${lesson.islamicLink.note}</div>
-  <div class="ref">📌 ${lesson.islamicLink.quranRef}</div>
-</div>
-
-<div class="footer">Arabic Learning App · تقرير درس مَالِك · ${date}</div>
-<script>window.onload=()=>window.print()<\/script>
-</body></html>`;
-    const w = window.open("","_blank");
-    w.document.write(html);
-    w.document.close();
-  };
 
   if(done && finalData){
     const {pct, answers:ans} = finalData;
@@ -1418,16 +1337,8 @@ ${qRows}
     return e("div",{className:"pop",style:{textAlign:"center",padding:"28px 0"}},
       e("div",{className:"star-pop",style:{fontSize:80,marginBottom:10}},big),
       e("h3",{style:{...AF,fontSize:26,fontWeight:900,color:"#c2410c",direction:"rtl",marginBottom:8}},msg),
-      e("p",{style:{fontSize:16,color:P.gray,marginBottom:20}},`${correctCount} من ${ans.length} صحيح (${pct}%)`),
-      e("button",{onClick:()=>openLessonPDF(pct,ans),
-        style:{display:"block",width:"100%",marginBottom:14,
-          background:"linear-gradient(135deg,#f97316,#c2410c)",color:"#fff",border:"none",
-          borderRadius:16,padding:"15px 0",fontSize:16,fontWeight:900,cursor:"pointer",
-          boxShadow:"0 6px 24px rgba(194,65,12,.4)"}},
-        "📄 تحميل PDF الدرس كاملاً"),
-      e("p",{style:{fontSize:12,color:P.gray,marginBottom:16,direction:"rtl"}},
-        "بعد فتح الصفحة → اضغط طباعة → احفظ كـ PDF → شارك على واتساب"),
-      e("button",{onClick:()=>onFinish(pct),
+      e("p",{style:{fontSize:16,color:P.gray,marginBottom:28}},`${correctCount} من ${ans.length} صحيح (${pct}%)`),
+      e("button",{onClick:()=>onFinish(pct,ans),
         style:{background:"linear-gradient(135deg,#fbbf24,#f97316)",color:"#fff",border:"none",
           borderRadius:16,padding:"16px 36px",fontSize:17,fontWeight:900,
           boxShadow:"0 6px 24px rgba(249,115,22,.45)"}},
@@ -1597,15 +1508,126 @@ function IslamicCard({ lesson, onFinish }) {
   );
 }
 
+// ── Lesson complete screen (with PDF export) ──────────────────────────────────
+function LessonComplete({ lesson, quizScore, gramScore, quizAnswers, onComplete, openPDF }) {
+  const pct = quizScore;
+  const [msg,big] = pct>=75?["أَنْهَيْتَ الدَّرْسَ! أَحْسَنْتَ! 🌟","🎓"]:pct>=50?["أَنْهَيْتَ الدَّرْسَ! جَيِّدٌ! 👍","🎓"]:["أَنْهَيْتَ الدَّرْسَ! 💪","🎓"];
+  return e("div",{className:"pop",style:{textAlign:"center",padding:"28px 16px"}},
+    e("div",{style:{fontSize:80,marginBottom:8}},big),
+    e("h3",{style:{...AF,fontSize:24,fontWeight:900,color:"#c2410c",direction:"rtl",marginBottom:6}},msg),
+    e("p",{style:{...AF,fontSize:15,color:P.gray,marginBottom:24,direction:"rtl"}},lesson.title),
+    e("button",{onClick:()=>openPDF(quizAnswers),
+      style:{display:"block",width:"100%",marginBottom:10,
+        background:"linear-gradient(135deg,#f97316,#c2410c)",color:"#fff",border:"none",
+        borderRadius:16,padding:"15px 0",fontSize:16,fontWeight:900,cursor:"pointer",
+        boxShadow:"0 6px 24px rgba(194,65,12,.4)"}},
+      "📄 تحميل PDF الدرس كاملاً"),
+    e("p",{style:{fontSize:12,color:P.gray,marginBottom:20,direction:"rtl"}},
+      "افتح الصفحة ← اضغط طباعة ← احفظ كـ PDF ← شارك على واتساب"),
+    e("button",{onClick:onComplete,
+      style:{background:"linear-gradient(135deg,#fbbf24,#f97316)",color:"#fff",border:"none",
+        borderRadius:16,padding:"14px 36px",fontSize:17,fontWeight:900,
+        boxShadow:"0 6px 24px rgba(249,115,22,.45)"}},
+      "العَوْدَة لِلدُّرُوس 🏠")
+  );
+}
+
 // ── Lesson flow ───────────────────────────────────────────────────────────────
 function LessonFlow({ lesson, onComplete, onBack }) {
   const [step, setStep]           = useState("passage");
   const [quizScore,setQuizScore]  = useState(0);
   const [gramScore,setGramScore]  = useState(0);
-  const steps = ["passage","quiz","grammar","islamic"];
-  const labels= ["قِرَاءَة","فَهْم","قَوَاعِد","إِسْلَام"];
+  const [quizAnswers,setQuizAnswers] = useState([]);
+  const steps = ["passage","quiz","grammar","islamic","done"];
+  const labels= ["قِرَاءَة","فَهْم","قَوَاعِد","إِسْلَام","تَمَّ"];
   const si    = steps.indexOf(step);
   const cat   = CATEGORY[lesson.category] || CATEGORY.story;
+
+  const openLessonPDF = (ans) => {
+    const date = new Date().toLocaleDateString("ar-EG");
+    const correctCount = ans.filter(a=>a.chosen===a.correct).length;
+    const pct = Math.round(correctCount/ans.length*100);
+    const vocabRows = lesson.vocabulary.map(v=>`
+      <tr>
+        <td style="font-size:14px;font-weight:700">${v.word}</td>
+        <td>${v.meaningAr||""}</td>
+        <td style="font-size:13px;color:#555">${v.meaningEn||""}</td>
+        <td style="font-size:13px;color:#888">${v.dialectEgy||""}</td>
+      </tr>`).join("");
+    const qRows = ans.map((a,i)=>{
+      const ok = a.chosen===a.correct;
+      const chosen = a.options[a.chosen]??"—";
+      const correct = a.options[a.correct];
+      return `<div style="margin-bottom:18px;padding:14px;border-radius:10px;page-break-inside:avoid;overflow-wrap:break-word;word-break:break-word;background:${ok?"#f0fdf4":"#fff5f5"};border:1.5px solid ${ok?"#86efac":"#fca5a5"}">
+        <div style="font-size:16px;font-weight:700;margin-bottom:8px;color:#1c1917;overflow-wrap:break-word">${i+1}. ${a.question}</div>
+        <div style="font-size:15px;overflow-wrap:break-word">${ok?"✅":"❌"} إجابة مَالِك: <strong>${chosen}</strong>${!ok?` <span style="color:#15803d"> | الصحيح: ${correct}</span>`:""}</div>
+      </div>`;
+    }).join("");
+    const gramRows = lesson.grammar.map(g=>`
+      <tr>
+        <td style="font-size:14px;font-weight:700">${g.word}</td>
+        <td>${g.type||""}</td>
+        <td>${g.number||""}</td>
+      </tr>`).join("");
+    const html = `<!DOCTYPE html><html dir="rtl" lang="ar">
+<head><meta charset="utf-8"><title>تقرير الدرس — ${lesson.title}</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  @page{size:A4;margin:1.5cm}
+  html{direction:rtl}
+  body{font-family:'Noto Naskh Arabic',serif;direction:rtl;color:#1c1917;background:#fff;padding:20px 24px;width:100%;font-size:15px}
+  h1{font-size:22px;font-weight:900;color:#c2410c;margin-bottom:4px;word-wrap:break-word;overflow-wrap:break-word}
+  h2{font-size:18px;font-weight:900;color:#92400e;margin:24px 0 10px;padding-bottom:6px;border-bottom:2px solid #fed7aa}
+  .meta{font-size:13px;color:#78716c;margin-bottom:12px}
+  .score-badge{display:block;text-align:center;background:${pct>=75?"#dcfce7":pct>=50?"#fef9c3":"#fee2e2"};color:${pct>=75?"#15803d":pct>=50?"#854d0e":"#991b1b"};border-radius:20px;padding:6px 20px;font-size:18px;font-weight:900;margin-bottom:20px}
+  .passage{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:12px;padding:20px;font-size:18px;line-height:2.2;margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  table{width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed}
+  col.w25{width:25%}col.w35{width:35%}col.w15{width:15%}col.w30{width:30%}
+  th{background:#fff7ed;padding:8px 10px;font-weight:700;border:1px solid #fde8c8;font-size:13px}
+  td{padding:8px 10px;border:1px solid #fde8c8;vertical-align:top;overflow-wrap:break-word;word-break:break-word}
+  tr:nth-child(even) td{background:#fffbf5}
+  .islamic-box{background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:18px;margin-top:8px}
+  .islamic-box .theme{font-size:17px;font-weight:900;color:#15803d;margin-bottom:8px}
+  .islamic-box .note{font-size:15px;line-height:1.9;color:#1c4a2b;overflow-wrap:break-word}
+  .islamic-box .ref{font-size:13px;color:#6b7280;margin-top:8px}
+  .footer{margin-top:32px;padding-top:16px;border-top:1px solid #e5e7eb;font-size:12px;color:#9ca3af;text-align:center}
+</style></head>
+<body>
+<h1>${lesson.emoji||"📖"} ${lesson.title}</h1>
+<div class="meta">الأسبوع ${lesson.week} · المستوى ${lesson.level} · ${date}</div>
+<div class="score-badge">⭐ نتيجة الفهم: ${correctCount} من ${ans.length} (${pct}%)</div>
+
+<h2>📖 النص</h2>
+<div class="passage">${lesson.passage}</div>
+
+<h2>📚 المفردات</h2>
+<table><colgroup><col class="w25"><col class="w35"><col class="w25"><col class="w15"></colgroup>
+<thead><tr><th>الكلمة</th><th>المعنى بالعربية</th><th>المعنى بالإنجليزية</th><th>العامية</th></tr></thead>
+<tbody>${vocabRows}</tbody></table>
+
+<h2>❓ أسئلة الفهم — إجابات مَالِك</h2>
+${qRows}
+
+<h2>📝 القواعد</h2>
+<table><colgroup><col class="w35"><col class="w35"><col class="w30"></colgroup>
+<thead><tr><th>الكلمة</th><th>النوع</th><th>العدد</th></tr></thead>
+<tbody>${gramRows}</tbody></table>
+
+<h2>🌿 الدرس الإسلامي</h2>
+<div class="islamic-box">
+  <div class="theme">${lesson.islamicLink.theme}</div>
+  <div class="note">${lesson.islamicLink.note}</div>
+  <div class="ref">📌 ${lesson.islamicLink.quranRef}</div>
+</div>
+
+<div class="footer">Arabic Learning App · تقرير درس مَالِك · ${date}</div>
+<script>window.onload=()=>window.print()<\/script>
+</body></html>`;
+    const w = window.open("","_blank");
+    w.document.write(html);
+    w.document.close();
+  };
 
   return e("div",null,
     // header strip
@@ -1632,9 +1654,12 @@ function LessonFlow({ lesson, onComplete, onBack }) {
         color:i===si?cat.color:P.gray,fontWeight:i===si?800:400}}," "+l))
     ),
     step==="passage" && e(PassageView,{lesson,onNext:()=>setStep("quiz")}),
-    step==="quiz"    && e(ComprehensionQuiz,{lesson,onFinish:p=>{setQuizScore(p);setStep("grammar");}}),
+    step==="quiz"    && e(ComprehensionQuiz,{lesson,onFinish:(p,ans)=>{setQuizScore(p);setQuizAnswers(ans);setStep("grammar");}}),
     step==="grammar" && e(GrammarGame,{lesson,onFinish:p=>{setGramScore(p);setStep("islamic");}}),
-    step==="islamic" && e(IslamicCard,{lesson,onFinish:()=>onComplete(lesson.id,quizScore,gramScore)})
+    step==="islamic" && e(IslamicCard,{lesson,onFinish:()=>setStep("done")}),
+    step==="done"    && e(LessonComplete,{lesson,quizScore,gramScore,quizAnswers,
+      onComplete:()=>onComplete(lesson.id,quizScore,gramScore),
+      openPDF:openLessonPDF})
   );
 }
 
