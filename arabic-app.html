@@ -1334,47 +1334,48 @@ function ComprehensionQuiz({ lesson, onFinish }) {
     const correctCount = ans.filter(a=>a.chosen===a.correct).length;
     const vocabRows = lesson.vocabulary.map(v=>`
       <tr>
-        <td style="font-size:18px;font-weight:700">${v.word}</td>
-        <td>${v.meaningAr||""}</td>
-        <td style="font-size:13px;color:#555">${v.meaningEn||""}</td>
-        <td style="font-size:13px;color:#888">${v.dialectEgy||""}</td>
+        <td style="font-size:14px;font-weight:700;width:25%">${v.word}</td>
+        <td style="width:35%">${v.meaningAr||""}</td>
+        <td style="font-size:13px;color:#555;width:25%">${v.meaningEn||""}</td>
+        <td style="font-size:13px;color:#888;width:15%">${v.dialectEgy||""}</td>
       </tr>`).join("");
     const qRows = ans.map((a,i)=>{
       const ok = a.chosen===a.correct;
       const chosen = a.options[a.chosen]??"—";
       const correct = a.options[a.correct];
-      return `<div style="margin-bottom:18px;padding:14px;border-radius:10px;background:${ok?"#f0fdf4":"#fff5f5"};border:1.5px solid ${ok?"#86efac":"#fca5a5"}">
-        <div style="font-size:16px;font-weight:700;margin-bottom:8px;color:#1c1917">${i+1}. ${a.question}</div>
-        <div style="font-size:15px">${ok?"✅":"❌"} إجابة مَالِك: <strong>${chosen}</strong>${!ok?` <span style="color:#15803d"> | الصحيح: ${correct}</span>`:""}</div>
+      return `<div style="margin-bottom:18px;padding:14px;border-radius:10px;background:${ok?"#f0fdf4":"#fff5f5"};border:1.5px solid ${ok?"#86efac":"#fca5a5"};page-break-inside:avoid;overflow-wrap:break-word;word-break:break-word">
+        <div style="font-size:16px;font-weight:700;margin-bottom:8px;color:#1c1917;overflow-wrap:break-word">${i+1}. ${a.question}</div>
+        <div style="font-size:15px;overflow-wrap:break-word">${ok?"✅":"❌"} إجابة مَالِك: <strong>${chosen}</strong>${!ok?` <span style="color:#15803d"> | الصحيح: ${correct}</span>`:""}</div>
       </div>`;
     }).join("");
     const gramRows = lesson.grammar.map(g=>`
       <tr>
-        <td style="font-size:17px;font-weight:700">${g.word}</td>
-        <td>${g.type||""}</td>
-        <td>${g.number||""}</td>
+        <td style="font-size:14px;font-weight:700;width:35%">${g.word}</td>
+        <td style="width:35%">${g.type||""}</td>
+        <td style="width:30%">${g.number||""}</td>
       </tr>`).join("");
     const html = `<!DOCTYPE html><html dir="rtl" lang="ar">
 <head><meta charset="utf-8"><title>تقرير الدرس — ${lesson.title}</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
+  @page{size:A4;margin:1.5cm}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Noto Naskh Arabic',serif;direction:rtl;color:#1c1917;background:#fff;padding:32px;max-width:800px;margin:auto}
-  h1{font-size:26px;font-weight:900;color:#c2410c;margin-bottom:4px}
+  html{direction:rtl}
+  body{font-family:'Noto Naskh Arabic',serif;direction:rtl;color:#1c1917;background:#fff;padding:20px 24px;font-size:15px;width:100%}
+  h1{font-size:22px;font-weight:900;color:#c2410c;margin-bottom:4px;word-wrap:break-word;overflow-wrap:break-word}
   h2{font-size:18px;font-weight:900;color:#92400e;margin:24px 0 10px;padding-bottom:6px;border-bottom:2px solid #fed7aa}
   .meta{font-size:13px;color:#78716c;margin-bottom:20px;direction:ltr;text-align:right}
-  .score-badge{display:inline-block;background:${pct>=75?"#dcfce7":pct>=50?"#fef9c3":"#fee2e2"};color:${pct>=75?"#15803d":pct>=50?"#854d0e":"#991b1b"};border-radius:20px;padding:6px 20px;font-size:18px;font-weight:900;margin-bottom:20px}
-  .passage{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:12px;padding:20px;font-size:20px;line-height:2.4;margin-bottom:4px}
-  table{width:100%;border-collapse:collapse;font-size:15px}
-  th{background:#fff7ed;padding:8px 10px;font-weight:700;border:1px solid #fde8c8;font-size:14px}
-  td{padding:8px 10px;border:1px solid #fde8c8;vertical-align:top}
+  .score-badge{display:block;text-align:center;background:${pct>=75?"#dcfce7":pct>=50?"#fef9c3":"#fee2e2"};color:${pct>=75?"#15803d":pct>=50?"#854d0e":"#991b1b"};border-radius:20px;padding:6px 20px;font-size:18px;font-weight:900;margin-bottom:20px}
+  .passage{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:12px;padding:20px;font-size:18px;line-height:2.2;margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  table{width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed}
+  th{background:#fff7ed;padding:8px 10px;font-weight:700;border:1px solid #fde8c8;font-size:14px;overflow-wrap:break-word}
+  td{padding:8px 10px;border:1px solid #fde8c8;vertical-align:top;overflow-wrap:break-word;word-break:break-word}
   tr:nth-child(even) td{background:#fffbf5}
   .islamic-box{background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:18px;margin-top:8px}
   .islamic-box .theme{font-size:17px;font-weight:900;color:#15803d;margin-bottom:8px}
   .islamic-box .note{font-size:15px;line-height:1.9;color:#1c4a2b}
   .islamic-box .ref{font-size:13px;color:#6b7280;margin-top:8px}
   .footer{margin-top:32px;padding-top:16px;border-top:1px solid #e5e7eb;font-size:12px;color:#9ca3af;text-align:center;direction:ltr}
-  @media print{body{padding:16px}@page{margin:1cm}}
 </style></head>
 <body>
 <h1>${lesson.emoji||"📖"} ${lesson.title}</h1>
@@ -1385,14 +1386,14 @@ function ComprehensionQuiz({ lesson, onFinish }) {
 <div class="passage">${lesson.passage}</div>
 
 <h2>📚 المفردات</h2>
-<table><thead><tr><th>الكلمة</th><th>المعنى بالعربية</th><th>المعنى بالإنجليزية</th><th>العامية المصرية</th></tr></thead>
+<table style="table-layout:fixed;width:100%"><colgroup><col style="width:25%"><col style="width:35%"><col style="width:25%"><col style="width:15%"></colgroup><thead><tr><th>الكلمة</th><th>المعنى بالعربية</th><th>المعنى بالإنجليزية</th><th>العامية المصرية</th></tr></thead>
 <tbody>${vocabRows}</tbody></table>
 
 <h2>❓ أسئلة الفهم — إجابات مَالِك</h2>
 ${qRows}
 
 <h2>📝 القواعد</h2>
-<table><thead><tr><th>الكلمة</th><th>النوع</th><th>العدد</th></tr></thead>
+<table style="table-layout:fixed;width:100%"><colgroup><col style="width:35%"><col style="width:35%"><col style="width:30%"></colgroup><thead><tr><th>الكلمة</th><th>النوع</th><th>العدد</th></tr></thead>
 <tbody>${gramRows}</tbody></table>
 
 <h2>🌿 الدرس الإسلامي</h2>
