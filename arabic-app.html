@@ -1512,18 +1512,40 @@ function IslamicCard({ lesson, onFinish }) {
 function LessonComplete({ lesson, quizScore, gramScore, quizAnswers, onComplete, openPDF }) {
   const pct = quizScore;
   const [msg,big] = pct>=75?["أَنْهَيْتَ الدَّرْسَ! أَحْسَنْتَ! 🌟","🎓"]:pct>=50?["أَنْهَيْتَ الدَّرْسَ! جَيِّدٌ! 👍","🎓"]:["أَنْهَيْتَ الدَّرْسَ! 💪","🎓"];
+
+  const sendWhatsApp = () => {
+    const correctCount = quizAnswers.filter(a=>a.chosen===a.correct).length;
+    const total = quizAnswers.length;
+    const stars = pct>=75?"⭐⭐⭐":pct>=50?"⭐⭐":"⭐";
+    const lines = quizAnswers.map((a,i)=>{
+      const ok = a.chosen===a.correct;
+      const chosen = a.options[a.chosen]??"—";
+      return `${ok?"✅":"❌"} س${i+1}: ${a.question}\nإجابة مالك: ${chosen}`;
+    }).join("\n\n");
+    const text = `📚 تقرير درس مالك\n${lesson.emoji||"📖"} ${lesson.title}\n\n` +
+      `${stars} النتيجة: ${correctCount} من ${total} (${pct}%)\n\n` +
+      `❓ أسئلة الفهم:\n${lines}\n\n` +
+      `🌿 الدرس الإسلامي: ${lesson.islamicLink?.theme||""}\n\n` +
+      `Arabic Learning App 📖`;
+    window.open("https://wa.me/?text="+encodeURIComponent(text),"_blank");
+  };
+
   return e("div",{className:"pop",style:{textAlign:"center",padding:"28px 16px"}},
     e("div",{style:{fontSize:80,marginBottom:8}},big),
     e("h3",{style:{...AF,fontSize:24,fontWeight:900,color:"#c2410c",direction:"rtl",marginBottom:6}},msg),
-    e("p",{style:{...AF,fontSize:15,color:P.gray,marginBottom:24,direction:"rtl"}},lesson.title),
-    e("button",{onClick:()=>openPDF(quizAnswers),
+    e("p",{style:{...AF,fontSize:15,color:P.gray,marginBottom:20,direction:"rtl"}},lesson.title),
+    e("button",{onClick:sendWhatsApp,
       style:{display:"block",width:"100%",marginBottom:10,
+        background:"linear-gradient(135deg,#25d366,#128c7e)",color:"#fff",border:"none",
+        borderRadius:16,padding:"15px 0",fontSize:16,fontWeight:900,cursor:"pointer",
+        boxShadow:"0 6px 24px rgba(37,211,102,.4)"}},
+      "💬 أرسل النتيجة على واتساب"),
+    e("button",{onClick:()=>openPDF(quizAnswers),
+      style:{display:"block",width:"100%",marginBottom:20,
         background:"linear-gradient(135deg,#f97316,#c2410c)",color:"#fff",border:"none",
         borderRadius:16,padding:"15px 0",fontSize:16,fontWeight:900,cursor:"pointer",
         boxShadow:"0 6px 24px rgba(194,65,12,.4)"}},
       "📄 تحميل PDF الدرس كاملاً"),
-    e("p",{style:{fontSize:12,color:P.gray,marginBottom:20,direction:"rtl"}},
-      "افتح الصفحة ← اضغط طباعة ← احفظ كـ PDF ← شارك على واتساب"),
     e("button",{onClick:onComplete,
       style:{background:"linear-gradient(135deg,#fbbf24,#f97316)",color:"#fff",border:"none",
         borderRadius:16,padding:"14px 36px",fontSize:17,fontWeight:900,
